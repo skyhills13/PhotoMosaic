@@ -1,0 +1,52 @@
+html, body {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+
+	font-family: "Apple SD Gothic Neo";
+}
+
+body * {
+	box-sizing: border-box;
+}
+
+.header {
+	position: relative;
+	height: 45px;
+
+	background-color: #E2E2E2;
+}
+
+.header>div {
+	position: absolute;
+	width: 100px;
+	height: 30px;
+
+	top: 50%;
+	margin-top: -15px;
+
+	border: 1px solid #777;
+
+	text-align: center;
+	line-height: 30px;
+}
+
+.header .logo {
+	left: 30px;
+}
+
+.header .user {
+	right: 30px;
+}
+
+.make {
+	position: absolute;
+
+	top: 45px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	border: 1px solid red;
+}
+
