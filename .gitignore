@@ -1,2 +1,6 @@
 # OS X File System
 .DS_Store
+/target/
+/.settings/
+/.classpath
+/.project
