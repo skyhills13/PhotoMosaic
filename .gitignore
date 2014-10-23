@@ -1,6 +1,17 @@
 # OS X File System
 .DS_Store
-/target/
-/.settings/
-/.classpath
-/.project
+
+# Java
+*.class
+
+# Package Files
+*.war
+*.ear
+
+# Maven
+target
+.settings
+.classpath
+.project
+bin
+
