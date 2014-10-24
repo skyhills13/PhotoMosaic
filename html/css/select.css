@@ -47,7 +47,7 @@ body * {
 	right: 30px;
 }
 
-.make {
+.select {
 	position: absolute;
 
 	left: 0px;
@@ -56,11 +56,11 @@ body * {
 	bottom: 0px;
 }
 
-.make .contents {
+.select .contents {
 	position: absolute;
 
 	width: 80%;
-	top: 50px;
+	top: 40px;
 	bottom: 100px;
 
 	left: 10%;
@@ -68,23 +68,23 @@ body * {
 	border: 1px solid #bdc7d8;
 }
 
-.make header:nth-child(1) {
+.select header:nth-child(1) {
 	display: table;
 
 	width: 100%;
 	height: 40px;
 }
 
-.make header > * {
+.select header > * {
 	display: table-cell;
 }
 
-.make header > *:nth-child(1) {
+.select header > *:nth-child(1) {
 	width: 300px;
 	border-right: 1px solid #bdc7d8;
 }
 
-.make input[type=text] {
+.select input[type=text] {
 	width: 100%;
 
 	margin: 0px;
@@ -97,7 +97,7 @@ body * {
 	line-height: 18px;
 }
 
-.make .pictures {
+.select .pictures {
 	position: absolute;
 
 	left: 0px;
@@ -110,7 +110,7 @@ body * {
 	border-top: 1px solid #bdc7d8;
 }
 
-.make .controll {
+.select .controll {
 	position: absolute;
 
 	width: 80%;
@@ -120,7 +120,7 @@ body * {
 	bottom: 20px;
 }
 
-.make .controll button {
+.select .controll button {
 	position: absolute;
 
 	left: 50%;
