@@ -60,10 +60,12 @@ body * {
 	position: absolute;
 
 	width: 80%;
-	height: 80%;
+	top: 50px;
+	bottom: 100px;
 
 	left: 10%;
-	top: 7.5%;
+
+	border: 1px solid #bdc7d8;
 }
 
 .make header:nth-child(1) {
@@ -75,34 +77,24 @@ body * {
 
 .make header > * {
 	display: table-cell;
-	border: 1px solid #bdc7d8;
 }
 
-.make header > div:nth-child(1) {
+.make header > *:nth-child(1) {
 	width: 300px;
-	border-right: none;
+	border-right: 1px solid #bdc7d8;
 }
 
 .make input[type=text] {
+	width: 100%;
+
 	margin: 0px;
-	padding: 5px 5px;
+	padding: 11px 10px;
 
 	border: none;
+	outline: none;
 
 	font-size: 16px;
-	line-height: 28px;
-}
-
-.make input[name=title] {
-	width: 297px;
-}
-
-.make input[name=subtitle] {
-	width: 100%;
-}
-
-.make .contents > div {
-	padding: 8px;
+	line-height: 18px;
 }
 
 .make .pictures {
@@ -111,19 +103,21 @@ body * {
 	left: 0px;
 	right: 0px;
 	top: 40px;
-	bottom: 80px;
+	bottom: 0px;
 
-	border: 1px solid #bdc7d8;
-	border-top: none;
+	padding: 8px;
+
+	border-top: 1px solid #bdc7d8;
 }
 
 .make .controll {
 	position: absolute;
 
-	width: 100%;
+	width: 80%;
 	height: 80px;
 
-	bottom: 0px;
+	left: 10%;
+	bottom: 20px;
 }
 
 .make .controll button {
