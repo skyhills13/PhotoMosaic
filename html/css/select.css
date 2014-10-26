@@ -110,6 +110,10 @@ body * {
 	border-top: 1px solid #bdc7d8;
 }
 
+.select .positioner.hover {
+	border: 2px solid red;
+}
+
 .select .controll {
 	position: absolute;
 

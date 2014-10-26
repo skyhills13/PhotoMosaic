@@ -45,50 +45,56 @@
 
 <script src="script/util.js"></script>
 <script>
-	// call initialization file
-	if (window.File && window.FileList && window.FileReader) {
-		init();
+	// Check File APIs are available
+	if (window.File
+			&& window.FileList
+			&& window.FileReader
+			&& window.Blob) {
+		initialize();
+	} else {
+		// Browser 버전과 지원사항에 대한 안내 보내기
 	}
 
 	// initialize
-	function init() {
-		var fileselect =
-				document.querySelector(".controll > input");
-		var filedrag = document.querySelector(".pictures > *");
+	function initialize() {
+		var eleInput = document.querySelector(".controll > input");
+		var eledrag = document.querySelector(".pictures > .positioner");
 
 		// file select
-		fileselect.addEventListener("change", FileSelectHandler, false);
+		eleInput.addEventListener("change", FileSelectHandler, false);
 
 		// is XHR2 available?
 		var xhr = new XMLHttpRequest();
 
 		if (xhr.upload) {
 			// file drop
-			filedrag.addEventListener("dragover", FileDragHover, false);
-			filedrag.addEventListener("dragleave", FileDragHover, false);
-			filedrag.addEventListener("drop", FileSelectHandler, false);
+			eleInput.addEventListener("dragover", FileDragHover, false);
+			eleInput.addEventListener("dragleave", FileDragHover, false);
+			eleInput.addEventListener("drop", FileSelectHandler, false);
 		}
 	}
 
 	// file drag hover
-	function FileDragHover(e) {
-		e.stopPropagation();
-		e.preventDefault();
+	function FileDragHover(event) {
+		event.stopPropagation();
+		event.preventDefault();
 
-		if (e.type == "dragover") {
-			utils.appendClassName(e.target, "hover");
+		if (event.type == "dragover") {
+			event.dataTransfer.dropEffect = "copy"; 
+			event.target.appendClassName("hover");
 		} else {
-			utils.removeClassName(e.target, "hover");
+			event.target.removeClassName("hover");
 		}
 	}
 
 	// file selection
-	function FileSelectHandler(e) {
+	function FileSelectHandler(event) {
 		// cancel event and hover styling
-		FileDragHover(e);
+		FileDragHover(event);
 
 		// fetch FileList object
-		var files = e.target.files || e.dataTransfer.files;
+		var files = event.target.files || event.dataTransfer.files;
+		console.log(event.dataTransfer.files);
 
 		// process all File objects
 		for (var i = 0, f; f = files[i]; i++) {
