@@ -73,21 +73,6 @@ Node.constructor.prototype.removeClassName = function(strClassName) {
 			this.className.replace(" " + strClassName, "").toString();
 };
 
-Node.constructor.prototype.getFiles = function() {
-	// File을 다루기 위해서는 FileList라는 객체를 받아야 한다.
-	// FileList 객체는 다음 위치에 있다.
-	//    input[type=file]: this.files;
-	//    Drag & Drop 가능한 node: this.dataTransfer.files;
-	if (this.files.length > 0) {
-		return this.files;
-	} else if (this.dataTransfer.files > 0) {
-		return this.dataTransfer.files;
-	} else {
-		console.log("getFiles: no files selected");
-		return null;
-	}
-}
-
 function getBrowserPrefix() {
 	if (typeof document.body.style.webkitTransition !== "undefined") {
 		return "webkit";

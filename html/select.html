@@ -50,6 +50,7 @@
 			&& window.FileList
 			&& window.FileReader
 			&& window.Blob) {
+		window.images = [];
 		initialize();
 	} else {
 		// Browser 버전과 지원사항에 대한 안내 보내기
@@ -58,7 +59,7 @@
 	// initialize
 	function initialize() {
 		var eleInput = document.querySelector(".controll > input");
-		var eledrag = document.querySelector(".pictures > .positioner");
+		var eleDrag = document.querySelector(".pictures > .positioner");
 
 		// file select
 		eleInput.addEventListener("change", FileSelectHandler, false);
@@ -68,9 +69,9 @@
 
 		if (xhr.upload) {
 			// file drop
-			eleInput.addEventListener("dragover", FileDragHover, false);
-			eleInput.addEventListener("dragleave", FileDragHover, false);
-			eleInput.addEventListener("drop", FileSelectHandler, false);
+			eleDrag.addEventListener("dragover", FileDragHover, false);
+			eleDrag.addEventListener("dragleave", FileDragHover, false);
+			eleDrag.addEventListener("drop", FileSelectHandler, false);
 		}
 	}
 
@@ -94,12 +95,34 @@
 
 		// fetch FileList object
 		var files = event.target.files || event.dataTransfer.files;
-		console.log(event.dataTransfer.files);
 
 		// process all File objects
 		for (var i = 0, f; f = files[i]; i++) {
-			// file upload logic
 			console.log("hihi");
+
+			// Only process image files.
+			if (!f.type.match('image.*')) {
+				continue;
+			}
+
+			window.images.push(f);
+
+			var reader = new FileReader();
+
+			// Closure to capture the file information.
+			reader.onload = (function(theFile) {
+				return function(event) {
+					// Render thumbnail.
+					var span = document.createElement('span');
+					span.innerHTML = ['<img class="thumb" src="', event.target.result,
+					'" title="', escape(theFile.name), '"/>'].join('');
+
+					document.querySelector(".pictures .positioner").insertBefore(span, null);
+				};
+			})(f);
+
+			// Read in the image file as a data URL.
+			reader.readAsDataURL(f);
 		}
 	}
 

@@ -108,6 +108,8 @@ body * {
 	padding: 8px;
 
 	border-top: 1px solid #bdc7d8;
+
+	overflow: scroll;
 }
 
 .select .positioner.hover {
@@ -121,6 +123,7 @@ body * {
 	height: 80px;
 
 	left: 10%;
+
 	bottom: 20px;
 }
 
