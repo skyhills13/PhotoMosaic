@@ -1,14 +1,13 @@
-import jdk.nashorn.internal.ir.annotations.Reference;
+package org.nhnnext.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 public class HomeController {
-
+	
 	@RequestMapping("/")
-	public void home(){
+	public String home(){
 		return "index";
 	}
 
