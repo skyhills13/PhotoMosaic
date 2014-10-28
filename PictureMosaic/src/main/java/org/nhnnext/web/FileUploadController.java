@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUploadController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-	private static final String ATTACHMENT_ROOT_DIR_LOCAL = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
+	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
 	private static final String ATTACHMENT_ROOT_DIR_REMOTE = ""; 
 	
 	@RequestMapping("/select")
@@ -25,47 +25,8 @@ public class FileUploadController {
 		logger.debug("into select page");
 		return "uploadMultiple";
 	}
-	
-	/**
-     * Upload single file using Spring Controller
-     */
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadFileHandler(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file) {
-        
-    	if (file.isEmpty()) {
-        	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
-        } try {
-        	byte[] bytes = file.getBytes();
-        	
-        	// Creating the directory to store file
-        	//TODO change ATTACHMENT_ROOT_DIR to ATTACHMENT_ROOT_DIR_REMOTE WHEN DISTRIBUTING 
-        	File dir = new File(ATTACHMENT_ROOT_DIR_LOCAL);
-        	if (!dir.exists()) {
-        		dir.mkdirs();
-        	}
-        	
-        	// Create the file on server
-        	File serverFile = new File(dir.getAbsolutePath()
-        			+ File.separator + file.getOriginalFilename());
-        	BufferedOutputStream stream = new BufferedOutputStream(
-        			new FileOutputStream(serverFile));
-        	stream.write(bytes);
-        	stream.close();
-        	
-        	logger.info("Server File Location="
-        			+ serverFile.getAbsolutePath());
-        	
-        	return "You successfully uploaded file=" + file.getOriginalFilename();
-        } catch (Exception e) {
-        	return "You failed to upload " + file.getOriginalFilename() + " => " + e.getMessage();
-        }
-    }
- 
-    /**
-     * Upload multiple file using Spring Controller
-     */
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody String uploadMultipleFileHandler(@RequestParam("name") String[] names,
             @RequestParam("file") MultipartFile[] files) {
  
@@ -81,7 +42,7 @@ public class FileUploadController {
                 byte[] bytes = file.getBytes();
  
                 // Create the directory to store file
-                File dir = new File(ATTACHMENT_ROOT_DIR_LOCAL);
+                File dir = new File(ATTACHMENT_ROOT_DIR);
                 if (!dir.exists()) {
                 	dir.mkdirs();
                 }
@@ -99,5 +60,15 @@ public class FileUploadController {
             }
         }
         return message;
+    }
+    
+    @RequestMapping(value="/remove", method = RequestMethod.GET)
+    public String delete(String name) {
+    	File imagesDir = new File(ATTACHMENT_ROOT_DIR);
+    	File targetFile = new File( imagesDir.getAbsolutePath() + File.separator + name );
+    	
+    	//TODO exception handling
+    	targetFile.delete();
+    	return name;
     }
 }
