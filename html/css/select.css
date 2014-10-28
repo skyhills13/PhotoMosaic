@@ -112,8 +112,13 @@ body * {
 	overflow: scroll;
 }
 
-.select .positioner.hover {
+.select .pictures.hover {
 	border: 2px solid red;
+}
+
+.select .pictures .positioner {
+	width: 0px;
+	height: 0px;
 }
 
 .select .controll {
@@ -121,6 +126,8 @@ body * {
 
 	width: 80%;
 	height: 80px;
+
+	padding: 10px;
 
 	left: 10%;
 
