@@ -1,0 +1,18 @@
+package org.nhnnext.web;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class FileUploadController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+	
+	@RequestMapping("/select")
+	public String select(){
+		logger.debug("into select page");
+		return "uploadMultiple";
+	}
+}
