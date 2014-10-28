@@ -34,7 +34,7 @@ public class FileUploadController {
             @RequestParam("file") MultipartFile file) {
         
     	if (file.isEmpty()) {
-        	return "You failed to upload " + name + " because the file was empty.";
+        	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
         } try {
         	byte[] bytes = file.getBytes();
         	
@@ -47,7 +47,7 @@ public class FileUploadController {
         	
         	// Create the file on server
         	File serverFile = new File(dir.getAbsolutePath()
-        			+ File.separator + name);
+        			+ File.separator + file.getOriginalFilename());
         	BufferedOutputStream stream = new BufferedOutputStream(
         			new FileOutputStream(serverFile));
         	stream.write(bytes);
@@ -56,9 +56,9 @@ public class FileUploadController {
         	logger.info("Server File Location="
         			+ serverFile.getAbsolutePath());
         	
-        	return "You successfully uploaded file=" + name;
+        	return "You successfully uploaded file=" + file.getOriginalFilename();
         } catch (Exception e) {
-        	return "You failed to upload " + name + " => " + e.getMessage();
+        	return "You failed to upload " + file.getOriginalFilename() + " => " + e.getMessage();
         }
     }
  
@@ -76,7 +76,7 @@ public class FileUploadController {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
-            String name = names[i];
+            String name = file.getOriginalFilename();
             try {
                 byte[] bytes = file.getBytes();
  
