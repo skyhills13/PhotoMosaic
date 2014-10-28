@@ -11,7 +11,6 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(){
-		System.out.println("aaa");
 		logger.debug("at home");
 		return "index";
 	}
