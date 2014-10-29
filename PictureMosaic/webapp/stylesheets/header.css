@@ -1,0 +1,30 @@
+header {
+	position : fixed;
+	top : 0px;
+	left : 0px;
+	z-index: 1;
+
+	width : 100%;
+	height : 50px;
+	background: RGBA(249, 39, 105, 0.8);
+}
+
+header div {
+	margin : 10px 10px;
+	float : right;
+	width : 80px;
+	height : 30px;
+	background: RGBA(154, 215, 121, 1);
+}
+
+header div:nth-child(1) {
+	float : left;
+}
+
+header div:nth-child(2) {
+	margin-left: 0px;
+}
+
+header div:nth-child(3) {
+	margin-right: 2px;
+}
