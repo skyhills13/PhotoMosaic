@@ -109,7 +109,7 @@ body * {
 
 	border-top: 1px solid #bdc7d8;
 
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .select .pictures.hover {

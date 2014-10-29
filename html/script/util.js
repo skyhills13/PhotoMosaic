@@ -13,3 +13,19 @@ function getBrowserPrefix() {
 	}
 }
 
+function createArray(/* 1d size, 2d size, 3d size, ... */) {
+	var array = new Array(arguments[0] || 0);
+
+	if (arguments.length > 1) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		var firstArg = arguments[0];
+
+		while(firstArg--) {
+			array[(arguments[0] - 1) - firstArg]
+					= createArray.apply(this, args);
+		}
+	}
+
+	return array;
+}
+
