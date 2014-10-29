@@ -15,28 +15,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(FileUploadController.class);
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
-	private static final String ATTACHMENT_ROOT_DIR_REMOTE = ""; 
-	
+	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
+
 	@RequestMapping("/select")
-	public String select(){
+	public String select() {
 		logger.debug("into select page");
 		return "uploadMultiple";
 	}
 
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("name") String[] names,
-            @RequestParam("file") MultipartFile[] files) {
- 
-        if (files.length != names.length) {
-        	return "Mandatory information missing";
-        }
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
         
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
+            if (file.isEmpty()) {
+            	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
+            }
+            
             String name = file.getOriginalFilename();
             try {
                 byte[] bytes = file.getBytes();
@@ -61,14 +61,15 @@ public class FileUploadController {
         }
         return message;
     }
-    
-    @RequestMapping(value="/remove", method = RequestMethod.GET)
-    public String delete(String name) {
-    	File imagesDir = new File(ATTACHMENT_ROOT_DIR);
-    	File targetFile = new File( imagesDir.getAbsolutePath() + File.separator + name );
-    	
-    	//TODO exception handling
-    	targetFile.delete();
-    	return name;
-    }
+
+	@RequestMapping(value = "/remove", method = RequestMethod.GET)
+	public String delete(String name) {
+		File imagesDir = new File(ATTACHMENT_ROOT_DIR);
+		File targetFile = new File(imagesDir.getAbsolutePath() + File.separator
+				+ name);
+
+		// TODO exception handling
+		targetFile.delete();
+		return name;
+	}
 }
