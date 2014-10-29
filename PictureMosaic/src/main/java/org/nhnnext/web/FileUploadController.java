@@ -3,6 +3,7 @@ package org.nhnnext.web;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,15 +30,16 @@ public class FileUploadController {
 
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
-        
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
+            UUID pictureUniqueKey = UUID.randomUUID();
             if (file.isEmpty()) {
             	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
             }
-            
-            String name = file.getOriginalFilename();
+            logger.debug(pictureUniqueKey.toString());
+            String uniqueName = pictureUniqueKey.toString();
+            String originalName = file.getOriginalFilename();
             try {
                 byte[] bytes = file.getBytes();
  
@@ -48,15 +50,15 @@ public class FileUploadController {
                 }
  
                 // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + originalName);
                 BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile) );
                 stream.write(bytes);
                 stream.close();
  
                 logger.info("Server File Location=" + serverFile.getAbsolutePath());
-                message = message + "You successfully uploaded file=" + name + "<br />";
+                message = message + "You successfully uploaded file=" + originalName + "<br />";
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "You failed to upload " + originalName + " => " + e.getMessage();
             }
         }
         return message;
