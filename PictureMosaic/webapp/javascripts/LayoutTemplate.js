@@ -1,196 +1,188 @@
 /****
  *   성공적인 Layouting 을 위한 객체
  */
-function LayoutTemplate(rowSize, colSize) {
-	this.rowSize = (typeof rowSize !== "undefined") ? rowSize : 4;
-	this.colSize = (typeof colSize !== "undefined") ? colSize : 4;
+function LayoutTemplate(width, height) {
+	this.width = (typeof width !== "undefined") ? width : 4;
+	this.height = (typeof height !== "undefined") ? height : 4;
 
-	this.board = createArray(this.rowSize, this.colSize);
+	this.layout = createArray(this.height * this.width);
+
 	// for ... in 문은 내부에 컨텐츠가 있어야 쓸 수 있다.
 	// (undefined 가 들어있는 배열은 사용할 수 없다)
-		for (var row in this.board) {
-		for (var col = 0; col < this.board[row].length; col++) {
-			this.board[row][col] = 0;
+	for (var row = 0; row < this.height; row++) {
+		for (var col = 0; col < this.width; col++) {
+			this.layout[row * this.width + col] = 0;
 		}
 	}
 
-	this.count = {};
-	for (var row in this.units) {
-		for (var col in this.units[row]) {
-			this.count[this.units[row][col]] = 0;
-		}
-	}
+	this.allLayouts = [];
+	this.targetLayouts = [];
 
 	this._init();
 }
 
-LayoutTemplate.prototype.units;
-
 LayoutTemplate.prototype._init = function() {
 	if (typeof this.units === "undefined") {
-		this.units = createArray(this.rowSize, this.colSize);
+		this.units = createArray(this.height * this.width);
 
-		for (var row = 0; row < this.rowSize; row++) {
-			for (var col = 0; col < this.colSize; col++) {
-				this.units[row][col] = "" + (row + 1) + "x" + (col + 1);
+		for (var row = 0; row < this.height; row++) {
+			for (var col = 0; col < this.width; col++) {
+				this.units[row * this.width + col] = (col + 1) + "x" + (row + 1);
 			}
 		}
 	}
 
-	//run(0, board);
-}
+	this.printAllPossibleLayouts(this.layout, 0, 0);
+};
 
-LayoutTemplate.prototype._isPossible = function(unit, board, startRow, startCol) {
-	var arrUnit = unit.split("x");
+LayoutTemplate.prototype.units;
 
-	var width = arrUnit[0];
-	var height = arrUnit[1];
+LayoutTemplate.prototype.insert = function(unit, startX, startY) {
+	if (this._isPossible(this.layout, unit, startX, startY)) {
+		this._insert(this.layout, unit, startX, startY);
+		return true;
+	} else {
+		return false;
+	}
+};
 
-	for (var row = 0; row < width; row++) {
+LayoutTemplate.prototype._isPossible = function(layout, unit, startX, startY) {
+	var unitSize = unit.split("x");
 
+	if (unitSize.length <= 1 || typeof unit !== "string") {
+		return false;
 	}
 
-	if (unit === "1x1") {
-		return !board[row][col];
+	var unitWidth = unitSize[0];
+	var unitHeight = unitSize[1];
+
+	if (this.width - unitWidth < startX
+			|| this.height - unitHeight < startY) {
+		return false;
 	}
 
-	if (unit === "2x1") {
-		return col <= 2
-			&& !board[row][col]
-			&& !board[row][col + 1];
-	}
-
-	if (unit === "3x1") {
-		return col <= 1
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row][col + 2];
-	}
-
-	if (unit === "4x1") {
-		return col == 0
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row][col + 2]
-			&& !board[row][col + 3];
-	}
-
-	if (unit == "1x2") {
-		return row <= 2
-			&& !board[row][col]
-			&& !board[row + 1][col];
-	}
-
-	if (unit === "2x2") {
-		return row <= 2
-			&& col <= 2
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row + 1][col]
-			&& !board[row + 1][col + 1];
-	}
-
-	if (unit === "3x2") {
-		return row <= 2
-			&& col <= 1
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row][col + 2]
-			&& !board[row + 1][col]
-			&& !board[row + 1][col + 1]
-			&& !board[row + 1][col + 2];
-	}
-
-	if (unit === "4x2") {
-		return row <= 2
-			&& col == 0
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row][col + 2]
-			&& !board[row][col + 3]
-			&& !board[row + 1][col]
-			&& !board[row + 1][col + 1]
-			&& !board[row + 1][col + 2]
-			&& !board[row + 1][col + 3];
-	}
-
-	if (unit == "1x3") {
-		return row <= 1
-			&& !board[row][col]
-			&& !board[row + 1][col]
-			&& !board[row + 2][col];
-	}
-
-	if (unit == "2x3") {
-		return row <= 1
-			&& col <= 2
-			&& !board[row][col]
-			&& !board[row][col + 1]
-			&& !board[row + 1][col]
-			&& !board[row + 1][col + 1]
-			&& !board[row + 2][col]
-			&& !board[row + 2][col + 1];
-	}
-
-
-	if (unit === "vertical") {
-		return leftTop < 4 && !board[leftTop] && !board[leftTop + 4];
-	}
-	if (unit === "horizontal") {
-		return leftTop % 4 < 3 && !board[leftTop] && !board[leftTop + 1];
-	}
-}
-
-function insert(piece, spot, board) {
-	board = board.concat();
-	if (piece === "small_square") {
-		board[spot] = "o";
-	}
-	if (piece === "big_square") {
-		board[spot] = board[spot + 1] = board[spot + 4] = board[spot + 5] = "#";
-	}
-	if (piece === "vertical") {
-		board[spot] = board[spot + 4] = "|";
-	}
-	if (piece === "horizontal") {
-		board[spot] = board[spot + 1] = "-";
-	}
-	return board;
-}
-
-function is_valid(board) {
-	for (var i = 0; i < board.length; ++i) {
-		if (!board[i]) {
-			return false;
+	for (var row = 0; row < unitHeight; row++) {
+		for (var col = 0; col < unitWidth; col++) {
+			if (layout[(startY + row) * this.width + startX + col] !== 0) {
+				return false;
+			}
 		}
 	}
+
 	return true;
-}
+};
 
+LayoutTemplate.prototype._insert = function(layout, unit, startX, startY) {
+	var result = layout.concat();
 
-function run(spot, board) {
-	if (spot === 8) {
-		if (is_valid(board)) {
-			board.splice(4, 0, "\n    ");
-			N++;
-			document.getElementById("pre").innerHTML += 
-				(N < 10 ? "0" : "") + N + ") " +
-				board.join("") + "\n\n";
-		}
-		return;
-	}
+	var unitSize = unit.split("x");
 
-	for (var i = 0; i < pieces.length; ++i) {
-		var piece = pieces[i];
+	var unitWidth = unitSize[0];
+	var unitHeight = unitSize[1];
 
-		if (is_possible(piece, spot, board)) {
-			run(spot + 1, insert(piece, spot, board));
-			hoho[piece]++;
+	for (var row = 0; row < unitHeight; row++) {
+		for (var col = 0; col < unitWidth; col++) {
+			if (row === 0 && col === 0) {
+				result[startY * this.width + startX] = unit;
+				continue;
+			}
+
+			result[(startY + row) * this.width + startX + col] = "x";
 		}
 	}
 
-	if (board[spot]) {
-		run(spot + 1, board);
+	return result;
+};
+
+LayoutTemplate.prototype.printLayout = function(layout) {
+	if (typeof layout === "undefined") {
+		var layout = this.layout;
 	}
-}
+
+	var result = "";
+
+	for (var row = 0; row < this.height; row++) {
+		for (var col = 0; col < this.width; col++) {
+			if (layout[row * this.width + col].length === 3) {
+				result += layout[row * this.width + col] + " ";
+			} else {
+				result += " " + layout[row * this.width + col] + "  ";
+			}
+		}
+		result += "\n";
+	}
+
+	return result;
+};
+
+LayoutTemplate.prototype.printAllPossibleLayouts
+		= function(layout, startX, startY) {
+	if (startY == this.height) {
+		if (this._isComplete(layout)) {
+			this.allLayouts.push(layout.concat());
+		}
+
+		return ;
+	}
+
+	for (var row = 0; row < this.height; row++) {
+		for (var col = 0; col < this.width; col++) {
+			var unit = this.units[row * this.width + col];
+			var tmpLayout;
+
+			if (this._isPossible(layout, unit, startX, startY)) {
+				tmpLayout = this._insert(layout, unit, startX, startY);
+				if (startX == this.width - 1) {
+					this.printAllPossibleLayouts(tmpLayout, 0, startY + 1);
+				} else {
+					this.printAllPossibleLayouts(tmpLayout, startX + 1, startY);
+				}
+			}
+		}
+	}
+
+	if (layout[startY * this.width + startX] !== 0) {
+		if (startX == this.width - 1) {
+			this.printAllPossibleLayouts(layout, 0, ++startY);
+		} else {
+			this.printAllPossibleLayouts(layout, ++startX, startY);
+		}
+	}
+};
+
+LayoutTemplate.prototype._isComplete = function(layout) {
+	for (var row = 0; row < this.height; row++) {
+		for (var col = 0; col < this.width; col++) {
+			if (layout[row * this.width + col] == 0) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+};
+
+LayoutTemplate.prototype.getTargetLayouts = function(numSections) {
+	var num = 0;
+	for (var idx = 0; idx < this.allLayouts.length; idx++) {
+		if (this._getNumSections(this.allLayouts[idx]) == numSections) {
+			this.targetLayouts.push(this.allLayouts[idx]);
+			num++;
+		}
+	}
+
+	return num;
+};
+
+LayoutTemplate.prototype._getNumSections = function(targetLayout) {
+	var numSections = targetLayout.length;
+
+	for (var idx = 0; idx < targetLayout.length; idx++) {
+		if (targetLayout[idx] === "x") {
+			numSections--;
+		}
+	}
+
+	return numSections;
+};
 
