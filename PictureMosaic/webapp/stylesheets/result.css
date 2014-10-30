@@ -1,1 +1,44 @@
-@CHARSET "UTF-8";
+html,body {
+	height: 100%;
+}
+
+aside {
+	position: fixed;
+	top: 50px;
+	left: 0px;
+	overflow: scroll;
+	height: 100%;
+	width: 25%;
+	background: RGBA(230, 230, 230, 1);
+}
+
+article {
+	position: absolute;
+	top: 50px;
+	left: 25%;
+	z-index: -1;
+	overflow-x: hidden;
+	width: 75%;
+	background: RGBA(154, 215, 121, 1);
+	padding: 10%;
+}
+
+article img {
+	border: none;
+	outline: none;
+	margin: 0px;
+	padding: 0px;
+	width: 39%;
+}
+
+aside section {
+	margin: 10px;
+}
+
+aside section:last-child {
+	margin-bottom: 50px;
+}
+
+aside section:nth-child(1) img {
+	width: 100%;
+}
