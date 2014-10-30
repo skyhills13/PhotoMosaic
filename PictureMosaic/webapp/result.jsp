@@ -16,7 +16,7 @@
 	</header>
 	<aside>
 		<section>
-			<img src="img/thumbnail.png" />
+			<img src="images/thumbnail.png" />
 		</section>
 		<section>
 			<ul>
