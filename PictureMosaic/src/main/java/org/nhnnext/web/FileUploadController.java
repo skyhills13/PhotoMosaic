@@ -25,8 +25,15 @@ public class FileUploadController {
 	@RequestMapping("/select")
 	public String select() {
 		logger.debug("into select page");
+		return "select";
+	}
+
+	@RequestMapping("/test")
+	public String test() {
+		logger.debug("into select page");
 		return "uploadMultiple";
 	}
+	
 
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
