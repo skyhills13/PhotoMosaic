@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -6,8 +9,8 @@
 	<meta charset="UTF-8" />
 	<title>Choose Pictures</title>
 
-	<link type="text/css" rel="stylesheet" href="./css/reset.css" />
-	<link type="text/css" rel="stylesheet" href="./css/select.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
 </head>
 
 <body>
@@ -41,9 +44,9 @@
 </div>
 </section>
 
-<script src="script/util.js"></script>
-<script src="script/MyHTMLElement.js"></script>
-<script src="script/MultiFileHandler.js"></script>
+<script src="/javascripts/util.js"></script>
+<script src="/javascripts/MyHTMLElement.js"></script>
+<script src="/javascripts/MultiFileHandler.js"></script>
 <script>
 	var eleInput = document.querySelector(".controll input[type=file]");
 	var eleDrag = document.querySelector(".pictures");

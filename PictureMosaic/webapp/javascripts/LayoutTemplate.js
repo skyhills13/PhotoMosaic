@@ -1,7 +1,7 @@
 /****
  *   성공적인 Layouting 을 위한 객체
  */
-function Layout(rowSize, colSize) {
+function LayoutTemplate(rowSize, colSize) {
 	this.rowSize = (typeof rowSize !== "undefined") ? rowSize : 4;
 	this.colSize = (typeof colSize !== "undefined") ? colSize : 4;
 
@@ -24,9 +24,9 @@ function Layout(rowSize, colSize) {
 	this._init();
 }
 
-Layout.prototype.units;
+LayoutTemplate.prototype.units;
 
-Layout.prototype._init = function() {
+LayoutTemplate.prototype._init = function() {
 	if (typeof this.units === "undefined") {
 		this.units = createArray(this.rowSize, this.colSize);
 
@@ -40,7 +40,7 @@ Layout.prototype._init = function() {
 	//run(0, board);
 }
 
-Layout.prototype._isPossible = function(unit, board, startRow, startCol) {
+LayoutTemplate.prototype._isPossible = function(unit, board, startRow, startCol) {
 	var arrUnit = unit.split("x");
 
 	var width = arrUnit[0];
