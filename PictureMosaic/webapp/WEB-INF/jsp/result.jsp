@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="stylesheets/reset.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/header.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
 
-	<link rel="stylesheet" type="text/css" href="stylesheets/result.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 	</head>
 <body>
 	<header>
@@ -16,7 +16,7 @@
 	</header>
 	<aside>
 		<section>
-			<img src="images/thumbnail.png" />
+			<img src="/images/thumbnail.png" />
 		</section>
 		<section>
 			<ul>
@@ -35,14 +35,14 @@
 		</section>
 	</aside>
 	<article>
-		<img src="images/bobby.jpg" />
-		<img src="images/baemin.jpg" />
-		<img src="images/captain.jpg" />
-		<img src="images/clan.png" />
-		<img src="images/comment.jpg" />
-		<img src="images/dog.jpg" />
-		<img src="images/pio.jpg" />
-		<img src="images/pitcher.jpg" />
+		<img src="/images/bobby.jpg" />
+		<img src="/images/baemin.jpg" />
+		<img src="/images/captain.jpg" />
+		<img src="/images/clan.png" />
+		<img src="/images/comment.jpg" />
+		<img src="/images/dog.jpg" />
+		<img src="/images/pio.jpg" />
+		<img src="/images/pitcher.jpg" />
 	</article>
 	</body>
 </html>
