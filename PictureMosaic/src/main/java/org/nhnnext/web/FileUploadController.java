@@ -20,8 +20,11 @@ public class FileUploadController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(FileUploadController.class);
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
-	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-
+//	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PictureMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/PictureMosaic/PictureMosaic/webapp/images";
+	
+	
 	@RequestMapping("/select")
 	public String select() {
 		logger.debug("into select page");
