@@ -37,6 +37,12 @@ public class FileUploadController {
 		return "uploadMultiple";
 	}
 	
+	@RequestMapping("/result")
+	public String result(){
+		logger.debug("into result page");
+		return "result";
+	}
+	
 
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
