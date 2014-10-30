@@ -4,5 +4,5 @@
 <pre id="pre"></pre>
 
 <script src="/javascripts/util.js"></script>
-<script src="/javascripts/layout.js"></script>
+<script src="/javascripts/LayoutTemplate.js"></script>
 
