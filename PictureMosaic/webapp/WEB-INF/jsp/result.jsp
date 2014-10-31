@@ -1,48 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
 
-	<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
-	</head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+</head>
 <body>
 	<header>
-		<div>service</div>
-		<div>user</div>
-		<div>make</div>
+		<a><span>SERVICE</span></a>
+		<a><span>USER</span></a>
+		<a><span>MAKE</span></a>
 	</header>
 	<aside>
-		<section>
+		<section class="thumbnail">
 			<img src="/images/thumbnail.png" />
 		</section>
-		<section>
+		<section class="info">
 			<ul>
-				<li>subject</li>
-				<li>subject value</li>
-				<li>comment</li>
-				<li>comment value</li>
-				<li>producer</li>
-				<li>producer value</li>
-				<li>date</li>
-				<li>date value</li>
+				<li>
+					<p>subject</p>
+					<p>subject value</p>
+				</li>
+				<li>
+					<p>comment</p>
+					<p>comment value</p>
+				</li>
+				<li>
+					<p>producer</p>
+					<p>producer value</p>
+				</li>
+				<li>
+					<p>date</p>
+					<p>date value</p>
+				</li>
 			</ul>
 		</section>
-		<section>
+		<section class="share">
 			<input type="button" value="share" />
 		</section>
 	</aside>
 	<article>
-		<img src="/images/bobby.jpg" />
-		<img src="/images/baemin.jpg" />
-		<img src="/images/captain.jpg" />
-		<img src="/images/clan.png" />
-		<img src="/images/comment.jpg" />
-		<img src="/images/dog.jpg" />
-		<img src="/images/pio.jpg" />
-		<img src="/images/pitcher.jpg" />
+		<ul>
+			<li><img src="/images/bobby.jpg" /></li>
+			<li><img src="/images/baemin.jpg" /></li>
+			<li><img src="/images/captain.jpg" /></li>
+			<li><img src="/images/clan.png" /></li>
+			<li><img src="/images/comment.jpg" /></li>
+			<li><img src="/images/dog.jpg" /></li>
+			<li><img src="/images/pio.jpg" /></li>
+			<li><img src="/images/pitcher.jpg" /></li>
+		</ul>
 	</article>
-	</body>
+</body>
 </html>
