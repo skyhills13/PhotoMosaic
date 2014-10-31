@@ -1,6 +1,17 @@
 /****
  *   성공적인 Layouting 을 위한 객체
  */
+
+/* 
+이하 코드를 보면 숫자들이 쭉 나열되어 있는데, 4, 8 등 이런게 정해진 알고리즘을 충족하기 위해서 구현한 건 알겠는데.
+로직이나 알고리즘은 나중에 변경되거나 기능이 변경(확장)된다는 것도 고민하면 좋겠음
+*/
+
+/* 
+전반적으로 코드에 대한 별도의 명세서(자유로운 형식으로 로직을 도식화하는 형태) 가 필요한 코드.
+wiki등에 정리하면 멋지겠음
+*/
+
 function Layout(rowSize, colSize) {
 	this.rowSize = (typeof rowSize !== "undefined") ? rowSize : 4;
 	this.colSize = (typeof colSize !== "undefined") ? colSize : 4;
@@ -40,6 +51,9 @@ Layout.prototype._init = function() {
 	//run(0, board);
 }
 
+/* 뭔가 그럴싸한 코드인데 정확히 이해가 안감 . 로직 잘 구현했으리라 ㅎ 
+   이정도를 머리속으로만 기억하지 말고 어딘가 이해할만한 내용으로 문서화(wiki등에)를 해두면 좋을 듯 
+*/
 Layout.prototype._isPossible = function(unit, board, startRow, startCol) {
 	var arrUnit = unit.split("x");
 

@@ -24,6 +24,7 @@ public class PictureUploader {
 		try {
 			multipartFile.transferTo(destFile);
 		} catch (Exception ex) {
+			//Message는 이런 메서드 안에서가 아니고 따로 묶어두면 좋겠죠.
 			throw new IllegalArgumentException(destFile + "로 첨부파일 옮기다 오류 발생");
 		}
 		return destFile;

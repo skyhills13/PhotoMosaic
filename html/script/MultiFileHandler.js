@@ -11,8 +11,19 @@ function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
 	this._init();
 }
 
+/* 
+이렇게 prototype이라는 객체를 새로 정의하는 경우에는 constructor 를 지정해줘야 함. 
+
+원래는 
+MultiFileHandler.prototype._init = function() { }
+MultiFileHandler.prototype._initEvents = function() { }
+이런식으로 하면 원래 함수안에 있는 prototype객체를 유지한채 메서드를 추가하는 것이라 constructor속성이 살아있는 것이고.
+
+*/
+
 MultiFileHandler.prototype = {
 	_init: function() {
+		//개행으로 보기 좋게 한거 좋다. 그런데 if문 에서 뭘 해야 하는데 뭘 안하네?
 		if (window.File
 				&& window.FileList
 				&& window.FileReader
@@ -39,6 +50,7 @@ MultiFileHandler.prototype = {
 				node.addEventListener("change",
 						this._fileSelectHandler.bind(this));
 			} else {
+				//이벤트 핸들러를 하나로 지정해서 그 안에서 분기토록 한건 괜찮아 보임. 그 핸들러가 그리 복잡한 녀석이 아니니까.
 				node.addEventListener("dragover", this._fileDragHover);
 				node.addEventListener("dragleave", this._fileDragHover);
 				node.addEventListener("drop",
@@ -51,6 +63,7 @@ MultiFileHandler.prototype = {
 		event.stopPropagation();
 		event.preventDefault();
 
+		// == , === 좀더 일관되게 사용하면 더 좋을 듯.
 		if (event.type == "dragover") {
 			event.dataTransfer.dropEffect = "copy"; 
 			event.target.appendClassName("hover");
@@ -80,4 +93,3 @@ MultiFileHandler.prototype = {
 	}
 
 }
-

@@ -45,12 +45,14 @@
 <script src="script/MyHTMLElement.js"></script>
 <script src="script/MultiFileHandler.js"></script>
 <script>
+	/* 여기코드도 가급적 별도 파일로 분리해도 됨 */
 	var eleInput = document.querySelector(".controll input[type=file]");
 	var eleDrag = document.querySelector(".pictures");
 
+	//callback 을 받아서 처리하는 거 아주 좋음. 이런식으로 개발자가 그때그때 상황에 따라 다르게 동작해야 할 콜백을 지정하게 해주는 게 '컴포넌트'개발에서 중요함 
 	this.fileHandler = new MultiFileHandler(
 			[eleInput, eleDrag],
-			[imgCb.bind(this)]);
+			[imgCb.bind(this)]); //bind 가 필요한거 맞나? 
 
 
 	function imgCb(file) {

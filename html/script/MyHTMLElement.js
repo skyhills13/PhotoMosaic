@@ -2,13 +2,19 @@
  *   HTMLElement의 prototype에 함수 추가
  */
 
+/* NATIVE 객체에 이렇게 추가하는 건 위험한 것이라고 했으니, 알고 사용하기.
+   개발자가 직접 추가한 것이라고 알아볼 수 있게 이름을 짓는 건 어떨까? 독특하게?
+  */
 HTMLElement.prototype.getStyleValue = function(strStyle) {
 	return window.getComputedStyle(this.node).getPropertyValue(strStyle);
 };
 
 HTMLElement.prototype.hasClassName = function(strClassName) {
+	// 공백문자라던가, 숫자타입이라던가  뭐 그런경우는 오류가 아닌가? 
 	if (typeof strClassName == "undefined"
 			|| strClassName == null) {
+		//실제 서비스코드에서 console.log로 출력하면 사용자 브라우저에 출력되는 것임으로 console.log는 지워줘야 함. console객체에 log메서드 말고 다른것도 있던데.. 
+		//그런 더 의미있는 메서드를 사용하는 건 어때? 
 		console.log("hasClassName: Missing className to search");
 		return false;
 	}
@@ -49,6 +55,7 @@ HTMLElement.prototype.appendClassName = function(strClassName) {
 };
 
 HTMLElement.prototype.removeClassName = function(strClassName) {
+	//type 체크를 반복적으로 계속 하고 잇지? 타입을 인자로 받아서 체크해주는 메서드같은거 나중에 만들면 좋을 듯. 
 	if (typeof strClassName == "undefined"
 			|| strClassName == null) {
 		console.log("removeClassName: Missing className to remove");
