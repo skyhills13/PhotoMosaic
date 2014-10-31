@@ -13,11 +13,11 @@ function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
 
 MultiFileHandler.prototype = {
 	_init: function() {
-		if (window.File
-				&& window.FileList
-				&& window.FileReader
-				&& window.Blob) {
-		} else {
+		if (!window.File
+				|| !window.FileList
+				|| !window.FileReader
+				|| !window.Blob) {
+			// 나중에 안내창 띄우는 것으로 변경할 것.
 			console.log("Browser doesn't support full range of File API");
 			return ;
 		}
@@ -78,6 +78,5 @@ MultiFileHandler.prototype = {
 	getFiles: function() {
 		return this.files;
 	}
-
 }
 
