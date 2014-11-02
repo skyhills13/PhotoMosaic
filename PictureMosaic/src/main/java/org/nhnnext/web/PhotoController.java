@@ -8,6 +8,7 @@ import org.nhnnext.domains.Photo;
 import org.nhnnext.support.PhotoUploader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,9 @@ public class PhotoController {
 //	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
 //	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PictureMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/PictureMosaic/PictureMosaic/webapp/images";
+	
+	@Autowired
+	private PhotoDao photoDao;
 	
 	
 	@RequestMapping("/select")
@@ -57,7 +61,6 @@ public class PhotoController {
             PhotoUploader.upload(file);
             
             //upload file information to DB
-            PhotoDao photoDao = new PhotoDao();
             Photo photo = new Photo(file.getOriginalFilename());
             
             //TODO add date to UUID for the case of exception

@@ -19,6 +19,7 @@ public class PhotoDao extends JdbcDaoSupport{
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("picturemosaic.sql"));
 		DatabasePopulatorUtils.execute(populator, getDataSource());
+		logger.debug("database initialize success!");
 	}
 
 	public Photo findByName(String originalFileName) {
@@ -37,7 +38,7 @@ public class PhotoDao extends JdbcDaoSupport{
 	}
 
 	public void upload(Photo photo) {
-		String sql="insert into PHOTOS (unique_id, original_name) VALUES (?, ?)";
+		String sql="INSERT INTO PHOTOS (unique_id, original_name) VALUES (?, ?)";
 		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName());
 	}
 }

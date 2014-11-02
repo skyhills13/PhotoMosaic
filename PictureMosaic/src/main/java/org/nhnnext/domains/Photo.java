@@ -24,6 +24,7 @@ public class Photo {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getUniqueId() {
 		return uniqueId;
 	}
@@ -31,6 +32,7 @@ public class Photo {
 	public void setUniqueId(String uniqueId) {
 		this.uniqueId = uniqueId;
 	}
+	
 	public String getOriginalFileName() {
 		return originalFileName;
 	}
