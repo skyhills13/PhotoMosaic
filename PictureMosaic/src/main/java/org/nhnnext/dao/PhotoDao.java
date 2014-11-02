@@ -1,8 +1,13 @@
 package org.nhnnext.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.annotation.PostConstruct;
 
+import org.nhnnext.domains.Photo;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -14,5 +19,25 @@ public class PhotoDao extends JdbcDaoSupport{
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("picturemosaic.sql"));
 		DatabasePopulatorUtils.execute(populator, getDataSource());
+	}
+
+	public Photo findByName(String originalFileName) {
+		String sql = "select * from photos where original_name= ?";
+		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
+			
+			@Override
+			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Photo(
+						rs.getInt("id"),
+						rs.getString("unique_id"),
+						rs.getString("original_name"));
+			}
+		};
+		return getJdbcTemplate().queryForObject(sql, rowMapper, originalFileName);
+	}
+
+	public void upload(Photo photo) {
+		String sql="insert into PHOTOS (unique_id, original_name) VALUES (?, ?)";
+		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName());
 	}
 }

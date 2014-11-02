@@ -1,10 +1,11 @@
 package org.nhnnext.web;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.UUID;
 
+import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.domains.Photo;
+import org.nhnnext.support.PhotoUploader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class FileUploadController {
+public class PhotoController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(FileUploadController.class);
+			.getLogger(PhotoController.class);
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
 //	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PictureMosaic/webapp/images";
@@ -42,42 +43,29 @@ public class FileUploadController {
 		logger.debug("into result page");
 		return "result";
 	}
-	
 
 	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
     public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
-            UUID pictureUniqueKey = UUID.randomUUID();
+            
             if (file.isEmpty()) {
             	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
             }
-            logger.debug(pictureUniqueKey.toString());
-            String uniqueName = pictureUniqueKey.toString();
-            String originalName = file.getOriginalFilename();
-            try {
-                byte[] bytes = file.getBytes();
- 
-                // Create the directory to store file
-                File dir = new File(ATTACHMENT_ROOT_DIR);
-                if (!dir.exists()) {
-                	dir.mkdirs();
-                }
- 
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + originalName);
-                BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile) );
-                stream.write(bytes);
-                stream.close();
- 
-                logger.info("Server File Location=" + serverFile.getAbsolutePath());
-                message = message + "You successfully uploaded file=" + originalName + "<br />";
-            } catch (Exception e) {
-                return "You failed to upload " + originalName + " => " + e.getMessage();
-            }
+            //upload file to server
+            PhotoUploader.upload(file);
+            
+            //upload file information to DB
+            PhotoDao photoDao = new PhotoDao();
+            Photo photo = new Photo(file.getOriginalFilename());
+            
+            //TODO add date to UUID for the case of exception
+            photo.setUniqueId((UUID.randomUUID().toString()));
+            photoDao.upload(photo);
+            message = message + "You successfully uploaded file=" + file.getOriginalFilename() + "<br />";
         }
-        return message;
+            return message;
     }
 
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
