@@ -53,7 +53,7 @@
 
 	this.fileHandler = new MultiFileHandler(
 			[eleInput, eleDrag],
-			[imgCb.bind(this)]);
+			[imgCb]);
 
 
 	function imgCb(file) {
