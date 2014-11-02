@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS photos; 
 
-CREATE TABLE photos ( 
+CREATE TABLE photo ( 
  photoId int NOT NULL auto_increment, 
  name varchar(45) NOT NULL, 
  size double NOT NULL, 
