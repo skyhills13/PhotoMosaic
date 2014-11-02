@@ -2,7 +2,6 @@
  *   Constructor
  */
 function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
-	console.log(arguments);
 	this.files = [];
 
 	this.nodes = [].slice.call(arguments[0]);
@@ -12,6 +11,8 @@ function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
 }
 
 MultiFileHandler.prototype = {
+	constructor: MultiFileHandler,
+
 	_init: function() {
 		if (!window.File
 				|| !window.FileList
