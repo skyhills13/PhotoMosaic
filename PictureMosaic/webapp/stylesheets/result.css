@@ -8,7 +8,7 @@
 /*font-family: 'Lato', sans-serif;*/
 @import url(http://fonts.googleapis.com/css?family=Lato:100,400);
 
-article {
+article#list {
 	position: absolute;
 	left: 30%;
 	z-index: -1;
@@ -24,18 +24,18 @@ article {
 	-webkit-transition: border 0.3s;
 }
 
-article:hover {
+article#list:hover {
 	border: 1px solid RGBA(54, 117, 199, 0.7);
 }
 
-article ul li {
+article#list ul li {
 	margin: 5px;
 	width: 40%;
 	display: inline-block;
 	position: relative;
 }
 
-article ul li img {
+article#list ul li img {
 	width: 100%;
 	border-radius: 2px;
 	padding: 0px;
@@ -44,7 +44,7 @@ article ul li img {
 	border: 1px solid RGBA(180, 180, 180, 0);
 }
 
-article ul li img:hover {
+article#list ul li img:hover {
 	border-radius: 20px;
 	-webkit-filter: grayscale(1);
 	background: black;
@@ -52,8 +52,8 @@ article ul li img:hover {
 	border: 1px solid RGBA(180, 180, 180, 1);
 }
 
-article ul li:hover:before {
-	content: url(img/magnifier.png);
+article#list ul li:hover:before {
+	content: url(../images/magnifier.png);
 	position: absolute;
 	z-index: 20;
 	top: 50%;
@@ -116,11 +116,86 @@ aside section.share input[type='button'] {
 	-webkit-transition: background-color 0.2s;
 }
 
-aside section.share input[type='button']:focus {
-	outline: none;
+aside section.share input[type='button']:hover {
 	background: RGBA(54, 117, 199, 1);
 }
 
-aside section.share input[type='button']:hover {
-	background: RGBA(54, 117, 199, 1);
+aside section.share input[type='button']:focus {
+	outline: none;
+}
+
+#lightBox {
+	position: fixed;
+	z-index: 999999;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: RGBA(0, 0, 0, 0.7);
+}
+
+#lightBox.hide {
+	/*display : block;*/
+	display: none;
+}
+
+#lightBox.show {
+	/*display : none;*/
+	display: block;
+}
+
+#lightBox section {
+	position: absolute;
+	width: 80%;
+	height: 100%;
+	border: 1px solid black;
+}
+
+#lightBox section div {
+	margin: auto;
+	border: 1px solid red;
+	position: absolute;
+}
+
+#lightBox section div.previous {
+	width: 50%;
+	height: 15%;
+	top: 0px;
+	left: 25%;
+}
+
+#lightBox section div.current {
+	width: 80%;
+	height: 64%;
+	left: 10%;
+	top: 18%;
+}
+
+#lightBox section div.next {
+	width: 50%;
+	height: 15%;
+	bottom: 0px;
+	left: 25%;
+}
+
+#lightBox section div img {
+	height: 100%;
+}
+
+#lightBox section div.overHeight img {
+	height: 100%;
+	margin: auto;
+}
+
+#lightBox section div.overWidth img {
+	width: 100%;
+	margin: auto;
+}
+
+#lightBox nav {
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	left: 80%;
+	border: 1px solid purple;
 }
