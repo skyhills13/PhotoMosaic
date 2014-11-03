@@ -23,7 +23,7 @@
 
 <!-- SELECT PICTURES -->
 <section class="select">
-<div class="positioner">
+<form class="positioner">
 	<article class="contents">
 		<header>
 			<section>
@@ -39,9 +39,9 @@
 	</article>
 	<section class="controll">
 		<input type="file" name="pictures" multiple accept="image/*" />
-		<button>Upload</button>
+		<input type="submit" value="Upload"></input>
 	</section >
-</div>
+</form>
 </section>
 
 <script src="/javascripts/util.js"></script>

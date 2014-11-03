@@ -15,6 +15,7 @@ body * {
 
 .positioner {
 	position: relative;
+	display: box;
 	height: 100%;
 }
 
@@ -134,7 +135,8 @@ body * {
 	bottom: 20px;
 }
 
-.select .controll button {
+.select .controll .button {
+	display: block;
 	position: absolute;
 
 	left: 50%;
