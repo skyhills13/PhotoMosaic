@@ -53,7 +53,7 @@ article#list ul li img:hover {
 }
 
 article#list ul li:hover:before {
-	content: url(../images/magnifier.png);
+	content: url(/images/magnifier.png);
 	position: absolute;
 	z-index: 20;
 	top: 50%;
@@ -148,20 +148,21 @@ aside section.share input[type='button']:focus {
 	position: absolute;
 	width: 80%;
 	height: 100%;
-	border: 1px solid black;
 }
 
 #lightBox section div {
 	margin: auto;
-	border: 1px solid red;
 	position: absolute;
 }
 
+#lightBox section div img {
+	width: 100%;
+}
+
 #lightBox section div.previous {
-	width: 50%;
-	height: 15%;
-	top: 0px;
-	left: 25%;
+	width: 60%;
+	left: 20%;
+	bottom: 85%;
 }
 
 #lightBox section div.current {
@@ -171,15 +172,14 @@ aside section.share input[type='button']:focus {
 	top: 18%;
 }
 
-#lightBox section div.next {
-	width: 50%;
-	height: 15%;
-	bottom: 0px;
-	left: 25%;
+#lightBox section div.current img {
+	height: 100%;
 }
 
-#lightBox section div img {
-	height: 100%;
+#lightBox section div.next {
+	width: 60%;
+	top: 85%;
+	left: 20%;
 }
 
 #lightBox section div.overHeight img {
@@ -197,5 +197,28 @@ aside section.share input[type='button']:focus {
 	width: 20%;
 	height: 100%;
 	left: 80%;
-	border: 1px solid purple;
+}
+
+#lightBox nav input[type="range"] {
+	position: absolute;
+	height: 10px;
+	width: 600px;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px;
+	-webkit-transform: rotate(90deg);
+}
+
+#lightBox nav input[type="button"] {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	top: 20px;
+	right: 20px;
+	background: url(/images/cancel.png);
+	border: none;
+}
+
+#lightBox nav input[type="button"]:focus {
+	outline: none;
 }
