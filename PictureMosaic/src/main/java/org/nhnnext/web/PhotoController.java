@@ -1,11 +1,10 @@
 package org.nhnnext.web;
 
-import java.io.File;
 import java.util.UUID;
 
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Photo;
-import org.nhnnext.support.PhotoUploader;
+import org.nhnnext.support.PhotoHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,6 @@ public class PhotoController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(PhotoController.class);
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PictureMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/PictureMosaic/PictureMosaic/webapp/images";
 	
 	@Autowired
 	private PhotoDao photoDao;
@@ -36,7 +31,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -45,7 +40,7 @@ public class PhotoController {
             	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
             }
             //upload file to server
-            PhotoUploader.upload(file);
+            PhotoHandler.upload(file);
             
             //upload file information to DB
             Photo photo = new Photo(file.getOriginalFilename());
@@ -60,13 +55,11 @@ public class PhotoController {
     }
 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
-	public String delete(String name) {
-		File imagesDir = new File(ATTACHMENT_ROOT_DIR);
-		File targetFile = new File(imagesDir.getAbsolutePath() + File.separator
-				+ name);
-
-		// TODO exception handling
-		targetFile.delete();
-		return name;
+	public boolean delete(String name) {
+		if(!PhotoHandler.delete(name)){
+			logger.debug("cannot delete");
+			return false;
+		}
+		return true;
 	}
 }
