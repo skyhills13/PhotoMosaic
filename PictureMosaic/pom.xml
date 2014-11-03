@@ -94,6 +94,7 @@
 				<configuration>
 					<warSourceDirectory>webapp</warSourceDirectory>
 				</configuration>
+				
 			</plugin>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -101,6 +102,7 @@
 				<configuration>
 					<wtpversion>2.0</wtpversion>
 					<wtpContextName>/</wtpContextName>
+					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
 		</plugins>

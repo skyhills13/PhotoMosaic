@@ -8,8 +8,7 @@
 </head>
 <body>
 	<form method="POST" action="uploadMultipleFile" enctype="multipart/form-data">
-		File1 to upload: <input type="file" name="file"><br /> 
-		File2 to upload: <input type="file" name="file"><br /> 
+		File1 to upload: <input type="file" name="file" multiple><br /> 
         <input type="submit" value="Upload"> Press here to upload the file!
 	</form>
 </body>

@@ -41,4 +41,8 @@ public class PhotoDao extends JdbcDaoSupport{
 		String sql="INSERT INTO PHOTOS (unique_id, original_name) VALUES (?, ?)";
 		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName());
 	}
+	
+	public void deleteAll(Photo photo) {
+		String sql="delete from PHOTOS";
+	}
 }
