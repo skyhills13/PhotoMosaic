@@ -11,8 +11,8 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(){
-		logger.debug("at home");
-		return "index";
+		logger.debug("at home, which is select page");
+		return "select";
 	}
 
 }

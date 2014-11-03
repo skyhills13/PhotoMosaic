@@ -29,19 +29,6 @@ public class PhotoController {
 	@Autowired
 	private PhotoDao photoDao;
 	
-	
-	@RequestMapping("/select")
-	public String select() {
-		logger.debug("into select page");
-		return "select";
-	}
-
-	@RequestMapping("/test")
-	public String test() {
-		logger.debug("into select page");
-		return "uploadMultiple";
-	}
-	
 	@RequestMapping("/result")
 	public String result(){
 		logger.debug("into result page");
@@ -49,7 +36,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
+    public String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -68,7 +55,8 @@ public class PhotoController {
             photoDao.upload(photo);
             message = message + "You successfully uploaded file=" + file.getOriginalFilename() + "<br />";
         }
-            return message;
+        	return message;
+            //return "result";
     }
 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
