@@ -31,7 +31,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
+    public String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -39,19 +39,16 @@ public class PhotoController {
             if (file.isEmpty()) {
             	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
             }
-            //upload file to server
+
             PhotoHandler.upload(file);
-            
-            //upload file information to DB
             Photo photo = new Photo(file.getOriginalFilename());
-            
             //TODO add date to UUID for the case of exception
             photo.setUniqueId((UUID.randomUUID().toString()));
             photoDao.upload(photo);
-            message = message + "You successfully uploaded file=" + file.getOriginalFilename() + "<br />";
+            message = message + "You successfully uploaded file=" + file.getOriginalFilename();
+            logger.debug(message);
         }
-        	return message;
-            //return "result";
+            return "result";
     }
 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
