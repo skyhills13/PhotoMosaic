@@ -23,7 +23,7 @@
 
 <!-- SELECT PICTURES -->
 <section class="select">
-<form class="positioner">
+<form class="positioner" method="POST" action="photo" enctype="multipart/form-data">
 	<article class="contents">
 		<header>
 			<section>

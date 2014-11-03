@@ -48,8 +48,8 @@ public class PhotoController {
 		return "result";
 	}
 
-	@RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) {
+	@RequestMapping(value = "/photo", method = RequestMethod.POST)
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
@@ -71,7 +71,7 @@ public class PhotoController {
             return message;
     }
 
-	@RequestMapping(value = "/remove", method = RequestMethod.GET)
+	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
 	public String delete(String name) {
 		File imagesDir = new File(ATTACHMENT_ROOT_DIR);
 		File targetFile = new File(imagesDir.getAbsolutePath() + File.separator

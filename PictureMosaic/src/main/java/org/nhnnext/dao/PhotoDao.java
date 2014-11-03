@@ -42,7 +42,13 @@ public class PhotoDao extends JdbcDaoSupport{
 		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName());
 	}
 	
+	public void deleteById(Photo photo) {
+		String sql="delete from PHOTOS where id = ? ";
+		getJdbcTemplate().update(sql, photo.getId());
+	}
+	
 	public void deleteAll(Photo photo) {
 		String sql="delete from PHOTOS";
+		getJdbcTemplate().update(sql);
 	}
 }
