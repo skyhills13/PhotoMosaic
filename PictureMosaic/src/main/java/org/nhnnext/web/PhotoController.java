@@ -3,16 +3,17 @@ package org.nhnnext.web;
 import java.util.UUID;
 
 import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.support.PhotoHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -29,9 +30,21 @@ public class PhotoController {
 		logger.debug("into result page");
 		return "result";
 	}
+	
+	@RequestMapping(value="/tempSelect")
+	public String test1(Model model){
+		model.addAttribute("mosaic", new Mosaic());
+		logger.debug("Model:{}", model);
+		return "tempSelect";
+	}
+	
+	@RequestMapping(value="/test", method=RequestMethod.POST)
+	public String test2(Model model) {
+		return "result";
+	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("pictures") MultipartFile[] files) {
+    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files) {
         String message = "";
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
