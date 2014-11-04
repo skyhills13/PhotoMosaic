@@ -1,5 +1,5 @@
 /****
- *   HTMLElement의 prototype에 함수 추가
+ *   TOOL: HTMLElement의 prototype에 함수 추가
  */
 
 HTMLElement.prototype.getStyleValue = function(strStyle) {

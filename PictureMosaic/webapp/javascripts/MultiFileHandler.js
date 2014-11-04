@@ -1,6 +1,7 @@
 /****
- *   Constructor
+ *   LIB: MultiFileHandler
  */
+
 function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
 	this.files = [];
 
@@ -58,8 +59,8 @@ MultiFileHandler.prototype = {
 			if (event.target.getAttribute("data-drag") === "true") {
 				this.hoverLine.appendClassName("hoverIn");
 			} else {
-				this.hoverLine.removeClassName("hoverIn");
 				this.hoverLine.appendClassName("hoverOut");
+				this.hoverLine.removeClassName("hoverIn");
 			}
 		} else {
 			this.hoverLine.removeClassName("hoverIn");

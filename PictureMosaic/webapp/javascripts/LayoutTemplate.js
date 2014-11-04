@@ -1,5 +1,5 @@
 /****
- *   성공적인 Layouting 을 위한 객체
+ *   LIB: LayoutTemplate
  */
 function LayoutTemplate(width, height) {
 	this.width = (typeof width !== "undefined") ? width : 4;
