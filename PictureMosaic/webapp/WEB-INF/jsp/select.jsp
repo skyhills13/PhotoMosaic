@@ -41,7 +41,7 @@
 	<section class="controll">
 		<div class="inputFile">
 			<div>Add Photo</div>
-			<input type="file" name="pictures" multiple accept="image/*" />
+			<input type="file" multiple accept="image/*" />
 		</div>
 		<input class="button" type="submit" value="Upload"></input>
 	</section >

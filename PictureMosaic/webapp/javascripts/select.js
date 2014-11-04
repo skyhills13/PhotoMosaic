@@ -6,7 +6,7 @@ var eleInput = document.querySelector(".controll input[type=file]");
 var eleBody = document.querySelector("body");
 var eleDrag = document.querySelector(".pictures");
 
-this.fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
+var fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
 
 function imgCb(file) {
 	// Only process image files.
@@ -35,4 +35,19 @@ function imgCb(file) {
 
 	// Read in the image file as a data URL.
 	reader.readAsDataURL(file);
+}
+
+function uploadImages() {
+	var files = fileHandler.getFiles()
+	var formData = new FormData();
+
+	for (var idx = 0; idx < files.length; idx++) {
+		if (files[idx].type.match('image.*')) {
+			formData.append("photos", files[idx]);
+		}
+	}
+	
+	var request = new XMLHttpRequest();
+	request.open("POST", "/photo");
+	request.send(formData);
 }

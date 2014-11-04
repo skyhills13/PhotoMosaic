@@ -3,7 +3,11 @@
  */
 
 function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
-	this.files = [];
+	var files = [];
+	
+	this.getFiles = function() {
+		return files;
+	}
 
 	this.nodes = [].slice.call(arguments[0]);
 	this.callbacks = [].slice.call(arguments[1]);
@@ -74,18 +78,15 @@ MultiFileHandler.prototype = {
 
 		// fetch FileList object
 		var files = event.target.files || event.dataTransfer.files;
+		var thisFiles = this.getFiles();
 
 		// process all File objects
 		for (var idxFile = 0, file; file = files[idxFile]; idxFile++) {
-			this.files.push(file);
+			thisFiles.push(file);
 			for (var idxCb = 0, cb; cb = this.callbacks[idxCb]; idxCb++) {
 				cb(file);
 			}
 		}
-	},
-
-	getFiles: function() {
-		return this.files;
 	}
 }
 
