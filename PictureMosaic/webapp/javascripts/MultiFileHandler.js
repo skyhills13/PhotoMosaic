@@ -6,6 +6,8 @@ function MultiFileHandler(/* [node1, node2, ...], [fn1, fn2, ...] */) {
 
 	this.nodes = [].slice.call(arguments[0]);
 	this.callbacks = [].slice.call(arguments[1]);
+	
+	this.hoverLine = document.querySelector(".hoverLine");
 
 	this._init();
 }
@@ -37,13 +39,11 @@ MultiFileHandler.prototype = {
 			}
 
 			if (node.nodeName === "INPUT") {
-				node.addEventListener("change",
-						this._fileSelectHandler.bind(this));
+				node.addEventListener("change", this._fileSelectHandler.bind(this));
 			} else {
-				node.addEventListener("dragover", this._fileDragHover);
-				node.addEventListener("dragleave", this._fileDragHover);
-				node.addEventListener("drop",
-						this._fileSelectHandler.bind(this));
+				node.addEventListener("dragover", this._fileDragHover.bind(this));
+				node.addEventListener("dragleave", this._fileDragHover.bind(this));
+				node.addEventListener("drop", this._fileSelectHandler.bind(this));
 			}
 		}.bind(this));
 	},
@@ -51,12 +51,19 @@ MultiFileHandler.prototype = {
 	_fileDragHover: function(event) {
 		event.stopPropagation();
 		event.preventDefault();
-
+		
+		
 		if (event.type == "dragover") {
-			event.dataTransfer.dropEffect = "copy"; 
-			event.target.appendClassName("hover");
+			event.dataTransfer.dropEffect = "copy";
+			if (event.target.getAttribute("data-drag") === "true") {
+				this.hoverLine.appendClassName("hoverIn");
+			} else {
+				this.hoverLine.removeClassName("hoverIn");
+				this.hoverLine.appendClassName("hoverOut");
+			}
 		} else {
-			event.target.removeClassName("hover");
+			this.hoverLine.removeClassName("hoverIn");
+			this.hoverLine.removeClassName("hoverOut");
 		}
 	},
 

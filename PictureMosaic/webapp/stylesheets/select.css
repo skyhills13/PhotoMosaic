@@ -6,6 +6,11 @@ html, body {
 	min-height: 600px;
 
 	font-family: "Apple SD Gothic Neo";
+	
+	-webkit-user-select: NONE;
+	-moz-user-select: NONE;
+	-ms-user-select: NONE;
+	user-select: NONE;
 }
 
 body * {
@@ -98,6 +103,27 @@ body * {
 	line-height: 18px;
 }
 
+.select .hoverLine {
+	position: absolute;
+	
+	left: -2px;
+	right: -1.5px;
+	top: 40px;
+	bottom: -1.5px;
+	
+	border: 3px dashed transparent;
+	
+	box-sizing: initial;
+}
+
+.select .hoverLine.hoverIn {
+	border: 3px dashed #999;
+}
+
+.select .hoverLine.hoverOut {
+	border: 3px dashed #BBB;
+}
+
 .select .pictures {
 	position: absolute;
 
@@ -111,15 +137,6 @@ body * {
 	border-top: 1px solid #bdc7d8;
 
 	overflow-y: scroll;
-}
-
-.select .pictures.hover {
-	border: 2px solid red;
-}
-
-.select .pictures .positioner {
-	width: 0px;
-	height: 0px;
 }
 
 .select .pictures .positioner .thumb {

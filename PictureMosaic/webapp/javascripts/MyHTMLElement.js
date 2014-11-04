@@ -18,8 +18,10 @@ HTMLElement.prototype.hasClassName = function(strClassName) {
 		return false;
 	}
 
+	var regExp = new RegExp("\\b" + strClassName + "\\b");
+	
 	// className이 없으면 false를 반환하고 함수 종료
-	if (this.className.toString().search(strClassName) == -1) {
+	if (this.className.toString().search(regExp) === -1) {
 		return false;
 	}
 

@@ -33,8 +33,9 @@
 				<input type="text" name="subtitle" placeholder="Subtitle"/>
 			</section>
 		</header>
-		<article class="pictures">
-			<div class="positioner"></div>
+		<div class="hoverLine"></div>
+		<article class="pictures" data-drag="true">
+			<div class="positioner" data-drag="true"></div>
 		</article>
 	</article>
 	<section class="controll">
@@ -52,10 +53,11 @@
 <script src="/javascripts/MultiFileHandler.js"></script>
 <script>
 	var eleInput = document.querySelector(".controll input[type=file]");
+	var eleBody = document.querySelector("body");
 	var eleDrag = document.querySelector(".pictures");
 
 	this.fileHandler = new MultiFileHandler(
-			[eleInput, eleDrag],
+			[eleInput, eleBody],
 			[imgCb]);
 
 
@@ -77,6 +79,7 @@
 				image.setAttribute("src", event.target.result);
 				image.setAttribute("title", escape(file.name));
 				image.setAttribute("draggable", false);
+				image.setAttribute("data-drag", true);
 
 				eleDrag.querySelector(".positioner")
 						.insertBefore(image, null);
