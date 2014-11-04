@@ -38,8 +38,11 @@
 		</article>
 	</article>
 	<section class="controll">
-		<input type="file" name="pictures" multiple accept="image/*" />
-		<input type="submit" value="Upload"></input>
+		<div class="inputFile">
+			<div>Add Photo</div>
+			<input type="file" name="pictures" multiple accept="image/*" />
+		</div>
+		<input class="button" type="submit" value="Upload"></input>
 	</section >
 </form>
 </section>
@@ -73,6 +76,7 @@
 				image.appendClassName("thumb");
 				image.setAttribute("src", event.target.result);
 				image.setAttribute("title", escape(file.name));
+				image.setAttribute("draggable", false);
 
 				eleDrag.querySelector(".positioner")
 						.insertBefore(image, null);

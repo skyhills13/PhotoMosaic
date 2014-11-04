@@ -122,6 +122,13 @@ body * {
 	height: 0px;
 }
 
+.select .pictures .positioner .thumb {
+	float: left;
+	
+	width: 200px;
+	height: 200px;
+}
+
 .select .controll {
 	position: absolute;
 
@@ -135,6 +142,49 @@ body * {
 	bottom: 20px;
 }
 
+.select .controll .inputFile {
+	display: table;
+	position: absolute;
+	
+	width: 110px;
+	height: 46px;
+	
+	right: 50%;
+	top: 50%;
+	
+	margin-right: 8px;
+	margin-top: -23px;
+	
+	background-color: #AAA;
+	
+	border: none;
+	border-radius: 5px;
+	
+	overflow: hidden;
+}
+
+.select .controll .inputFile > div {
+	display: table-cell;
+	
+	text-align: center;
+	vertical-align: middle;
+	
+	font-size: 16px;
+}
+
+.select .controll input[type=file] {
+	display: block;
+	position: absolute;
+	
+	width: 100%;
+	height: 100%;
+	
+	top: 0px;
+	left: 0px;
+	
+	opacity: 0;
+}
+
 .select .controll .button {
 	position: absolute;
 	display: block;
@@ -142,7 +192,7 @@ body * {
 	left: 50%;
 	top: 50%;
 
-	margin-left: -43.5px;
+	margin-left: 8px;
 	margin-top: -23px;
 
 	padding: 15px 20px;
@@ -153,6 +203,6 @@ body * {
 	font-size: 14px;
 	line-height: 16px;
 
-	background-color: #AAA
+	background-color: #AAA;
 }
 
