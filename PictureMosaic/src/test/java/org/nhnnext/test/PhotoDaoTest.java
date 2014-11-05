@@ -1,5 +1,7 @@
 package org.nhnnext.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.UUID;
 
 import org.junit.Test;
@@ -9,12 +11,8 @@ import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.AssertThrows;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
@@ -35,6 +33,8 @@ public class PhotoDaoTest {
 		logger.debug("photo:{}", photo.getUniqueId());
 		logger.debug("dbphoto:{}", dbPhoto.getUniqueId());
 		//TODO solve assertEquals error
+		//둘다 아님 
 		assertEquals(photo, dbPhoto);
+		//assertThat(photo, is(dbPhoto));
 	}
 }

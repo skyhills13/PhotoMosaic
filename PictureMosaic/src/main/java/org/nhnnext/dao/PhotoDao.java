@@ -23,7 +23,7 @@ public class PhotoDao extends JdbcDaoSupport{
 	}
 
 	public Photo findByName(String originalFileName) {
-		String sql = "select * from photos where original_name= ?";
+		String sql = "select * from PHOTOS where original_name= ?";
 		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
 			
 			@Override
