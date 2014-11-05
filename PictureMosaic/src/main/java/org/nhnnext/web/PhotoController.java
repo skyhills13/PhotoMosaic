@@ -58,10 +58,11 @@ public class PhotoController {
             //TODO add date to UUID for the case of exception
             photo.setUniqueId((UUID.randomUUID().toString()));
             photoDao.upload(photo);
-            message = message + "You successfully uploaded file=" + file.getOriginalFilename();
-            logger.debug(message);
+            message = message + file.getOriginalFilename() + ", ";
         }
-            return "result";
+
+        logger.debug("You successfully uploaded files=" + message);
+        return "result";
     }
 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)

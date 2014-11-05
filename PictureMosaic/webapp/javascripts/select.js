@@ -2,11 +2,40 @@
  *   SCRIPT: select.jsp
  */
 
-var eleInput = document.querySelector(".controll input[type=file]");
 var eleBody = document.querySelector("body");
+
+var eleInput = document.querySelector(".inputFile input[type=file]");
 var eleDrag = document.querySelector(".pictures");
 
+var eleSubmit = document.querySelector(".controll button");
+
 var fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
+
+eleSubmit.addEventListener("click", function(event, eleForm) {
+	event.preventDefault();
+	
+	var files = fileHandler.getFiles();
+	var inputTexts = document.querySelectorAll(".select input[type=text]");
+	var formData = new FormData();
+
+	for (var idx = 0; idx < inputTexts.length; idx++) {
+		formData.append(inputTexts[idx].type, inputTexts[idx].value);
+	}
+	
+	for (var idx = 0; idx < files.length; idx++) {
+		if (files[idx].type.match('image.*')) {
+			formData.append("photos", files[idx]);
+		}
+	}
+	
+	var request = new XMLHttpRequest();
+	request.open("POST", "/photo");
+	request.send(formData);
+	
+	request.addEventListener("load", function() {
+		console.log(this.responseText);
+	});
+});
 
 function imgCb(file) {
 	// Only process image files.
@@ -28,26 +57,10 @@ function imgCb(file) {
 			image.setAttribute("draggable", false);
 			image.setAttribute("data-drag", true);
 
-			eleDrag.querySelector(".positioner")
-					.insertBefore(image, null);
+			eleDrag.querySelector(".positioner").insertBefore(image, null);
 		};
 	})(file);
 
 	// Read in the image file as a data URL.
 	reader.readAsDataURL(file);
-}
-
-function uploadImages() {
-	var files = fileHandler.getFiles()
-	var formData = new FormData();
-
-	for (var idx = 0; idx < files.length; idx++) {
-		if (files[idx].type.match('image.*')) {
-			formData.append("photos", files[idx]);
-		}
-	}
-	
-	var request = new XMLHttpRequest();
-	request.open("POST", "/photo");
-	request.send(formData);
 }

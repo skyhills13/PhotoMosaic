@@ -159,7 +159,28 @@ body * {
 	bottom: 20px;
 }
 
-.select .controll .inputFile {
+.select .controll .button {
+	position: absolute;
+	display: block;
+
+	left: 50%;
+	top: 50%;
+
+	margin-left: 8px;
+	margin-top: -23px;
+
+	padding: 15px 20px;
+
+	border: none;
+	border-radius: 5px;
+
+	font-size: 14px;
+	line-height: 16px;
+
+	background-color: #AAA;
+}
+
+.inputFile {
 	display: table;
 	position: absolute;
 	
@@ -180,7 +201,7 @@ body * {
 	overflow: hidden;
 }
 
-.select .controll .inputFile > div {
+.inputFile > div {
 	display: table-cell;
 	
 	text-align: center;
@@ -189,7 +210,7 @@ body * {
 	font-size: 16px;
 }
 
-.select .controll input[type=file] {
+.inputFile input[type=file] {
 	display: block;
 	position: absolute;
 	
@@ -200,26 +221,5 @@ body * {
 	left: 0px;
 	
 	opacity: 0;
-}
-
-.select .controll .button {
-	position: absolute;
-	display: block;
-
-	left: 50%;
-	top: 50%;
-
-	margin-left: 8px;
-	margin-top: -23px;
-
-	padding: 15px 20px;
-
-	border: none;
-	border-radius: 5px;
-
-	font-size: 14px;
-	line-height: 16px;
-
-	background-color: #AAA;
 }
 

@@ -23,7 +23,7 @@
 
 <!-- SELECT PICTURES -->
 <section class="select">
-<form class="positioner" method="POST" action="photo" enctype="multipart/form-data">
+<div class="positioner">
 	<article class="contents">
 		<header>
 			<section>
@@ -43,9 +43,9 @@
 			<div>Add Photo</div>
 			<input type="file" multiple accept="image/*" />
 		</div>
-		<input class="button" type="submit" value="Upload"></input>
+		<button class="button">Upload</button>
 	</section >
-</form>
+</div>
 </section>
 
 <script src="/javascripts/util.js"></script>
