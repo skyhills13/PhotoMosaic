@@ -10,9 +10,7 @@
 </head>
 <body>
 	<header>
-		<a><span>SERVICE</span></a>
-		<a><span>USER</span></a>
-		<a><span>MAKE</span></a>
+		<a><span>SERVICE</span></a> <a><span>USER</span></a> <a><span>MAKE</span></a>
 	</header>
 	<aside>
 		<section class="thumbnail">
@@ -55,5 +53,16 @@
 		</ul>
 	</article>
 	<script src="/javascripts/PictureListSlide.js"></script>
+	<script src="/javascripts/ShareTool.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var imgListTarget = document.querySelectorAll("article#list ul li img");
+			new PictureListSlide(imgListTarget);
+			
+			var sButton = document.querySelector("section.share input[type='button']");
+			var sTool = new ShareTool();
+			sTool.URL(sButton);
+		});
+	</script>
 </body>
 </html>

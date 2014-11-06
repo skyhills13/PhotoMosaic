@@ -1,8 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-	var eventTarget = document.querySelectorAll("article#list ul li img");
-	new PictureListSlide(eventTarget);
-});
-
 function PictureListSlide(target) {
 	this.photoNodes = target;
 	this.createLightBox();
