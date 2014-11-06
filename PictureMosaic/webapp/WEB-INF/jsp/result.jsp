@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<a><span>SERVICE</span></a> <a><span>USER</span></a> <a><span>MAKE</span></a>
+		<a href="/"><span>SERVICE</span></a> <a><span>USER</span></a> <a href="/"><span>MAKE</span></a>
 	</header>
 	<aside>
 		<section class="thumbnail">
