@@ -11,14 +11,16 @@
 
 	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 </head>
 
 <body>
 
 <!-- HEADER -->
-<header class="header">
-	<div class="logo">서비스 로고</div>
-	<div class="user">유저 정보</div>
+<header>
+	<a><span>SERVICE</span></a>
+	<a><span>USER</span></a>
+	<a><span>MAKE</span></a>
 </header>
 
 <!-- SELECT PICTURES -->
