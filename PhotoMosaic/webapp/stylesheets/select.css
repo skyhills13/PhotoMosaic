@@ -112,10 +112,36 @@ body * {
 }
 
 .select .pictures .positioner .thumb {
+	position: relative;
 	float: left;
 	
 	width: 200px;
 	height: 150px;
+}
+
+.select .pictures .positioner .thumb .removeButton {
+	display: none;
+	position: absolute;
+	
+	width: 30px;
+	height: 30px;
+	
+	top: 0px;
+	left: 0px;
+	
+	background-image: url(/images/remove.png);
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.select .pictures .positioner .thumb:hover .removeButton {
+	display: block;
+}
+
+.select .pictures .positioner .thumb img {
+	width: 100%;
+	height: 100%;
 }
 
 .select .controll {

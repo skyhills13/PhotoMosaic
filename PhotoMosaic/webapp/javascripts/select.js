@@ -47,24 +47,32 @@ function imgCb(file) {
 	reader.onload = (function(file) {
 		return function(event) {
 			// Render thumbnail.
-			var image = document.createElement("img");
-
-			image.appendClassName("thumb");
-			image.setAttribute("src", event.target.result);
-			image.setAttribute("title", escape(file.name));
-			image.setAttribute("draggable", false);
-			image.setAttribute("data-draghover", true);
+			var thumbArea = document.createElement("div");
+			eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
+			thumbArea.appendClassName("thumb");
+			thumbArea.setAttribute("data-draghover", true);
 			
-			eleDrag.querySelector(".positioner").insertBefore(image, null);
 			
-			image.addEventListener("click", function() {
-				var itsFile = objectFindByKey(images, "eleImage", this);
-				
-				images.splice(images.indexOf(itsFile), 1);
-				this.parentNode.removeChild(this);
-			});
+			thumbArea.innerHTML = "<img src=\"" + event.target.result + "\""
+					+ "title=\"" + escape(file.name) + "\""
+					+ "draggable=\"false\""
+					+ "data-draghover=\"true\">";
 			
-			images.push({"eleImage": image, "file": file});
+			var removeButton = document.createElement("div");
+			thumbArea.insertBefore(removeButton, null);
+			removeButton.appendClassName("removeButton");
+			removeButton.setAttribute("data-draghover", true);
+			
+			removeButton.addEventListener("click", (function(eleThumbArea) {
+				return function() {
+					var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
+					
+					images.splice(images.indexOf(itsFile), 1);
+					thumbArea.parentNode.removeChild(thumbArea);
+				}
+			})(thumbArea));
+			
+			images.push({"eleThumbArea": thumbArea, "file": file});
 		};
 	})(file);
 
