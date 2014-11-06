@@ -1,4 +1,6 @@
-
+/****
+ *   Get browser prefix
+ */
 function getBrowserPrefix() {
 	if (typeof document.body.style.webkitTransition !== "undefined") {
 		return "webkit";
@@ -13,6 +15,9 @@ function getBrowserPrefix() {
 	}
 }
 
+/****
+ *   Create multidimensional array
+ */
 function createArray(/* 1d size, 2d size, 3d size, ... */) {
 	var array = new Array(arguments[0] || 0);
 
@@ -27,5 +32,19 @@ function createArray(/* 1d size, 2d size, 3d size, ... */) {
 	}
 
 	return array;
+}
+
+/****
+ *   Search target object in its array
+ *   [{"key": "key1", value: "value1"}, {"key": "key2", value: "value2"}, ... ]
+ */
+function objectFindByKey(array, key, value) {
+	for (var idx = 0; idx < array.length; idx++) {
+		if (array[idx][key] === value) {
+			return array[idx];
+		}
+	}
+	
+	return null;
 }
 

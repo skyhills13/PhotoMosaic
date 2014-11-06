@@ -36,9 +36,9 @@
 				<input type="text" name="subtitle" placeholder="Subtitle"/>
 			</section>
 		</header>
-		<div class="hoverLine"></div>
-		<article class="pictures" data-drag="true">
-			<div class="positioner" data-drag="true"></div>
+		<div class="hoverLine" data-draghover="true"></div>
+		<article class="pictures" data-draghover="true">
+			<div class="positioner" data-draghover="true"></div>
 		</article>
 	</article>
 	<section class="controll">

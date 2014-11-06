@@ -8,10 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PictureMosaic/PictureMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
 //	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PictureMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PictureMosaic/webapp/images";
+	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
 	public static String upload(MultipartFile multipartFile) {
 		if (multipartFile.isEmpty()) {

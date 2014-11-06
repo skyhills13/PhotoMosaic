@@ -10,11 +10,11 @@ var eleDrag = document.querySelector(".pictures");
 var eleSubmit = document.querySelector(".controll button");
 
 var fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
+var images = [];
 
-eleSubmit.addEventListener("click", function(event, eleForm) {
+eleSubmit.addEventListener("click", function(event) {
 	event.preventDefault();
 	
-	var files = fileHandler.getFiles();
 	var inputTexts = document.querySelectorAll(".select input[type=text]");
 	var formData = new FormData();
 
@@ -22,10 +22,8 @@ eleSubmit.addEventListener("click", function(event, eleForm) {
 		formData.append(inputTexts[idx].type, inputTexts[idx].value);
 	}
 	
-	for (var idx = 0; idx < files.length; idx++) {
-		if (files[idx].type.match('image.*')) {
-			formData.append("photos", files[idx]);
-		}
+	for (var idx = 0; idx < images.length; idx++) {
+		formData.append("photos", images[idx]["file"]);
 	}
 	
 	var request = new XMLHttpRequest();
@@ -55,9 +53,18 @@ function imgCb(file) {
 			image.setAttribute("src", event.target.result);
 			image.setAttribute("title", escape(file.name));
 			image.setAttribute("draggable", false);
-			image.setAttribute("data-drag", true);
-
+			image.setAttribute("data-draghover", true);
+			
 			eleDrag.querySelector(".positioner").insertBefore(image, null);
+			
+			image.addEventListener("click", function() {
+				var itsFile = objectFindByKey(images, "eleImage", this);
+				
+				images.splice(images.indexOf(itsFile), 1);
+				this.parentNode.removeChild(this);
+			});
+			
+			images.push({"eleImage": image, "file": file});
 		};
 	})(file);
 

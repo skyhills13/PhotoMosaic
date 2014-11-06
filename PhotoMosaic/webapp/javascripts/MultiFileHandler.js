@@ -57,18 +57,20 @@ MultiFileHandler.prototype = {
 		event.stopPropagation();
 		event.preventDefault();
 		
-		
 		if (event.type == "dragover") {
 			event.dataTransfer.dropEffect = "copy";
-			if (event.target.getAttribute("data-drag") === "true") {
+
+			this.hoverLine.appendClassName("hoverOut");
+			if (event.target.getAttribute("data-draghover") === "true") {
 				this.hoverLine.appendClassName("hoverIn");
+				this.hoverLine.removeClassName("hoverOut");
 			} else {
 				this.hoverLine.appendClassName("hoverOut");
 				this.hoverLine.removeClassName("hoverIn");
 			}
 		} else {
-			this.hoverLine.removeClassName("hoverIn");
 			this.hoverLine.removeClassName("hoverOut");
+			this.hoverLine.removeClassName("hoverIn");
 		}
 	},
 
@@ -84,7 +86,7 @@ MultiFileHandler.prototype = {
 		for (var idxFile = 0, file; file = files[idxFile]; idxFile++) {
 			thisFiles.push(file);
 			for (var idxCb = 0, cb; cb = this.callbacks[idxCb]; idxCb++) {
-				cb(file);
+				cb(file, idxFile);
 			}
 		}
 	}
