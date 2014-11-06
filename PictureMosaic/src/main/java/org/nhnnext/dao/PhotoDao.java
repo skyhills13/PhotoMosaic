@@ -17,7 +17,7 @@ public class PhotoDao extends JdbcDaoSupport{
 	@PostConstruct
 	public void initialize(){
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("picturemosaic.sql"));
+		populator.addScript(new ClassPathResource("photomosaic.sql"));
 		DatabasePopulatorUtils.execute(populator, getDataSource());
 		logger.debug("database initialize success!");
 	}
