@@ -1,0 +1,224 @@
+/*Denim RGBA(54, 117, 199, 1)*/
+/*Beau Blue RGBA(194, 216, 237, 1)*/
+/*Light Gray RGBA(209, 209, 209, 1)*/
+/*White RGBA(255, 255, 255, 1)*/
+/*Kelly Green RGBA(45, 180, 3, 1)*/
+/*Magnesium RGBA(180, 180, 180, 1)*/
+
+/*font-family: 'Lato', sans-serif;*/
+@import url(http://fonts.googleapis.com/css?family=Lato:100,400);
+
+article#list {
+	position: absolute;
+	left: 30%;
+	z-index: -1;
+	overflow-x: hidden;
+	width: 67%;
+	margin-top: 100px;
+	margin-bottom: 30px;
+	padding: 40px 0px;
+	text-align: center;
+	background: RGBA(255, 255, 255, 1);
+	border: 1px solid RGBA(180, 180, 180, 1);
+	border-radius: 5px;
+	-webkit-transition: border 0.3s;
+}
+
+article#list:hover {
+	border: 1px solid RGBA(54, 117, 199, 0.7);
+}
+
+article#list ul li {
+	margin: 5px;
+	width: 40%;
+	display: inline-block;
+	position: relative;
+}
+
+article#list ul li img {
+	width: 100%;
+	border-radius: 2px;
+	padding: 0px;
+	opacity: 1;
+	-webkit-transition: border-radius 0.2s;
+	border: 1px solid RGBA(180, 180, 180, 0);
+}
+
+article#list ul li img:hover {
+	border-radius: 20px;
+	-webkit-filter: grayscale(1);
+	background: black;
+	filter: grayscale(1);
+	border: 1px solid RGBA(180, 180, 180, 1);
+}
+
+article#list ul li:hover:before {
+	content: url(/images/magnifier.png);
+	position: absolute;
+	z-index: 20;
+	top: 50%;
+	left: 50%;
+	margin: -16px;
+}
+
+aside {
+	position: absolute;
+	left: 3%;
+	z-index: -1;
+	top: 100px;
+	padding: 40px 0px;
+	overflow: scroll;
+	width: 24%;
+	background: RGBA(255, 255, 255, 1);
+	border: 1px solid RGBA(180, 180, 180, 1);
+	border-radius: 5px;
+	-webkit-transition: border 0.3s;
+}
+
+aside:hover {
+	border: 1px solid RGBA(54, 117, 199, 0.7);
+}
+
+aside section {
+	margin: 0px 10%;
+	margin-bottom: 30px;
+}
+
+aside section.thumbnail img {
+	border-radius: 5px;
+	width: 100%;
+}
+
+aside section.info ul li {
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	margin-bottom: 8px;
+}
+
+aside section.info ul li p:nth-child(1) {
+	background-color: RGBA(209, 209, 209, 0.5);
+	font-style: italic;
+}
+
+aside section.share {
+	margin-bottom: 0px;
+}
+
+aside section.share input[type='button'] {
+	width: 100%;
+	border: none;
+	height: 50px;
+	background: RGBA(194, 216, 237, 1);
+	color: RGBA(255, 255, 255, 1);
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	font-size: 30px;
+	-webkit-transition: background-color 0.2s;
+}
+
+aside section.share input[type='button']:hover {
+	background: RGBA(54, 117, 199, 1);
+}
+
+aside section.share input[type='button']:focus {
+	outline: none;
+}
+
+#lightBox {
+	position: fixed;
+	z-index: 999999;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: RGBA(0, 0, 0, 0.7);
+}
+
+#lightBox.hide {
+	/*display : block;*/
+	display: none;
+}
+
+#lightBox.show {
+	/*display : none;*/
+	display: block;
+}
+
+#lightBox section {
+	position: absolute;
+	width: 80%;
+	height: 100%;
+}
+
+#lightBox section div {
+	margin: auto;
+	position: absolute;
+}
+
+#lightBox section div img {
+	width: 100%;
+}
+
+#lightBox section div.previous {
+	width: 60%;
+	left: 20%;
+	bottom: 85%;
+}
+
+#lightBox section div.current {
+	width: 80%;
+	height: 64%;
+	left: 10%;
+	top: 18%;
+}
+
+#lightBox section div.current img {
+	height: 100%;
+}
+
+#lightBox section div.next {
+	width: 60%;
+	top: 85%;
+	left: 20%;
+}
+
+#lightBox section div.overHeight img {
+	height: 100%;
+	margin: auto;
+}
+
+#lightBox section div.overWidth img {
+	width: 100%;
+	margin: auto;
+}
+
+#lightBox nav {
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	left: 80%;
+}
+
+#lightBox nav input[type="range"] {
+	position: absolute;
+	height: 10px;
+	width: 600px;
+	left: 50%;
+	top: 50%;
+	margin-left: -300px;
+	-webkit-transform: rotate(90deg);
+}
+
+#lightBox nav input[type="button"] {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	top: 20px;
+	right: 20px;
+	background: url(/images/cancel.png);
+	border: none;
+}
+
+#lightBox nav input[type="button"]:focus {
+	outline: none;
+}
