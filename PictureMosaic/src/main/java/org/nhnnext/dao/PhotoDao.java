@@ -26,7 +26,6 @@ public class PhotoDao extends JdbcDaoSupport{
 		String sql = "select * from PHOTOS where original_name= ?";
 		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
 			
-			@Override
 			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new Photo(
 						rs.getInt("id"),

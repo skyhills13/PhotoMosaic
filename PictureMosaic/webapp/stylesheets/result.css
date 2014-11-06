@@ -62,7 +62,7 @@ article#list ul li:hover:before {
 }
 
 aside {
-	position: fixed;
+	position: absolute;
 	left: 3%;
 	z-index: -1;
 	top: 100px;

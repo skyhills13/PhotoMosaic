@@ -33,7 +33,7 @@ eleSubmit.addEventListener("click", function(event, eleForm) {
 	request.send(formData);
 	
 	request.addEventListener("load", function() {
-		console.log(this.responseText);
+		document.querySelector(".request").submit();
 	});
 });
 

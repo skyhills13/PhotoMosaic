@@ -4,7 +4,7 @@ function ShareTool(){
 }
 
 
-ShareUrl.prototype = {
+ShareTool.prototype = {
 	URL : function(sButton){
 		var currentUrl = this.getCurrentUrl();
 		this.copyURL(sButton, currentUrl);
@@ -16,8 +16,8 @@ ShareUrl.prototype = {
 	
 	copyURL : function(button, url){
 		button.addEventListener("click", function(){
-			url.execCommand('copy');
-			alert(url + "복사되었습니다.");
+//			url.execCommand('copy');
+			alert(url+" 복사되었습니다.");
 		});
 	}
 }
