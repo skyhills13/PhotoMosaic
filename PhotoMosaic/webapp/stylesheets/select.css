@@ -120,7 +120,6 @@ body * {
 }
 
 .select .pictures .positioner .thumb .removeButton {
-	display: none;
 	position: absolute;
 	
 	width: 30px;
@@ -129,14 +128,20 @@ body * {
 	top: 0px;
 	left: 0px;
 	
+	opacity: 0;
+	
 	background-image: url(/images/remove.png);
 	background-size: 90%;
 	background-repeat: no-repeat;
 	background-position: center;
+	
+	-webkit-transition: opacity 0.4s;
+	   -moz-transition: opacity 0.4s;
+	        transition: opacity 0.4s;
 }
 
 .select .pictures .positioner .thumb:hover .removeButton {
-	display: block;
+	opacity: 1;
 }
 
 .select .pictures .positioner .thumb img {
