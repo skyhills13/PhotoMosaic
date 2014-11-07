@@ -48,3 +48,14 @@ function objectFindByKey(array, key, value) {
 	return null;
 }
 
+/****
+ *   Type check for String
+ */
+function isString(target) {
+	if (typeof strClassName === "undefined"
+		|| strClassName === null) {
+		return false;
+	}
+	
+	return true;
+}

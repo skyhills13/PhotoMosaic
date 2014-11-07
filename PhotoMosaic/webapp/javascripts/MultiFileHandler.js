@@ -39,7 +39,7 @@ MultiFileHandler.prototype = {
 
 	_initEvents: function(nodes) {
 		nodes.forEach(function(node) {
-			if (node == null) {
+			if (node === null) {
 				return ;
 			}
 
@@ -57,7 +57,7 @@ MultiFileHandler.prototype = {
 		event.stopPropagation();
 		event.preventDefault();
 		
-		if (event.type == "dragover") {
+		if (event.type === "dragover") {
 			event.dataTransfer.dropEffect = "copy";
 
 			this.hoverLine.appendClassName("hoverOut");

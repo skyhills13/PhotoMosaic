@@ -7,9 +7,8 @@ HTMLElement.prototype.getStyleValue = function(strStyle) {
 };
 
 HTMLElement.prototype.hasClassName = function(strClassName) {
-	if (typeof strClassName == "undefined"
-			|| strClassName == null) {
-		console.log("hasClassName: Missing className to search");
+	if (isString(strClassName)) {
+		console.error("hasClassName: Missing className to search");
 		return false;
 	}
 
@@ -29,9 +28,8 @@ HTMLElement.prototype.hasClassName = function(strClassName) {
 };
 
 HTMLElement.prototype.appendClassName = function(strClassName) {
-	if (typeof strClassName == "undefined"
-			|| strClassName == null) {
-		console.log("appendClassName: Missing className to append");
+	if (isString(strClassName)) {
+		console.error("appendClassName: Missing className to append");
 		return ;
 	}
 
@@ -51,9 +49,8 @@ HTMLElement.prototype.appendClassName = function(strClassName) {
 };
 
 HTMLElement.prototype.removeClassName = function(strClassName) {
-	if (typeof strClassName == "undefined"
-			|| strClassName == null) {
-		console.log("removeClassName: Missing className to remove");
+	if (isString(strClassName)) {
+		console.error("removeClassName: Missing className to remove");
 		return ;
 	}
 

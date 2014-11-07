@@ -117,7 +117,7 @@ LayoutTemplate.prototype.printLayout = function(layout) {
 
 LayoutTemplate.prototype.printAllPossibleLayouts
 		= function(layout, startX, startY) {
-	if (startY == this.height) {
+	if (startY === this.height) {
 		if (this._isComplete(layout)) {
 			this.allLayouts.push(layout.concat());
 		}
@@ -132,7 +132,7 @@ LayoutTemplate.prototype.printAllPossibleLayouts
 
 			if (this._isPossible(layout, unit, startX, startY)) {
 				tmpLayout = this._insert(layout, unit, startX, startY);
-				if (startX == this.width - 1) {
+				if (startX === this.width - 1) {
 					this.printAllPossibleLayouts(tmpLayout, 0, startY + 1);
 				} else {
 					this.printAllPossibleLayouts(tmpLayout, startX + 1, startY);
@@ -142,7 +142,7 @@ LayoutTemplate.prototype.printAllPossibleLayouts
 	}
 
 	if (layout[startY * this.width + startX] !== 0) {
-		if (startX == this.width - 1) {
+		if (startX === this.width - 1) {
 			this.printAllPossibleLayouts(layout, 0, ++startY);
 		} else {
 			this.printAllPossibleLayouts(layout, ++startX, startY);
@@ -153,7 +153,7 @@ LayoutTemplate.prototype.printAllPossibleLayouts
 LayoutTemplate.prototype._isComplete = function(layout) {
 	for (var row = 0; row < this.height; row++) {
 		for (var col = 0; col < this.width; col++) {
-			if (layout[row * this.width + col] == 0) {
+			if (layout[row * this.width + col] === 0) {
 				return false;
 			}
 		}
@@ -165,7 +165,7 @@ LayoutTemplate.prototype._isComplete = function(layout) {
 LayoutTemplate.prototype.getTargetLayouts = function(numSections) {
 	var num = 0;
 	for (var idx = 0; idx < this.allLayouts.length; idx++) {
-		if (this._getNumSections(this.allLayouts[idx]) == numSections) {
+		if (this._getNumSections(this.allLayouts[idx]) === numSections) {
 			this.targetLayouts.push(this.allLayouts[idx]);
 			num++;
 		}
