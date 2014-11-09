@@ -1,9 +1,28 @@
-DROP TABLE IF EXISTS PHOTOS; 
 
-CREATE TABLE PHOTOS ( 
- id int NOT NULL auto_increment, 
- unique_id varchar(60) NOT NULL,
- original_name varchar(45) NOT NULL, 
- primary key(id) 
+DROP TABLE IF EXISTS `MOSAICS` ;
+
+CREATE TABLE IF NOT EXISTS `MOSAICS` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `url` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`)
 );
 
+
+DROP TABLE IF EXISTS `PHOTOS` ;
+
+CREATE TABLE IF NOT EXISTS `PHOTOS` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `unique_id` VARCHAR(60) NOT NULL,
+  `original_name` VARCHAR(45) NOT NULL,
+  `width` INT NOT NULL,
+  `height` INT NOT NULL,
+  `position_x` INT NOT NULL,
+  `position_y` INT NOT NULL,
+  `MOSAICS_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_PHOTOS_MOSAICS_idx` (`MOSAICS_id` ASC),
+  CONSTRAINT `fk_PHOTOS_MOSAICS`
+    FOREIGN KEY (`MOSAICS_id`)
+    REFERENCES `MOSAICS` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
