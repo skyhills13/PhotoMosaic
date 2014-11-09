@@ -31,12 +31,12 @@ public class PhotoController {
 		return "result";
 	}
 	
-	@RequestMapping(value="/tempSelect")
-	public String test1(Model model){
-		model.addAttribute("mosaic", new Mosaic());
-		logger.debug("Model:{}", model);
-		return "tempSelect";
-	}
+//	@RequestMapping(value="/tempSelect")
+//	public String test1(Model model){
+//		model.addAttribute("mosaic", new Mosaic());
+//		logger.debug("Model:{}", model);
+//		return "tempSelect";
+//	}
 	
 	@RequestMapping(value="/test", method=RequestMethod.POST)
 	public String test2(Model model) {
@@ -54,13 +54,14 @@ public class PhotoController {
             }
 
             PhotoHandler.upload(file);
+            Mosaic mosaic = new Mosaic();
             Photo photo = new Photo(file.getOriginalFilename());
             //TODO add date to UUID for the case of exception
             photo.setUniqueId((UUID.randomUUID().toString()));
             photoDao.upload(photo);
             message = message + file.getOriginalFilename() + ", ";
         }
-
+        
         logger.debug("You successfully uploaded files=" + message);
         return "result";
     }

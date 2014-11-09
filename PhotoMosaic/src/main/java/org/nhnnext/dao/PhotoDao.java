@@ -50,4 +50,18 @@ public class PhotoDao extends JdbcDaoSupport{
 		String sql="delete from PHOTOS";
 		getJdbcTemplate().update(sql);
 	}
+	
+	public Photo findByUniqueId(String uniqueId) {
+		String sql = "select * from PHOTOS where unique_id = ?";
+		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
+			
+			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Photo(
+						rs.getInt("id"),
+						rs.getString("unique_id"),
+						rs.getString("original_name"));
+			}
+		};
+		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);
+	}
 }

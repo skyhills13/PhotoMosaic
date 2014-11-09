@@ -19,7 +19,7 @@ eleSubmit.addEventListener("click", function(event) {
 	var formData = new FormData();
 
 	for (var idx = 0; idx < inputTexts.length; idx++) {
-		formData.append(inputTexts[idx].type, inputTexts[idx].value);
+		formData.append(inputTexts[idx].name, inputTexts[idx].value);
 	}
 	
 	for (var idx = 0; idx < images.length; idx++) {
