@@ -6,6 +6,23 @@ var Template = (function() {
 	var _width;
 	var _height;
 	var _template;
+	var _numOfSections = {};
+	
+	var _countSections = function(template) {
+		var idx = 0;
+		for (var row = 0; row < _height; row++) {
+			for (var col = 0; col < _width; col++) {
+				idx = row * _width + col
+				if (template[idx] !== "x") {
+					if (typeof _numOfSections[template[idx]] === "undefined") {
+						_numOfSections[template[idx]] = 1;
+					} else {
+						_numOfSections[template[idx]]++;
+					}
+				}
+			}
+		}
+	};
 	
 	var constructor = function(width, height) {
 		_width = (typeof width !== "undefined") ? width : 4;
@@ -18,7 +35,34 @@ var Template = (function() {
 	
 	constructor.prototype.setTemplate = function(template) {
 		_template = template;
+		_countSections(template);
 	};
+	
+	// printTemplate은 template을 예쁘게 반환해준다.
+	// 원래 한 줄 짜리 array라 찍으면 안 예쁘게 나온다.
+	constructor.prototype.printTemplate = function() {
+		var result = "";
+
+		var idx;
+		for (var row = 0; row < _height; row++) {
+			for (var col = 0; col < _width; col++) {
+				idx = row * _width + col;
+				if (_template[idx].length === 3) {
+					result += _template[idx] + " ";
+				} else {
+					result += " " + _template[idx] + "  ";
+				}
+			}
+			
+			result += "\n";
+		}
+
+		return result;
+	};
+	
+	constructor.prototype.getNumOfSections = function() {
+		return _numOfSections;
+	}
 	
 	return constructor;
 })();
@@ -163,29 +207,6 @@ var TemplateGenerator = (function(){
 	// getHeight는 _height를 반환한다.
 	constructor.prototype.getHeight = function() {
 		return _height;
-	};
-	
-	// printTemplate은 template을 예쁘게 반환해준다.
-	// 원래 한 줄 짜리 array라 찍으면 안 예쁘게 나온다.
-	constructor.prototype.printTemplate = function(template) {
-		if (typeof template === "undefined") {
-			var template = this.tempTemplate;
-		}
-
-		var result = "";
-
-		for (var row = 0; row < _height; row++) {
-			for (var col = 0; col < _width; col++) {
-				if (template[row * _width + col].length === 3) {
-					result += template[row * _width + col] + " ";
-				} else {
-					result += " " + template[row * _width + col] + "  ";
-				}
-			}
-			result += "\n";
-		}
-
-		return result;
 	};
 	
 	// savePossibleTemplates는 possibleTemplate에 생성 가능한 template을 모두 저장하는 함수이다.
