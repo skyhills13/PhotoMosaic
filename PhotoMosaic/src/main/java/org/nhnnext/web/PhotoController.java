@@ -1,18 +1,16 @@
 package org.nhnnext.web;
 
-import java.util.UUID;
-
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,29 +33,15 @@ public class PhotoController {
 		logger.debug("into result page");
 		return "result";
 	}
-	
-//	@RequestMapping(value="/tempSelect")
-//	public String test1(Model model){
-//		model.addAttribute("mosaic", new Mosaic());
-//		logger.debug("Model:{}", model);
-//		return "tempSelect";
-//	}
-	
-	@RequestMapping(value="/test", method=RequestMethod.POST)
-	public String test2(Model model) {
-		return "result";
-	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("subtitle") String subtitle) {
-        String message = "";
 
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
         mosaic.setContents(subtitle);
 
         String newUrl = StringHandler.makeUrl();
-        logger.debug("newUrl : " + newUrl);
         mosaic.setUrl(newUrl);
         mosaicDao.upload(mosaic);
 
@@ -69,18 +53,17 @@ public class PhotoController {
             MultipartFile file = files[i];
             
             if (file.isEmpty()) {
-            	return "You failed to upload " + file.getOriginalFilename() + " because the file was empty.";
+            	logger.debug(Constants.UPLOAD_FAIL_MESSAGE + file.getOriginalFilename());
+            	return null;
             }
 
             PhotoHandler.upload(file);
-            
-            Photo photo = new Photo(file.getOriginalFilename(), UUID.randomUUID().toString(), mosaicId);
+            String newUniqueId = StringHandler.makeRandomId();
+            Photo photo = new Photo(newUniqueId, file.getOriginalFilename(), mosaicId);
             //TODO add date to UUID for the case of exception
             photoDao.upload(photo);
-            message = message + file.getOriginalFilename() + ", ";
+            logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
-        
-        logger.debug("You successfully uploaded files=" + message);
         return "result";
     }
 

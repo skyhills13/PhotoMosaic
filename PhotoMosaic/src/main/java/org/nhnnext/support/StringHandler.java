@@ -13,10 +13,10 @@ public class StringHandler {
 	
 	public static String makeRandomId(){
 		String newUniqueId = UUID.randomUUID().toString();
-		PhotoDao photoDao = new PhotoDao();
-		if(photoDao.findByUniqueId(newUniqueId) != null) {
-			makeRandomId();
-		};
+//		PhotoDao photoDao = new PhotoDao();
+//		if(photoDao.findByUniqueId(newUniqueId) != null) {
+//			makeRandomId();
+//		};
 		logger.debug("newUniqueId : " + newUniqueId);
 		return newUniqueId;
 	}
@@ -32,7 +32,7 @@ public class StringHandler {
 			text[i] = includedCharacters.charAt(random.nextInt(includedCharacters.length()));
 		}
 		newUrl = new String(text);
-		MosaicDao mosaicDao = new MosaicDao();
+//		MosaicDao mosaicDao = new MosaicDao();
 //		if(mosaicDao.findByUrl(newUrl) != null) {
 //			makeUrl();
 //		}
