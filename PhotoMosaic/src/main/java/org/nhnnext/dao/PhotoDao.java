@@ -38,8 +38,8 @@ public class PhotoDao extends JdbcDaoSupport{
 	}
 
 	public void upload(Photo photo) {
-		String sql="INSERT INTO PHOTOS (unique_id, original_name, MOSAICS_id) VALUES (?, ?, ?)";
-		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getMosaicId());
+		String sql="INSERT INTO PHOTOS (unique_id, original_name, width, height, MOSAICS_id) VALUES (?, ?, ?, ?, ?)";
+		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getWidth(), photo.getHeight(), photo.getMosaicId());
 	}
 	
 	public void deleteById(Photo photo) {

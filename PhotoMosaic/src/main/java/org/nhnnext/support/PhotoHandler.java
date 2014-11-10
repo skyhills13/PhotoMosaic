@@ -1,6 +1,14 @@
 package org.nhnnext.support;
 
+import java.awt.Dimension;
 import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.FileImageInputStream;
+import javax.imageio.stream.ImageInputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,4 +56,29 @@ public class PhotoHandler {
 	
 	//TODO should consider the case of the non-existence of dir (previous version of FileUploadController) 
 	
+	public static Dimension getImageDimension(MultipartFile file)
+			throws IOException {
+		File imgFile = new File(ATTACHMENT_ROOT_DIR + File.separator + file.getOriginalFilename());
+		int pos = imgFile.getName().lastIndexOf(".");
+		if (pos == -1) {
+			throw new IOException(Constants.WRONG_FILE + imgFile.getAbsolutePath());
+		}
+		String suffix = imgFile.getName().substring(pos + 1);
+		Iterator<ImageReader> iterator = ImageIO.getImageReadersBySuffix(suffix);
+		if (iterator.hasNext()) {
+			ImageReader reader = iterator.next();
+			try {
+				ImageInputStream stream = new FileImageInputStream(imgFile);
+				reader.setInput(stream);
+				int width = reader.getWidth(reader.getMinIndex());
+				int height = reader.getHeight(reader.getMinIndex());
+				return new Dimension(width, height);
+			} catch (IOException e) {
+				logger.warn("Error reading: " + imgFile.getAbsolutePath(), e);
+			} finally {
+				reader.dispose();
+			}
+		}
+		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
+	}
 }
