@@ -1,5 +1,9 @@
 package org.nhnnext.web;
 
+import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
+
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
@@ -35,8 +39,15 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) {
-
+    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) throws IOException {
+		
+		/*
+		 * TODO exception handling for the case submit w/o photo
+		* right now, mosaic table is updated without photo table update.
+		* do it to check the situation before handling
+		*/
+		
+		/*insert mosaic information into the database*/
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
         mosaic.setContents(contents);
@@ -56,10 +67,16 @@ public class PhotoController {
             	logger.debug(Constants.UPLOAD_FAIL_MESSAGE + file.getOriginalFilename());
             	return null;
             }
-
+            /*file upload to the server*/
             PhotoHandler.upload(file);
+
+            /*get the information of the photo*/
+            Dimension photoDimension = PhotoHandler.getImageDimension(file);
+            logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
+            
+            /*insert file information into the database*/
             String newUniqueId = StringHandler.makeRandomId();
-            Photo photo = new Photo(newUniqueId, file.getOriginalFilename(), mosaicId);
+            Photo photo = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
             //TODO add date to UUID for the case of exception
             photoDao.upload(photo);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());

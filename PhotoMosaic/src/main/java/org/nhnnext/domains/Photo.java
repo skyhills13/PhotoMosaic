@@ -24,16 +24,21 @@ public class Photo {
 		this.mosaicId = mosaicId;
 	}
 	
-	public Photo(String uniqueId, String originalFileName) {
-		this.uniqueId = uniqueId;
-		this.originalFileName = originalFileName;
-	}
-	
 	public Photo(String uniqueId, String originalFileName, int mosaicId) {
 		this.uniqueId = uniqueId;
 		this.originalFileName = originalFileName;
 		this.mosaicId = mosaicId;
 	}
+	
+	public Photo(String uniqueId, String originalFileName, int width, int height, int mosaicId) {
+		super();
+		this.uniqueId = uniqueId;
+		this.originalFileName = originalFileName;
+		this.width = width;
+		this.height = height;
+		this.mosaicId = mosaicId;
+	}
+
 	public int getId() {
 		return id;
 	}
