@@ -33,7 +33,7 @@
 				<input type="text" name="title" placeholder="Title" />
 			</section>
 			<section>
-				<input type="text" name="subtitle" placeholder="Subtitle"/>
+				<input type="text" name="contents" placeholder="Contents"/>
 			</section>
 		</header>
 		<div class="hoverLine" data-draghover="true"></div>

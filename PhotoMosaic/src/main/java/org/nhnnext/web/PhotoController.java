@@ -35,11 +35,11 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("subtitle") String subtitle) {
+    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) {
 
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
-        mosaic.setContents(subtitle);
+        mosaic.setContents(contents);
 
         String newUrl = StringHandler.makeUrl();
         mosaic.setUrl(newUrl);
