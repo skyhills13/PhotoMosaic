@@ -56,9 +56,9 @@ public class PhotoHandler {
 	
 	//TODO should consider the case of the non-existence of dir (previous version of FileUploadController) 
 	
-	public static Dimension getImageDimension(MultipartFile file)
+	public static Dimension getImageDimension(String fileName)
 			throws IOException {
-		File imgFile = new File(ATTACHMENT_ROOT_DIR + File.separator + file.getOriginalFilename());
+		File imgFile = new File(ATTACHMENT_ROOT_DIR + File.separator + fileName);
 		int pos = imgFile.getName().lastIndexOf(".");
 		if (pos == -1) {
 			throw new IOException(Constants.WRONG_FILE + imgFile.getAbsolutePath());
