@@ -33,9 +33,9 @@ public class StringHandler {
 		}
 		newUrl = new String(text);
 		MosaicDao mosaicDao = new MosaicDao();
-		if(mosaicDao.findByUrl(newUrl) != null) {
-			makeUrl();
-		}
+//		if(mosaicDao.findByUrl(newUrl) != null) {
+//			makeUrl();
+//		}
 		logger.debug("newUrl :" + newUrl);
 		return newUrl;
 	}

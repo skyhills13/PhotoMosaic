@@ -30,15 +30,16 @@ public class PhotoDao extends JdbcDaoSupport{
 				return new Photo(
 						rs.getInt("id"),
 						rs.getString("unique_id"),
-						rs.getString("original_name"));
+						rs.getString("original_name"),
+						rs.getInt("MOSAICS_id"));
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, originalFileName);
 	}
 
 	public void upload(Photo photo) {
-		String sql="INSERT INTO PHOTOS (unique_id, original_name) VALUES (?, ?)";
-		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName());
+		String sql="INSERT INTO PHOTOS (unique_id, original_name, MOSAICS_id) VALUES (?, ?, ?)";
+		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getMosaicId());
 	}
 	
 	public void deleteById(Photo photo) {
@@ -59,7 +60,8 @@ public class PhotoDao extends JdbcDaoSupport{
 				return new Photo(
 						rs.getInt("id"),
 						rs.getString("unique_id"),
-						rs.getString("original_name"));
+						rs.getString("original_name"),
+						rs.getInt("MOSAICS_id"));
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);

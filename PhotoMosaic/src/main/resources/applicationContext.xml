@@ -21,4 +21,8 @@
 	<bean id="photoDao" class="org.nhnnext.dao.PhotoDao"
 		p:dataSource-ref="dataSource"
 	/>
+	
+	<bean id="mosaicDao" class="org.nhnnext.dao.MosaicDao"
+		p:dataSource-ref="dataSource"
+	/>
 </beans>

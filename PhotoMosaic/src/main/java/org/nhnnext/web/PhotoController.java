@@ -2,10 +2,12 @@ package org.nhnnext.web;
 
 import java.util.UUID;
 
+import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.support.PhotoHandler;
+import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class PhotoController {
 	
 	@Autowired
 	private PhotoDao photoDao;
+	
+	@Autowired
+	private MosaicDao mosaicDao;
 	
 	@RequestMapping("/result")
 	public String result(){
@@ -44,8 +49,22 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files) {
+    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("subtitle") String subtitle) {
         String message = "";
+
+        Mosaic mosaic = new Mosaic();
+        mosaic.setTitle(title);
+        mosaic.setContents(subtitle);
+
+        String newUrl = StringHandler.makeUrl();
+        logger.debug("newUrl : " + newUrl);
+        mosaic.setUrl(newUrl);
+        mosaicDao.upload(mosaic);
+
+        int mosaicId = mosaicDao.findByUrl(newUrl).getId();
+        //TODO check for the right usage
+        mosaic.setId(mosaicId);
+        
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             
@@ -54,10 +73,9 @@ public class PhotoController {
             }
 
             PhotoHandler.upload(file);
-            Mosaic mosaic = new Mosaic();
-            Photo photo = new Photo(file.getOriginalFilename());
+            
+            Photo photo = new Photo(file.getOriginalFilename(), UUID.randomUUID().toString(), mosaicId);
             //TODO add date to UUID for the case of exception
-            photo.setUniqueId((UUID.randomUUID().toString()));
             photoDao.upload(photo);
             message = message + file.getOriginalFilename() + ", ";
         }
