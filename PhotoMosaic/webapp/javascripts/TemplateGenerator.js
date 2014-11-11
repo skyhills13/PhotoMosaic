@@ -3,30 +3,40 @@
  */
 
 var Template = (function() {
+	/*
+	 * PRIVATE AREA
+	 */
+	
 	var _width;
 	var _height;
-	var _template;
-	var _numOfSections = {};
 	
-	var _countSections = function(template) {
+	var _countNumOfEachSection = function(template) {
 		var idx = 0;
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
 				idx = row * _width + col
 				if (template[idx] !== "x") {
-					if (typeof _numOfSections[template[idx]] === "undefined") {
-						_numOfSections[template[idx]] = 1;
+					if (typeof this.numOfEachSection[template[idx]] === "undefined") {
+						this.numOfEachSection[template[idx]] = 1;
 					} else {
-						_numOfSections[template[idx]]++;
+						this.numOfEachSection[template[idx]]++;
 					}
 				}
 			}
 		}
 	};
 	
+	
+	/*
+	 * PUBLIC AREA
+	 */
+	
 	var constructor = function(width, height) {
 		_width = (typeof width !== "undefined") ? width : 4;
 		_height = (typeof height !== "undefined") ? height : 4;
+		
+		this.template;
+		this.numOfEachSection = {};
 	};
 	
 	constructor.prototype.getTemplate = function() {
@@ -34,8 +44,8 @@ var Template = (function() {
 	};
 	
 	constructor.prototype.setTemplate = function(template) {
-		_template = template;
-		_countSections(template);
+		this.template = template;
+		_countNumOfEachSection.call(this, this.template);
 	};
 	
 	// printTemplate은 template을 예쁘게 반환해준다.
@@ -47,10 +57,10 @@ var Template = (function() {
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
 				idx = row * _width + col;
-				if (_template[idx].length === 3) {
-					result += _template[idx] + " ";
+				if (this.template[idx].length === 3) {
+					result += this.template[idx] + " ";
 				} else {
-					result += " " + _template[idx] + "  ";
+					result += " " + this.template[idx] + "  ";
 				}
 			}
 			
@@ -60,12 +70,23 @@ var Template = (function() {
 		return result;
 	};
 	
-	constructor.prototype.getNumOfSections = function() {
-		return _numOfSections;
+	constructor.prototype.getNumOfEachSection = function() {
+		return this.numOfEachSection;
 	}
+
+	// _getNumSections는 targetTemplate이 몇 개의 section으로 이루어져 있는지 반환하는 함수이다.
+	constructor.prototype.sumNumOfEachSection = function() {
+		var num = 0;
+		for (var section in this.numOfEachSection) {
+			num += this.numOfEachSection[section];
+		}
+		
+		return num;
+	};
 	
 	return constructor;
 })();
+
 
 var TemplateGenerator = (function(){
 	/*
@@ -162,20 +183,6 @@ var TemplateGenerator = (function(){
 		return true;
 	};
 	
-	// _getNumSections는 targetTemplate이 몇 개의 section으로 이루어져 있는지 반환하는 함수이다.
-	var _getNumSections = function(targetTemplate) {
-		var numSections = targetTemplate.length;
-
-		for (var idx = 0; idx < targetTemplate.length; idx++) {
-			if (targetTemplate[idx] === "x") {
-				numSections--;
-			}
-		}
-
-		return numSections;
-	};
-
-	
 	
 	/*
 	 * PUBLIC AREA
@@ -217,7 +224,11 @@ var TemplateGenerator = (function(){
 			// 1. template이 빈 칸 없이 완성되었다면,
 			if (_isComplete(template)) {
 				// 2. possibleTemplate에 현재 template을 저장한다.
-				this.possibleTemplates.push(template.concat());
+				// this.possibleTemplates.push(template.concat());
+				var newTemplate = new Template(_width, _height);
+				newTemplate.setTemplate(template.concat());
+				
+				this.possibleTemplates.push(newTemplate);
 			}
 		
 			return ;
@@ -261,15 +272,11 @@ var TemplateGenerator = (function(){
 	
 	// saveTargetTemplates는 원하는 section 갯수를 가진 template만 찾아 targetTemplates에 저장하는 함수이다.
 	constructor.prototype.saveTargetTemplates = function(numSections) {
-		var num = 0;
 		for (var idx = 0; idx < this.possibleTemplates.length; idx++) {
-			if (_getNumSections(this.possibleTemplates[idx]) === numSections) {
+			if (this.possibleTemplates[idx].sumNumOfEachSection() === numSections) {
 				this.targetTemplates.push(this.possibleTemplates[idx]);
-				num++;
 			}
 		}
-		
-		return num;
 	};
 
 	return constructor;
