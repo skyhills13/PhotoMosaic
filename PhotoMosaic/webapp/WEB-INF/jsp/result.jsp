@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
-<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <title>show mosaic</title>
 </head>
@@ -18,20 +18,44 @@
 		<section class="info">
 			<ul>
 				<li>
-					<p>subject</p>
-					<p>subject value</p>
+					<p>subject</p> <c:choose>
+						<c:when test="${requestScope.subject!=null}">
+							<p>${requestScope.subject}</p>
+						</c:when>
+						<c:otherwise>
+							<p>test subject</p>
+						</c:otherwise>
+					</c:choose>
 				</li>
 				<li>
-					<p>comment</p>
-					<p>comment value</p>
+					<p>comment</p> <c:choose>
+						<c:when test="${requestScope.comment!=null}">
+							<p>${requestScope.comment}</p>
+						</c:when>
+						<c:otherwise>
+							<p>test value</p>
+						</c:otherwise>
+					</c:choose>
 				</li>
 				<li>
-					<p>producer</p>
-					<p>producer value</p>
+					<p>producer</p> <c:choose>
+						<c:when test="${requestScope.producer!=null}">
+							<p>${requestScope.producer}</p>
+						</c:when>
+						<c:otherwise>
+							<p>anonymous</p>
+						</c:otherwise>
+					</c:choose>
 				</li>
 				<li>
-					<p>date</p>
-					<p>date value</p>
+					<p>date</p> <c:choose>
+						<c:when test="${requestScope.date!=null}">
+							<p>${requestScope.date}</p>
+						</c:when>
+						<c:otherwise>
+							<p>test value</p>
+						</c:otherwise>
+					</c:choose>
 				</li>
 			</ul>
 		</section>
@@ -55,20 +79,26 @@
 	<script src="/javascripts/ShareTool.js"></script>
 	<script src="/javascripts/PhotoLightBox.js"></script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var mosaic = document.querySelector("img#mosaic");
-			var originalImages = document
-					.querySelectorAll("article#list ul li img");
-			var lightBox = document.querySelector("article#lightBox");
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							var mosaic = document.querySelector("img#mosaic");
+							var originalImages = document
+									.querySelectorAll("article#list ul li img");
+							var comment = document
+									.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
+							var lightBox = document
+									.querySelector("article#lightBox");
 
-			new PhotoLightBox(lightBox, mosaic);
-			//new PhotoListSlide(originalImages, lightBox);
+							new PhotoLightBox(lightBox, mosaic, [ comment ]);
+							//new PhotoListSlide(originalImages, lightBox);
 
-			var sButton = document
-					.querySelector("section.share input[type='button']");
-			var sTool = new ShareTool();
-			sTool.URL(sButton);
-		});
+							var sButton = document
+									.querySelector("section.share input[type='button']");
+							var sTool = new ShareTool();
+							sTool.URL(sButton);
+						});
 	</script>
 </body>
 </html>

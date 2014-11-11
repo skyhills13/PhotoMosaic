@@ -11,7 +11,6 @@
 
 	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 </head>
 
 <body>
