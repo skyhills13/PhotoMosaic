@@ -71,7 +71,7 @@ public class PhotoController {
             PhotoHandler.upload(file);
 
             /*get the information of the photo*/
-            Dimension photoDimension = PhotoHandler.getImageDimension(file);
+            Dimension photoDimension = PhotoHandler.getImageDimension(file.getOriginalFilename());
             logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
             
             /*insert file information into the database*/

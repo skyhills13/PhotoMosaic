@@ -17,7 +17,7 @@ ShareTool.prototype = {
 	copyURL : function(button, url){
 		button.addEventListener("click", function(){
 //			url.execCommand('copy');
-			alert(url+" 복사되었습니다.");
+			alert(url+" 를 복사해주세요.");
 		});
 	}
 }
