@@ -60,6 +60,9 @@ public class PhotoController {
         //TODO check for the right usage
         mosaic.setId(mosaicId);
         
+        /*make photo objects for making mosaic*/
+        Photo[] photos = new Photo[files.length];
+        
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             
@@ -76,11 +79,20 @@ public class PhotoController {
             
             /*insert file information into the database*/
             String newUniqueId = StringHandler.makeRandomId();
-            Photo photo = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
+            photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
             //TODO add date to UUID for the case of exception
-            photoDao.upload(photo);
+            photoDao.upload(photos[i]);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
+        /*merge photos*/
+        logger.debug("just before merging");
+//      int numOfPhotos = photoDao.getNumOfPhotos(mosaicId);
+        /* 굳이 이렇게 할 필요가 없는 것 같아서 잠시 주석 처리 */
+//		for (int i = 0; i < numOfPhotos ; ++i) {
+//        	photos[i] = photoDao.
+//        }
+        PhotoHandler.mergeImages(photos);
+        logger.debug("after merging");
         return "result";
     }
 

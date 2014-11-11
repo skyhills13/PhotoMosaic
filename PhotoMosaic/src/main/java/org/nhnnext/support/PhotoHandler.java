@@ -86,49 +86,46 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
-	public static void mergeImages(int mosaicId) throws IOException{
-		/*이거는 컨트롤러에 들어가야 함 임시로 여기에 넣어두었다.*/
-		PhotoDao photoDao = new PhotoDao();
-		
-		
-		int numOfPhotos = photoDao.getNumOfPhotos(mosaicId);
-		Photo[] photos = new Photo[numOfPhotos];
-		
-		
-		int rows = 2;   //we assume the no. of rows and cols are known and each chunk has equal width and height  
-        int cols = 2;  
-        int chunks = rows * cols;  
-  
-        int chunkWidth, chunkHeight;  
-        int type;
-        
-        //fetching image files  
-        File[] imgFiles = new File[chunks];  
-        for (int i = 0; i < chunks; i++) {  
-            imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());  
-        }  
-  
-       //creating a bufferd image array from image files  
-        BufferedImage[] bufferedImages = new BufferedImage[chunks];  
-        for (int i = 0; i < chunks; i++) {  
-            bufferedImages[i] = ImageIO.read(imgFiles[i]);  
-        }  
-        type = bufferedImages[0].getType();
-        logger.debug("type in the mergeImages : " + bufferedImages[0].getType());
-        chunkWidth = bufferedImages[0].getWidth();  
-        chunkHeight = bufferedImages[0].getHeight();  
-  
-        //Initializing the final image  
-        BufferedImage finalImg = new BufferedImage(chunkWidth*cols, chunkHeight*rows, type);  
-  
-        int num = 0;  
-        for (int i = 0; i < rows; i++) {  
-            for (int j = 0; j < cols; j++) {  
-                finalImg.createGraphics().drawImage(bufferedImages[num], chunkWidth * j, chunkHeight * i, null);  
-                num++;  
-            }  
-        }  
-        logger.debug("Image concatenated.....");  
-        ImageIO.write(finalImg, "jpeg", new File("finalImg.jpg"));
+	public static void mergeImages(Photo[] photos) throws IOException {
+
+		int rows = 2; // we assume the no. of rows and cols are known and each
+						// chunk has equal width and height
+		int cols = 2;
+		int chunks = rows * cols;
+
+		int chunkWidth, chunkHeight;
+		int type;
+
+		// fetching image files
+		File[] imgFiles = new File[chunks];
+		for (int i = 0; i < chunks; i++) {
+			logger.debug("Photo :{}" , photos[i]);
+			logger.debug(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());
+			imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());
+		}
+
+		// creating a bufferd image array from image files
+		BufferedImage[] bufferedImages = new BufferedImage[chunks];
+		for (int i = 0; i < chunks; i++) {
+			bufferedImages[i] = ImageIO.read(imgFiles[i]);
+		}
+		type = bufferedImages[0].getType();
+		logger.debug("type in the mergeImages : " + bufferedImages[0].getType());
+		chunkWidth = bufferedImages[0].getWidth();
+		chunkHeight = bufferedImages[0].getHeight();
+
+		// Initializing the final image
+		BufferedImage finalImg = new BufferedImage(chunkWidth * cols, chunkHeight * rows, type);
+
+		int num = 0;
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				finalImg.createGraphics().drawImage(bufferedImages[num], chunkWidth * j, chunkHeight * i, null);
+				num++;
+			}
+		}
+		logger.debug("Image concatenated.....");
+		File mergedImg = new File(ATTACHMENT_ROOT_DIR+ File.separator + "finalImg.jpg");
+		ImageIO.write(finalImg, "jpeg", mergedImg);
 	}
 }

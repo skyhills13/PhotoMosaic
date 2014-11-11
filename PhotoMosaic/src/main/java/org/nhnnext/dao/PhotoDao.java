@@ -68,8 +68,8 @@ public class PhotoDao extends JdbcDaoSupport{
 	}
 	
 	public int getNumOfPhotos(int mosaicId) {
-		String sql = "select COUNT(*) from PHOTOS where mosaic_id = ?";
-		int numOfPhotos = getJdbcTemplate().queryForObject(sql, Integer.class);
+		String sql = "select COUNT(*) from PHOTOS where MOSAICS_id = ?";
+		int numOfPhotos = getJdbcTemplate().queryForObject(sql, new Object[]{mosaicId}, Integer.class);
 		return numOfPhotos;
 	}
 }
