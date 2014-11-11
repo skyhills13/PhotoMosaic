@@ -5,7 +5,7 @@ public class Mosaic {
 	private String title;
 	private String url;
 	private String contents;
-	//private Photo[] photos;
+	private Photo[] photos;
 	
 	public Mosaic() {
 	}
@@ -39,10 +39,10 @@ public class Mosaic {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-//	public Photo[] getPhotos() {
-//		return photos;
-//	}
-//	public void setPhotos(Photo[] photos) {
-//		this.photos = photos;
-//	}
+	public Photo[] getPhotos() {
+		return photos;
+	}
+	public void setPhotos(Photo[] photos) {
+		this.photos = photos;
+	}
 }

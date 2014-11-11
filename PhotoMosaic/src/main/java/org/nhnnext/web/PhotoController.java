@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) throws IOException {
+    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents, Model model) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
@@ -84,9 +85,12 @@ public class PhotoController {
             photoDao.upload(photos[i]);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
+        mosaic.setPhotos(photos);
         /*merge photos*/
         //TODO should check for the performance when many photos are there 
-        PhotoHandler.mergeImages(photos);
+        PhotoHandler.mergeImages(mosaic);
+        model.addAttribute("mosaic", mosaic);
+        logger.debug("model:{}", model);
         return mosaic.getUrl();
     }
 

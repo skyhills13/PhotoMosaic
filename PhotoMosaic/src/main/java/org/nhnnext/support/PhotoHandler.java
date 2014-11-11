@@ -11,6 +11,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +85,7 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
-	public static void mergeImages(Photo[] photos) throws IOException {
+	public static void mergeImages(Mosaic mosaic) throws IOException {
 
 		int rows = 2; // we assume the no. of rows and cols are known and each
 						// chunk has equal width and height
@@ -96,6 +97,7 @@ public class PhotoHandler {
 
 		// fetching image files
 		File[] imgFiles = new File[chunks];
+		Photo[] photos = mosaic.getPhotos();
 		for (int i = 0; i < chunks; i++) {
 			logger.debug("Photo :{}" , photos[i]);
 			logger.debug(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());
