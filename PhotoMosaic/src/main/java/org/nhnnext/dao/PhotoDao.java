@@ -66,4 +66,10 @@ public class PhotoDao extends JdbcDaoSupport{
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);
 	}
+	
+	public int getNumOfPhotos(int mosaicId) {
+		String sql = "select COUNT(*) from PHOTOS where mosaic_id = ?";
+		int numOfPhotos = getJdbcTemplate().queryForObject(sql, Integer.class);
+		return numOfPhotos;
+	}
 }
