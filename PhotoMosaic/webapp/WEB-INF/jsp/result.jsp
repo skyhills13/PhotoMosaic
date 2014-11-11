@@ -14,7 +14,7 @@
 	<jsp:include page="header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
-			<img id="mosaic" src="/images/thumbnail.png" />
+			<img id="mosaic" src="/images/${mosaic.fileName}" />
 		</section>
 		<section class="info">
 			<ul>
