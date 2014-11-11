@@ -39,7 +39,7 @@ public class MosaicDao extends JdbcDaoSupport {
 	}
 
 	public void upload(Mosaic mosaic) {
-		String sql = "INSERT INTO MOSAICS (title, comment, url) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO MOSAICS (title, comment, url, created_date) VALUES (?, ?, ?, NOW())";
 		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
 	}
 }
