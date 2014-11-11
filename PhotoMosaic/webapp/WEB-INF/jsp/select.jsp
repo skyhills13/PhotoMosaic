@@ -17,11 +17,7 @@
 <body>
 
 <!-- HEADER -->
-<header>
-	<a><span>SERVICE</span></a>
-	<a><span>USER</span></a>
-	<a><span>MAKE</span></a>
-</header>
+<jsp:include page="header.jsp" flush="false" />
 
 <!-- SELECT PICTURES -->
 <section class="select">

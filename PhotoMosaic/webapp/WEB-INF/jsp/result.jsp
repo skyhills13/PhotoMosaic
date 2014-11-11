@@ -10,11 +10,7 @@
 </head>
 <body>
 	<article id="lightBox"></article>
-	<header>
-		<a href="/"><span>SERVICE</span></a>
-		<a><span>USER</span></a>
-		<a href="/"><span>MAKE</span></a>
-	</header>
+	<jsp:include page="header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
 			<img id="mosaic" src="/images/thumbnail.png" />
@@ -61,9 +57,10 @@
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
-			var originalImages = document.querySelectorAll("article#list ul li img");
+			var originalImages = document
+					.querySelectorAll("article#list ul li img");
 			var lightBox = document.querySelector("article#lightBox");
-			
+
 			new PhotoLightBox(lightBox, mosaic);
 			//new PhotoListSlide(originalImages, lightBox);
 
