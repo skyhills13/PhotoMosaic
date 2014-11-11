@@ -40,7 +40,7 @@ var Template = (function() {
 	};
 	
 	constructor.prototype.getTemplate = function() {
-		return _template;
+		return this.template;
 	};
 	
 	constructor.prototype.setTemplate = function(template) {
@@ -272,11 +272,16 @@ var TemplateGenerator = (function(){
 	
 	// saveTargetTemplates는 원하는 section 갯수를 가진 template만 찾아 targetTemplates에 저장하는 함수이다.
 	constructor.prototype.saveTargetTemplates = function(numSections) {
+		var num = 0;
+		
 		for (var idx = 0; idx < this.possibleTemplates.length; idx++) {
 			if (this.possibleTemplates[idx].sumNumOfEachSection() === numSections) {
 				this.targetTemplates.push(this.possibleTemplates[idx]);
+				num++;
 			}
 		}
+		
+		return num;
 	};
 
 	return constructor;
