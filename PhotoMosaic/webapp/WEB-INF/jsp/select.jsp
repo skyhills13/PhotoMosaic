@@ -24,7 +24,6 @@
 </header>
 
 <!-- SELECT PICTURES -->
-<form class="request" method="GET" action="/result"></form>
 <section class="select">
 <div class="positioner">
 	<article class="contents">
