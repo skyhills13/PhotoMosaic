@@ -40,7 +40,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents, Model model) throws IOException {
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("comment") String comment, Model model) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
@@ -51,7 +51,7 @@ public class PhotoController {
 		/*insert mosaic information into the database*/
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
-        mosaic.setContents(contents);
+        mosaic.setContents(comment);
 
         String newUrl = StringHandler.makeUrl();
         mosaic.setUrl(newUrl);

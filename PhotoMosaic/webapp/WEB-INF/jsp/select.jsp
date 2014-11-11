@@ -27,7 +27,7 @@
 				<input type="text" name="title" placeholder="Title" />
 			</section>
 			<section>
-				<input type="text" name="contents" placeholder="Contents"/>
+				<input type="text" name="comment" placeholder="Contents"/>
 			</section>
 		</header>
 		<div class="hoverLine" data-draghover="true"></div>
