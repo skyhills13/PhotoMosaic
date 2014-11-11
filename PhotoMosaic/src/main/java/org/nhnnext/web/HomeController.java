@@ -14,5 +14,12 @@ public class HomeController {
 		logger.debug("at home, which is select page");
 		return "select";
 	}
+	
+	// UI Test를 위한 URL Mapping. file 이름만 바꾸면 된다.
+	// TODO 배포 전에 반드시 제거할 것.
+	@RequestMapping("/test")
+	public String UITest() {
+		return "targetFile";
+	}
 
 }
