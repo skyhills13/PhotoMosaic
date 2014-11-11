@@ -3,18 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
-	<title>show mosaic</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+<title>show mosaic</title>
 </head>
 <body>
+	<article id="lightBox"></article>
 	<header>
-		<a href="/"><span>SERVICE</span></a> <a><span>USER</span></a> <a href="/"><span>MAKE</span></a>
+		<a href="/"><span>SERVICE</span></a>
+		<a><span>USER</span></a>
+		<a href="/"><span>MAKE</span></a>
 	</header>
 	<aside>
 		<section class="thumbnail">
-			<img src="/images/thumbnail.png" />
+			<img id="mosaic" src="/images/thumbnail.png" />
 		</section>
 		<section class="info">
 			<ul>
@@ -52,14 +55,20 @@
 			<li data-list="7"><img src="/images/pitcher.jpg" /></li>
 		</ul>
 	</article>
-	<script src="/javascripts/PictureListSlide.js"></script>
+	<script src="/javascripts/PhotoListSlide.js"></script>
 	<script src="/javascripts/ShareTool.js"></script>
+	<script src="/javascripts/PhotoLightBox.js"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var imgListTarget = document.querySelectorAll("article#list ul li img");
-			new PictureListSlide(imgListTarget);
+			var mosaic = document.querySelector("img#mosaic");
+			var originalImages = document.querySelectorAll("article#list ul li img");
+			var lightBox = document.querySelector("article#lightBox");
 			
-			var sButton = document.querySelector("section.share input[type='button']");
+			new PhotoLightBox(lightBox, mosaic);
+			//new PhotoListSlide(originalImages, lightBox);
+
+			var sButton = document
+					.querySelector("section.share input[type='button']");
 			var sTool = new ShareTool();
 			sTool.URL(sButton);
 		});

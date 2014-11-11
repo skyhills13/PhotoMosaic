@@ -52,7 +52,7 @@ article#list ul li img:hover {
 	border: 1px solid RGBA(180, 180, 180, 1);
 }
 
-article#list ul li:hover:before {
+article#list ul li:hover::before {
 	content: url(/images/magnifier.png);
 	position: absolute;
 	z-index: 20;
@@ -150,6 +150,18 @@ aside section.share input[type='button']:focus {
 	height: 100%;
 }
 
+#lightBox section.thumbnail {
+	width : 100%;
+	text-align : center;
+}
+
+#lightBox section.thumbnail img{
+	height : 300px;
+	position : relative;
+	top : 50%;
+	margin-top : -150px;
+}
+
 #lightBox section div {
 	margin: auto;
 	position: absolute;
@@ -157,6 +169,7 @@ aside section.share input[type='button']:focus {
 
 #lightBox section div img {
 	/* width: 100%; */
+	
 }
 
 #lightBox section div.previous {
@@ -174,7 +187,7 @@ aside section.share input[type='button']:focus {
 	height: 64%;
 	left: 10%;
 	top: 18%;
-	text-align : center;
+	text-align: center;
 }
 
 #lightBox section div.current img {
@@ -187,8 +200,8 @@ aside section.share input[type='button']:focus {
 	left: 20%;
 }
 
-#lightBox section div.next img{
-	width : 100%;
+#lightBox section div.next img {
+	width: 100%;
 }
 
 #lightBox section div.overHeight img {

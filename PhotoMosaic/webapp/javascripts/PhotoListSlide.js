@@ -1,10 +1,11 @@
-function PictureListSlide(target) {
+function PhotoListSlide(target, lightBox) {
+	this.lightBox = lightBox;
 	this.photoNodes = target;
 	this.createLightBox();
 	this.eventHander();
 }
 
-PictureListSlide.prototype = {
+PhotoListSlide.prototype = {
 	eventHander : function() {
 		var eventTarget = this.photoNodes[0].parentNode.parentNode;
 		var parentNodeTag = this.photoNodes[0].parentNode.tagName.toLowerCase();
@@ -15,8 +16,8 @@ PictureListSlide.prototype = {
 				var targetList = e.target.parentNode;
 				var targetNumber = targetList.getAttribute("data-list");
 				this.showTargetImage(targetNumber);
-				var sidebar = document
-						.querySelector("#lightBox nav input[type='range']");
+				var sidebar = this.lightBox
+						.querySelector("nav input[type='range']");
 				sidebar.value = targetNumber;
 			}
 		}.bind(this));
@@ -71,8 +72,7 @@ PictureListSlide.prototype = {
 	},
 
 	createLightBox : function() {
-		var lightBox = "<article id='lightBox' class='hide'>"
-				+ "<nav><input type='button' /></nav>"
+		var lightBox = "<nav><input type='button' /></nav>"
 				+ "<section><div class='previous'></div>"
 				+ "<div class='current'></div>"
 				+ "<div class='next'></div></section>" + "</article>";
