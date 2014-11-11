@@ -32,7 +32,7 @@
 				</li>
 				<li>
 					<p>comment</p> 
-					<p>${mosaic.contents}</p>
+					<p>${mosaic.comment}</p>
 					<%-- <c:choose>
 						<c:when test="${requestScope.comment!=null}">
 							<p>${requestScope.comment}</p>

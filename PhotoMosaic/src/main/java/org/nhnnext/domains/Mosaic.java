@@ -4,16 +4,16 @@ public class Mosaic {
 	private int id;
 	private String title;
 	private String url;
-	private String contents;
+	private String comment;
 	private Photo[] photos;
 	
 	public Mosaic() {
 	}
-	public Mosaic(int id, String title, String contents, String url) {
+	public Mosaic(int id, String title, String comment, String url) {
 		this.id = id;
 		this.title = title;
 		this.url = url;
-		this.contents = contents;
+		this.comment = comment;
 	}
 	public int getId() {
 		return id;
@@ -27,11 +27,11 @@ public class Mosaic {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContents() {
-		return contents;
+	public String getComment() {
+		return comment;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public String getUrl() {
 		return url;

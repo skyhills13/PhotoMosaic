@@ -51,7 +51,7 @@ public class PhotoController {
 		/*insert mosaic information into the database*/
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
-        mosaic.setContents(comment);
+        mosaic.setComment(comment);
 
         String newUrl = StringHandler.makeUrl();
         mosaic.setUrl(newUrl);

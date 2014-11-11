@@ -40,6 +40,6 @@ public class MosaicDao extends JdbcDaoSupport {
 
 	public void upload(Mosaic mosaic) {
 		String sql = "INSERT INTO MOSAICS (title, comment, url) VALUES (?, ?, ?)";
-		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getContents(), mosaic.getUrl());
+		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
 	}
 }
