@@ -19,7 +19,7 @@
 		</ul>
 	</article>
 	<script src="/javascripts/util.js"></script>
-	<script src="/javascripts/LayoutTemplate.js"></script>
+	<script src="/javascripts/TemplateGenerator.js"></script>
 	<script src="/javascripts/PhotoCombine.js"></script>
 </body>
 </html>

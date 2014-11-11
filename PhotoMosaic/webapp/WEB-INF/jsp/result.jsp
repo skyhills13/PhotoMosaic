@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
-<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
-
-<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/header.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+	<title>show mosaic</title>
 </head>
 <body>
 	<header>

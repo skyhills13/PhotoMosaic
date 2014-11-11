@@ -1,14 +1,14 @@
-document.addEventListener("DOMContentLoaded", function() {
-	var template = new LayoutTemplate();
-	template.getTargetLayouts(8);
-	var tArray = template.targetLayouts[2345];
-
+window.addEventListener("load", function() {
+	var tg = new TemplateGenerator();
+	tg.saveTargetTemplates(8);
+	var tArray = tg.targetTemplates[2345].template;
+	console.log(tArray);
 	var pArray = document.querySelectorAll("#list img");
 	var appendPlace = document.querySelector("article");
 	var combine = new PhotoCombine();
 	combine.getMaterial({
-		"mWidth" : 4000,
-		"mHeight" : 3000,
+		"mWidth" : 1000,
+		"mHeight" : 800,
 		"templateArray" : tArray,
 		"templateColumn" : 4,
 		"templateRow" : 4,
@@ -48,9 +48,12 @@ PhotoCombine.prototype = {
 		// context.drawImage(img, 300, 300, 300, 300, 300, 300, 300, 300);
 		var canvas = this.appendPlace.querySelector("#main");
 		var context = canvas.getContext("2d");
-		context.drawImage(item.imgElement, 0, 0, 300, 300, 100, 100, 300, 300);
-		// context.drawImage(item.imgElement, 0, 0, item._width, item._height,
-		// item.posX, item.posY, item._width, item._height);
+//		 context.drawImage(item.imgElement, 0, 0, 300, 300, 100, 100, 300,
+//		 300);
+		 console.log(item);
+		context.drawImage(item.imgElement, 0, 0, item._width, item._height,
+				item.posX, item.posY, item._width, item._height);
+		debugger;
 	},
 
 	linkBoardWithImage : function() {

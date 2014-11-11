@@ -19,7 +19,7 @@ public class HomeController {
 	// TODO 배포 전에 반드시 제거할 것.
 	@RequestMapping("/test")
 	public String UITest() {
-		return "targetFile";
+		return "combineTest";
 	}
 
 }

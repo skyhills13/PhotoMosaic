@@ -48,6 +48,7 @@ PictureListSlide.prototype = {
 	
 	reSizingCurrentImage : function(targetImage){
 		var img =  targetImage.querySelector("img");
+		var targetStyle = window.getComputedStyle(targetImage);
 		var originalStyle = window.getComputedStyle(img);
 		var cls = "over";
 		console.log(img);
@@ -56,7 +57,7 @@ PictureListSlide.prototype = {
 		} else {
 			img.classList.add(cls+"Width");
 		}
-		console.log(img);
+		
 		return targetImage;
 	},
 
