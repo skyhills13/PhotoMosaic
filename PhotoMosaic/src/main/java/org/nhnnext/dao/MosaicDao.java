@@ -16,7 +16,7 @@ public class MosaicDao extends JdbcDaoSupport {
 				return new Mosaic(
 						rs.getInt("id"), 
 						rs.getString("title"),
-						rs.getString("contents"),
+						rs.getString("comment"),
 						rs.getString("url"));
 			}
 		};
@@ -31,7 +31,7 @@ public class MosaicDao extends JdbcDaoSupport {
 				return new Mosaic(
 						rs.getInt("id"), 
 						rs.getString("title"),
-						rs.getString("contents"),
+						rs.getString("comment"),
 						rs.getString("url"));
 			}
 		};
@@ -39,7 +39,7 @@ public class MosaicDao extends JdbcDaoSupport {
 	}
 
 	public void upload(Mosaic mosaic) {
-		String sql = "INSERT INTO MOSAICS (title, contents, url) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO MOSAICS (title, comment, url) VALUES (?, ?, ?)";
 		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getContents(), mosaic.getUrl());
 	}
 }
