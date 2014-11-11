@@ -19,7 +19,7 @@
 		<section class="info">
 			<ul>
 				<li>
-					<p>subject</p> 
+					<p>title</p> 
 					<p>${mosaic.title}</p>
 					<%-- <c:choose>
 						<c:when test="${requestScope.subject!=null}">
