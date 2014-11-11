@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `MOSAICS` (
   `url` VARCHAR(45) NOT NULL DEFAULT 'default',
   `title` VARCHAR(45) NOT NULL DEFAULT 'default',
   `comment` VARCHAR(140) NOT NULL DEFAULT 'default',
-  `created_date` TIMESTAMP NOT NULL,
+  `created_date` TIMESTAMP,
   PRIMARY KEY (`id`));
 
 CREATE TABLE IF NOT EXISTS `PHOTOS` (

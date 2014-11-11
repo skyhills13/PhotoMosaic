@@ -2,6 +2,7 @@ package org.nhnnext.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.nhnnext.domains.Mosaic;
 import org.springframework.jdbc.core.RowMapper;
@@ -39,7 +40,18 @@ public class MosaicDao extends JdbcDaoSupport {
 	}
 
 	public void upload(Mosaic mosaic) {
-		String sql = "INSERT INTO MOSAICS (title, comment, url, created_date) VALUES (?, ?, ?, NOW())";
+		String sql = "INSERT INTO MOSAICS (title, comment, url) VALUES (?, ?, ?)";
 		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
+	}
+	
+	public void updateCreatedTime(Mosaic mosaic) {
+		String sql ="UPDATE MOSAICS SET created_date = NOW() where id = ?";
+		getJdbcTemplate().update(sql, mosaic.getId());
+		//TODO if I can get NOW() here, it doesn't need getCreateTime method
+	}
+	
+	public Timestamp getCreatedTime(int mosaicId) {
+		String sql = "SELECT created_date from MOSAICS where id = ?";
+		return getJdbcTemplate().queryForObject(sql, new Object[]{mosaicId}, Timestamp.class);
 	}
 }

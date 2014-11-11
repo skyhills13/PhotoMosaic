@@ -1,10 +1,13 @@
 package org.nhnnext.domains;
 
+import java.sql.Timestamp;
+
 public class Mosaic {
 	private int id;
 	private String title;
 	private String url;
 	private String comment;
+	private Timestamp createdTime;
 	private Photo[] photos;
 	
 	public Mosaic() {
@@ -38,6 +41,13 @@ public class Mosaic {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public Timestamp getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(Timestamp createdTime) {
+		this.createdTime = createdTime;
 	}
 	public Photo[] getPhotos() {
 		return photos;
