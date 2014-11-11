@@ -34,6 +34,8 @@
 		request.send(formData);
 		
 		request.addEventListener("load", function() {
+			console.log("request.responseText 뭔지 보게 : " + request.responseText);
+			debugger;
 			var origin = window.location.origin;
 			window.location.assign(origin + "/result");
 		});

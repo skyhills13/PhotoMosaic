@@ -1,7 +1,6 @@
 package org.nhnnext.web;
 
 import java.awt.Dimension;
-import java.io.File;
 import java.io.IOException;
 
 import org.nhnnext.dao.MosaicDao;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -39,7 +39,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) throws IOException {
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
@@ -85,15 +85,9 @@ public class PhotoController {
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
         /*merge photos*/
-        logger.debug("just before merging");
-//      int numOfPhotos = photoDao.getNumOfPhotos(mosaicId);
-        /* 굳이 이렇게 할 필요가 없는 것 같아서 잠시 주석 처리 */
-//		for (int i = 0; i < numOfPhotos ; ++i) {
-//        	photos[i] = photoDao.
-//        }
+        //TODO should check for the performance when many photos are there 
         PhotoHandler.mergeImages(photos);
-        logger.debug("after merging");
-        return "result";
+        return mosaic.getUrl();
     }
 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
