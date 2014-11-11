@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class Mosaic {
 	private int id;
+	private String fileName;
 	private String title;
 	private String url;
 	private String comment;
@@ -18,9 +19,10 @@ public class Mosaic {
 		this.url = url;
 		this.comment = comment;
 	}
-	public Mosaic(int id, String title, String comment, String url,
+	public Mosaic(int id, String fileName, String title, String comment, String url,
 			Timestamp createdDate) {
 		this.id = id;
+		this.fileName = fileName;
 		this.title = title;
 		this.url = url;
 		this.comment = comment;
@@ -31,6 +33,13 @@ public class Mosaic {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getTitle() {
 		return title;

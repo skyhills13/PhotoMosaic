@@ -30,7 +30,8 @@ public class MosaicDao extends JdbcDaoSupport {
 
 			public Mosaic mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new Mosaic(
-						rs.getInt("id"), 
+						rs.getInt("id"),
+						rs.getString("file_name"),
 						rs.getString("title"),
 						rs.getString("comment"),
 						rs.getString("url"),
@@ -41,8 +42,8 @@ public class MosaicDao extends JdbcDaoSupport {
 	}
 
 	public void upload(Mosaic mosaic) {
-		String sql = "INSERT INTO MOSAICS (title, comment, url) VALUES (?, ?, ?)";
-		getJdbcTemplate().update(sql, mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
+		String sql = "INSERT INTO MOSAICS (file_name, title, comment, url) VALUES (?, ?, ?, ?)";
+		getJdbcTemplate().update(sql, mosaic.getFileName(), mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
 	}
 	
 	public void updateCreatedTime(Mosaic mosaic) {

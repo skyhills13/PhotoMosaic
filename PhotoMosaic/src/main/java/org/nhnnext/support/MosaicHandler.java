@@ -60,7 +60,8 @@ public class MosaicHandler {
 			}
 		}
 		logger.debug("Image concatenated.....");
-		File mergedImg = new File(ATTACHMENT_ROOT_DIR+ File.separator + "finalImg.jpg");
+		String mergedPhotoName = ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getTitle() + ".jpg";
+		File mergedImg = new File(mergedPhotoName);
 		ImageIO.write(finalImg, "jpeg", mergedImg);
 	}
 }
