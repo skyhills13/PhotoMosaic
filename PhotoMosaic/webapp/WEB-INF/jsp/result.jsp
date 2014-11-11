@@ -53,14 +53,16 @@
 					</c:choose>
 				</li>
 				<li>
-					<p>date</p> <c:choose>
+					<p>date</p> 
+					<p>${mosaic.createdDate}</p>
+					<%-- <c:choose>
 						<c:when test="${requestScope.date!=null}">
 							<p>${requestScope.date}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test value</p>
 						</c:otherwise>
-					</c:choose>
+					</c:choose> --%>
 				</li>
 			</ul>
 		</section>

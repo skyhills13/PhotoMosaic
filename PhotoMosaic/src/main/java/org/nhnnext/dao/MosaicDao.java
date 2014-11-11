@@ -33,7 +33,8 @@ public class MosaicDao extends JdbcDaoSupport {
 						rs.getInt("id"), 
 						rs.getString("title"),
 						rs.getString("comment"),
-						rs.getString("url"));
+						rs.getString("url"),
+						rs.getTimestamp("created_date"));
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, url);

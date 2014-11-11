@@ -90,7 +90,7 @@ public class PhotoController {
         //TODO should check for the performance when many photos are there 
         PhotoHandler.mergeImages(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
-        mosaic.setCreatedTime(mosaicDao.getCreatedTime(mosaic.getId()));
+        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         return mosaic.getUrl();
     }
 	

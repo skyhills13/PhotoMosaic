@@ -7,7 +7,7 @@ public class Mosaic {
 	private String title;
 	private String url;
 	private String comment;
-	private Timestamp createdTime;
+	private String createdDate;
 	private Photo[] photos;
 	
 	public Mosaic() {
@@ -17,6 +17,14 @@ public class Mosaic {
 		this.title = title;
 		this.url = url;
 		this.comment = comment;
+	}
+	public Mosaic(int id, String title, String comment, String url,
+			Timestamp createdDate) {
+		this.id = id;
+		this.title = title;
+		this.url = url;
+		this.comment = comment;
+		this.createdDate = createdDate.toString();
 	}
 	public int getId() {
 		return id;
@@ -43,11 +51,11 @@ public class Mosaic {
 		this.url = url;
 	}
 	
-	public Timestamp getCreatedTime() {
-		return createdTime;
+	public String getCreatedDate() {
+		return createdDate;
 	}
-	public void setCreatedTime(Timestamp createdTime) {
-		this.createdTime = createdTime;
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate.toString();
 	}
 	public Photo[] getPhotos() {
 		return photos;
