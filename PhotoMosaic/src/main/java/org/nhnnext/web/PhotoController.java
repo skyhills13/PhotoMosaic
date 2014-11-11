@@ -40,7 +40,7 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents, Model model) throws IOException {
+    public @ResponseBody String uploadMultipleFileHandler(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("contents") String contents, Model model) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
@@ -89,11 +89,10 @@ public class PhotoController {
         /*merge photos*/
         //TODO should check for the performance when many photos are there 
         PhotoHandler.mergeImages(mosaic);
-        model.addAttribute("mosaic", mosaic);
-        logger.debug("model:{}", model);
         return mosaic.getUrl();
     }
-
+	
+	//not using now 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
 	public boolean delete(String name) {
 		if(!PhotoHandler.delete(name)){

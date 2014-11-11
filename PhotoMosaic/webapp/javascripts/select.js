@@ -34,9 +34,9 @@
 		request.send(formData);
 		
 		request.addEventListener("load", function() {
-			console.log("request.responseText 뭔지 보게 : " + request.responseText);
+			var mosaicUrl = request.responseText;
 			var origin = window.location.origin;
-			window.location.assign(origin + "/result");
+			window.location.assign(origin + "/result/" + mosaicUrl);
 		});
 	});
 	
