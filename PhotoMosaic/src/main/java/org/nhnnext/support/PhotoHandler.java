@@ -1,6 +1,7 @@
 package org.nhnnext.support;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -10,6 +11,9 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.domains.Mosaic;
+import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,5 +84,51 @@ public class PhotoHandler {
 			}
 		}
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
+	}
+	
+	public static void mergeImages(int mosaicId) throws IOException{
+		/*이거는 컨트롤러에 들어가야 함 임시로 여기에 넣어두었다.*/
+		PhotoDao photoDao = new PhotoDao();
+		
+		
+		int numOfPhotos = photoDao.getNumOfPhotos(mosaicId);
+		Photo[] photos = new Photo[numOfPhotos];
+		
+		
+		int rows = 2;   //we assume the no. of rows and cols are known and each chunk has equal width and height  
+        int cols = 2;  
+        int chunks = rows * cols;  
+  
+        int chunkWidth, chunkHeight;  
+        int type;
+        
+        //fetching image files  
+        File[] imgFiles = new File[chunks];  
+        for (int i = 0; i < chunks; i++) {  
+            imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());  
+        }  
+  
+       //creating a bufferd image array from image files  
+        BufferedImage[] bufferedImages = new BufferedImage[chunks];  
+        for (int i = 0; i < chunks; i++) {  
+            bufferedImages[i] = ImageIO.read(imgFiles[i]);  
+        }  
+        type = bufferedImages[0].getType();
+        logger.debug("type in the mergeImages : " + bufferedImages[0].getType());
+        chunkWidth = bufferedImages[0].getWidth();  
+        chunkHeight = bufferedImages[0].getHeight();  
+  
+        //Initializing the final image  
+        BufferedImage finalImg = new BufferedImage(chunkWidth*cols, chunkHeight*rows, type);  
+  
+        int num = 0;  
+        for (int i = 0; i < rows; i++) {  
+            for (int j = 0; j < cols; j++) {  
+                finalImg.createGraphics().drawImage(bufferedImages[num], chunkWidth * j, chunkHeight * i, null);  
+                num++;  
+            }  
+        }  
+        logger.debug("Image concatenated.....");  
+        ImageIO.write(finalImg, "jpeg", new File("finalImg.jpg"));
 	}
 }

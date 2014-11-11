@@ -31,7 +31,8 @@ eleSubmit.addEventListener("click", function(event) {
 	request.send(formData);
 	
 	request.addEventListener("load", function() {
-		document.querySelector(".request").submit();
+		var origin = window.location.origin;
+		window.location.assign(origin + "/result");
 	});
 });
 
