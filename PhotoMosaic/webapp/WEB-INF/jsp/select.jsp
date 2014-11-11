@@ -11,17 +11,12 @@
 
 	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
 	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 </head>
 
 <body>
 
 <!-- HEADER -->
-<header>
-	<a><span>SERVICE</span></a>
-	<a><span>USER</span></a>
-	<a><span>MAKE</span></a>
-</header>
+<jsp:include page="header.jsp" flush="false" />
 
 <!-- SELECT PICTURES -->
 <section class="select">

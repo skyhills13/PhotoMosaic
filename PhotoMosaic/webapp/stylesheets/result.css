@@ -151,15 +151,20 @@ aside section.share input[type='button']:focus {
 }
 
 #lightBox section.thumbnail {
-	width : 100%;
-	text-align : center;
+	width: 500px;
+	text-align: center;
+	padding-left: 50%;
+	margin-left: -250px;
+	padding-top: 100px;
 }
 
-#lightBox section.thumbnail img{
-	height : 300px;
-	position : relative;
-	top : 50%;
-	margin-top : -150px;
+#lightBox section.thumbnail p {
+	color: white;
+}
+
+#lightBox section.thumbnail img {
+	width: 100%;
+	margin-top: 10px;
 }
 
 #lightBox section div {
