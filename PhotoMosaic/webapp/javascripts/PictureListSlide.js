@@ -33,15 +33,31 @@ PictureListSlide.prototype = {
 		var area = this.lightBox.querySelector("." + classOfArea);
 		var toPut = targetList;
 		var toPutInner = "";
-
-		if (classOfArea != "current") {
+		
+		if (classOfArea != "current"){
 			toPut = targetList[classOfArea + "ElementSibling"];
+		} else {
+			toPut = this.reSizingCurrentImage(toPut);
 		}
-		;
+		
 		if (toPut != null)
 			toPutInner = toPut.innerHTML;
-
+		
 		area.innerHTML = toPutInner;
+	},
+	
+	reSizingCurrentImage : function(targetImage){
+		var img =  targetImage.querySelector("img");
+		var originalStyle = window.getComputedStyle(img);
+		var cls = "over";
+		console.log(img);
+		if(originalStyle.width < originalStyle.height){
+			img.classList.add(cls+"Height");
+		} else {
+			img.classList.add(cls+"Width");
+		}
+		console.log(img);
+		return targetImage;
 	},
 
 	changeLightBoxVisible : function() {
