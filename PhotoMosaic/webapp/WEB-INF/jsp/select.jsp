@@ -45,10 +45,10 @@
 </div>
 </section>
 
-<script src="/javascripts/util.js"></script>
-<script src="/javascripts/MyHTMLElement.js"></script>
-<script src="/javascripts/MultiFileHandler.js"></script>
-<script src="/javascripts/select.js"></script>
+<script src="/javascripts/util.js?20141112"></script>
+<script src="/javascripts/MyHTMLElement.js?20141112"></script>
+<script src="/javascripts/MultiFileHandler.js?20141112"></script>
+<script src="/javascripts/select.js?20141112"></script>
 
 </body>
 

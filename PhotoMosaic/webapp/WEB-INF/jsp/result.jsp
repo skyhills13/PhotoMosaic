@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%-- <%@ page isELIgnored="false" %> --%>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <title>show mosaic</title>
@@ -18,24 +19,28 @@
 		<section class="info">
 			<ul>
 				<li>
-					<p>subject</p> <c:choose>
+					<p>subject</p> 
+					<p>${mosaic.title}</p>
+					<%-- <c:choose>
 						<c:when test="${requestScope.subject!=null}">
 							<p>${requestScope.subject}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test subject</p>
 						</c:otherwise>
-					</c:choose>
+					</c:choose> --%>
 				</li>
 				<li>
-					<p>comment</p> <c:choose>
+					<p>comment</p> 
+					<p>${mosaic.contents}</p>
+					<%-- <c:choose>
 						<c:when test="${requestScope.comment!=null}">
 							<p>${requestScope.comment}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test value</p>
 						</c:otherwise>
-					</c:choose>
+					</c:choose> --%>
 				</li>
 				<li>
 					<p>producer</p> <c:choose>
@@ -75,9 +80,9 @@
 			<li data-list="7"><img src="/images/pitcher.jpg" /></li>
 		</ul>
 	</article>
-	<script src="/javascripts/PhotoListSlide.js"></script>
-	<script src="/javascripts/ShareTool.js"></script>
-	<script src="/javascripts/PhotoLightBox.js"></script>
+	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
+	<script src="/javascripts/ShareTool.js?20141112"></script>
+	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
 	<script>
 		document
 				.addEventListener(
