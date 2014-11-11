@@ -8,6 +8,7 @@ import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.support.Constants;
+import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
@@ -88,7 +89,7 @@ public class PhotoController {
         mosaic.setPhotos(photos);
         /*merge photos*/
         //TODO should check for the performance when many photos are there 
-        PhotoHandler.mergeImages(mosaic);
+        MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         return mosaic.getUrl();
