@@ -79,16 +79,22 @@ public class MosaicHandler {
 		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		
-		BufferedImage resizedImage = new BufferedImage(CHUNK_WIDTH, CHUNK_HEIGHT, type);
+		BufferedImage resizedImage = new BufferedImage(photo.getScaledWidth(), photo.getScaledHeight(), type);
 		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, CHUNK_WIDTH, CHUNK_HEIGHT, null);
+		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
 		g.dispose();
 		
 		ImageIO.write(resizedImage, "png", new File(ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
 	}
 	
 	
-	
+	/*
+	 * temporal template 
+	 * 2x1   0   1x1   1x2
+	 * 1x3  1x2   0     0
+	 * 0    1x2  2x1    0
+	 * 0     0   2x1    0
+	 */
 	
 //	private BufferedImage cropImage(BufferedImage src, Rectangle rect) {
 //		BufferedImage dest = src.getSubimage(0, 0, rect.width, rect.height);

@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 @Controller
 public class PhotoController {
 
@@ -83,6 +85,10 @@ public class PhotoController {
             /*insert file information into the database*/
             String newUniqueId = StringHandler.makeRandomId();
             photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
+
+            Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
+            photos[i].setScaledWidth(scaledDimension.width);
+            photos[i].setScaledHeight(scaledDimension.height);
             //TODO add date to UUID for the case of exception
             photoDao.upload(photos[i]);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
@@ -94,7 +100,7 @@ public class PhotoController {
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         
-        //MosaicHandler.resizePhoto(photos[0]);
+        MosaicHandler.resizePhoto(photos[0]);
         return mosaic.getUrl();
     }
 	
