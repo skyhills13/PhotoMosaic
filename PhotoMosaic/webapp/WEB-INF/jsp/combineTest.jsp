@@ -6,6 +6,9 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 </head>
 <body>
+	<p><a>사진보기</a></p>
+	<article id="canvas">
+	</article>
 	<article id="list">
 		<ul>
 			<li data-list="0"><img src="/images/bobby.jpg" /></li>

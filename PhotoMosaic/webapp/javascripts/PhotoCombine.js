@@ -1,13 +1,16 @@
+var ooo;
 window.addEventListener("load", function() {
 	var tg = new TemplateGenerator();
 	tg.saveTargetTemplates(8);
-	var tArray = tg.targetTemplates[2345].template;
-	console.log(tArray);
+	var random = parseInt(Math.random()*1000);
+	var tArray = tg.targetTemplates[random].template;
+	
 	var pArray = document.querySelectorAll("#list img");
-	var appendPlace = document.querySelector("article");
+	var appendPlace = document.querySelector("#canvas");
+	
 	var combine = new PhotoCombine();
 	combine.getMaterial({
-		"mWidth" : 1000,
+		"mWidth" : 800,
 		"mHeight" : 800,
 		"templateArray" : tArray,
 		"templateColumn" : 4,
@@ -16,6 +19,10 @@ window.addEventListener("load", function() {
 		"appendPlace" : appendPlace
 	});
 	combine.create();
+	var result = combine.getResult();
+	document.querySelector("p a").addEventListener("click", function(){
+		window.location = result;
+	});
 });
 
 function PhotoCombine() {
@@ -31,9 +38,9 @@ PhotoCombine.prototype = {
 
 	boardToCanvas : function() {
 		var canvas = document.createElement("canvas");
+		canvas.setAttribute("id", "main");
 		canvas.width = this.mosaic.totalWidth;
 		canvas.height = this.mosaic.totalHeight;
-		canvas.setAttribute("id", "main");
 		this.appendPlace.appendChild(canvas);
 		this.mainCanvas = this.appendPlace.querySelector("#main");
 
@@ -42,18 +49,15 @@ PhotoCombine.prototype = {
 			this.drawingTargetImage(item);
 		}.bind(this));
 	},
-
-	drawingTargetImage : function(item) {
-		// var img = this.photoArray[0];
-		// context.drawImage(img, 300, 300, 300, 300, 300, 300, 300, 300);
-		var canvas = this.appendPlace.querySelector("#main");
+	
+	getResult : function(){
+		return this.mainCanvas.toDataURL();
+	},
+	drawingTargetImage : function(i) {
+		var img = this.photoArray[0];
+		var canvas = this.mainCanvas;
 		var context = canvas.getContext("2d");
-//		 context.drawImage(item.imgElement, 0, 0, 300, 300, 100, 100, 300,
-//		 300);
-		 console.log(item);
-		context.drawImage(item.imgElement, 0, 0, item._width, item._height,
-				item.posX, item.posY, item._width, item._height);
-		debugger;
+		context.drawImage(i.imgElement, 0, 0, i._width, i._height, i.posX, i.posY, i._width, i._height);
 	},
 
 	linkBoardWithImage : function() {
@@ -74,7 +78,7 @@ PhotoCombine.prototype = {
 			if (area === null)
 				return;
 			var cvtItem = {
-				"poxX" : idx.r * m.roomWidth,
+				"posX" : idx.r * m.roomWidth,
 				"posY" : idx.c * m.roomHeight,
 				"_width" : area.w * m.roomWidth,
 				"_height" : area.h * m.roomHeight
@@ -82,6 +86,7 @@ PhotoCombine.prototype = {
 			convertedTemplate.push(cvtItem);
 		}.bind(this));
 		m.board = convertedTemplate;
+		ooo = convertedTemplate;
 	},
 
 	oneDimToTwoDim : function(index) {
@@ -107,8 +112,7 @@ PhotoCombine.prototype = {
 
 	getMaterial : function(material) {
 		var m = material;
-		this.setTemplateMaterial(m.templateArray, m.templateColumn,
-				m.templateRow, m.photoLengthInTemplate);
+		this.setTemplateMaterial(m.templateArray, m.templateColumn, m.templateRow, m.photoLengthInTemplate);
 		this.setMosaicMaterial(m.mWidth, m.mHeight);
 		this.setPhotoArray(m.photoArray);
 		this.setAppendPlace(m.appendPlace);
