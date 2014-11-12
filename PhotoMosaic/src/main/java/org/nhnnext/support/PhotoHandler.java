@@ -1,6 +1,8 @@
 package org.nhnnext.support;
 
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -17,9 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
+	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
 	private static final int CHUNK_WIDTH = 1000;
@@ -64,8 +66,19 @@ public class PhotoHandler {
 		return false;
 	}
 	
-	
-	//TODO should consider the case of the non-existence of dir (previous version of FileUploadController) 
+	public static void resizePhoto(Photo photo) throws IOException {
+		File file = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
+		//TODO change throw exception to try catch 
+		BufferedImage originalImage = ImageIO.read(file);
+		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+		
+		BufferedImage resizedImage = new BufferedImage(photo.getScaledWidth(), photo.getScaledHeight(), type);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
+		g.dispose();
+		
+		ImageIO.write(resizedImage, "png", new File(ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
+	}
 	
 	public static Dimension getImageDimension(String fileName)
 			throws IOException {

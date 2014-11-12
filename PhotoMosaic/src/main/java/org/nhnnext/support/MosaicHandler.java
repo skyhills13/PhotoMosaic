@@ -1,6 +1,7 @@
 package org.nhnnext.support;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +17,9 @@ public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
+	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
 	private static final int CHUNK_WIDTH = 1000;
@@ -73,20 +74,7 @@ public class MosaicHandler {
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
-	public static void resizePhoto(Photo photo) throws IOException {
-		File file = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
-		//TODO change throw exception to try catch 
-		BufferedImage originalImage = ImageIO.read(file);
-		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-		
-		BufferedImage resizedImage = new BufferedImage(photo.getScaledWidth(), photo.getScaledHeight(), type);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
-		g.dispose();
-		
-		ImageIO.write(resizedImage, "png", new File(ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
-	}
-	
+
 	
 	/*
 	 * temporal template 
@@ -96,9 +84,9 @@ public class MosaicHandler {
 	 * 0     0   2x1    0
 	 */
 	
-//	private BufferedImage cropImage(BufferedImage src, Rectangle rect) {
-//		BufferedImage dest = src.getSubimage(0, 0, rect.width, rect.height);
-//		return dest;
-//	}
+	private BufferedImage cropImage(BufferedImage src, Rectangle rect) {
+		BufferedImage dest = src.getSubimage(0, 0, rect.width, rect.height);
+		return dest;
+	}
 	
 }

@@ -68,7 +68,7 @@ public class PhotoDao extends JdbcDaoSupport{
 		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);
 	}
 	
-	public Photo[] findPhotosOfMosaic(int mosaicId) {
+	public List<Photo> findPhotosOfMosaic(int mosaicId) {
 		String sql = "select * from photos where mosaics_id= ? ";
 		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
 			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -82,12 +82,7 @@ public class PhotoDao extends JdbcDaoSupport{
 							rs.getInt("mosaics_id"));
 			}
 		};
-		List<Photo> photos = getJdbcTemplate().query(sql, rowMapper, mosaicId);
-		Photo[] mosaicPhotos = new Photo[photos.size()];
-		for(int i = 0; i < photos.size(); ++i){
-			mosaicPhotos[i] = photos.get(i);
-		}
-		return mosaicPhotos;
+		return getJdbcTemplate().query(sql, rowMapper, mosaicId);
 	}
 	
 	public int getNumOfPhotos(int mosaicId) {
