@@ -19,55 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
+
 
 	private static final int CHUNK_WIDTH = 1000;
 	private static final int CHUNK_HEIGHT = 750;
 	
-	public static String upload(MultipartFile multipartFile) {
-		if (multipartFile.isEmpty()) {
-			logger.debug("no picture");
-			return null;
-		}
-		transferToAttachmentDir(multipartFile);
-		return multipartFile.getOriginalFilename();
-	}
-
-	private static File transferToAttachmentDir(MultipartFile multipartFile) {
-		File destFile = getDestinationFile(multipartFile.getOriginalFilename());
-		try {
-			multipartFile.transferTo(destFile);
-		} catch (Exception ex) {
-			throw new IllegalArgumentException(destFile + "로 첨부파일 옮기다 오류 발생");
-		}
-		return destFile;
-	}
-
-	public static File getDestinationFile(String fileName) {
-		return new File(ATTACHMENT_ROOT_DIR + File.separator + fileName);
-	}
-	
-	public static void renameAsUnique(Photo photo){
-		File oldFile = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getOriginalFileName());
-		File newFile = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
-		oldFile.renameTo(newFile);
-	}
-	
-	public static boolean delete(String fileName) {
-		File targetFile = getDestinationFile(fileName);
-		try {
-			return targetFile.delete();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	
 	public static void resizePhoto(Photo photo) throws IOException {
-		File file = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
+		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
 		//TODO change throw exception to try catch 
 		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
@@ -77,12 +36,12 @@ public class PhotoHandler {
 		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
 		g.dispose();
 		
-		ImageIO.write(resizedImage, "png", new File(ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
+		ImageIO.write(resizedImage, "png", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
 	}
 	
 	public static Dimension getImageDimension(String fileName)
 			throws IOException {
-		File imgFile = new File(ATTACHMENT_ROOT_DIR + File.separator + fileName);
+		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + fileName);
 		int pos = imgFile.getName().lastIndexOf(".");
 		if (pos == -1) {
 			throw new IOException(Constants.WRONG_FILE + imgFile.getAbsolutePath());

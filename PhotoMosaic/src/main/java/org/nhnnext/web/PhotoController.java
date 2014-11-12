@@ -11,6 +11,7 @@ import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
+import org.nhnnext.support.UploadHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ public class PhotoController {
             	return null;
             }
             /*file upload to the server*/
-            PhotoHandler.upload(file);
+            UploadHandler.upload(file);
             
             /*get the information of the photo*/
             Dimension photoDimension = PhotoHandler.getImageDimension(file.getOriginalFilename());
@@ -90,7 +91,7 @@ public class PhotoController {
 
             String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
             photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
-            PhotoHandler.renameAsUnique(photos[i]);
+            UploadHandler.renameAsUnique(photos[i]);
 
             Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
             photos[i].setScaledWidth(scaledDimension.width);
@@ -105,7 +106,7 @@ public class PhotoController {
 	//not using now 
 	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
 	public boolean delete(String name) {
-		if(!PhotoHandler.delete(name)){
+		if(!UploadHandler.delete(name)){
 			logger.debug("cannot delete");
 			return false;
 		}
