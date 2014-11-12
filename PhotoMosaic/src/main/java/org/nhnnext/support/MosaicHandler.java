@@ -21,8 +21,8 @@ public class MosaicHandler {
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
-	private static final int CHUNK_WIDTH = 500;
-	private static final int CHUNK_HEIGHT = 400;
+	private static final int CHUNK_WIDTH = 1000;
+	private static final int CHUNK_HEIGHT = 750;
 	
 	public static void mergePhotos(Mosaic mosaic) throws IOException {
 
@@ -39,8 +39,8 @@ public class MosaicHandler {
 		Photo[] photos = mosaic.getPhotos();
 		for (int i = 0; i < chunks; i++) {
 			logger.debug("Photo :{}" , photos[i]);
-			logger.debug(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());
-			imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getOriginalFileName());
+			logger.debug(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
+			imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
 		}
 
 		// creating a bufferd image array from image files
@@ -68,13 +68,13 @@ public class MosaicHandler {
 			}
 		}
 		logger.debug("Image concatenated.....");
-		String mergedPhotoName = ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getTitle() + ".png";
+		String mergedPhotoName = ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getFileName();
 		File mergedImg = new File(mergedPhotoName);
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
 	public static void resizePhoto(Photo photo) throws IOException {
-		File file = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getOriginalFileName());
+		File file = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
 		//TODO change throw exception to try catch 
 		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();

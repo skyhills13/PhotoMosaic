@@ -47,11 +47,13 @@ public class PhotoHandler {
 	public static File getDestinationFile(String fileName) {
 		return new File(ATTACHMENT_ROOT_DIR + File.separator + fileName);
 	}
-//	
-//	public static void renameAsUnique(String fileName){
-//		File oldFile = new File("")
-//	}
-//	
+	
+	public static void renameAsUnique(Photo photo){
+		File oldFile = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getOriginalFileName());
+		File newFile = new File(ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
+		oldFile.renameTo(newFile);
+	}
+	
 	public static boolean delete(String fileName) {
 		File targetFile = getDestinationFile(fileName);
 		try {
