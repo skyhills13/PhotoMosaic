@@ -1,10 +1,10 @@
-function PhotoLightBox(lightBox, photo, commentList) {
+function PhotoLightBox(lightBox, photo, commentList, afterclose) {
 	this.lightBox = lightBox;
 	this.photo = photo;
 	this.commentList = commentList;
 
 	this.setSection(this.show);
-	this.closeHandler();
+	this.closeHandler(afterclose);
 }
 
 PhotoLightBox.prototype = {
@@ -36,11 +36,15 @@ PhotoLightBox.prototype = {
 		sectionElement.insertAdjacentHTML("afterbegin", commentElements);
 	},
 
-	closeHandler : function() {
+	closeHandler : function(afterclose) {
 		var lightBox = this.lightBox;
 		var hide = "hide";
+		var CLASS_NAME = "thumbnail";
 		lightBox.addEventListener("click", function() {
+			if(!lightBox.classList.contains(CLASS_NAME)) return;
 			lightBox.classList.add(hide);
+			lightBox.classList.remove(CLASS_NAME);
+			afterclose();
 		}, false);
 	}
 }

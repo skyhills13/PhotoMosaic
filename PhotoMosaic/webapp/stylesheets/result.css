@@ -199,6 +199,11 @@ aside section.share input[type='button']:focus {
 	height: 100%;
 }
 
+#lightBox section div.current img.over{
+	width : 100%;
+	height : initial;
+}
+
 #lightBox section div.next {
 	width: 60%;
 	top: 85%;
@@ -207,16 +212,6 @@ aside section.share input[type='button']:focus {
 
 #lightBox section div.next img {
 	width: 100%;
-}
-
-#lightBox section div.overHeight img {
-	height: 100%;
-	margin: auto;
-}
-
-#lightBox section div.overWidth img {
-	width: 100%;
-	margin: auto;
 }
 
 #lightBox nav {

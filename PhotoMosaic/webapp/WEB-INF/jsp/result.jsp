@@ -10,7 +10,7 @@
 <title>show mosaic</title>
 </head>
 <body>
-	<article id="lightBox"></article>
+	<article id="lightBox" class="thumbnail"></article>
 	<jsp:include page="header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
@@ -19,28 +19,24 @@
 		<section class="info">
 			<ul>
 				<li>
-					<p>title</p> 
-					<p>${mosaic.title}</p>
-					<%-- <c:choose>
-						<c:when test="${requestScope.subject!=null}">
-							<p>${requestScope.subject}</p>
+					<p>title</p> <%-- <p>${mosaic.title}</p> --%> <c:choose>
+						<c:when test="${mosaic.title!=null}">
+							<p>${mosaic.title}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test subject</p>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 				</li>
 				<li>
-					<p>comment</p> 
-					<p>${mosaic.comment}</p>
-					<%-- <c:choose>
-						<c:when test="${requestScope.comment!=null}">
-							<p>${requestScope.comment}</p>
+					<p>comment</p> <%-- <p>${mosaic.comment}</p> --%> <c:choose>
+						<c:when test="${mosaic.comment!=null}">
+							<p>${mosaic.comment}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test value</p>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 				</li>
 				<li>
 					<p>producer</p> <c:choose>
@@ -53,16 +49,14 @@
 					</c:choose>
 				</li>
 				<li>
-					<p>date</p> 
-					<p>${mosaic.createdDate}</p>
-					<%-- <c:choose>
-						<c:when test="${requestScope.date!=null}">
-							<p>${requestScope.date}</p>
+					<p>date</p> <%-- <p>${mosaic.createdDate}</p> --%> <c:choose>
+						<c:when test="${mosaic.createdDate!=null}">
+							<p>${mosaic.createdDate}</p>
 						</c:when>
 						<c:otherwise>
 							<p>test value</p>
 						</c:otherwise>
-					</c:choose> --%>
+					</c:choose>
 				</li>
 			</ul>
 		</section>
@@ -72,40 +66,36 @@
 	</aside>
 	<article id="list">
 		<ul>
-			<li data-list="0"><img src="/images/bobby.jpg" /></li>
-			<li data-list="1"><img src="/images/baemin.jpg" /></li>
-			<li data-list="2"><img src="/images/captain.jpg" /></li>
-			<li data-list="3"><img src="/images/clan.png" /></li>
-			<li data-list="4"><img src="/images/comment.jpg" /></li>
-			<li data-list="5"><img src="/images/dog.jpg" /></li>
-			<li data-list="6"><img src="/images/pio.jpg" /></li>
-			<li data-list="7"><img src="/images/pitcher.jpg" /></li>
+			<li class="container" data-list="0"><img class="original" src="/images/bobby.jpg" /></li>
+			<li class="container" data-list="1"><img class="original" src="/images/baemin.jpg" /></li>
+			<li class="container" data-list="2"><img class="original" src="/images/captain.jpg" /></li>
+			<li class="container" data-list="3"><img class="original" src="/images/clan.png" /></li>
+			<li class="container" data-list="4"><img class="original" src="/images/comment.jpg" /></li>
+			<li class="container" data-list="5"><img class="original" src="/images/dog.jpg" /></li>
+			<li class="container" data-list="6"><img class="original" src="/images/test.png" /></li>
+			<li class="container" data-list="7"><img class="original" src="/images/pitcher.jpg" /></li>
 		</ul>
 	</article>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
 	<script>
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							var mosaic = document.querySelector("img#mosaic");
-							var originalImages = document
-									.querySelectorAll("article#list ul li img");
-							var comment = document
-									.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
-							var lightBox = document
-									.querySelector("article#lightBox");
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			var mosaic = document.querySelector("img#mosaic");
+			var comments = document.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
+			var lightBox = document.querySelector("article#lightBox");
 
-							new PhotoLightBox(lightBox, mosaic, [ comment ]);
-							//new PhotoListSlide(originalImages, lightBox);
-
-							var sButton = document
-									.querySelector("section.share input[type='button']");
-							var sTool = new ShareTool();
-							sTool.URL(sButton);
-						});
+			new PhotoLightBox(lightBox, mosaic, [ comments ], function(){
+				//for ul li img.original
+				var listWrapper = document.querySelector("article#list ul");
+				new PhotoListSlide(listWrapper, lightBox);
+			});
+			
+			var sButton = document.querySelector("section.share input[type='button']");
+			var sTool = new ShareTool();
+			sTool.URL(sButton);
+		});
 	</script>
 </body>
 </html>

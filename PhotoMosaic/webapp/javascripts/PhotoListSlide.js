@@ -1,65 +1,83 @@
-function PhotoListSlide(target, lightBox) {
+function PhotoListSlide(wrapper, lightBox) {
 	this.lightBox = lightBox;
-	this.photoNodes = target;
-	this.createLightBox();
+	this.container = wrapper.firstElementChild;
+	this.wrapper = wrapper;
+	this.createNavigation();
 	this.eventHander();
 }
 
 PhotoListSlide.prototype = {
+
 	eventHander : function() {
-		var eventTarget = this.photoNodes[0].parentNode.parentNode;
-		var parentNodeTag = this.photoNodes[0].parentNode.tagName.toLowerCase();
-		var photoTag = this.photoNodes[0].tagName.toLowerCase();
-		eventTarget.addEventListener("click", function(e) {
-			if (e.target.tagName.toLowerCase() === photoTag) {
+		var IMG_TAG = "img";
+		var CLASS_NAME = "original";
+		this.wrapper.addEventListener("click", function(e) {
+			var target = e.target;
+			var isTagEqual = e.target.tagName.toLowerCase() === IMG_TAG;
+			var isOriginalImage = target.classList.contains(CLASS_NAME);
+			if (isTagEqual && isOriginalImage) {
 				this.changeLightBoxVisible();
-				var targetList = e.target.parentNode;
-				var targetNumber = targetList.getAttribute("data-list");
-				this.showTargetImage(targetNumber);
-				var sidebar = this.lightBox
-						.querySelector("nav input[type='range']");
-				sidebar.value = targetNumber;
+				var targetDataNumber = this.getDataNumber(target);
+				this.showTargetImage(targetDataNumber);
+				var rangeBar = this.lightBox.querySelector("nav input[type='range']");
+				rangeBar.value = rangeBar;
 			}
-		}.bind(this));
+		}.bind(this), false);
+	},
+
+	getDataNumber : function(target) {
+		var KEY = "data-list";
+		var data = "";
+		while (true) {
+			data = target.getAttribute(KEY);
+			if (data != null)
+				break;
+			target = target.parentNode;
+		}
+		return parseInt(data);
 	},
 
 	showTargetImage : function(targetNumber) {
-		var currentList = this.photoNodes[targetNumber].parentNode;
-		this.imagePutter("current", currentList);
-		this.imagePutter("previous", currentList);
-		this.imagePutter("next", currentList);
+		var currentContainer = this.wrapper.children[targetNumber];
+		this.imagePutter("current", currentContainer);
+		this.imagePutter("previous", currentContainer);
+		this.imagePutter("next", currentContainer);
+		this.removeRemainPhoto(targetNumber);
+		this.resizing();
 	},
 
-	imagePutter : function(classOfArea, targetList) {
-		var area = this.lightBox.querySelector("." + classOfArea);
-		var toPut = targetList;
-		var toPutInner = "";
+	removeRemainPhoto : function(targetNumber){
 		
-		if (classOfArea != "current"){
-			toPut = targetList[classOfArea + "ElementSibling"];
-		} else {
-			toPut = this.reSizingCurrentImage(toPut);
-		}
+		if(targetNumber === 0) 
+			this.lightBox.querySelector(".previous").innerHTML = "";
+		if(targetNumber === this.wrapper.childElementCount-1)
+			this.lightBox.querySelector(".next").innerHTML = "";	
 		
-		if (toPut != null)
-			toPutInner = toPut.innerHTML;
-		
-		area.innerHTML = toPutInner;
 	},
 	
-	reSizingCurrentImage : function(targetImage){
-		var img =  targetImage.querySelector("img");
-		var targetStyle = window.getComputedStyle(targetImage);
-		var originalStyle = window.getComputedStyle(img);
-		var cls = "over";
-		console.log(img);
-		if(originalStyle.width < originalStyle.height){
-			img.classList.add(cls+"Height");
-		} else {
-			img.classList.add(cls+"Width");
-		}
+	imagePutter : function(classOfArea, currentContainer) {
+		var area = this.lightBox.querySelector("." + classOfArea);
+		var toPut = currentContainer.querySelector("img.original");
+
+		if (classOfArea != "current")
+			toPut = currentContainer[classOfArea + "ElementSibling"];
+
+		if (toPut != null)
+			area.innerHTML = toPut.outerHTML;
+	},
+
+	resizing : function() {
+		var viewing = this.lightBox.querySelector(".current");
+		var target = viewing.querySelector("img");
+		var viewingStyle = window.getComputedStyle(viewing);
+		var imageStyle = window.getComputedStyle(target);
+		var CLASS_NAME = "over";
 		
-		return targetImage;
+		if(viewingStyle.width < imageStyle.width){
+			target.className = CLASS_NAME;
+		} else {
+			target.className = "";
+		}
 	},
 
 	changeLightBoxVisible : function() {
@@ -71,18 +89,20 @@ PhotoListSlide.prototype = {
 		this.lightBox.classList.add(toAdd);
 	},
 
-	createLightBox : function() {
-		var lightBox = "<nav><input type='button' /></nav>"
-				+ "<section><div class='previous'></div>"
-				+ "<div class='current'></div>"
-				+ "<div class='next'></div></section>" + "</article>";
-		var place = document.querySelector("body");
-		place.insertAdjacentHTML("afterbegin", lightBox);
-		this.lightBox = place.querySelector("#lightBox");
-		var photolen = this.photoNodes.length - 1;
-		var rangeBar = "<input type='range' min='0' max='" + photolen + "'>";
-		var nav = this.lightBox.querySelector("nav");
-		nav.insertAdjacentHTML("afterbegin", rangeBar);
+	createNavigation : function() {
+		function createRangeBar(photolen) {
+			return "<input type='range' min='0' max='" + photolen + "'>";
+		}
+
+		var photolen = this.wrapper.childElementCount - 1;
+		var closeButton = "<input class='close' type='button' />";
+		var rangeBar = createRangeBar(photolen);
+
+		var nav = "<nav>" + closeButton + rangeBar + "</nav>";
+		var photoSection = "<section>" + "<div class='previous'></div>" + "<div class='current'></div>"
+				+ "<div class='next'></div></section>";
+
+		this.lightBox.innerHTML = nav + photoSection;
 		this.lightBoxEvent();
 	},
 
@@ -97,21 +117,21 @@ PhotoListSlide.prototype = {
 			}
 		});
 
-		var closeButton = this.lightBox.querySelector("input[type='button']");
+		var closeButton = this.lightBox.querySelector("nav input.close");
 		closeButton.addEventListener("click", function() {
 			if (isBoxShow) {
 				this.changeLightBoxVisible();
 			}
 		}.bind(this));
 
-		var slideBar = this.lightBox.querySelector("input[type='range']");
+		var slideBar = this.lightBox.querySelector("nav input[type='range']");
 		slideBar.addEventListener("change", function(e) {
 			this.pictureMoveAlongSlideBar(e);
 		}.bind(this));
 	},
 
-	pictureMoveAlongSlideBar : function(evt) {
-		var targetNumber = evt.target.valueAsNumber;
+	pictureMoveAlongSlideBar : function(event) {
+		var targetNumber = event.target.valueAsNumber;
 		this.showTargetImage(targetNumber);
 	}
 }
