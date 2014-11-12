@@ -13,8 +13,8 @@
 	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
 </head>
 
-<section class="hidden"></section>
 <body>
+<section class="hidden"></section>
 
 <!-- HEADER -->
 <jsp:include page="./include/header.jsp" flush="false" />
