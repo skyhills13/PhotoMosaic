@@ -58,10 +58,10 @@
 				thumbArea.setAttribute("data-draghover", true);
 				
 				
-				thumbArea.innerHTML = "<img src=\"" + event.target.result + "\""
+				thumbArea.innerHTML = "<section><img src=\"" + event.target.result + "\""
 						+ "title=\"" + escape(file.name) + "\""
 						+ "draggable=\"false\""
-						+ "data-draghover=\"true\">";
+						+ "data-draghover=\"true\"></section>";
 				
 				var removeButton = document.createElement("div");
 				thumbArea.insertBefore(removeButton, null);
