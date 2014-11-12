@@ -11,7 +11,7 @@
 </head>
 <body>
 	<article id="lightBox" class="thumbnail"></article>
-	<jsp:include page="header.jsp" flush="false" />
+	<jsp:include page="./include/header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
 			<img id="mosaic" src="/images/${mosaic.fileName}" />

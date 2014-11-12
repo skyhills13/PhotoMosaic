@@ -21,8 +21,8 @@
 			<li data-list="7"><img src="/images/test8.jpg" /></li>
 		</ul>
 	</article>
-	<script src="/javascripts/util.js"></script>
-	<script src="/javascripts/TemplateGenerator.js"></script>
-	<script src="/javascripts/PhotoCombine.js"></script>
+	<script src="/javascripts/lib/util.js"></script>
+	<script src="/javascripts/lib/TemplateGenerator.js"></script>
+	<script src="/javascripts/lib/PhotoCombine.js"></script>
 </body>
 </html>

@@ -45,9 +45,9 @@
 </form:form>
 </section>
 
-<script src="/javascripts/util.js"></script>
-<script src="/javascripts/MyHTMLElement.js"></script>
-<script src="/javascripts/MultiFileHandler.js"></script>
+<script src="/javascripts/lib/util.js"></script>
+<script src="/javascripts/lib/MyHTMLElement.js"></script>
+<script src="/javascripts/lib/MultiFileHandler.js"></script>
 <script>
 	var eleInput = document.querySelector(".controll input[type=file]");
 	var eleDrag = document.querySelector(".pictures");

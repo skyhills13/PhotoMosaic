@@ -16,7 +16,7 @@
 <body>
 
 <!-- HEADER -->
-<jsp:include page="header.jsp" flush="false" />
+<jsp:include page="./include/header.jsp" flush="false" />
 
 <!-- SELECT PICTURES -->
 <section class="select">
@@ -45,9 +45,9 @@
 </div>
 </section>
 
-<script src="/javascripts/util.js?20141112"></script>
-<script src="/javascripts/MyHTMLElement.js?20141112"></script>
-<script src="/javascripts/MultiFileHandler.js?20141112"></script>
+<script src="/javascripts/lib/util.js?20141112"></script>
+<script src="/javascripts/lib/MyHTMLElement.js?20141112"></script>
+<script src="/javascripts/lib/MultiFileHandler.js?20141112"></script>
 <script src="/javascripts/select.js?20141112"></script>
 
 </body>
