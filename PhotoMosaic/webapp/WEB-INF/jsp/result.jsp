@@ -69,7 +69,7 @@
 			<c:forEach var="photo" items="${mosaic.getPhotos()}"
 				varStatus="status">
 				<li class="container" data-list="${status.index}"><img
-					class="original" src="/images/${photo.getOriginalFileName()}" /></li>
+					class="original" src="/images/${photo.getUniqueId()}" /></li>
 			</c:forEach>
 		</ul>
 	</article>

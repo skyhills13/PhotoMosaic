@@ -54,11 +54,11 @@ public class PhotoController {
 		/*insert mosaic information into the database*/
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
-        mosaic.setFileName(title+".png");
         mosaic.setComment(comment);
 
         String newUrl = StringHandler.makeUrl();
         mosaic.setUrl(newUrl);
+        mosaic.setFileName(newUrl+".png");
         mosaicDao.upload(mosaic);
 
         int mosaicId = mosaicDao.findByUrl(newUrl).getId();
@@ -77,14 +77,16 @@ public class PhotoController {
             }
             /*file upload to the server*/
             PhotoHandler.upload(file);
-
             /*get the information of the photo*/
             Dimension photoDimension = PhotoHandler.getImageDimension(file.getOriginalFilename());
             logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
             
             /*insert file information into the database*/
-            String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId();
+            int extensionIndex = file.getOriginalFilename().indexOf(".");
+    		String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
+            String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
             photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
+            PhotoHandler.renameAsUnique(photos[i]);
 
             Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
             photos[i].setScaledWidth(scaledDimension.width);
