@@ -3,8 +3,8 @@ package org.nhnnext.web;
 import java.awt.Dimension;
 import java.io.IOException;
 
-import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.support.Constants;

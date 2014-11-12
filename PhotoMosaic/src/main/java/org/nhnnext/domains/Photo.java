@@ -1,6 +1,5 @@
 package org.nhnnext.domains;
 
-
 public class Photo {
 	
 	private int id;
