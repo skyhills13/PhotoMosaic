@@ -5,10 +5,10 @@ public class Photo {
 	private int id;
 	private String uniqueId;
 	private String originalFileName;
-	private int width;
-	private int height;
-	private int posX;
-	private int posY;
+	private int originalWidth;
+	private int originalHeight;
+	private int scaledWidth;
+	private int scaledHeight;
 	private int mosaicId;
 	
 	public Photo(){
@@ -32,12 +32,12 @@ public class Photo {
 		this.mosaicId = mosaicId;
 	}
 	
-	public Photo(String uniqueId, String originalFileName, int width, int height, int mosaicId) {
+	public Photo(String uniqueId, String originalFileName, int originalWidth, int originalHeight, int mosaicId) {
 		super();
 		this.uniqueId = uniqueId;
 		this.originalFileName = originalFileName;
-		this.width = width;
-		this.height = height;
+		this.originalWidth = originalWidth;
+		this.originalHeight = originalHeight;
 		this.mosaicId = mosaicId;
 	}
 
@@ -63,36 +63,36 @@ public class Photo {
 		this.originalFileName = originalFileName;
 	}
 		
-	public int getWidth() {
-		return width;
+	public int getOriginalWidth() {
+		return originalWidth;
 	}
 	
-	public void setWidth(int width) {
-		this.width = width;
+	public void setOriginalWidth(int originalWidth) {
+		this.originalWidth = originalWidth;
 	}
 	
-	public int getHeight() {
-		return height;
+	public int getOriginalHeight() {
+		return originalHeight;
 	}
 	
-	public void setHeight(int height) {
-		this.height = height;
+	public void setOriginalHeight(int originalHeight) {
+		this.originalHeight = originalHeight;
 	}
 	
-	public int getPosX() {
-		return posX;
+	public int getScaledWidth() {
+		return scaledWidth;
 	}
 	
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void setScaledWidth(int scaledWidth) {
+		this.scaledWidth = scaledWidth;
 	}
 	
-	public int getPosY() {
-		return posY;
+	public int getScaledHeight() {
+		return scaledHeight;
 	}
 	
-	public void setPosY(int posY) {
-		this.posY = posY;
+	public void setScaledHeight(int scaledHeight) {
+		this.scaledHeight = scaledHeight;
 	}
 	
 	public int getMosaicId() {

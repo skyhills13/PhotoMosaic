@@ -24,6 +24,9 @@ public class PhotoHandler {
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
+	private static final int CHUNK_WIDTH = 500;
+	private static final int CHUNK_HEIGHT = 400;
+	
 	public static String upload(MultipartFile multipartFile) {
 		if (multipartFile.isEmpty()) {
 			logger.debug("no picture");
@@ -85,5 +88,25 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
-	
+	public static Dimension getScaledDimension(Photo photo) {
+		Dimension boundary = new Dimension(CHUNK_WIDTH, CHUNK_HEIGHT);
+		int originalWidth = photo.getOriginalWidth();
+		int originalHeight = photo.getOriginalHeight();
+		int boundWidth = boundary.width;
+		int boundHeight = boundary.height;
+		int newWidth = originalWidth;
+		int newHeight = originalHeight;
+		
+		if (originalWidth > boundWidth) {
+			newWidth = boundWidth;
+			newHeight = (newWidth * originalHeight) / originalWidth;
+		}
+		
+		if(newHeight > boundHeight) {
+			newHeight = boundHeight;
+			newWidth = (newHeight * originalWidth) / originalHeight;
+		}
+		
+		return new Dimension(newWidth, newHeight);
+	}
 }

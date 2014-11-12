@@ -19,6 +19,5 @@
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		p:maxUploadSize="2000000" />
-
+		p:maxUploadSize="100000000" /> <!-- about 95MB -->
 </beans>

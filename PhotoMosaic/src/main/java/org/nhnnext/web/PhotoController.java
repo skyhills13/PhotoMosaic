@@ -52,7 +52,7 @@ public class PhotoController {
 		/*insert mosaic information into the database*/
         Mosaic mosaic = new Mosaic();
         mosaic.setTitle(title);
-        mosaic.setFileName(title+".jpg");
+        mosaic.setFileName(title+".png");
         mosaic.setComment(comment);
 
         String newUrl = StringHandler.makeUrl();
@@ -93,6 +93,8 @@ public class PhotoController {
         MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
+        
+        //MosaicHandler.resizePhoto(photos[0]);
         return mosaic.getUrl();
     }
 	
