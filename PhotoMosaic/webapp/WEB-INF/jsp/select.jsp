@@ -13,6 +13,7 @@
 	<link type="text/css" rel="stylesheet" href="/stylesheets/select.css" />
 </head>
 
+<section class="hidden"></section>
 <body>
 
 <!-- HEADER -->
@@ -48,6 +49,7 @@
 <script src="/javascripts/lib/util.js?20141112"></script>
 <script src="/javascripts/lib/MyHTMLElement.js?20141112"></script>
 <script src="/javascripts/lib/MultiFileHandler.js?20141112"></script>
+<script src="/javascripts/lib/PhotoCombine.js"></script>
 <script src="/javascripts/select.js?20141112"></script>
 
 </body>

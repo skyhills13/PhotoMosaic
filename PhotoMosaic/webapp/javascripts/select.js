@@ -29,15 +29,18 @@
 			formData.append("photos", images[idx]["file"]);
 		}
 		
-		var request = new XMLHttpRequest();
-		request.open("POST", "/photo");
-		request.send(formData);
+		var layout = makeLayout();
+		window.location = layout;
 		
-		request.addEventListener("load", function() {
-			var mosaicUrl = request.responseText;
-			var origin = window.location.origin;
-			window.location.assign(origin + "/result/" + mosaicUrl);
-		});
+//		var request = new XMLHttpRequest();
+//		request.open("POST", "/photo");
+//		request.send(formData);
+//		
+//		request.addEventListener("load", function() {
+//			var mosaicUrl = request.responseText;
+//			var origin = window.location.origin;
+//			window.location.assign(origin + "/result/" + mosaicUrl);
+//		});
 	});
 	
 	function imgCb(file) {
@@ -84,4 +87,37 @@
 		// Read in the image file as a data URL.
 		reader.readAsDataURL(file);
 	}
+	
+	function makeLayout() {
+		var t = [ [ "1x1", "1x1", "1x4", "1x4", "1x1", "1x1", "x", "x", "2x1", "x", "x", "x", "2x1", "x", "x", "x" ],
+					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
+					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ] ];
+		
+		var tArray = t[parseInt(Math.random() * 10)];
+
+		var pArray = document.querySelectorAll(".select .thumb img");
+		var appendPlace = document.querySelector("section.hidden");
+		
+		var combine = new PhotoCombine();
+		combine.getMaterial({
+			"mWidth" : 1000,
+			"mHeight" : 800,
+			"templateArray" : tArray,
+			"templateColumn" : 4, // getWidth
+			"templateRow" : 4, // getHeight
+			"photoArray" : pArray, // HTMLImgElement
+			"appendPlace" : appendPlace
+		});
+		combine.create();
+		
+		return combine.getResult();
+	}
+	
 })();

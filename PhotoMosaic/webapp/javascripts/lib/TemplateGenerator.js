@@ -39,6 +39,16 @@ var Template = (function() {
 		this.numOfEachSection = {};
 	};
 	
+	// getWidth는 _width를 반환한다.
+	constructor.prototype.getWidth = function() {
+		return _width;
+	};
+	
+	// getHeight는 _height를 반환한다.
+	constructor.prototype.getHeight = function() {
+		return _height;
+	};
+	
 	constructor.prototype.getTemplate = function() {
 		return this.template;
 	};
