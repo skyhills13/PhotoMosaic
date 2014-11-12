@@ -66,32 +66,39 @@
 	</aside>
 	<article id="list">
 		<ul>
-			<li class="container" data-list="0"><img class="original" src="/images/bobby.jpg" /></li>
-			<li class="container" data-list="1"><img class="original" src="/images/baemin.jpg" /></li>
-			<li class="container" data-list="2"><img class="original" src="/images/captain.jpg" /></li>
-			<li class="container" data-list="3"><img class="original" src="/images/clan.png" /></li>
-			<li class="container" data-list="4"><img class="original" src="/images/comment.jpg" /></li>
-			<li class="container" data-list="5"><img class="original" src="/images/dog.jpg" /></li>
-			<li class="container" data-list="6"><img class="original" src="/images/test.png" /></li>
-			<li class="container" data-list="7"><img class="original" src="/images/pitcher.jpg" /></li>
+			<li class="container" data-list="0"><img class="original"
+				src="/images/bobby.jpg" /></li>
+			<li class="container" data-list="1"><img class="original"
+				src="/images/baemin.jpg" /></li>
+			<li class="container" data-list="2"><img class="original"
+				src="/images/captain.jpg" /></li>
+			<li class="container" data-list="3"><img class="original"
+				src="/images/clan.png" /></li>
+			<li class="container" data-list="4"><img class="original"
+				src="/images/comment.jpg" /></li>
+			<li class="container" data-list="5"><img class="original"
+				src="/images/dog.jpg" /></li>
+			<li class="container" data-list="6"><img class="original"
+				src="/images/test.png" /></li>
+			<li class="container" data-list="7"><img class="original"
+				src="/images/pitcher.jpg" /></li>
 		</ul>
 	</article>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
 	<script>
-		
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
 			var comments = document.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
 			var lightBox = document.querySelector("article#lightBox");
 
-			new PhotoLightBox(lightBox, mosaic, [ comments ], function(){
+			new PhotoLightBox(lightBox, mosaic, [ comments ], function() {
 				//for ul li img.original
 				var listWrapper = document.querySelector("article#list ul");
 				new PhotoListSlide(listWrapper, lightBox);
 			});
-			
+
 			var sButton = document.querySelector("section.share input[type='button']");
 			var sTool = new ShareTool();
 			sTool.URL(sButton);
