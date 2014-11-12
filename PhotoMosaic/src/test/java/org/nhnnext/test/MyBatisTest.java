@@ -20,12 +20,9 @@ public class MyBatisTest {
 		String resource = "mybatis-config-test.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		SqlSession session = sqlSessionFactory.openSession();
-		try {
+		try(SqlSession session = sqlSessionFactory.openSession()) {
 			Photo photo = (Photo)session.selectOne("org.nhnnext.domains.PhotoMapper.findByName","tomyson1.png");
 			logger.debug("Photo : {}" , photo);
-		} finally {
-			session.close();
 		}
 	}
 }
