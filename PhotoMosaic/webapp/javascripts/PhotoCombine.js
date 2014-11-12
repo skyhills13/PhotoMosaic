@@ -20,7 +20,6 @@ window.addEventListener("load", function() {
 	});
 	combine.create();
 	var result = combine.getResult();
-	console.log(result);
 	document.querySelector("p a").addEventListener("click", function(){
 		window.location = result;
 	});
