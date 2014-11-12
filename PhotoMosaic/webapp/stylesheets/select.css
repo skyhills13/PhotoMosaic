@@ -122,6 +122,7 @@ body * {
 	margin: 5px;
 	
 	border: 1px solid #CCC;
+	box-sizing: initial;
 }
 
 .select .pictures .positioner .thumb > section {
@@ -138,8 +139,8 @@ body * {
 	
 	width: auto;
 	height: auto;
-	max-width: 100%;
-	max-height: 100%;
+	max-width: 200px;
+	max-height: 150px;
 	
 	margin: auto;
 }
