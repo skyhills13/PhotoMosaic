@@ -41,7 +41,8 @@ public class PhotoController {
 	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, @RequestParam("title") String title, @RequestParam("comment") String comment, Model model) throws IOException {
+    public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
+    		@RequestParam("title") String title, @RequestParam("comment") String comment) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
