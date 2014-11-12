@@ -13,6 +13,16 @@ public class Mosaic {
 	
 	public Mosaic() {
 	}
+	
+	
+	public Mosaic(String fileName, String title, String url, String comment) {
+		this.fileName = fileName;
+		this.title = title;
+		this.url = url;
+		this.comment = comment;
+	}
+
+
 	public Mosaic(int id, String title, String comment, String url) {
 		this.id = id;
 		this.title = title;
