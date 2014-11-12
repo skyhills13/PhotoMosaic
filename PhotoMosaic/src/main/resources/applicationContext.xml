@@ -25,4 +25,5 @@
 	<bean id="mosaicDao" class="org.nhnnext.dao.MosaicDao"
 		p:dataSource-ref="dataSource"
 	/>
+	
 </beans>

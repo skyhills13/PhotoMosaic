@@ -1,6 +1,5 @@
 package org.nhnnext.domains;
 
-
 public class Photo {
 	
 	private int id;
@@ -12,6 +11,9 @@ public class Photo {
 	private int posY;
 	private int mosaicId;
 	
+	public Photo(){
+		
+	}
 
 	public Photo(String originalFileName){
 		this.originalFileName = originalFileName;

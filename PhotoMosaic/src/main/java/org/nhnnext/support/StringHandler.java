@@ -3,8 +3,6 @@ package org.nhnnext.support;
 import java.util.Random;
 import java.util.UUID;
 
-import org.nhnnext.dao.MosaicDao;
-import org.nhnnext.dao.PhotoDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
