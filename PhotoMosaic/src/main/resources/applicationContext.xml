@@ -18,25 +18,12 @@
 		p:password="${database.password}" 
 	/>
 	
-<!-- 	<bean id="jdbcPhotoDao" class="org.nhnnext.dao.JdbcPhotoDao"
+	<bean id="photoDao" class="org.nhnnext.dao.PhotoDao"
 		p:dataSource-ref="dataSource"
-	/> -->
+	/>
 	
 	<bean id="mosaicDao" class="org.nhnnext.dao.MosaicDao"
 		p:dataSource-ref="dataSource"
 	/>
 	
-	<bean id="sqlSessionFactory" class ="org.mybatis.spring.SqlSessionFactoryBean"
-		p:dataSource-ref="dataSource"
-		p:configLocation="classpath:/mybatis-config.xml" 
-	/>
-<!-- 		p:mapperLocations="classpath:org/nhnnext/dao/PhotoMapper.xml"  -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-	
-	<bean id="photoDao" class="org.nhnnext.dao.MyBatisPhotoDao"
-		p:sqlSession-ref="sqlSession"
-		p:dataSource-ref="dataSource"
-	/>
 </beans>
