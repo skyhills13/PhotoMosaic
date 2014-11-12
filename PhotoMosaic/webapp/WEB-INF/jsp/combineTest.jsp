@@ -11,14 +11,14 @@
 	</article>
 	<article id="list">
 		<ul>
-			<li data-list="0"><img src="/images/bobby.jpg" /></li>
-			<li data-list="1"><img src="/images/baemin.jpg" /></li>
-			<li data-list="2"><img src="/images/captain.jpg" /></li>
-			<li data-list="3"><img src="/images/clan.png" /></li>
-			<li data-list="4"><img src="/images/comment.jpg" /></li>
-			<li data-list="5"><img src="/images/dog.jpg" /></li>
-			<li data-list="6"><img src="/images/pio.jpg" /></li>
-			<li data-list="7"><img src="/images/pitcher.jpg" /></li>
+			<li data-list="0"><img src="/images/test1.jpg" /></li>
+			<li data-list="1"><img src="/images/test2.png" /></li>
+			<li data-list="2"><img src="/images/test3.jpg" /></li>
+			<li data-list="3"><img src="/images/test4.jpg" /></li>
+			<li data-list="4"><img src="/images/test5.jpg" /></li>
+			<li data-list="5"><img src="/images/test6.png" /></li>
+			<li data-list="6"><img src="/images/test7.jpg" /></li>
+			<li data-list="7"><img src="/images/test8.jpg" /></li>
 		</ul>
 	</article>
 	<script src="/javascripts/util.js"></script>
