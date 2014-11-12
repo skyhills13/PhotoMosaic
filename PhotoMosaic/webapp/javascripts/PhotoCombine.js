@@ -10,7 +10,7 @@ window.addEventListener("load", function() {
 	
 	var combine = new PhotoCombine();
 	combine.getMaterial({
-		"mWidth" : 800,
+		"mWidth" : 1000,
 		"mHeight" : 800,
 		"templateArray" : tArray,
 		"templateColumn" : 4,
