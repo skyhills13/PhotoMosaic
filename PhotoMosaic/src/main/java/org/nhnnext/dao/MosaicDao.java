@@ -40,7 +40,7 @@ public class MosaicDao extends JdbcDaoSupport {
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, url);
 	}
-
+	
 	public void upload(Mosaic mosaic) {
 		String sql = "INSERT INTO mosaics (file_name, title, comment, url) VALUES (?, ?, ?, ?)";
 		getJdbcTemplate().update(sql, mosaic.getFileName(), mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());

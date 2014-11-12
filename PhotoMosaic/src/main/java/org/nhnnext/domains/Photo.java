@@ -41,6 +41,19 @@ public class Photo {
 		this.mosaicId = mosaicId;
 	}
 
+	public Photo(int id, String uniqueId, String originalFileName,
+			int originalWidth, int originalHeight, int scaledWidth,
+			int scaledHeight, int mosaicId) {
+		this.id = id;
+		this.uniqueId = uniqueId;
+		this.originalFileName = originalFileName;
+		this.originalWidth = originalWidth;
+		this.originalHeight = originalHeight;
+		this.scaledWidth = scaledWidth;
+		this.scaledHeight = scaledHeight;
+		this.mosaicId = mosaicId;
+	}
+
 	public int getId() {
 		return id;
 	}

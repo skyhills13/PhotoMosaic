@@ -2,6 +2,7 @@ package org.nhnnext.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -65,6 +66,28 @@ public class PhotoDao extends JdbcDaoSupport{
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);
+	}
+	
+	public Photo[] findPhotosOfMosaic(int mosaicId) {
+		String sql = "select * from photos where mosaics_id= ? ";
+		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
+			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Photo(rs.getInt("id"), 
+							rs.getString("unique_id"),
+							rs.getString("original_name"),
+							rs.getInt("original_width"),
+							rs.getInt("original_height"),
+							rs.getInt("scaled_width"),
+							rs.getInt("scaled_height"),
+							rs.getInt("mosaics_id"));
+			}
+		};
+		List<Photo> photos = getJdbcTemplate().query(sql, rowMapper, mosaicId);
+		Photo[] mosaicPhotos = new Photo[photos.size()];
+		for(int i = 0; i < photos.size(); ++i){
+			mosaicPhotos[i] = photos.get(i);
+		}
+		return mosaicPhotos;
 	}
 	
 	public int getNumOfPhotos(int mosaicId) {

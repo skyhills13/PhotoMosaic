@@ -47,7 +47,11 @@ public class PhotoHandler {
 	public static File getDestinationFile(String fileName) {
 		return new File(ATTACHMENT_ROOT_DIR + File.separator + fileName);
 	}
-	
+//	
+//	public static void renameAsUnique(String fileName){
+//		File oldFile = new File("")
+//	}
+//	
 	public static boolean delete(String fileName) {
 		File targetFile = getDestinationFile(fileName);
 		try {
@@ -57,6 +61,7 @@ public class PhotoHandler {
 		}
 		return false;
 	}
+	
 	
 	//TODO should consider the case of the non-existence of dir (previous version of FileUploadController) 
 	
@@ -104,7 +109,6 @@ public class PhotoHandler {
 			newHeight = boundHeight;
 			newWidth = (newHeight * originalWidth) / originalHeight;
 		}
-		
 		return new Dimension(newWidth, newHeight);
 	}
 }

@@ -83,7 +83,7 @@ public class PhotoController {
             logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
             
             /*insert file information into the database*/
-            String newUniqueId = StringHandler.makeRandomId();
+            String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId();
             photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaicId);
 
             Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
