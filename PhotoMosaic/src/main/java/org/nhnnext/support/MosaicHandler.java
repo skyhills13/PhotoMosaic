@@ -16,9 +16,9 @@ public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/develop/PictureMosaic/PhotoMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
+	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
+	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
 	private static final int CHUNK_WIDTH = 500;
