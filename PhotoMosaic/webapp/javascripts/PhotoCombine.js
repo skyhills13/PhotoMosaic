@@ -13,13 +13,14 @@ window.addEventListener("load", function() {
 		"mWidth" : 800,
 		"mHeight" : 800,
 		"templateArray" : tArray,
-		"templateColumn" : 4,
-		"templateRow" : 4,
-		"photoArray" : pArray,
+		"templateColumn" : 4, // getWidth
+		"templateRow" : 4, // getHeight
+		"photoArray" : pArray, // HTMLImgElement
 		"appendPlace" : appendPlace
 	});
 	combine.create();
 	var result = combine.getResult();
+	console.log(result);
 	document.querySelector("p a").addEventListener("click", function(){
 		window.location = result;
 	});
@@ -42,7 +43,7 @@ PhotoCombine.prototype = {
 		canvas.width = this.mosaic.totalWidth;
 		canvas.height = this.mosaic.totalHeight;
 		this.appendPlace.appendChild(canvas);
-		this.mainCanvas = this.appendPlace.querySelector("#main");
+		this.mainCanvas = canvas;
 
 		var boardArray = this.mosaic.board;
 		boardArray.map(function(item) {
