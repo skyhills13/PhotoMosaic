@@ -1,7 +1,6 @@
 package org.nhnnext.support;
 
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -11,7 +10,6 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
-import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +22,8 @@ public class PhotoHandler {
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
-	private static final int CHUNK_WIDTH = 500;
-	private static final int CHUNK_HEIGHT = 400;
+	private static final int CHUNK_WIDTH = 1000;
+	private static final int CHUNK_HEIGHT = 750;
 	
 	public static String upload(MultipartFile multipartFile) {
 		if (multipartFile.isEmpty()) {
