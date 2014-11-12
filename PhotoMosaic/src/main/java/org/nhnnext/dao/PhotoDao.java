@@ -23,7 +23,7 @@ public class PhotoDao extends JdbcDaoSupport{
 	}
 
 	public Photo findByName(String originalFileName) {
-		String sql = "select * from PHOTOS where original_name= ?";
+		String sql = "select * from photos where original_name= ?";
 		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
 			
 			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -31,29 +31,29 @@ public class PhotoDao extends JdbcDaoSupport{
 						rs.getInt("id"),
 						rs.getString("unique_id"),
 						rs.getString("original_name"),
-						rs.getInt("MOSAICS_id"));
+						rs.getInt("mosaics_id"));
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, originalFileName);
 	}
 
 	public void upload(Photo photo) {
-		String sql="INSERT INTO PHOTOS (unique_id, original_name, width, height, MOSAICS_id) VALUES (?, ?, ?, ?, ?)";
-		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getWidth(), photo.getHeight(), photo.getMosaicId());
+		String sql="INSERT INTO photos (unique_id, original_name, original_width, original_height, mosaics_id) VALUES (?, ?, ?, ?, ?)";
+		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getOriginalWidth(), photo.getOriginalHeight(), photo.getMosaicId());
 	}
 	
 	public void deleteById(Photo photo) {
-		String sql="delete from PHOTOS where id = ? ";
+		String sql="delete from photos where id = ? ";
 		getJdbcTemplate().update(sql, photo.getId());
 	}
 	
 	public void deleteAll(Photo photo) {
-		String sql="delete from PHOTOS";
+		String sql="delete from photos";
 		getJdbcTemplate().update(sql);
 	}
 	
 	public Photo findByUniqueId(String uniqueId) {
-		String sql = "select * from PHOTOS where unique_id = ?";
+		String sql = "select * from photos where unique_id = ?";
 		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
 			
 			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -61,14 +61,14 @@ public class PhotoDao extends JdbcDaoSupport{
 						rs.getInt("id"),
 						rs.getString("unique_id"),
 						rs.getString("original_name"),
-						rs.getInt("MOSAICS_id"));
+						rs.getInt("mosaics_id"));
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, uniqueId);
 	}
 	
 	public int getNumOfPhotos(int mosaicId) {
-		String sql = "select COUNT(*) from PHOTOS where MOSAICS_id = ?";
+		String sql = "select COUNT(*) from photos where mosaics_id = ?";
 		int numOfPhotos = getJdbcTemplate().queryForObject(sql, new Object[]{mosaicId}, Integer.class);
 		return numOfPhotos;
 	}
