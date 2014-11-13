@@ -29,18 +29,33 @@ PhotoCombine.prototype = {
 	},
 
 	drawingTargetImage : function(item) {
-		var i = this.adjustImagePosition(item);
+		var i = this.adjustImageSize(item);
 		// this.adjustImagePosition(item);
 		// var i = item;
+		i = this.adjustImagePosition(i);
 		var img = this.photoArray[0];
 		var canvas = this.mainCanvas;
 		var context = canvas.getContext("2d");
 		// context.drawImage(i.imgElement, 0, 0, i._width, i._height, i.posX,
 		// i.posY, i._width, i._height);
-		context.drawImage(i.imgElement, 0, 0, i.widthBound, i.heightBound, i.posX, i.posY, i.cWidth, i.cHeight);
+		context.drawImage(i.imgElement, i.widthStart, i.heightStart, i.widthBound, i.heightBound, i.posX, i.posY, i.cWidth, i.cHeight);
 	},
-
-	adjustImagePosition : function(item) {
+	
+	adjustImagePosition : function(item){
+		//item.widthStart, item.heightStart
+		item.widthStart = 0;
+		item.heightStart = 0;
+		
+		var pHeight = item.imgElement.height;
+		var pWidth = item.imgElement.width;
+		
+		item.widthStart = (pWidth - item.widthBound)*0.5;
+		item.heightStart = (pHeight - item.heightBound)*0.5;
+		
+		return item;
+	},
+	
+	adjustImageSize : function(item) {
 
 		var pWidth = item.imgElement.width;
 		var pHeight = item.imgElement.height;
@@ -68,7 +83,6 @@ PhotoCombine.prototype = {
 			mat.widthBound = item._width*(item.imgElement.height/item._height);
 		}
 		return mat;
-		
 		
 //		var remain = item.imgElement.Height * (item._width / item.imgElement.width) - item._height;
 //		
