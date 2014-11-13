@@ -11,10 +11,10 @@
 </head>
 <body>
 	<article id="lightBox" class="thumbnail"></article>
-	<jsp:include page="./include/header.jsp" flush="false" />
+	<jsp:include page="../include/header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
-			<img id="mosaic" src="/images/${mosaic.fileName}" />
+			<img id="mosaic" src="/images/test/test1.jpg" />
 		</section>
 		<section class="info">
 			<ul>
@@ -66,17 +66,40 @@
 	</aside>
 	<article id="list">
 		<ul>
-			<c:forEach var="photo" items="${mosaic.getPhotos()}"
+			<li class="container" data-list="0"><img class="original"
+				src="/images/test/test2.png"></li>
+			<li class="container" data-list="1"><img class="original"
+				src="/images/test/test3.jpg"></li>
+			<li class="container" data-list="2"><img class="original"
+				src="/images/test/test4.jpg"></li>
+			<li class="container" data-list="3"><img class="original"
+				src="/images/test/test5.jpg"></li>
+			<li class="container" data-list="4"><img class="original"
+				src="/images/test/test6.png"></li>
+			<li class="container" data-list="5"><img class="original"
+				src="/images/test/test7.jpg"></li>
+			<li class="container" data-list="6"><img class="original"
+				src="/images/test/test8.jpg"></li>
+			<li class="container" data-list="7"><img class="original"
+				src="/images/test/pngtest1.png"></li>
+			<li class="container" data-list="8"><img class="original"
+				src="/images/test/pngtest2.png"></li>
+			<li class="container" data-list="9"><img class="original"
+				src="/images/test/pngtest3.png"></li>
+
+			<%-- 			<c:forEach var="photo" items="${mosaic.getPhotos()}"
 				varStatus="status">
 				<li class="container" data-list="${status.index}"><img
 					class="original" src="/images/${photo.getUniqueId()}" /></li>
 			</c:forEach>
+ --%>
 		</ul>
 	</article>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
 	<script src="/javascripts/result.js"></script>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
