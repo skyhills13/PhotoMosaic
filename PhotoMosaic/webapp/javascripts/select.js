@@ -30,17 +30,17 @@
 		}
 		
 		var layout = makeLayout();
-		window.location = layout;
+		formData.append("mosaic", layout);
 		
-//		var request = new XMLHttpRequest();
-//		request.open("POST", "/photo");
-//		request.send(formData);
-//		
-//		request.addEventListener("load", function() {
-//			var mosaicUrl = request.responseText;
-//			var origin = window.location.origin;
-//			window.location.assign(origin + "/result/" + mosaicUrl);
-//		});
+		var request = new XMLHttpRequest();
+		request.open("POST", "/photo");
+		request.send(formData);
+		
+		request.addEventListener("load", function() {
+			var mosaicUrl = request.responseText;
+			var origin = window.location.origin;
+			window.location.assign(origin + "/result/" + mosaicUrl);
+		});
 	});
 	
 	function imgCb(file) {
