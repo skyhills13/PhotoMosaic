@@ -39,7 +39,7 @@
 		request.addEventListener("load", function() {
 			var mosaicUrl = request.responseText;
 			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
-			if (mosaicUrl.search(regExp) !== -1) {
+			if (mosaicUrl.search(regExp) > -1) {
 				console.error("UPLOAD: Error! Response is not valid");
 				return;
 			}
