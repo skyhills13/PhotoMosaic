@@ -80,6 +80,13 @@
 				src="/images/test/test7.jpg"></li>
 			<li class="container" data-list="6"><img class="original"
 				src="/images/test/test8.jpg"></li>
+			<li class="container" data-list="7"><img class="original"
+				src="/images/test/pngtest1.png"></li>
+			<li class="container" data-list="8"><img class="original"
+				src="/images/test/pngtest2.png"></li>
+			<li class="container" data-list="9"><img class="original"
+				src="/images/test/pngtest3.png"></li>
+
 			<%-- 			<c:forEach var="photo" items="${mosaic.getPhotos()}"
 				varStatus="status">
 				<li class="container" data-list="${status.index}"><img
