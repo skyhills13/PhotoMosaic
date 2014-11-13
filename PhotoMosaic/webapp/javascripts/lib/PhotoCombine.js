@@ -19,6 +19,7 @@ PhotoCombine.prototype = {
 		this.mainCanvas = canvas;
 
 		var boardArray = this.mosaic.board;
+		console.log(boardArray);
 		boardArray.map(function(item) {
 			this.drawingTargetImage(item);
 		}.bind(this));
@@ -29,6 +30,7 @@ PhotoCombine.prototype = {
 	},
 
 	drawingTargetImage : function(item) {
+		
 		var i = this.adjustImageSize(item);
 		// this.adjustImagePosition(item);
 		// var i = item;
@@ -46,8 +48,8 @@ PhotoCombine.prototype = {
 		item.widthStart = 0;
 		item.heightStart = 0;
 		
-		var pHeight = item.imgElement.height;
-		var pWidth = item.imgElement.width;
+		var pHeight = item.imgElement.naturalHeight;
+		var pWidth = item.imgElement.naturalWidth;
 		
 		item.widthStart = (pWidth - item.widthBound)*0.5;
 		item.heightStart = (pHeight - item.heightBound)*0.5;
@@ -56,9 +58,9 @@ PhotoCombine.prototype = {
 	},
 	
 	adjustImageSize : function(item) {
-
-		var pWidth = item.imgElement.width;
-		var pHeight = item.imgElement.height;
+		console.log(item);
+		var pWidth = item.imgElement.naturalWidth;
+		var pHeight = item.imgElement.naturalHeight;
 		var bWidth = item._width;
 		var bHeight = item._height;
 
@@ -75,12 +77,12 @@ PhotoCombine.prototype = {
 		}
 		
 		// 가로폭에 맞춰서 사진 보여주기
-		mat.widthBound = item.imgElement.width;
-		mat.heightBound = item._height * (item.imgElement.width/item._width);
+		mat.widthBound = item.imgElement.naturalWidth;
+		mat.heightBound = item._height * (item.imgElement.naturalWidth/item._width);
 		// 세로에 빈공간이 생기면 세로폭에 맞춰서 사진 보여주기
-		if(mat.heightBound > item.imgElement.height){			
-			mat.heightBound = item.imgElement.height;
-			mat.widthBound = item._width*(item.imgElement.height/item._height);
+		if(mat.heightBound > item.imgElement.naturalHeight){			
+			mat.heightBound = item.imgElement.naturalHeight;
+			mat.widthBound = item._width*(item.imgElement.naturalHeight/item._height);
 		}
 		return mat;
 		

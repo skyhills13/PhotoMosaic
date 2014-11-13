@@ -18,7 +18,7 @@ public class MosaicHandler {
 	
 	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
+//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/Documents/workspace/PhotoMosaic/PhotoMosaic/webapp/images";
 //	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 
 	private static final int CHUNK_WIDTH = 1000;
