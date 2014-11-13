@@ -122,7 +122,7 @@
 			"appendPlace" : appendPlace
 		});
 		combine.create();
-		
+
 		return combine.getResult();
 	}
 	

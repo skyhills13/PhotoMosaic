@@ -1,6 +1,8 @@
 package org.nhnnext.web;
 
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.nhnnext.dao.MosaicDao;
@@ -16,12 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import sun.misc.BASE64Decoder;
 
 @Controller
 public class PhotoController {
@@ -43,29 +46,38 @@ public class PhotoController {
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment) throws IOException {
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
 		
 		/*
 		 * TODO exception handling for the case submit w/o photo
 		* right now, mosaic table is updated without photo table update.
 		* do it to check the situation before handling
 		*/
-		
+
 		/*insert mosaic information into the database*/
 		String mosaicUrl = StringHandler.makeUrl();
-        Mosaic mosaic = new Mosaic(mosaicUrl+".png", title, mosaicUrl, comment);
-        mosaicDao.upload(mosaic);
-        int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
-        mosaic.setId(mosaicId);
-
-        mosaic.setPhotos(uploadFiles(files, mosaic));
+		Mosaic mosaic = new Mosaic(mosaicUrl+".png", title, mosaicUrl, comment);
+		mosaicDao.upload(mosaic);
+		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
+		mosaic.setId(mosaicId);
+		mosaic.setPhotos(uploadFiles(files, mosaic));
+		
+		
+		String imageDataBytes = clientMosaic.substring(clientMosaic.indexOf(",")+1);
+		BASE64Decoder decoder = new BASE64Decoder();
+		byte[] bytes = decoder.decodeBuffer(imageDataBytes);
+		
+		File of = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getUrl() + ".png");  
+		FileOutputStream osf = new FileOutputStream(of);  
+		osf.write(bytes);  
+		osf.flush();  
 
         /*merge photos*/
-        MosaicHandler.mergePhotos(mosaic);
+//        MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         
-        PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
+//        PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();
     }
 	

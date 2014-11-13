@@ -16,11 +16,6 @@ public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
-	private static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-//	private static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/Documents/workspace/PhotoMosaic/PhotoMosaic/webapp/images";
-//	private static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
-
 	private static final int CHUNK_WIDTH = 1000;
 	private static final int CHUNK_HEIGHT = 750;
 	
@@ -39,8 +34,8 @@ public class MosaicHandler {
 		Photo[] photos = mosaic.getPhotos();
 		for (int i = 0; i < chunks; i++) {
 			logger.debug("Photo :{}" , photos[i]);
-			logger.debug(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
-			imgFiles[i] = new File(ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
+			logger.debug(Constants.ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
+			imgFiles[i] = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photos[i].getUniqueId());
 		}
 
 		// creating a bufferd image array from image files
@@ -68,7 +63,7 @@ public class MosaicHandler {
 			}
 		}
 		logger.debug("Image concatenated.....");
-		String mergedPhotoName = ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getFileName();
+		String mergedPhotoName = Constants.ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getFileName();
 		File mergedImg = new File(mergedPhotoName);
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
