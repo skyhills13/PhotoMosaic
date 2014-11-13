@@ -98,6 +98,8 @@
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
+	<script src="/javascripts/result.js"></script>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");

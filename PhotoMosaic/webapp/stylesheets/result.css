@@ -47,7 +47,7 @@ article#list ul li img {
 article#list ul li img:hover {
 	border-radius: 20px;
 	-webkit-filter: grayscale(1);
-	background: black;
+	background: white;
 	filter: grayscale(1);
 	border: 1px solid RGBA(180, 180, 180, 1);
 }
