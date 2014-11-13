@@ -9,7 +9,7 @@ public class Constants {
 
 //	public static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
-	public static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
+	public static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/Documents/workspace/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 	
 }
