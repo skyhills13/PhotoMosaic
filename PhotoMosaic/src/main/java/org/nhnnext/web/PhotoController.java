@@ -37,12 +37,6 @@ public class PhotoController {
 	
 	@Autowired
 	private MosaicDao mosaicDao;
-	
-	@RequestMapping("/result")
-	public String result(){
-		logger.debug("into result page");
-		return "result";
-	}
 
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 

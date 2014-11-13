@@ -26,4 +26,8 @@
 		p:dataSource-ref="dataSource"
 	/>
 	
+	<bean id="userDao" class="org.nhnnext.dao.UserDao"
+		p:dataSource-ref="dataSource"
+	/>
+	
 </beans>
