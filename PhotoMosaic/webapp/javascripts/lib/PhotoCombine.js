@@ -27,18 +27,77 @@ PhotoCombine.prototype = {
 	getResult : function() {
 		return this.mainCanvas.toDataURL();
 	},
-	
+
 	drawingTargetImage : function(item) {
-		// var i = this.adjustImagePosition(item);
-		var i = item;
+		var i = this.adjustImageSize(item);
+		// this.adjustImagePosition(item);
+		// var i = item;
+		i = this.adjustImagePosition(i);
 		var img = this.photoArray[0];
 		var canvas = this.mainCanvas;
 		var context = canvas.getContext("2d");
-		context.drawImage(i.imgElement, 0, 0, i._width, i._height, i.posX, i.posY, i._width, i._height);
-	},	
+		// context.drawImage(i.imgElement, 0, 0, i._width, i._height, i.posX,
+		// i.posY, i._width, i._height);
+		context.drawImage(i.imgElement, i.widthStart, i.heightStart, i.widthBound, i.heightBound, i.posX, i.posY, i.cWidth, i.cHeight);
+	},
 	
 	adjustImagePosition : function(item){
+		//item.widthStart, item.heightStart
+		item.widthStart = 0;
+		item.heightStart = 0;
+		
+		var pHeight = item.imgElement.height;
+		var pWidth = item.imgElement.width;
+		
+		item.widthStart = (pWidth - item.widthBound)*0.5;
+		item.heightStart = (pHeight - item.heightBound)*0.5;
+		
 		return item;
+	},
+	
+	adjustImageSize : function(item) {
+
+		var pWidth = item.imgElement.width;
+		var pHeight = item.imgElement.height;
+		var bWidth = item._width;
+		var bHeight = item._height;
+
+		var mat = {
+			// "sx" : ,
+			// "sy" : ,
+			// "widthBound" : ,
+			// "heightBound" : ,
+			"posX" : item.posX,
+			"posY" : item.posY,
+			"cWidth" : item._width,
+			"cHeight" : item._height,
+			"imgElement" : item.imgElement
+		}
+		
+		// 가로폭에 맞춰서 사진 보여주기
+		mat.widthBound = item.imgElement.width;
+		mat.heightBound = item._height * (item.imgElement.width/item._width);
+		// 세로에 빈공간이 생기면 세로폭에 맞춰서 사진 보여주기
+		if(mat.heightBound > item.imgElement.height){			
+			mat.heightBound = item.imgElement.height;
+			mat.widthBound = item._width*(item.imgElement.height/item._height);
+		}
+		return mat;
+		
+//		var remain = item.imgElement.Height * (item._width / item.imgElement.width) - item._height;
+//		
+//		if (remain > 0) {
+//			var realRemain = item.imgElement.height - item._height * (item.imgElement.width / item._width);
+//			drawMaterial.pHeight = item.imgElement.height - realRemain;
+//			return drawMaterial;
+//		}
+//		
+//		drawMaterial.pHeight = item.imgElement.height;
+//		var reamin2 = item.imgElement.width * (item._height/item.imgElement.height) - item._width;
+//		drawMaterial.pWidth = item.imgElement.width - reamin2*(item.imgElement.height/item._height);
+//
+//		
+//		return drawMaterial;
 	},
 
 	linkBoardWithImage : function() {
