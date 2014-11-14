@@ -24,6 +24,13 @@ PhotoListSlide.prototype = {
 			}
 		}.bind(this), false);
 	},
+	
+	backgroundScrollState : function(){
+		var bg = document.querySelector("body");
+		var CLASS_NAME = "lightBoxShowing";
+		var action = bg.classList.contains(CLASS_NAME)?"remove":"add";
+		bg.classList[action](CLASS_NAME);
+	},
 
 	getDataNumber : function(target) {
 		var KEY = "data-list";
@@ -87,6 +94,7 @@ PhotoListSlide.prototype = {
 		var toAdd = current === hide ? show : hide;
 		this.lightBox.classList.remove(current);
 		this.lightBox.classList.add(toAdd);
+		this.backgroundScrollState();
 	},
 
 	createNavigation : function() {

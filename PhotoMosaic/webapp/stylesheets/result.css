@@ -8,6 +8,10 @@
 /*font-family: 'Lato', sans-serif;*/
 @import url(http://fonts.googleapis.com/css?family=Lato:100,400);
 
+body.lightBoxShowing{
+	overflow : hidden;
+}
+
 article#list {
 	position: absolute;
 	left: 30%;
@@ -146,6 +150,11 @@ aside section.share input[type='button']:focus {
 	display: block;
 }
 
+#lightBox.thumbnail{
+	overflow-y : scroll;
+	overflow-x : hidden;
+}
+
 #lightBox section {
 	position: absolute;
 	width: 80%;
@@ -156,7 +165,6 @@ aside section.share input[type='button']:focus {
 #lightBox section.thumbnail {
 	max-width: 800px;
 	padding-left: 50%;
-	padding-top: 100px;
 }
 
 #lightBox section.thumbnail p {
@@ -165,12 +173,14 @@ aside section.share input[type='button']:focus {
 	width : 100%;
 	margin-left : -50%;
 	text-align : center;
+	margin-top : 100px
 }
 
 #lightBox section.thumbnail img {
 	width: 100%;
 	margin-top: 30px;
 	margin-left : -50%;
+	margin-bottom : 100px;
 }
 
 #lightBox section div {
