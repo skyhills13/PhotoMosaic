@@ -4,6 +4,7 @@ function PhotoLightBox(lightBox, photo, commentList, afterclose) {
 	this.commentList = commentList;
 
 	this.setSection(this.show);
+	this.backgroundScrollState();
 	this.closeHandler(afterclose);
 }
 
@@ -13,6 +14,13 @@ PhotoLightBox.prototype = {
 		var section = "<section class='thumbnail'></section>";
 		this.lightBox.innerHTML = section;
 		showCallback.bind(this)();
+	},
+	
+	backgroundScrollState : function(){
+		var bg = document.querySelector("body");
+		var CLASS_NAME = "lightBoxShowing";
+		var action = bg.classList.contains(CLASS_NAME)?"remove":"add";
+		bg.classList[action](CLASS_NAME);
 	},
 
 	show : function() {
@@ -44,7 +52,8 @@ PhotoLightBox.prototype = {
 			if(!lightBox.classList.contains(CLASS_NAME)) return;
 			lightBox.classList.add(hide);
 			lightBox.classList.remove(CLASS_NAME);
+			this.backgroundScrollState();
 			afterclose();
-		}, false);
+		}.bind(this), false);
 	}
 }

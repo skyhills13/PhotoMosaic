@@ -19,7 +19,6 @@ PhotoCombine.prototype = {
 		this.mainCanvas = canvas;
 
 		var boardArray = this.mosaic.board;
-		console.log(boardArray);
 		boardArray.map(function(item) {
 			this.drawingTargetImage(item);
 		}.bind(this));
@@ -106,10 +105,16 @@ PhotoCombine.prototype = {
 		var boardArray = this.mosaic.board;
 		var imageArray = this.photoArray;
 		boardArray.map(function(item, i) {
-			item.imgElement = imageArray[i];
+			var selectedImage = imageArray[i];
+			var isImageUndefined = (typeof selectedImage === "undefined");
+			if(isImageUndefined){
+				console.log(i%imageArray.length);
+				selectedImage = imageArray[i%imageArray.length];
+			}
+			item.imgElement = selectedImage;
 		});
 	},
-
+	
 	makeMosaicBoard : function() {
 		var t = this.template;
 		var m = this.mosaic;
