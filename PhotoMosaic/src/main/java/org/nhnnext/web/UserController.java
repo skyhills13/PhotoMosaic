@@ -25,11 +25,17 @@ public class UserController {
 		return "form";
 	}
 	
-	@RequestMapping(value="join", method=RequestMethod.POST)
+	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String createUser(@RequestParam("email") String email, @RequestParam("password") String password) {
 		User newUser = new User(email, password);
 		userDao.create(newUser);
 		logger.debug("DatabaseUser:{}", userDao.findByEmail(newUser.getEmail()));
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/login")
+	public String login(Model model){
+		model.addAttribute("user", new User());
+		return "login";
 	}
 }
