@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 public class UserDao extends JdbcDaoSupport{
 	
-	public User findById(int id) {
-		String sql = "SELECT * FROM users WHERE id = ?";
+	public User findByEmail(String email) {
+		String sql = "SELECT * FROM users WHERE email = ?";
 		RowMapper<User> rowMapper = new RowMapper<User>() {
 			@Override
 			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -20,12 +20,12 @@ public class UserDao extends JdbcDaoSupport{
 						rs.getString("password")); 
 			}
 		};
-		return getJdbcTemplate().queryForObject(sql, rowMapper, id);
+		return getJdbcTemplate().queryForObject(sql, rowMapper, email);
 	}
 
 	public void create(User user) {
-		String sql = "INSERT INTO users (id, email, password) VALUES (?, ?)";
-		getJdbcTemplate().update(sql, user.getId(), user.getEmail(), user.getPassword());
+		String sql = "INSERT INTO users (email, password) VALUES (?, ?)";
+		getJdbcTemplate().update(sql, user.getEmail(), user.getPassword());
 	}
 
 }

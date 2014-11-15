@@ -23,18 +23,13 @@ public class UserDaoTest {
 	@Autowired
 	private UserDao userDao;
 
+
 //	@Test
-//	public void findById() {
-//		
-//		User user = userDao.findById("ddd");
-//		logger.debug("User:{}", user);
+//	public void create(){
+//		User user = new User(1, "111@111.com", "111");
+//		userDao.create(user);
+//		User actual = userDao.findByEmail(user.getEmail());
+//		logger.debug("user: {}", actual);
+//		assertThat(actual, is(user));
 //	}
-	@Test
-	public void create(){
-		User user = new User(1, "111@111.com", "111");
-		userDao.create(user);
-		User actual = userDao.findById(user.getId());
-		logger.debug("user: {}", actual);
-		assertThat(actual, is(user));
-	}
 }
