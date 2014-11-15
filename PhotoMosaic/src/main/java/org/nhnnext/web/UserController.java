@@ -20,7 +20,7 @@ public class UserController {
 	
 	@RequestMapping("/form")
 	public String userPage(Model model){
-		model.addAttribute("users", new User());
+		model.addAttribute("user", new User());
 		logger.debug("in to userFormPage");
 		return "form";
 	}

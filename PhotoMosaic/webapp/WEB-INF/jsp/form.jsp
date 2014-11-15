@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -9,13 +11,13 @@
 </head>
 
 <body>
-<form action="/join" method="post">
-<lable> 이메일 </lable>
-<input type ="text" name="email" />
-<lable> 비밀번호 </lable>
-<input type ="password" name="password" />
+<form:form modelAttribute="user" cssClass="changeIt" action="/join" method="post">
+<p> 이메일 </p>
+<form:input path="email" />
+<p> 비밀번호 </p>
+<form:password path="password" />
 <button type="submit">Join </button>
-</form>
+</form:form>
 
 </body>
 </html>
