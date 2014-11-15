@@ -1,9 +1,16 @@
 package org.nhnnext.domains;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
 
 	private int id;
+	@NotEmpty @Email
 	private String email;
+	@NotEmpty @Size(min=4, max=12)
 	private String password;
 
 	public User() {
@@ -43,6 +50,15 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean matchEmail(String email) {
+		return this.email.equals(email);
+	}
+	
+	public boolean matchPassword(String password) {
+		return this.password.equals(password);
+	}
+	
 
 	@Override
 	public String toString() {

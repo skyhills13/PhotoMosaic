@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.nhnnext.domains.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -20,7 +21,11 @@ public class UserDao extends JdbcDaoSupport{
 						rs.getString("password")); 
 			}
 		};
-		return getJdbcTemplate().queryForObject(sql, rowMapper, email);
+		try {
+			return getJdbcTemplate().queryForObject(sql, rowMapper, email);
+		}catch(EmptyResultDataAccessException e){
+			return null;
+		}
 	}
 
 	public void create(User user) {

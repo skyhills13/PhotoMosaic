@@ -20,4 +20,7 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 		p:maxUploadSize="100000000" /> <!-- about 95MB -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource"
+		p:basename="messages" p:defaultEncoding="UTF-8" />
 </beans>
