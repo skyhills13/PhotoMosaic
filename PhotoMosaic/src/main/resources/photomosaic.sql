@@ -1,5 +1,13 @@
-DROP TABLE IF EXISTS `PHOTOS` ;
-DROP TABLE IF EXISTS `MOSAICS` ;
+DROP TABLE IF EXISTS `photos` ;
+DROP TABLE IF EXISTS `mosaics`;
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE IF NOT EXISTS `users` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`email` VARCHAR(45) NOT NULL,
+	`password` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`id`)
+);
 
 CREATE TABLE IF NOT EXISTS `mosaics` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -8,7 +16,14 @@ CREATE TABLE IF NOT EXISTS `mosaics` (
   `title` VARCHAR(45) NOT NULL DEFAULT 'default',
   `comment` VARCHAR(140) NOT NULL DEFAULT 'default',
   `created_date` TIMESTAMP,
-  PRIMARY KEY (`id`));
+  `users_id` INT,
+  PRIMARY KEY (`id`),
+  INDEX `fk_mosaics_users_idx` (`users_id` ASC),
+  CONSTRAINT `fk_mosaics_users`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
 
 CREATE TABLE IF NOT EXISTS `photos` (
   `id` INT NOT NULL AUTO_INCREMENT,
