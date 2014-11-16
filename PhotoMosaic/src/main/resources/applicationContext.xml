@@ -30,4 +30,7 @@
 		p:dataSource-ref="dataSource"
 	/>
 	
+	<bean id="albumDao" class="org.nhnnext.dao.AlbumDao"
+		p:dataSource-ref="dataSource"
+	/>
 </beans>
