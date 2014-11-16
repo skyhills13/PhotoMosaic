@@ -25,9 +25,9 @@ public class AlbumController {
 	@RequestMapping("/{userEmail}")
 	public String albumPage(@PathVariable String userEmail, Model model){
 		logger.debug("into albumpage");
-		User user = userDao.findByEmail(userEmail);
-		Album album = albumDao.findByUserId(user.getId());
-		model.addAttribute("album", album);
+	//	User user = userDao.findByEmail(userEmail);
+	//	Album album = albumDao.findByUserId(user.getId());
+	//	model.addAttribute("album", album);
 		return "album";
 	}
 	
