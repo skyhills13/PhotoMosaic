@@ -11,6 +11,13 @@
 </head>
 
 <body>
+<jsp:include page="./include/header.jsp" flush="false" />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 <form:form modelAttribute="user" cssClass="changeIt" action="/join" method="post">
 <p> 이메일 </p>
 <form:input path="email" />

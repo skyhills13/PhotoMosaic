@@ -2,8 +2,6 @@ package org.nhnnext.web;
 
 import org.nhnnext.dao.AlbumDao;
 import org.nhnnext.dao.UserDao;
-import org.nhnnext.domains.Album;
-import org.nhnnext.domains.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
