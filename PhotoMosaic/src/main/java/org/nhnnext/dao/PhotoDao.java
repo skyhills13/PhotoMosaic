@@ -37,7 +37,7 @@ public class PhotoDao extends JdbcDaoSupport{
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, originalFileName);
 	}
-
+	
 	public void upload(Photo photo) {
 		String sql="INSERT INTO photos (unique_id, original_name, original_width, original_height, scaled_width, scaled_height, mosaics_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		getJdbcTemplate().update(sql, photo.getUniqueId(), photo.getOriginalFileName(), photo.getOriginalWidth(), photo.getOriginalHeight(), photo.getScaledWidth(), photo.getScaledHeight(), photo.getMosaicId());
@@ -84,6 +84,7 @@ public class PhotoDao extends JdbcDaoSupport{
 		};
 		return getJdbcTemplate().query(sql, rowMapper, mosaicId);
 	}
+	
 	
 	public int getNumOfPhotos(int mosaicId) {
 		String sql = "select COUNT(*) from photos where mosaics_id = ?";

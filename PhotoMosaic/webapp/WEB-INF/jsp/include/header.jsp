@@ -11,7 +11,7 @@
 	<a href="/form"><span>JOIN</span></a>
 	</c:when>
 	<c:otherwise>
-		<a><span>${sessionScope.email}</span></a>
+		<a href="/${sessionScope.email}"><span>${sessionScope.email}</span></a>
 		<a href="/logout"><span>SIGN OUT</span></a>
 	</c:otherwise>
 	</c:choose>

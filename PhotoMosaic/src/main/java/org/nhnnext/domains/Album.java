@@ -6,6 +6,15 @@ public class Album {
 	private String name;
 	private int userId;
 	
+	public Album(){
+		
+	}
+	
+	public Album(int id, String name, int userId) {
+		this.id= id;
+		this.name = name;
+		this.userId = userId;
+	}
 	public int getId() {
 		return id;
 	}
