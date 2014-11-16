@@ -3,6 +3,7 @@ package org.nhnnext.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.nhnnext.domains.Mosaic;
 import org.springframework.jdbc.core.RowMapper;

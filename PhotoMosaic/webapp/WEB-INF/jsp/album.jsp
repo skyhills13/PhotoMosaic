@@ -14,6 +14,6 @@
 <!-- HEADER -->
 <jsp:include page="./include/header.jsp" flush="false" />
 <div><p>${sessionScope.email}님의 앨범 페이지 입니둥</p></div> 
-<div><p>전체보기 / 앨범1 / 앨범 2/ 앨범 3</p></div>
+<div><p>전체보기</p></div>
 </body>
 </html>

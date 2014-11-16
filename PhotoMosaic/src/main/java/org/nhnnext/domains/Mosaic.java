@@ -38,6 +38,18 @@ public class Mosaic {
 		this.comment = comment;
 		this.createdDate = createdDate.toString();
 	}
+	public Mosaic(int id, String fileName, String title, String url,
+			String comment, Timestamp timestamp, int userId, int mosaicId) {
+		this.id = id;
+		this.fileName = fileName;
+		this.title = title;
+		this.url = url;
+		this.comment = comment;
+		this.createdDate = createdDate.toString();
+		//TODO userId , mosaicId 생성
+	}
+
+
 	public int getId() {
 		return id;
 	}

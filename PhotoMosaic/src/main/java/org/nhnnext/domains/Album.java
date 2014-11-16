@@ -1,10 +1,13 @@
 package org.nhnnext.domains;
 
+import java.util.List;
+
 public class Album {
 
 	private int id;
 	private String name;
 	private int userId;
+	private List<Mosaic> mosaics;
 	
 	public Album(){
 		
@@ -33,4 +36,13 @@ public class Album {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	public List<Mosaic> getMosaics() {
+		return mosaics;
+	}
+
+	public void setMosaics(List<Mosaic> mosaics) {
+		this.mosaics = mosaics;
+	}
+	
 }
