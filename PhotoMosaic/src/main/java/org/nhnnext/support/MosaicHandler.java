@@ -19,9 +19,11 @@ public class MosaicHandler {
 	private static final int CHUNK_WIDTH = 1000;
 	private static final int CHUNK_HEIGHT = 750;
 	
+	//아래 메서드는 상대적,절대적으로 비교적 크다. 몇개의 기능으로 분리해두면 좋겠어.
 	public static void mergePhotos(Mosaic mosaic) throws IOException {
 
-		int rows = 2; // we assume the no. of rows and cols are known and each
+		//이런건 왜 constant개념으로 분리하지 않지? 변경될일이 없는게 맞는건지?
+		int rows = 2; // we assume the no. of rows and cols are known and each 
 						// chunk has equal width and height
 		int cols = 2;
 		int chunks = rows * cols;

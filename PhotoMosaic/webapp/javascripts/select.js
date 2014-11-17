@@ -77,6 +77,7 @@
 				removeButton.appendClassName("removeButton");
 				removeButton.setAttribute("data-draghover", true);
 				
+				//즉시 실행 함수를 사용한 이유가 뭐지? 
 				removeButton.addEventListener("click", (function(eleThumbArea) {
 					return function() {
 						var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
@@ -95,6 +96,7 @@
 	}
 	
 	function makeLayout() {
+		//경우에 따라서는 이렇게 해두는 것도 나쁜건 아님.
 		var t = [ [ "1x1", "1x1", "1x4", "1x4", "1x1", "1x1", "x", "x", "2x1", "x", "x", "x", "2x1", "x", "x", "x" ],
 					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
 					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
@@ -112,6 +114,7 @@
 		var appendPlace = document.querySelector("section.hidden");
 		
 		var combine = new PhotoCombine();
+		//옵션으로 동작가능한 컴포넌트방식이라 이런거 좋음.
 		combine.getMaterial({
 			"mWidth" : 1000,
 			"mHeight" : 800,

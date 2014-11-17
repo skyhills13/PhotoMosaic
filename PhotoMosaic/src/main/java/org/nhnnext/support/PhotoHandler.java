@@ -31,6 +31,9 @@ public class PhotoHandler {
 		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		
+
+		//photo.getScaleedWidth()같은 값을 두 군데에서 사용하고 있으니 미리 변수로 담가두고, 생성자의 인자로 추가하면 어때? 
+		//그렇게되면 생성자 호출문도 지금보다 좀더 간걸해보일거 같고.
 		BufferedImage resizedImage = new BufferedImage(photo.getScaledWidth(), photo.getScaledHeight(), type);
 		Graphics2D g = resizedImage.createGraphics();
 		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
@@ -39,6 +42,8 @@ public class PhotoHandler {
 		ImageIO.write(resizedImage, "png", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
 	}
 	
+	//에러처리코드가 많이 필요한 코드인가봐. 이런 경우 예외상황에 대해서 테스트를 해보는 것도 좋겠어.(예외발생시 적절한 exception이 발생하는지)
+	//아! java 개발하면서 test code구현을 해보는 건 어때? 물론 권장사항이고. 핵심로직에 대해서는 test code가 있다면 좋겠음.
 	public static Dimension getImageDimension(String fileName)
 			throws IOException {
 		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + fileName);

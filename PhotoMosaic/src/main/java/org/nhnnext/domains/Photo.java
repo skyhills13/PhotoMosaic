@@ -11,6 +11,9 @@ public class Photo {
 	private int scaledHeight;
 	private int mosaicId;
 	
+	//이렇게 오버로딩된 메서드가 많아야 하는게 맞나? 다 필요한 메서드들?
+	//오버로딩하는게 많다는게 복잡함을 증가시키거나 이미 로직이 복잡하다는 걸 의미하는건 아닌지? 
+	//그런게 아니면 무시하고^^
 	public Photo(){
 		
 	}

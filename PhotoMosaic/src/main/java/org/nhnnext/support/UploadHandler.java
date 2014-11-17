@@ -24,7 +24,7 @@ public class UploadHandler {
 		try {
 			multipartFile.transferTo(destFile);
 		} catch (Exception ex) {
-			throw new IllegalArgumentException(destFile + "로 첨부파일 옮기다 오류 발생");
+			throw new IllegalArgumentException(destFile + "로 첨부파일 옮기다 오류 발생"); //이런메시지는 로직이 담긴 코드에서는 분리해야겠지?
 		}
 		return destFile;
 	}

@@ -62,6 +62,7 @@ public class UserController {
 					
 		User dbUser = userDao.findByEmail(user.getEmail());
 		if( dbUser == null) {
+			//이런 메세지들은 모두 설정파일 어딘가로 분리하는게 좋겠다.
 			model.addAttribute("errorMessage", "존재하지 않는 사용자입니다.");
 			return "loginform";
 		}

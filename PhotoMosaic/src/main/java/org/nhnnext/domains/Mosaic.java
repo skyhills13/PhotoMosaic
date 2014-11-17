@@ -38,6 +38,8 @@ public class Mosaic {
 		this.comment = comment;
 		this.createdDate = createdDate.toString();
 	}
+
+	//아직 완성품이 아닌 듯? 매개변수에 선언된 건 많은데 메서드에서 사용하는 건 별로 없어보이길래.
 	public Mosaic(int id, String fileName, String title, String url,
 			String comment, Timestamp timestamp, int userId, int mosaicId) {
 		this.id = id;
@@ -50,6 +52,7 @@ public class Mosaic {
 	}
 
 
+	// 아래 getter setter는 분명히 필요해서 추가한 것들이겠지? 
 	public int getId() {
 		return id;
 	}

@@ -37,6 +37,8 @@ public class PhotoController {
 	@Autowired
 	private MosaicDao mosaicDao;
 
+	//File을 다루는 메서드나 클래스가 많네. Exception을 발생시키면서 오류처리가 잘 되는지 잘봐야겠어.
+	//메인 라이팅역할을 하는 아래 메서드는 좀더 간결한 로직만 담고 있고, 세부자세한 로직은 더 많은 메서드를 만들어서 분리해도 될 듯.
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
     		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
@@ -74,6 +76,7 @@ public class PhotoController {
         return mosaic.getUrl();
     }
 	
+	//uploadFiles를 몇 개의 메서드로 더 분리하는 건 어떨까? 
 	public Photo[] uploadFiles(MultipartFile[] files, Mosaic mosaic) throws IOException{
 		Photo[] photos = new Photo[files.length];
 		for (int i = 0; i < files.length; i++) {

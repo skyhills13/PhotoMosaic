@@ -2,12 +2,15 @@
  *   TOOL: HTMLElement의 prototype에 함수 추가
  */
 
+//네이티브에 추가했으니 좀더 unique한 이름으로 변경하는 게 좋겠음.
 HTMLElement.prototype.getStyleValue = function(strStyle) {
 	return window.getComputedStyle(this.node).getPropertyValue(strStyle);
 };
 
 HTMLElement.prototype.hasClassName = function(strClassName) {
 	if (isString(strClassName)) {
+		//console.error로 하지말고 메서드를 하나 만들어서 그걸 호출하는 것도 좋겠음. 
+		//ex) printError("....")
 		console.error("hasClassName: Missing className to search");
 		return false;
 	}

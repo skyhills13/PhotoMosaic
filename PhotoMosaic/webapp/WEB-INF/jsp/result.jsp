@@ -5,6 +5,7 @@
 <html>
 <head>
 <%-- <%@ page isELIgnored="false" %> --%>
+<!-- 배포할때는 css merge하기 -->
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <title>show mosaic</title>
@@ -73,6 +74,7 @@
 			</c:forEach>
 		</ul>
 	</article>
+	<!-- 나중에 배포할때 js파일들 merge하기-->
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>

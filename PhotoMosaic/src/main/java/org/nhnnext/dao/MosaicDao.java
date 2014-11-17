@@ -9,6 +9,10 @@ import org.nhnnext.domains.Mosaic;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+/* 
+* SQL 문을 소스코드에서 나중에는 분리할 계획이 있는지? 혹시 계획이 아예없다면 나중에 분리하는 게 좋겠지?
+* 다른 클래스도 마찬가지고..
+*/
 public class MosaicDao extends JdbcDaoSupport {
 	public Mosaic findById(int id) {
 		String sql = "select * from mosaics where id= ?";

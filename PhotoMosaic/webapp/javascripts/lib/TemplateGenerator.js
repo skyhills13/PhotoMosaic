@@ -15,6 +15,7 @@ var Template = (function() {
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
 				idx = row * _width + col
+				//for문은 그렇다치고, if문은 좀더 줄일 수 있겠다. continue 를 추가로 사용해서.. 
 				if (template[idx] !== "x") {
 					if (typeof this.numOfEachSection[template[idx]] === "undefined") {
 						this.numOfEachSection[template[idx]] = 1;
@@ -31,7 +32,9 @@ var Template = (function() {
 	 * PUBLIC AREA
 	 */
 	
+	//constructor 라는 이름은 자바스크립트 예약어를 사용하는 느낌이다. 다른이름으로 바꾸시길.
 	var constructor = function(width, height) {
+		// _width와 _height를 전역변수로 설정한 이유는? 
 		_width = (typeof width !== "undefined") ? width : 4;
 		_height = (typeof height !== "undefined") ? height : 4;
 		
@@ -134,6 +137,7 @@ var TemplateGenerator = (function(){
 		var sectionWidth = sectionSize[0];
 		var sectionHeight = sectionSize[1];
 
+		//중괄호를 좀더 써서 그룹핑을하면 코드 보기가 더 쉬울 듯.
 		if (_width - sectionWidth < startX
 				|| _height - sectionHeight < startY) {
 			return false;
@@ -245,6 +249,9 @@ var TemplateGenerator = (function(){
 		}
 		
 		// Main logic
+		//TemplateGenerator 코드보면 비슷한 중첩for문이 많다. 
+		//이걸 줄일(없앨) 수 있지 않을까? 
+		//for 문 두개 처리하는 함수만들고 callback으로 다르게 처리하게 하는 함수같은건 어때? 
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
 				// 1. 생성 가능한 모든 section에 대해

@@ -1,5 +1,9 @@
 // var ooo;
 
+//생성자안에 프로퍼티가 꼭 있을필요는 없지만, 생성자를 호출하는 순간 필요한 필수 옵션이나 값들을 받아서 this.value = value; 이런식으로 
+//셋팅하는 것이 이 클래스를 사용하는 개발자입장에서 좀더 명확할 수 있음.
+//고민해보삼.
+
 function PhotoCombine() {
 }
 
@@ -42,6 +46,8 @@ PhotoCombine.prototype = {
 		context.drawImage(i.imgElement, i.widthStart, i.heightStart, i.widthBound, i.heightBound, i.posX, i.posY, i.cWidth, i.cHeight);
 	},
 	
+	//private 성격의 메서드는 underscore('_') 를 붙여서 이름을 짓는것이일반적이고, 필요하면 prototype안에 추가하지 않는 것도 방법임.
+	//이 코드가 경민이 것이라면 지난번 말해준 모듈패턴을 되새겨보기.
 	adjustImagePosition : function(item){
 		//item.widthStart, item.heightStart
 		item.widthStart = 0;
@@ -75,6 +81,9 @@ PhotoCombine.prototype = {
 			"imgElement" : item.imgElement
 		}
 		
+		//item.imgElement.naturalHeight 와 같은 속성은 변수로담아주기(캐쉬)
+		//불필요하게 여러번 호출하는 거 같음.
+
 		// 가로폭에 맞춰서 사진 보여주기
 		mat.widthBound = item.imgElement.naturalWidth;
 		mat.heightBound = item._height * (item.imgElement.naturalWidth/item._width);

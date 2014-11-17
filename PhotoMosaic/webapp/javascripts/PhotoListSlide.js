@@ -1,3 +1,7 @@
+//다른js소스파일과 같이 일관된 prototype 기반의 클래스를 만든게 보기 좋다.
+//일관성도 있고. 메서드들 크기도 크지 않고 적당함. 
+//각 클래스 파일에서 생성자를 어떻게 호출하는지 메서드를 어떻게 부르는지 예제를 넣는 것도 좋을 거 같다. (주석으로)
+
 function PhotoListSlide(wrapper, lightBox) {
 	this.lightBox = lightBox;
 	this.container = wrapper.firstElementChild;
