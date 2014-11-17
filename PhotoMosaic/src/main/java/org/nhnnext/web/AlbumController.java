@@ -24,7 +24,7 @@ public class AlbumController {
 	@Autowired
 	private MosaicDao mosaicDao;
 	
-	@RequestMapping("/{userEmail}")
+	@RequestMapping("/album/{userEmail}")
 	public String albumPage(@PathVariable String userEmail, Model model){
 		logger.debug("into albumpage");
 		User user = userDao.findByEmail(userEmail);

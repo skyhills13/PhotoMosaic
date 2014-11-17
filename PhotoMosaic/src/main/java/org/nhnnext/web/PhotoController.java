@@ -55,16 +55,10 @@ public class PhotoController {
 		mosaic.setId(mosaicId);
 		mosaic.setPhotos(uploadFiles(files, mosaic));
 		
+		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getFileName();
 		
-		String imageDataBytes = clientMosaic.substring(clientMosaic.indexOf(",")+1);
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] bytes = decoder.decodeBuffer(imageDataBytes);
+		convertDataUrlToImg(clientMosaic, mosaicPath);
 		
-		File of = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getUrl() + ".png");  
-		FileOutputStream osf = new FileOutputStream(of);  
-		osf.write(bytes);  
-		osf.flush();  
-
         /*merge photos*/
 //        MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
@@ -106,6 +100,17 @@ public class PhotoController {
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
 		return photos;
+	}
+	
+	public void convertDataUrlToImg(String dataUrl, String mosaicPath) throws IOException{
+		String imageDataBytes = dataUrl.substring(dataUrl.indexOf(",")+1);
+		BASE64Decoder decoder = new BASE64Decoder();
+		byte[] bytes = decoder.decodeBuffer(imageDataBytes);
+		
+		File of = new File(mosaicPath);  
+		FileOutputStream osf = new FileOutputStream(of);  
+		osf.write(bytes);  
+		osf.flush();  
 	}
 
 	//not using now 
