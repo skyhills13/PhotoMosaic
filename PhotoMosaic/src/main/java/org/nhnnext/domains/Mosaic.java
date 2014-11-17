@@ -9,6 +9,7 @@ public class Mosaic {
 	private String url;
 	private String comment;
 	private String createdDate;
+	private int userId;
 	private Photo[] photos;
 	
 	public Mosaic() {
@@ -39,14 +40,14 @@ public class Mosaic {
 		this.createdDate = createdDate.toString();
 	}
 	public Mosaic(int id, String fileName, String title, String url,
-			String comment, Timestamp timestamp, int userId, int mosaicId) {
+			String comment, Timestamp timestamp, int userId) {
 		this.id = id;
 		this.fileName = fileName;
 		this.title = title;
 		this.url = url;
 		this.comment = comment;
 		this.createdDate = createdDate.toString();
-		//TODO userId , mosaicId 생성
+		this.userId = userId;
 	}
 
 
@@ -88,6 +89,15 @@ public class Mosaic {
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate.toString();
 	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public Photo[] getPhotos() {
 		return photos;
 	}

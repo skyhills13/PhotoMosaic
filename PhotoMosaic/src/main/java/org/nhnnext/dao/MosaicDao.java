@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.nhnnext.domains.Mosaic;
+import org.nhnnext.domains.Photo;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
@@ -40,6 +41,22 @@ public class MosaicDao extends JdbcDaoSupport {
 			}
 		};
 		return getJdbcTemplate().queryForObject(sql, rowMapper, url);
+	}
+	
+	public List<Mosaic> findMosaicsOfUser(int userId) {
+		String sql = "select * from mosaics where users_id = ? ";
+		RowMapper<Mosaic> rowMapper = new RowMapper<Mosaic>() {
+			public Mosaic mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Mosaic(rs.getInt("id"),
+							rs.getString("fileName"),
+							rs.getString("title"),
+							rs.getString("url"),
+							rs.getString("comment"),
+							rs.getTimestamp("created_date"),
+							rs.getInt("users_id"));
+			}
+		};
+		return getJdbcTemplate().query(sql, rowMapper, userId);
 	}
 	
 	public void upload(Mosaic mosaic) {
