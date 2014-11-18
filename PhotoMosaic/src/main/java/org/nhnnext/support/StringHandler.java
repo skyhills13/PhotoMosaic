@@ -10,7 +10,7 @@ public class StringHandler {
 	private static final Logger logger = LoggerFactory.getLogger(StringHandler.class);
 	
 	public static String makeRandomId(){
-		String newUniqueId = UUID.randomUUID().toString();
+		String newUniqueId = UUID.randomUUID().toString().substring(0,11);
 //		PhotoDao photoDao = new PhotoDao();
 //		if(photoDao.findByUniqueId(newUniqueId) != null) {
 //			makeRandomId();
