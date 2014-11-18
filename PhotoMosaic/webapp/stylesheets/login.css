@@ -1,0 +1,91 @@
+/*Denim RGBA(54, 117, 199, 1)*/
+/*Beau Blue RGBA(194, 216, 237, 1)*/
+/*Light Gray RGBA(209, 209, 209, 1)*/
+/*White RGBA(255, 255, 255, 1)*/
+/*Kelly Green RGBA(45, 180, 3, 1)*/
+/*Magnesium RGBA(180, 180, 180, 1)*/
+
+/*font-family: 'Lato', sans-serif;*/
+@import url(http://fonts.googleapis.com/css?family=Lato:100,400);
+
+article {
+	margin-top: 140px;
+}
+
+article > form {
+	border : 1px solid RGBA(194, 216, 237, 1);
+	border-radius : 10px;
+	width : 50%;
+	margin : auto;
+	padding : 50px 50px; 
+	text-align : center;
+}
+
+article form p {
+	text-align : left;
+	width : 100%;
+	margin-bottom : 20px;
+	height : 30px;
+}
+
+/* 25% */
+article form p span{
+	display : inline-block;
+	text-align : right;
+	width : 22%;
+	margin-right : 3%;
+	height : 100%;
+	font-family : 'Lato', sans-serif;
+	font-weight : 400;
+	color : RGBA(100, 100, 100, 1);
+}
+
+article form p input{
+	width : 69%;
+	height : 100%;	
+	border : none;
+	background : none;
+	border-bottom: 2px solid RGBA(100, 100, 100, 1);
+	color : RGBA(100, 100, 100, 1);
+	padding : 0px 10px;
+	font-family : 'Lato', sans-serif;
+	font-weight : 400;
+	letter-spacing: 2px;
+	 content: "email";
+	
+}
+
+article form p input:focus{
+	outline : none;
+	background : RGBA(100, 100, 100, 1);
+	color : RGBA(255,255,255, 1);
+	-webkit-transition : background 0.2s, color 0.2s;
+}
+
+
+article form button {
+	width : 60%;
+	margin-top : 25px;
+	height : 50px;
+	font-family : 'Lato', sans-serif;
+	font-weight : 400;
+	color : RGBA(54, 117, 199, 1);
+	font-size : 20px;
+	border : 3px solid RGBA(54, 117, 199, 1);
+	background : RGBA(255,255,255,1);
+	
+}
+
+article form button:hover {
+	color : RGBA(255, 255, 255, 1);
+	font-size : 20px;
+	border : 3px solid RGBA(54, 117, 199, 0);
+	background : RGBA(54, 117, 199, 1);
+	-webkit-transition : border 0.2s, background 0.2s, color 0.2s;
+}
+/*Denim RGBA(54, 117, 199, 1)*/
+/*Beau Blue RGBA(194, 216, 237, 1)*/
+/*Light Gray RGBA(209, 209, 209, 1)*/
+/*White RGBA(255, 255, 255, 1)*/
+/*Kelly Green RGBA(45, 180, 3, 1)*/
+/*Magnesium RGBA(180, 180, 180, 1)*/

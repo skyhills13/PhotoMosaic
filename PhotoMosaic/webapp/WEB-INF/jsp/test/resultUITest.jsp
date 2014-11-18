@@ -12,7 +12,6 @@
 <body>
 	<article id="lightBox" class="thumbnail"></article>
 	<jsp:include page="../include/header.jsp" flush="false" />
-	<div id="wrapper">
 	<aside>
 		<section class="thumbnail">
 			<img id="mosaic" src="/images/test/test1.jpg" />
@@ -97,7 +96,6 @@
  --%>
 		</ul>
 	</article>
-	</div>
 	
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
