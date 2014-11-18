@@ -14,7 +14,7 @@
 	<jsp:include page="./include/header.jsp" flush="false" />
 	<aside>
 		<section class="thumbnail">
-			<img id="mosaic" src="/images/${mosaic.fileName}" />
+			<img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
 		</section>
 		<section class="info">
 			<ul>
@@ -69,7 +69,7 @@
 			<c:forEach var="photo" items="${mosaic.getPhotos()}"
 				varStatus="status">
 				<li class="container" data-list="${status.index}"><img
-					class="original" src="/images/${photo.getUniqueId()}" /></li>
+					class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" /></li>
 			</c:forEach>
 		</ul>
 	</article>

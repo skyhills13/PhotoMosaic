@@ -12,10 +12,10 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
@@ -25,8 +25,8 @@ public class PhotoHandler {
 	private static final int CHUNK_HEIGHT = 750;
 	
 	
-	public static void resizePhoto(Photo photo) throws IOException {
-		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId());
+	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
+		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + photo.getUniqueId());
 		//TODO change throw exception to try catch 
 		BufferedImage originalImage = ImageIO.read(file);
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
@@ -36,12 +36,12 @@ public class PhotoHandler {
 		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
 		g.dispose();
 		
-		ImageIO.write(resizedImage, "png", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + "resizecheckcheck.png"));
+		ImageIO.write(resizedImage, "png", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + "resizecheckcheck.png"));
 	}
 	
-	public static Dimension getImageDimension(String fileName)
+	public static Dimension getImageDimension(Mosaic mosaic, String fileName)
 			throws IOException {
-		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + fileName);
+		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + fileName);
 		int pos = imgFile.getName().lastIndexOf(".");
 		if (pos == -1) {
 			throw new IOException(Constants.WRONG_FILE + imgFile.getAbsolutePath());

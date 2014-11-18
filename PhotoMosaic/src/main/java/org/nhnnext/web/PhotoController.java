@@ -55,7 +55,7 @@ public class PhotoController {
 		mosaic.setId(mosaicId);
 		mosaic.setPhotos(uploadFiles(files, mosaic));
 		
-		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getFileName();
+		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		convertDataUrlToImg(clientMosaic, mosaicPath);
 		
@@ -78,10 +78,10 @@ public class PhotoController {
             	return null;
             }
             /*file upload to the server*/
-            UploadHandler.upload(file);
+            UploadHandler.upload(mosaic, file);
             
             /*get the information of the photo*/
-            Dimension photoDimension = PhotoHandler.getImageDimension(file.getOriginalFilename());
+            Dimension photoDimension = PhotoHandler.getImageDimension(mosaic, file.getOriginalFilename());
             logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
             
             /*insert file information into the database*/
@@ -90,7 +90,7 @@ public class PhotoController {
 
             String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
             photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
-            UploadHandler.renameAsUnique(photos[i]);
+            UploadHandler.renameAsUnique(mosaic, photos[i]);
 
             Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
             photos[i].setScaledWidth(scaledDimension.width);
@@ -113,13 +113,13 @@ public class PhotoController {
 		osf.flush();  
 	}
 
-	//not using now 
-	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
-	public boolean delete(String name) {
-		if(!UploadHandler.delete(name)){
-			logger.debug("cannot delete");
-			return false;
-		}
-		return true;
-	}
+//	//not using now 
+//	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)
+//	public boolean delete(String name) {
+//		if(!UploadHandler.delete(name)){
+//			logger.debug("cannot delete");
+//			return false;
+//		}
+//		return true;
+//	}
 }
