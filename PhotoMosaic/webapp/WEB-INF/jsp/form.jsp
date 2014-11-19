@@ -21,8 +21,7 @@
 				<span>Nice to see new faces</span>
 			</p>
 		</section>
-		<form:form modelAttribute="user" cssClass="changeIt" action="/join"
-			method="post">
+		<form:form modelAttribute="user" cssClass="changeIt" action="/join" method="post">
 			<div>
 				<p>
 					<span>EMAIL</span>

@@ -7,7 +7,9 @@ public class Constants {
 	public static final String WRONG_FILE = "No extension for file : ";
 	public static final String NOT_IMAGE = "Not a known image file: ";
 	public static final String MOVE_FAIL_MESSAGE ="fail to move attachedFile";
-
+	public static final String NOT_EXISTING_MEMBER ="존재하지 않는 사용자입니다.";
+	public static final String WRONG_PASSWORD = "비밀번호가 틀립니다.";
+	
 	public static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR_REMOTE = "";
 //	public static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/Documents/workspace/PhotoMosaic/PhotoMosaic/webapp/images";
