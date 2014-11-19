@@ -12,43 +12,67 @@ header {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	z-index: 100;
+	z-index: 9999;
 	width: 100%;
-	height: 70px;
-	background: RGBA(255, 255, 255, 0.9);
-	box-shadow: 0px 2px 5px RGBA(180, 180, 180, 0.5);
+	height: 60px;
+	background: RGBA(10, 10, 10, 0.6);
+	box-shadow: 0px 2px 5px RGBA(10, 10, 10, 0.3);
+	text-align : center;
 }
 
 header a {
-	padding: 0px 50px;
-	float: right;
-	height: inherit;
-	background: RGBA(180, 180, 180, 1);
+	/* float: right; */
 	text-align: center;
 	-webkit-transition: background-color 0.3s;
+	height : 50px;
+	
 }
 
-header a:hover {
-	background: RGBA(54, 117, 199, 0.7);
-}
-
-header a span {
-	margin-top: 25px;
+header a button {
+	margin-top : 5px;
+	height: 80%;
+	width :130px;
 	display: inline-block;
-	font-size: 20px;
-	color: RGBA(255, 255, 255, 1);
+	font-size: 18px;
+	color: RGBA(255, 255, 255, 0.6);
+	border : none;
+	letter-spacing : 3px;
+	background : none;
 	font-family: 'Lato', sans-serif;
-	font-weight: 100;
+	font-weight: 400;
 }
-/*service*/
+
+header a button:hover {
+	background : RGBA(54, 117, 199, 0.8);
+	-webkit-transition : background 0.3s;
+}
+
+
+header a button:focus{
+	outline : none;
+}
+header a:focus{
+	outline : none;
+}
+/*make*/
 header a:nth-child(1) {
-	float: left;
+	/* float: left; */
+	
 }
-/*user*/
+
+header a:nth-child(1) button {
+/* 	border : 1px solid RGBA(54, 117, 199, 0.8);
+ */}
+
+/*sign in*/
 header a:nth-child(2) {
 	
 }
-/*make*/
+
+/*sign up*/
 header a:nth-child(3) {
-	border-right: 1px solid RGBA(255, 255, 255, 1);
-}
+/* 	border-left : 1px solid RGBA(54, 117, 199, 0.8);
+	border-right : 1px solid RGBA(54, 117, 199, 0.8);
+ */}
+
+

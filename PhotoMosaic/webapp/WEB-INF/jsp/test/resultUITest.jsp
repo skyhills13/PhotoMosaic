@@ -12,9 +12,10 @@
 <body>
 	<article id="lightBox" class="thumbnail"></article>
 	<jsp:include page="../include/header.jsp" flush="false" />
+	<div id="wrapper">
 	<aside>
 		<section class="thumbnail">
-			<img id="mosaic" src="/images/test/test1.jpg" />
+			<img id="mosaic" src="/images/test/B0.jpg" />
 		</section>
 		<section class="info">
 			<ul>
@@ -68,19 +69,19 @@
 	<article id="list">
 		<ul>
 			<li class="container" data-list="0"><img class="original"
-				src="/images/test/test2.png"></li>
+				src="/images/test/A0.jpg"></li>
 			<li class="container" data-list="1"><img class="original"
-				src="/images/test/test3.jpg"></li>
+				src="/images/test/A1.jpg"></li>
 			<li class="container" data-list="2"><img class="original"
-				src="/images/test/test4.jpg"></li>
+				src="/images/test/C2.jpg"></li>
 			<li class="container" data-list="3"><img class="original"
-				src="/images/test/test5.jpg"></li>
+				src="/images/test/A3.jpg"></li>
 			<li class="container" data-list="4"><img class="original"
-				src="/images/test/test6.png"></li>
+				src="/images/test/A2.jpg"></li>
 			<li class="container" data-list="5"><img class="original"
-				src="/images/test/test7.jpg"></li>
+				src="/images/test/C0.jpg"></li>
 			<li class="container" data-list="6"><img class="original"
-				src="/images/test/test8.jpg"></li>
+				src="/images/test/C1.jpg"></li>
 			<li class="container" data-list="7"><img class="original"
 				src="/images/test/pngtest1.png"></li>
 			<li class="container" data-list="8"><img class="original"
@@ -96,7 +97,7 @@
  --%>
 		</ul>
 	</article>
-	
+	</div>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>

@@ -12,31 +12,73 @@ body.lightBoxShowing{
 	overflow : hidden;
 }
 
-article#list {
-	position: absolute;
-	left: 30%;
-	z-index: -1;
-	overflow-x: hidden;
-	width: 67%;
-	margin-top: 100px;
-	margin-bottom: 30px;
-	padding: 40px 0px;
-	text-align: center;
-	background: RGBA(255, 255, 255, 1);
-	border: 1px solid RGBA(180, 180, 180, 1);
-	border-radius: 5px;
-	-webkit-transition: border 0.3s;
+div#wrapper{
+	margin-top : 100px;
+	position : relative;
+	text-align : center;
+	min-width : 800px;
 }
 
-article#list:hover {
-	border: 1px solid RGBA(54, 117, 199, 0.7);
+@media screen and (max-width : 800px){
+	aside {
+		padding-right: 30px;
+	}
+	article#list{
+		padding-left : 30px;	
+		width : 475px;
+	}
+}
+
+@media screen and (min-width : 800px) and (max-width : 1280px){
+	aside {
+		padding-right : 59px;
+	}
+	article#list{
+		padding-left : 59px;
+		width : 475px;
+	}
+}
+
+article#list {
+	width : 475px;
+	display : inline-block;
+	overflow-x: hidden;
+	padding-top : 40px;
+	padding-bottom : 40px;
+	border-left: 1px solid RGBA(180, 180, 180, 1);
+	-webkit-transition: border 0.3s;
+	-webkit-transition : padding-left 0.3s;
+}
+
+
+article#list ul{
+	text-align: -webkit-left;
 }
 
 article#list ul li {
-	margin: 5px;
-	width: 40%;
+	width: 48%;
+	margin-left : 3px;
 	display: inline-block;
 	position: relative;
+	vertical-align: top;
+	-webkit-transition: width 1s;
+}
+
+
+@media screen and (min-width : 1280px){
+	aside {
+		padding-right : 59px;	
+	}
+	article#list{
+		padding-left : 59px;
+		width : 800px;
+	}
+	article#list ul li{
+		width: 32%;
+		position : relative;
+		top : 0px;
+		left : 0px;
+	}
 }
 
 article#list ul li img {
@@ -66,25 +108,18 @@ article#list ul li:hover::before {
 }
 
 aside {
-	position: absolute;
-	left: 3%;
-	z-index: -1;
-	top: 100px;
-	padding: 40px 0px;
+	width :200px;
+	display : inline-block;
+	vertical-align : top;
+	padding-top : 40px;
+	padding-bottom : 40px;
 	overflow: scroll;
-	width: 24%;
 	background: RGBA(255, 255, 255, 1);
-	border: 1px solid RGBA(180, 180, 180, 1);
-	border-radius: 5px;
-	-webkit-transition: border 0.3s;
-}
-
-aside:hover {
-	border: 1px solid RGBA(54, 117, 199, 0.7);
+	text-align : -webkit-right;
+	-webkit-transition : padding-right 0.3s;
 }
 
 aside section {
-	margin: 0px 10%;
 	margin-bottom: 30px;
 }
 
