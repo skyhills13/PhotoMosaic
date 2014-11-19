@@ -9,29 +9,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sign In</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+
 </head>
 
 <body>
 	<jsp:include page="./include/header.jsp" flush="false" />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+	<article>
+		<section class="welcome">
+			<p>
+				<span> pleased to meet you </span>
+			</p>
+		</section>
 
-	<form:form modelAttribute="user" cssClass="changeIt" action="/login"
-		method="post">
-		<p>이메일</p>
-		<form:input path="email" />
-		<form:errors path="email" cssClass="error" />
-		<p>비밀번호</p>
-		<form:password path="password" />
-		<form:errors path="password" cssClass="error" />
-		<c:if test="${not empty errorMessage}">
-			<div class="error">${errorMessage}</div>
-		</c:if>
-		<button type="submit">Login</button>
-	</form:form>
+		<form:form modelAttribute="user" cssClass="changeIt" action="/login"
+			method="post">
 
+			<div>
+				<p>
+					<span>EMAIL</span>
+					<form:input path="email" />
+					<form:errors path="email" cssClass="error email" />
+				</p>
+				<p>
+					<span>PASSWORD</span>
+					<form:password path="password" />
+					<form:errors path="password" cssClass="error password" />
+					<c:if test="${not empty errorMessage}">
+						<span class="error email nouser">${errorMessage}</span>
+					</c:if>
+				</p>
+			</div>
+			<button type="submit">SIGN IN</button>
+		</form:form>
+	</article>
 </body>
 </html>

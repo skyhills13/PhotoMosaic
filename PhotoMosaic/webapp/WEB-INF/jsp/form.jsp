@@ -14,18 +14,28 @@
 
 <body>
 	<jsp:include page="./include/header.jsp" flush="false" />
+
 	<article>
+		<section class="welcome">
+			<p>
+				<span>Nice to see new faces</span>
+			</p>
+		</section>
 		<form:form modelAttribute="user" cssClass="changeIt" action="/join"
 			method="post">
-			<p><span>EMAIL</span>
-			<form:input path="email" />
-			<form:errors path="email" cssClass="error" />
-			</p>
-			<p><span>PASSWORD</span>
-			<form:password path="password" />
-			<form:errors path="password" cssClass="error" />
-			</p>
-			<button type="submit">Join</button>
+			<div>
+				<p>
+					<span>EMAIL</span>
+					<form:input path="email" />
+					<form:errors path="email" cssClass="error email" />
+				</p>
+				<p>
+					<span>PASSWORD</span>
+					<form:password path="password" />
+					<form:errors path="password" cssClass="error password" />
+				</p>
+			</div>
+			<button type="submit">SIGN UP</button>
 		</form:form>
 
 	</article>

@@ -5,84 +5,187 @@
 /*Kelly Green RGBA(45, 180, 3, 1)*/
 /*Magnesium RGBA(180, 180, 180, 1)*/
 
-/*font-family: 'Lato', sans-serif;*/
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Shadows Into Light', cursive;
+*/
 @import url(http://fonts.googleapis.com/css?family=Lato:100,400);
+@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
-article {
-	margin-top: 140px;
+body {
+	background : url("../images/background/join_bg2.jpg");
+	background-size : cover;
+	width : 100%;
+	height : 100%;
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	z-index : -10;
 }
 
-article > form {
-	border : 1px solid RGBA(194, 216, 237, 1);
-	border-radius : 10px;
-	width : 50%;
+body::before{
+/* 	position : absolute;
+	top : 0px;
+	left : 0px;
+	z-index : -1;
+	width : 100%;
+	height : 100%;
+	content : " ";
+	background : RGBA(255,255,255,0.2);
+ */}
+
+article {
+	margin-top: 180px;
+}
+
+article section.welcome {
+	width : 500px;
 	margin : auto;
-	padding : 50px 50px; 
+	margin-bottom : 3px;
+}
+
+article section.welcome p{
+	width : 100%;
+	text-align : center;
+	font-family: 'Shadows Into Light', cursive;
+	font-weight : 100;
+	font-size : 35px;
+	color : RGBA(10, 10, 10, 0.8);
+	margin-bottom : 30px;
+}
+
+article form {
 	text-align : center;
 }
 
+article > form > div{
+	width : 500px;
+	margin : auto;
+	text-align : center;
+	padding : 50px 0px;
+	position : relative;
+	top : 0px;
+	left : 0px;
+	border : 2px solid RGBA(10, 10, 10, 0.8);
+ 	
+ }
+ 
+article > form > div::before{
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	z-index : -1;
+	width : 100%;
+	height : 100%;
+	content : " ";
+	background : RGBA(255,255,255,0.2);
+}
+
+
+
+article form::after{
+/* 	position : absolute;
+	top : 0px;
+	left : 0px;
+	width : 100%;
+	height : 100%;
+	content : " ";
+ */}
+
 article form p {
 	text-align : left;
-	width : 100%;
-	margin-bottom : 20px;
+	width : 80%;
+	margin-bottom : 15px;
+	margin-left : 10%;
 	height : 30px;
 }
 
-/* 25% */
 article form p span{
 	display : inline-block;
 	text-align : right;
-	width : 22%;
-	margin-right : 3%;
-	height : 100%;
+	width : 100px;
+	margin-right : 10px;
+	font-size : 15px;
+	height : 30px;
 	font-family : 'Lato', sans-serif;
 	font-weight : 400;
-	color : RGBA(100, 100, 100, 1);
+	color : RGBA(10, 10, 10, 0.8);
+	/* text-shadow : 0px 0px 1px RGBA(255,255,255, 0.7); */
 }
 
 article form p input{
-	width : 69%;
-	height : 100%;	
+	width : 250px;
+	height : 30px;	
 	border : none;
+	border-bottom : 1px solid RGBA(10, 10, 10, 0.8);
 	background : none;
-	border-bottom: 2px solid RGBA(100, 100, 100, 1);
-	color : RGBA(100, 100, 100, 1);
+	color : RGBA(10, 10, 10, 0.8);
 	padding : 0px 10px;
 	font-family : 'Lato', sans-serif;
 	font-weight : 400;
 	letter-spacing: 2px;
 	 content: "email";
-	
 }
 
 article form p input:focus{
 	outline : none;
-	background : RGBA(100, 100, 100, 1);
+	background : RGBA(10, 10, 10, 0.8);
 	color : RGBA(255,255,255, 1);
 	-webkit-transition : background 0.2s, color 0.2s;
 }
 
+article form span.error{
+	display : inline-block;
+	position : relative;
+	text-align : left;
+	height : initial;
+	left : 390px;
+	width : 220px;
+	/* background : RGBA(179, 5, 24, 0.3); */
+	padding : 3px;
+	border : 1px solid RGBA(179, 5, 24, 0.8);
+	background : RGBA(179, 5, 24, 0.1);
+	border-radius : 3px;
+}
+
+article form span.error::before{
+	content : "url("../images/background/join_bg2.jpg")";
+}
+
+article form span.email{
+	top : -40px;
+}
+
+article form span.password{
+	top : -40px;
+}
+
+article form span.nouser{
+	top : -75px;
+}
+
 
 article form button {
-	width : 60%;
-	margin-top : 25px;
+	width : 500px;
+	margin : auto;
+	margin-top : 15px;
 	height : 50px;
 	font-family : 'Lato', sans-serif;
 	font-weight : 400;
-	color : RGBA(54, 117, 199, 1);
-	font-size : 20px;
-	border : 3px solid RGBA(54, 117, 199, 1);
-	background : RGBA(255,255,255,1);
-	
+	letter-spacing : 5px;
+	color : RGBA(10, 10, 10, 0.8);
+	font-size : 15px;
+	border : 2px solid RGBA(10, 10, 10, 0.8);
+	background : RGBA(255,255,255,0.2);
 }
 
 article form button:hover {
-	color : RGBA(255, 255, 255, 1);
-	font-size : 20px;
-	border : 3px solid RGBA(54, 117, 199, 0);
-	background : RGBA(54, 117, 199, 1);
-	-webkit-transition : border 0.2s, background 0.2s, color 0.2s;
+	color : RGBA(255, 255, 255, 0.8);
+	border : 2px solid RGBA(10, 10, 10, 0.8);
+	background : RGBA(10, 10, 10, 0.8);
+	-webkit-transition : border 0.4s, background 0.4s, color 0.4s;
 }
+
 /*Denim RGBA(54, 117, 199, 1)*/
 /*Beau Blue RGBA(194, 216, 237, 1)*/
 /*Light Gray RGBA(209, 209, 209, 1)*/
