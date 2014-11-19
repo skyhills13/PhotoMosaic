@@ -23,9 +23,7 @@
 			</p>
 		</section>
 
-		<form:form modelAttribute="user" cssClass="changeIt" action="/login"
-			method="post">
-
+		<form:form modelAttribute="user" cssClass="changeIt" action="/login" method="post">
 			<div>
 				<p>
 					<span>EMAIL</span>

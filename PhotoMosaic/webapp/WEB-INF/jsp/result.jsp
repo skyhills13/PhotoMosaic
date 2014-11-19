@@ -12,67 +12,70 @@
 <body>
 	<article id="lightBox" class="thumbnail"></article>
 	<jsp:include page="./include/header.jsp" flush="false" />
-	<aside>
-		<section class="thumbnail">
-			<img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
-		</section>
-		<section class="info">
+	<div id="wrapper">
+		<aside>
+			<section class="thumbnail">
+				<img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
+			</section>
+			<section class="info">
+				<ul>
+					<li>
+						<p>title</p> <%-- <p>${mosaic.title}</p> --%> <c:choose>
+							<c:when test="${mosaic.title!=null}">
+								<p>${mosaic.title}</p>
+							</c:when>
+							<c:otherwise>
+								<p>test subject</p>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li>
+						<p>comment</p> <%-- <p>${mosaic.comment}</p> --%> <c:choose>
+							<c:when test="${mosaic.comment!=null}">
+								<p>${mosaic.comment}</p>
+							</c:when>
+							<c:otherwise>
+								<p>test value</p>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li>
+						<p>producer</p> <c:choose>
+							<c:when test="${requestScope.producer!=null}">
+								<p>${requestScope.producer}</p>
+							</c:when>
+							<c:otherwise>
+								<p>anonymous</p>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li>
+						<p>date</p> <%-- <p>${mosaic.createdDate}</p> --%> <c:choose>
+							<c:when test="${mosaic.createdDate!=null}">
+								<p>${mosaic.createdDate}</p>
+							</c:when>
+							<c:otherwise>
+								<p>test value</p>
+							</c:otherwise>
+						</c:choose>
+					</li>
+				</ul>
+			</section>
+			<section class="share">
+				<input type="button" value="share" />
+			</section>
+		</aside>
+		<article id="list">
 			<ul>
-				<li>
-					<p>title</p> <%-- <p>${mosaic.title}</p> --%> <c:choose>
-						<c:when test="${mosaic.title!=null}">
-							<p>${mosaic.title}</p>
-						</c:when>
-						<c:otherwise>
-							<p>test subject</p>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li>
-					<p>comment</p> <%-- <p>${mosaic.comment}</p> --%> <c:choose>
-						<c:when test="${mosaic.comment!=null}">
-							<p>${mosaic.comment}</p>
-						</c:when>
-						<c:otherwise>
-							<p>test value</p>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li>
-					<p>producer</p> <c:choose>
-						<c:when test="${requestScope.producer!=null}">
-							<p>${requestScope.producer}</p>
-						</c:when>
-						<c:otherwise>
-							<p>anonymous</p>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li>
-					<p>date</p> <%-- <p>${mosaic.createdDate}</p> --%> <c:choose>
-						<c:when test="${mosaic.createdDate!=null}">
-							<p>${mosaic.createdDate}</p>
-						</c:when>
-						<c:otherwise>
-							<p>test value</p>
-						</c:otherwise>
-					</c:choose>
-				</li>
+				<c:forEach var="photo" items="${mosaic.getPhotos()}"
+					varStatus="status">
+					<li class="container" data-list="${status.index}"><img
+						class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" /></li>
+				</c:forEach>
 			</ul>
-		</section>
-		<section class="share">
-			<input type="button" value="share" />
-		</section>
-	</aside>
-	<article id="list">
-		<ul>
-			<c:forEach var="photo" items="${mosaic.getPhotos()}"
-				varStatus="status">
-				<li class="container" data-list="${status.index}"><img
-					class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" /></li>
-			</c:forEach>
-		</ul>
-	</article>
+		</article>
+
+	</div>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>

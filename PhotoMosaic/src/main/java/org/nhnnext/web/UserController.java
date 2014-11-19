@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.User;
+import org.nhnnext.support.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,12 @@ public class UserController {
 					
 		User dbUser = userDao.findByEmail(user.getEmail());
 		if( dbUser == null) {
-			model.addAttribute("errorMessage", "존재하지 않는 사용자입니다.");
+			model.addAttribute("errorMessage", Constants.NOT_EXISTING_MEMBER);
 			return "loginform";
 		}
 		
 		if( !user.matchPassword(dbUser.getPassword())) {
-			model.addAttribute("errorMessage", "비밀번호가 틀립니다.");
+			model.addAttribute("errorMessage", Constants.WRONG_PASSWORD);
 			return "loginform";
 		}
 		session.setAttribute("email", user.getEmail());

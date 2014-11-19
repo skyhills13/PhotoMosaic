@@ -4,15 +4,19 @@
 
 <link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 <header>
-	<a href="/"><span>MAKE</span></a> 
+	<a href="/"><button>MAKE</button></a>
 	<c:choose>
-		<c:when test="${empty sessionScope.email}"> 
-	<a href="/loginform"><span>SIGN IN</span></a>
-	<a href="/form"><span>JOIN</span></a>
-	</c:when>
-	<c:otherwise>
-		<a href="/album/${sessionScope.email}"><span>${sessionScope.email}</span></a>
-		<a href="/logout"><span>SIGN OUT</span></a>
-	</c:otherwise>
+		<c:when test="${empty sessionScope.email}">
+			<a href="/loginform">
+				<button>SIGN IN</button></a>
+			<a href="/form">
+				<button>SIGN UP</button></a>
+		</c:when>
+		<c:otherwise>
+			<a href="/album/${sessionScope.email}">
+				<button>${sessionScope.email}</button></a>
+			<a href="/logout">
+				<button>SIGN OUT</button></a>
+		</c:otherwise>
 	</c:choose>
 </header>
