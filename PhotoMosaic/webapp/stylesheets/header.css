@@ -31,7 +31,7 @@ header a {
 header a button {
 	margin-top : 5px;
 	height: 80%;
-	width :130px;
+	min-width :130px;
 	display: inline-block;
 	font-size: 18px;
 	color: RGBA(255, 255, 255, 0.6);

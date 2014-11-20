@@ -88,10 +88,13 @@ PhotoListSlide.prototype = {
 	},
 
 	changeLightBoxVisible : function() {
-		var hide = "hide";
-		var show = "show"
-		var current = this.lightBox.className === hide ? hide : show;
-		var toAdd = current === hide ? show : hide;
+		var HIDE_CLASS = "hide";
+		var SHOW_CLASS = "show"
+		
+		
+		var current = this.lightBox.classList.contains(HIDE_CLASS)?HIDE_CLASS:SHOW_CLASS;
+		var toAdd = !this.lightBox.classList.contains(HIDE_CLASS)?HIDE_CLASS:SHOW_CLASS;
+		
 		this.lightBox.classList.remove(current);
 		this.lightBox.classList.add(toAdd);
 		this.backgroundScrollState();

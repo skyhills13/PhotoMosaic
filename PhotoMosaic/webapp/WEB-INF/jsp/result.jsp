@@ -7,10 +7,11 @@
 <%-- <%@ page isELIgnored="false" %> --%>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
 <title>show mosaic</title>
 </head>
 <body>
-	<article id="lightBox" class="thumbnail"></article>
+	<article id="lightBox"></article>
 	<jsp:include page="./include/header.jsp" flush="false" />
 	<div id="wrapper">
 		<aside>
@@ -92,9 +93,9 @@
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
 			var comments = document.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
-			var lightBox = document.querySelector("article#lightBox");
+			var lightbox = document.querySelector("article#lightBox");
 
-			new PhotoLightBox(lightBox, mosaic, [ comments ], function() {
+			new PhotoLightBox(lightbox, mosaic, [ comments ], function() {
 				//for ul li img.original
 				var listWrapper = document.querySelector("article#list ul");
 				new PhotoListSlide(listWrapper, lightBox);

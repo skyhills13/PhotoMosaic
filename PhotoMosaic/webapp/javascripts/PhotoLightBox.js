@@ -1,30 +1,40 @@
-function PhotoLightBox(lightBox, photo, commentList, afterclose) {
+function PhotoLightBox(lightBox, photo, commentList, afterBoxCloseCallback) {
 	this.lightBox = lightBox;
 	this.photo = photo;
 	this.commentList = commentList;
 
-	this.setSection(this.show);
+	this.setThumbnailLightBox(this.show);
 	this.backgroundScrollState();
-	this.closeHandler(afterclose);
+	this.closeHandler(afterBoxCloseCallback);
 }
 
 PhotoLightBox.prototype = {
 
-	setSection : function(showCallback) {
-		var section = "<section class='thumbnail'></section>";
+	setThumbnailLightBox : function(showCallback) {
+		var section = "<section></section>";
+		var THUMBNAIL = "thumbnail";
+		var SHOWING = "show";
+		
 		this.lightBox.innerHTML = section;
+		this.lightBox.classList.add(THUMBNAIL);
+		this.lightBox.classList.add(SHOWING);
 		showCallback.bind(this)();
 	},
 	
 	backgroundScrollState : function(){
-		var bg = document.querySelector("body");
 		var CLASS_NAME = "lightBoxShowing";
-		var action = bg.classList.contains(CLASS_NAME)?"remove":"add";
-		bg.classList[action](CLASS_NAME);
+		var BODY_TAG = "body";
+		var REMOVE_ACTION = "remove";
+		var ADD_ACTION = "add";
+		
+		var bodyElement = document.querySelector(BODY_TAG);
+		var action = bodyElement.classList.contains(CLASS_NAME)?REMOVE_ACTION:ADD_ACTION;
+		bodyElement.classList[action](CLASS_NAME);
 	},
 
 	show : function() {
-		var sectionElement = this.lightBox.querySelector("section.thumbnail");
+		var SECTION_TAG = "section";
+		var sectionElement = this.lightBox.querySelector(SECTION_TAG);
 		this.showPhoto(sectionElement);
 		this.showComment(sectionElement);
 	},
@@ -34,26 +44,28 @@ PhotoLightBox.prototype = {
 	},
 
 	showComment : function(sectionElement) {
-		var createPElement = function(comment) {
-			return "<p>" + comment + "</p>";
-		}
 		var commentElements = "";
 		this.commentList.map(function(item) {
-			commentElements += createPElement(item);
+			var pElement = "<p>" + item + "</p>";
+			commentElements += pElement;
 		});
 		sectionElement.insertAdjacentHTML("afterbegin", commentElements);
 	},
 
-	closeHandler : function(afterclose) {
-		var lightBox = this.lightBox;
-		var hide = "hide";
-		var CLASS_NAME = "thumbnail";
-		lightBox.addEventListener("click", function() {
-			if(!lightBox.classList.contains(CLASS_NAME)) return;
-			lightBox.classList.add(hide);
-			lightBox.classList.remove(CLASS_NAME);
+	closeHandler : function(afterBoxCloseCallback) {
+		var HIDE_CLASS = "hide";
+		var SHOW_CLASS = "show";
+		var THUMBNAIL_CLASS = "thumbnail";
+		var SLIDE_CLASS = "slide";
+
+		this.lightBox.addEventListener("click", function() {
+			if(!lightBox.classList.contains(THUMBNAIL_CLASS)) return;
+			lightBox.classList.add(HIDE_CLASS);
+			lightBox.classList.add(SLIDE_CLASS);
+			lightBox.classList.remove(THUMBNAIL_CLASS);
+			lightBox.classList.remove(SHOW_CLASS);
 			this.backgroundScrollState();
-			afterclose();
+			afterBoxCloseCallback();
 		}.bind(this), false);
 	}
 }
