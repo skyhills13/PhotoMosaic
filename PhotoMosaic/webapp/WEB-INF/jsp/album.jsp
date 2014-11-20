@@ -9,12 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Album page</title>
 	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
-	<style>
-		section {
-			position: relative;
-			top: 70px;
-		}
-	</style>
+	<link type="text/css" rel="stylesheet" href="/stylesheets/album.css" />
 </head>
 
 <body>
