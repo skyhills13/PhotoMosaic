@@ -15,7 +15,14 @@
 	<div id="wrapper">
 		<aside>
 			<section class="thumbnail">
-				<img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
+				<c:choose>
+					<c:when test="${mosaic.fileName!=null}">
+						<img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
+					</c:when>
+					<c:otherwise>
+						<img id="mosaic" src="/images/button/no_image_thumb.gif" />
+					</c:otherwise>
+				</c:choose>
 			</section>
 			<section class="info">
 				<ul>
@@ -40,7 +47,8 @@
 						</c:choose>
 					</li>
 					<li>
-						<p>producer</p> <c:choose>
+						<p>producer</p>
+						<c:choose>
 							<c:when test="${requestScope.producer!=null}">
 								<p>${requestScope.producer}</p>
 							</c:when>
