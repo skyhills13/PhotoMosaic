@@ -111,6 +111,7 @@ public class PhotoController {
 		FileOutputStream osf = new FileOutputStream(of);  
 		osf.write(bytes);  
 		osf.flush();  
+		// TODO Resource leak: 'osf' is never closed 경고 뜸.
 	}
 
 //	//not using now 

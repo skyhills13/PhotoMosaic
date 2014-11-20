@@ -22,12 +22,10 @@
 	<jsp:include page="./include/header.jsp" flush="false" />
 
 	<section>
-		<%-- <div>
-			<p>${sessionScope.email}님의앨범페이지입니둥</p>
-		</div> --%>
-
 		<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
-			<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+			<a href="/result/${mosaic.getUrl()}">
+				<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+			</a>
 		</c:forEach>
 	</section>
 </body>
