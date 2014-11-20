@@ -1,22 +1,41 @@
 /**
  * 추후에 사진을 준비하는 객체로 합치기
  * 사진이 모두 로드된 후에 실행하기 
+ * string 을 상수로 만들기
  */
 
-
 function PhotoChecker(list){
-	
-	createObject(list);
-	return list;
+	var sl = createSimpleRatioObejctList(list);
+	var checked = {
+		"simpleRatioList" : sl,
+		"orientationComposition" : getOrientationComposition(sl)
+	}
+	return checked;
 }
 
-function createObject(plist){
+function getOrientationComposition(list){
+	var composition = {
+		"square" : 0,
+		"landscape" : 0,
+		"portrait" : 0
+	};
+	list.map(function(item){
+		var orientation = item.orientation;
+		composition[orientation]++;
+	});
+	
+	console.log(composition);
+	return composition;
+}
+
+function createSimpleRatioObejctList(plist){
 	var olistArray = [];
 	for(var i=0 ; i<plist.length ; i++){
 		var info = convertSimpleRatio(plist[i]);
 		var pObject = {
-//			"state" : info.state,
-//			"simpleRatio" : info.ratio,
+			"orientation" : info.orientation,
+			"simpleRatio" : info.simpleRatio,
+			"originalRatio" : info.originalRatio,
 			"originalElement" : plist[i]
 		}
 		olistArray.push(pObject);
@@ -28,9 +47,34 @@ function convertSimpleRatio(photoElement){
 	var originWidth = photoElement.naturalWidth;
 	var originHeight = photoElement.naturalHeight;
 	
-	var ratio = originWidth / originHeight;
+	var ratio = originHeight / originWidth;
+	var info = {};
+	info.originalRatio = ratio;
+	info.orientation = getPhotoOrientation(ratio)
+	info.simpleRatio = getSimpleRatio(info.orientation, ratio);
+	return info;
 }
 
+function getSimpleRatio(orientation , ratio){
+	var section = "";
+	if(orientation === "square" ){
+		section = "1x1";
+	}
+	if(orientation === "landscape" ){
+		var rat = 1/ratio;
+		section = Math.round(rat) + "x1";
+	}
+	if(orientation === "portrait"){
+		section = "1x" + Math.round(ratio);
+	}
+	return section;
+}
 
-
+function getPhotoOrientation(ratio){
+	if(ratio === 1){
+		return "square";
+	}
+	var orientation = ratio>1?"portrait":"landscape";
+	return orientation;
+}
 

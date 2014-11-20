@@ -57,7 +57,7 @@ PhotoCombine.prototype = {
 	},
 	
 	adjustImageSize : function(item) {
-		console.log(item);
+//		console.log(item);
 		var pWidth = item.imgElement.naturalWidth;
 		var pHeight = item.imgElement.naturalHeight;
 		var bWidth = item._width;

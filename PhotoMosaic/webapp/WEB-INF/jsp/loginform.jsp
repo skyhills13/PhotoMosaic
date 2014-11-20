@@ -28,7 +28,7 @@
 				<p>
 					<span>EMAIL</span>
 					<form:input path="email" />
-					<form:errors path="email" cssClass="error email" />
+					<span><form:errors path="email" cssClass="error email" /></span>
 				</p>
 				<p>
 					<span>PASSWORD</span>
