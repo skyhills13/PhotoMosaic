@@ -66,7 +66,8 @@ public class MosaicDao extends JdbcDaoSupport {
 		String sql = "select * from mosaics";
 		RowMapper<Mosaic> rowMapper = new RowMapper<Mosaic>() {
 			public Mosaic mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new Mosaic(rs.getInt("id"),
+				return new Mosaic(
+						rs.getInt("id"),
 						rs.getString("file_name"),
 						rs.getString("title"),
 						rs.getString("url"),

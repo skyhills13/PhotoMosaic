@@ -30,8 +30,8 @@ public class Mosaic {
 		this.url = url;
 		this.comment = comment;
 	}
-	public Mosaic(int id, String fileName, String title, String comment, String url,
-			Timestamp createdDate) {
+	public Mosaic(int id, String fileName, String title, String url,
+			String comment, Timestamp createdDate) {
 		this.id = id;
 		this.fileName = fileName;
 		this.title = title;
@@ -39,7 +39,7 @@ public class Mosaic {
 		this.comment = comment;
 		this.createdDate = createdDate.toString();
 	}
-	public Mosaic(int id, String fileName, String title, String url,
+	public Mosaic(int id, String fileName, String title,  String url,
 			String comment, Timestamp timestamp, int userId) {
 		this.id = id;
 		this.fileName = fileName;
