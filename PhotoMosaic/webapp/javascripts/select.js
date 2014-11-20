@@ -114,7 +114,7 @@
 		var combine = new PhotoCombine();
 		combine.getMaterial({
 			"mWidth" : 1000,
-			"mHeight" : 800,
+			"mHeight" : 750,
 			"templateArray" : tArray,
 			"templateColumn" : 4, // getWidth
 			"templateRow" : 4, // getHeight
