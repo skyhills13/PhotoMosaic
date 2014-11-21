@@ -65,6 +65,16 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
+	public static Orientation judgeOrientation(Photo photo) {
+		if( photo.getOriginalHeight() > photo.getOriginalWidth()) {
+			return Orientation.PORTRAIT;
+		} else if ( photo.getOriginalWidth() > photo.getOriginalHeight()) {
+			return Orientation.LANDSCAPE;
+		} else {
+			return Orientation.SQUARE;
+		}
+	}
+	
 	public static Dimension getScaledDimension(Photo photo) {
 		Dimension boundary = new Dimension(CHUNK_WIDTH, CHUNK_HEIGHT);
 		int originalWidth = photo.getOriginalWidth();
