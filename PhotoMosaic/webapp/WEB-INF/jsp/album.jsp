@@ -22,10 +22,10 @@
 				<div class="album">
 					<a href="/result/${mosaic.getUrl()}">
 						<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+						<div class="info">
+							<h2 class="title">${mosaic.getTitle()}</h2>
+						</div>
 					</a>
-					<div class="info">
-						<p>${mosaic.getTitle()}</p>
-					</div>
 				</div>
 			</c:forEach>
 			<div class="clear"></div>
