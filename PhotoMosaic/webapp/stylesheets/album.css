@@ -1,17 +1,55 @@
-section {
+html, body {
 	position: relative;
-	top: 60px;
-	padding: 10px;
+	
+	height: 100%;
+	min-height: 600px;
+	
+	font-family: "Apple SD Gothic Neo";
+	-moz-user-select: none;
+	overflow: hidden;
 }
 
-section a {
-	display: block;
-	float: left;
+.clear {
+	clear: both;
+}
+
+body > section {
+	position: absolute;
 	
-	width: 400px;
-	height: 300px;
+	left: 0px;
+	right: 0px;
+	top: 60px;
+	bottom: 0px;
 	
-	padding: 10px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+section div {
+	position: relative;
+	margin: 15px 15px 25px 15px;
+	text-align: center;
+}
+
+@media only screen
+and (max-width : 855px) {
+	div a {
+		display: inline-block;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+@media only screen
+and (min-width : 855px) {
+	div a {
+		display: inline-block;
+		
+		width: 400px;
+		height: 300px;
+		
+		margin: 5px;
+	}
 }
 
 section a img {

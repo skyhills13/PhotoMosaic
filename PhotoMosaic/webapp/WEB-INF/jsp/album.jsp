@@ -17,11 +17,14 @@
 	<jsp:include page="./include/header.jsp" flush="false" />
 
 	<section>
-		<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
-			<a href="/result/${mosaic.getUrl()}">
-				<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
-			</a>
-		</c:forEach>
+		<div>
+			<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
+				<a href="/result/${mosaic.getUrl()}">
+					<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+				</a>
+			</c:forEach>
+			<div class="clear"></div>
+		</div>
 	</section>
 </body>
 </html>
