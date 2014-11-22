@@ -16,10 +16,10 @@
 	<!-- HEADER -->
 	<jsp:include page="./include/header.jsp" flush="false" />
 
-	<section>
-		<div>
+	<section class="albums">
+		<div class="positioner">
 			<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
-				<a href="/result/${mosaic.getUrl()}">
+				<a class="album" href="/result/${mosaic.getUrl()}">
 					<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
 				</a>
 			</c:forEach>
