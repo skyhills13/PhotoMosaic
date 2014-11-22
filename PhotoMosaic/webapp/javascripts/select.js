@@ -62,18 +62,22 @@
 			return function(event) {
 				// Render thumbnail.
 				var thumbArea = document.createElement("div");
+				
 				eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
 				thumbArea.appendClassName("thumb");
 				thumbArea.setAttribute("data-draghover", true);
 				
-				
-				thumbArea.innerHTML = "<section><img src=\"" + event.target.result + "\""
-						+ "title=\"" + escape(file.name) + "\""
-						+ "draggable=\"false\""
-						+ "data-draghover=\"true\"></section>";
+				thumbArea.innerHTML = "<div class=\"positioner\">" +
+						"<section data-draghover=\"true\">" +
+								"<img src=\"" + event.target.result + "\"" +
+									"title=\"" + escape(file.name) + "\"" +
+									"draggable=\"false\"" +
+									"data-draghover=\"true\">" +
+						"</section>" +
+						"</div>";
 				
 				var removeButton = document.createElement("div");
-				thumbArea.insertBefore(removeButton, null);
+				thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
 				removeButton.appendClassName("removeButton");
 				removeButton.setAttribute("data-draghover", true);
 				

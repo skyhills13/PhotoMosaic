@@ -19,9 +19,14 @@
 	<section class="albums">
 		<div class="positioner">
 			<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
-				<a class="album" href="/result/${mosaic.getUrl()}">
-					<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
-				</a>
+				<div class="album">
+					<a href="/result/${mosaic.getUrl()}">
+						<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+					</a>
+					<div class="info">
+						<p>${mosaic.getTitle()}</p>
+					</div>
+				</div>
 			</c:forEach>
 			<div class="clear"></div>
 		</div>
