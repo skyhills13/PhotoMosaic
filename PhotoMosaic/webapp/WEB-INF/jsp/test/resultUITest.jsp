@@ -7,10 +7,14 @@
 <%-- <%@ page isELIgnored="false" %> --%>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/Range2Range.css">
 <title>show mosaic</title>
 </head>
 <body>
-	<article id="lightBox" class="thumbnail"></article>
+	<article id="lightBox" class="thumbnail">
+		<input type="button" value="X"></input>
+	</article>
 	<jsp:include page="../include/header.jsp" flush="false" />
 	<div id="wrapper">
 		<%-- <img id="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" /> --%>
@@ -105,10 +109,12 @@
 			</ul>
 		</article>
 	</div>
+	<script src="/javascripts/RangeBar.js"></script>
 	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
 	<script src="/javascripts/ShareTool.js?20141112"></script>
 	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
 	<script src="/javascripts/result.js"></script>
+	
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

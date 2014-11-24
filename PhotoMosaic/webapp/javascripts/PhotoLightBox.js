@@ -15,7 +15,8 @@ PhotoLightBox.prototype = {
 		var THUMBNAIL = "thumbnail";
 		var SHOWING = "show";
 		
-		this.lightBox.innerHTML = section;
+//		this.lightBox.innerHTML = section;
+		this.lightBox.insertAdjacentHTML("beforeend", section);
 		this.lightBox.classList.add(THUMBNAIL);
 		this.lightBox.classList.add(SHOWING);
 		showCallback.bind(this)();
@@ -46,7 +47,7 @@ PhotoLightBox.prototype = {
 	showComment : function(sectionElement) {
 		var commentElements = "";
 		this.commentList.map(function(item) {
-			var pElement = "<p>" + item + "</p>";
+			var pElement = "<p><span>" + item + "</span></p>";
 			commentElements += pElement;
 		});
 		sectionElement.insertAdjacentHTML("afterbegin", commentElements);
@@ -56,12 +57,10 @@ PhotoLightBox.prototype = {
 		var HIDE_CLASS = "hide";
 		var SHOW_CLASS = "show";
 		var THUMBNAIL_CLASS = "thumbnail";
-		var SLIDE_CLASS = "slide";
 
 		this.lightBox.addEventListener("click", function() {
 			if(!lightBox.classList.contains(THUMBNAIL_CLASS)) return;
 			lightBox.classList.add(HIDE_CLASS);
-			lightBox.classList.add(SLIDE_CLASS);
 			lightBox.classList.remove(THUMBNAIL_CLASS);
 			lightBox.classList.remove(SHOW_CLASS);
 			this.backgroundScrollState();

@@ -1,0 +1,22 @@
+#range2range{
+	position : relative;
+	height : 100%;
+}
+
+#bar2bar{
+	position : relative;
+	
+	width : 10px;
+	height : 70%;
+	background : blue; 
+	border : 40px solid green;
+}
+
+#point2point{
+	position : relative;
+	top : 10px;
+	border : none;
+	width : 10px;
+	height : 10px; 
+	background: red;
+}
