@@ -45,6 +45,28 @@ body * {
 	letter-spacing: 0px;
 }
 
+.albums .empty {
+	position: absolute;
+	width: 100%;
+	
+	font-size: initial;
+	word-spacing: initial;
+	letter-spacing: initial;
+}
+
+.albums .empty h1 {
+	font-size: 30px;
+	font-weight: 800;
+}
+
+.albums .empty .album {
+	position: relative;
+	float: left;
+	width: 400px;
+	height: 300px;
+	margin: 5px;
+}
+
 @media only screen
 and (min-width: 1261px) {
 	.albums > .positioner {
@@ -63,24 +85,41 @@ and (min-width: 1261px) {
 }
 
 @media only screen
-and (min-width: 851px) and (max-width: 1260px) {
+and (min-width: 951px) and (max-width: 1260px) {
 	.albums > .positioner {
-		width: 820px;
+		width: 930px;
 		left: 50%;
-		margin-left: -410px;
+		margin-left: -465px;
 	}
 	
 	.album {
 		position: relative;
 		float: left;
-		width: 400px;
-		height: 300px;
+		width: 300px;
+		height: 225px;
 		margin: 5px;
 	}
 }
 
 @media only screen
-and (max-width: 850px) {
+and (min-width: 641px) and (max-width: 950px) {
+	.albums > .positioner {
+		width: 620px;
+		left: 50%;
+		margin-left: -310px;
+	}
+	
+	.album {
+		position: relative;
+		float: left;
+		width: 300px;
+		height: 225px;
+		margin: 5px;
+	}
+}
+
+@media only screen
+and (max-width: 640px) {
 	.album {
 		position: relative;
 		display: inline-block;

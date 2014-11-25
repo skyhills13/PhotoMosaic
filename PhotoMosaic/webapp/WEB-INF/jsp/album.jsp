@@ -6,10 +6,12 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Album page</title>
-	<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
-	<link type="text/css" rel="stylesheet" href="/stylesheets/album.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<title>Album page</title>
+<link type="text/css" rel="stylesheet" href="/stylesheets/reset.css" />
+<link type="text/css" rel="stylesheet" href="/stylesheets/album.css" />
 </head>
 
 <body>
@@ -18,16 +20,26 @@
 
 	<section class="albums">
 		<div class="positioner">
-			<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
-				<div class="album">
-					<a href="/result/${mosaic.getUrl()}">
-						<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
-						<div class="info">
-							<h2 class="title">${mosaic.getTitle()}</h2>
+			<c:choose>
+				<c:when test="${empty mosaics}">
+					<div class="empty">
+						<h1>No albums.</h1>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="mosaic" items="${mosaics}" varStatus="status">
+						<div class="album">
+							<a href="/result/${mosaic.getUrl()}">
+								<img src="/images/${mosaic.getId()}/${mosaic.getFileName()}" />
+								<div class="info">
+									<h2 class="title">${mosaic.getTitle()}</h2>
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-			</c:forEach>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			
 			<div class="clear"></div>
 		</div>
 	</section>
