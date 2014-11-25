@@ -28,10 +28,19 @@
 					<input type="text" name="title" placeholder="Title" />
 				</section>
 				<section>
-					<input type="text" name="comment" placeholder="Contents"/>
+					<input type="text" name="comment" placeholder="Comment"/>
 				</section>
 			</header>
-			<div class="hoverLine" data-draghover="true"></div>
+			<div class="hoverLine" data-draghover="true">
+				<div class="info">
+					<img src="/images/button/image.png"></img>
+					<div>
+						<p>Drag images here</p>
+						<p>or</p>
+						<p>Click [Add Photo]</p>
+					</div>
+				</div>
+			</div>
 			<article class="pictures" data-draghover="true">
 				<div class="positioner" data-draghover="true">
 					<div class="clean"></div>
@@ -39,8 +48,8 @@
 			</article>
 		</article>
 		<section class="controll">
-			<div class="inputFile">
-				<div>Add Photo</div>
+			<div class="button inputFile">
+				<div class="value">Add Photo</div>
 				<input type="file" multiple accept="image/*" />
 			</div>
 			<button class="button">Upload</button>
