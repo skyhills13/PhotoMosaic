@@ -8,11 +8,16 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/Range2Range.css">
 <title>show mosaic</title>
 </head>
 <body>
-	<article id="lightBox"></article>
+	<article id="lightBox" class="thumbnail">
+		<input type="button" value="X"></input>
+	</article>
+	<div id="header">
 	<jsp:include page="./include/header.jsp" flush="false" />
+	</div>
 	<div id="wrapper">
 		<aside>
 			<section class="thumbnail">
@@ -28,22 +33,24 @@
 			<section class="info">
 				<ul>
 					<li>
-						<p>title</p> <%-- <p>${mosaic.title}</p> --%> <c:choose>
+						<p>title</p>
+						<c:choose>
 							<c:when test="${mosaic.title!=null}">
 								<p>${mosaic.title}</p>
 							</c:when>
 							<c:otherwise>
-								<p>test subject</p>
+								<p>cannot find title</p>
 							</c:otherwise>
 						</c:choose>
 					</li>
 					<li>
-						<p>comment</p> <%-- <p>${mosaic.comment}</p> --%> <c:choose>
+						<p>comment</p>
+						<c:choose>
 							<c:when test="${mosaic.comment!=null}">
 								<p>${mosaic.comment}</p>
 							</c:when>
 							<c:otherwise>
-								<p>test value</p>
+								<p>cannot find comment</p>
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -59,12 +66,13 @@
 						</c:choose>
 					</li>
 					<li>
-						<p>date</p> <%-- <p>${mosaic.createdDate}</p> --%> <c:choose>
+						<p>date</p>
+						<c:choose>
 							<c:when test="${mosaic.createdDate!=null}">
 								<p>${mosaic.createdDate}</p>
 							</c:when>
 							<c:otherwise>
-								<p>test value</p>
+								<p>cannot find date</p>
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -76,19 +84,22 @@
 		</aside>
 		<article id="list">
 			<ul>
-				<c:forEach var="photo" items="${mosaic.getPhotos()}"
-					varStatus="status">
-					<li class="container" data-list="${status.index}"><img
-						class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" /></li>
+				<c:forEach var="photo" items="${mosaic.getPhotos()}" varStatus="status">
+					<li class="container" data-list="${status.index}">
+						<img class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" />
+					</li>
 				</c:forEach>
 			</ul>
 		</article>
 
 	</div>
-	<script src="/javascripts/PhotoListSlide.js?20141112"></script>
-	<script src="/javascripts/ShareTool.js?20141112"></script>
-	<script src="/javascripts/PhotoLightBox.js?20141112"></script>
+	
+	<script src="/javascripts/RangeBar.js"></script>
+	<script src="/javascripts/PhotoListSlide.js"></script>
+	<script src="/javascripts/ShareTool.js"></script>
+	<script src="/javascripts/PhotoLightBox.js"></script>
 	<script src="/javascripts/result.js"></script>
+
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");

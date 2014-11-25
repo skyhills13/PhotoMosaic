@@ -14,9 +14,10 @@ header {
 	left: 0px;
 	z-index: 9999;
 	width: 100%;
+	min-width : 450px;
 	height: 60px;
-	background: RGBA(10, 10, 10, 0.6);
-	box-shadow: 0px 2px 5px RGBA(10, 10, 10, 0.3);
+	background: RGBA(10, 10, 10, 0.8);
+	/* box-shadow: 0px 2px 5px RGBA(10, 10, 10, 0.3); */
 	text-align : center;
 }
 
@@ -36,10 +37,10 @@ header a button {
 	font-size: 18px;
 	color: RGBA(255, 255, 255, 0.6);
 	border : none;
-	letter-spacing : 3px;
+	letter-spacing : 2px;
 	background : none;
 	font-family: 'Lato', sans-serif;
-	font-weight: 400;
+	font-weight: 100;
 }
 
 header a button:hover {

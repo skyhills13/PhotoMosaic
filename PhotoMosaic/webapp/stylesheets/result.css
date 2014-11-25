@@ -12,6 +12,15 @@ body.lightBoxShowing{
 	overflow : hidden;
 }
 
+div#header header{
+	background : RGBA(255,255,255,0.8);
+	border-bottom : 1px solid RGBA(10, 10, 10, 0.5);
+}
+
+div#header header a button{
+	color : RGBA(10,10,10,0.8);
+}
+
 div#wrapper{
 	margin-top : 100px;
 	position : relative;
