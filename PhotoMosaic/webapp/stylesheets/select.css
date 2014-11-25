@@ -30,6 +30,27 @@ body * {
 	opacity: 0;
 }
 
+.button {
+	display: table;
+	
+	width: 110px;
+	height: 46px;
+	
+	background-color: #AAA;
+	
+	border: none;
+	border-radius: 5px;
+	
+	overflow: hidden;
+}
+
+.button > .value {
+	display: table-cell;
+	
+	text-align: center;
+	vertical-align: middle;
+}
+
 .clear {
 	clear: both;
 }
@@ -52,7 +73,8 @@ body * {
 
 	left: 10%;
 
-	border: 1px solid #bdc7d8;
+	border: 1px solid #CCC;
+	box-shadow: 0px 3px 6px rgba(10, 10, 10, 0.3);
 }
 
 .select header:nth-child(1) {
@@ -61,6 +83,8 @@ body * {
 
 	width: 100%;
 	height: 40px;
+	
+	box-shadow: initial;
 }
 
 .select header > * {
@@ -69,7 +93,7 @@ body * {
 
 .select header > *:nth-child(1) {
 	width: 300px;
-	border-right: 1px solid #bdc7d8;
+	border-right: 1px solid #CCC;
 }
 
 .select input[type=text] {
@@ -106,6 +130,43 @@ body * {
 	border: 3px dashed #BBB;
 }
 
+.select .hoverLine .info div {
+	position: absolute;
+	
+	width: 100%;
+	/* height: 105px */
+	top: 50%;
+	margin-top: -52.5px;
+}
+
+.select .hoverLine img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -46px;
+	margin-top: -60px;
+	
+	opacity: 0.4;
+}
+
+.select .hoverLine p {
+	width: 100%;
+	
+	font-size: 30px;
+	line-height: 35px;
+	font-weight: 800;
+	text-align: center;
+}
+
+.select .hoverLine div p:nth-child(2) {
+	font-size: 24px;
+	font-weight: initial;
+}
+
+.select .hoverLine div p:nth-child(3) {
+	font-size: 26px;
+}
+
 .select .pictures {
 	position: absolute;
 
@@ -115,7 +176,7 @@ body * {
 	bottom: 0px;
 
 	padding: 8px;
-	border-top: 1px solid #bdc7d8;
+	border-top: 1px solid #CCC;
 
 	text-align: center;
 
@@ -205,7 +266,7 @@ body * {
 	bottom: 20px;
 }
 
-.select .controll .button {
+.select .controll button {
 	position: absolute;
 	display: block;
 
@@ -227,32 +288,16 @@ body * {
 }
 
 .inputFile {
-	display: table;
 	position: absolute;
-	
-	width: 110px;
-	height: 46px;
 	
 	right: 50%;
 	top: 50%;
 	
 	margin-right: 8px;
 	margin-top: -23px;
-	
-	background-color: #AAA;
-	
-	border: none;
-	border-radius: 5px;
-	
-	overflow: hidden;
 }
 
-.inputFile > div {
-	display: table-cell;
-	
-	text-align: center;
-	vertical-align: middle;
-	
+.inputFile > .value {
 	font-size: 16px;
 }
 
@@ -268,4 +313,3 @@ body * {
 	
 	opacity: 0;
 }
-

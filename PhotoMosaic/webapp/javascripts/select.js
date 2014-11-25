@@ -7,6 +7,7 @@
 (function() {
 	var eleBody = document.querySelector("body");
 	
+	var eleInfo = document.querySelector(".hoverLine .info");
 	var eleInput = document.querySelector(".inputFile input[type=file]");
 	var eleDrag = document.querySelector(".pictures");
 	
@@ -60,6 +61,7 @@
 		// Closure to capture the file information.
 		reader.onload = (function(file) {
 			return function(event) {
+				eleInfo.appendClassName("hidden");
 				// Render thumbnail.
 				var thumbArea = document.createElement("div");
 				
@@ -87,6 +89,10 @@
 						
 						images.splice(images.indexOf(itsFile), 1);
 						thumbArea.parentNode.removeChild(thumbArea);
+						
+						if (images.length <= 0) {
+							eleInfo.removeClassName("hidden");
+						}
 					}
 				})(thumbArea));
 				
