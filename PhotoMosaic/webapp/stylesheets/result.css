@@ -8,86 +8,128 @@
 /*font-family: 'Lato', sans-serif;*/
 @import url(http://fonts.googleapis.com/css?family=Lato:100,400);
 
-body.lightBoxShowing{
-	overflow : hidden;
+body.lightBoxShowing {
+	overflow: hidden;
 }
 
-div#header header{
-	background : RGBA(255,255,255,0.8);
-	border-bottom : 1px solid RGBA(10, 10, 10, 0.5);
+body {
+	background-size: cover;
 }
 
-div#header header a button{
-	color : RGBA(10,10,10,0.8);
+body::before {
+	/* content : url("../images/background/texture_line.png"); */
+	content: "";
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: RGBA(10, 10, 10, 0.4);
 }
 
-div#wrapper{
-	margin-top : 100px;
-	position : relative;
-	text-align : center;
-	min-width : 800px;
+/* ============================== */
+/*                                */
+/* 결과 페이지에만 적용되는 header 스타일 */
+/*                                */
+/* ============================== */
+div#header header {
+	background: RGBA(10, 10, 10, 0.8);
+	border-bottom: 1px solid RGBA(10, 10, 10, 0.8);
 }
 
-@media screen and (max-width : 800px){
-	aside {
-		padding-right: 30px;
-	}
-	article#list{
-		padding-left : 30px;	
-		width : 475px;
-	}
+div#header header a {
+	position: relative;
+	top: 0px;
+	left: 0px;
 }
 
-@media screen and (min-width : 800px) and (max-width : 1280px){
-	aside {
-		padding-right : 59px;
-	}
-	article#list{
-		padding-left : 59px;
-		width : 475px;
-	}
+div#header header a button {
+	color: RGBA(10, 10, 10, 0.8);
+	position: relative;
+	top: 0px;
+	left: 0px;
 }
 
+div#header header a button:hover {
+	background: none;
+}
+
+div#header header a button span {
+	color: RGBA(255, 255, 255, 0.8);
+	display: inline-block;
+	width: initial;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	text-shadow: 0px 0px 1px RGBA(255, 255, 255, 0.2);
+	-webkit-transition: text-shadow 0.5s;
+}
+
+div#header header a button span::before {
+	margin: auto;
+	content: "";
+	width: 0%;
+	height: 2px;
+	position: absolute;
+	bottom: -6px;
+	left: 50%;
+	background-color: RGBA(255, 255, 255, 0.7);
+}
+
+div#header header a button:hover span {
+	text-shadow: 0px 0px 10px RGBA(255, 255, 255, 1);
+}
+
+div#header header a button:hover span::before {
+	margin: auto;
+	content: "";
+	width: 100%;
+	height: 2px;
+	position: absolute;
+	bottom: -6px;
+	left: 0px;
+	background-color: RGBA(255, 255, 255, 0.7);
+	-webkit-transition: width 0.5s, left 0.5s;
+}
+
+/* ========================	*/
+/*							*/
+/* 사이드바&사진 리스트 보기 시작	*/
+/*                        	*/
+/* ========================	*/
+div#wrapper {
+	margin-top: 100px;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	height: 100%;
+}
+
+/* 사진 리스트 */
 article#list {
-	width : 475px;
-	display : inline-block;
+	position: absolute;
+	left: 280px;
+	top: 0px;
+	display: inline-block;
 	overflow-x: hidden;
-	padding-top : 40px;
-	padding-bottom : 40px;
-	border-left: 1px solid RGBA(180, 180, 180, 1);
-	-webkit-transition: border 0.3s;
-	-webkit-transition : padding-left 0.3s;
+	padding: 40px 20px;
+	border: 1px solid RGBA(10, 10, 10, 0.8);
+	background: RGBA(10, 10, 10, 0.3);
+	-webkit-transition: border 0.3s, padding-left 0.3s;
 }
 
-
-article#list ul{
+article#list ul {
 	text-align: -webkit-left;
 }
 
 article#list ul li {
-	width: 48%;
-	margin-left : 3px;
+	/* width : 48%; */
 	display: inline-block;
 	position: relative;
 	vertical-align: top;
 	-webkit-transition: width 1s;
-}
-
-
-@media screen and (min-width : 1280px){
-	aside {
-		padding-right : 59px;	
-	}
-	article#list{
-		padding-left : 59px;
-		width : 800px;
-	}
-	article#list ul li{
-		width: 32%;
-		position : relative;
-		top : 0px;
-		left : 0px;
-	}
+	margin-left: 3px;
 }
 
 article#list ul li img {
@@ -116,16 +158,32 @@ article#list ul li:hover::before {
 	margin: -16px;
 }
 
+/* @media all and (min-width : 800px) and (max-width: 1280px){
+	article#list {
+		border : 1px solid red;
+	}
+	
+	article#list ul li {
+		width : 48%;
+	}
+}
+ */
+
+/* 사이드바 */
 aside {
-	width :200px;
-	display : inline-block;
-	vertical-align : top;
-	padding-top : 40px;
-	padding-bottom : 40px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	/* width: 240px; */
+	display: inline-block;
+	vertical-align: top;
+	padding: 40px 20px;
 	overflow: scroll;
-	background: RGBA(255, 255, 255, 1);
-	text-align : -webkit-right;
-	-webkit-transition : padding-right 0.3s;
+	background: RGBA(10, 10, 10, 0.3);
+	border: 1px solid RGBA(10, 10, 10, 0.8);
+	text-align: -webkit-right;
+	-webkit-transition: padding-right 0.3s;
+	text-align: -webkit-right;
 }
 
 aside section {
@@ -144,8 +202,10 @@ aside section.info ul li {
 }
 
 aside section.info ul li p:nth-child(1) {
+	display: inline;
 	background-color: RGBA(209, 209, 209, 0.5);
 	font-style: italic;
+	background-color: RGBA(209, 209, 209, 0.5);
 }
 
 aside section.share {
@@ -183,3 +243,91 @@ aside section.share input[type='button']:focus {
 	font-family: 'Lato', sans-serif;
 	font-weight: 100;
 }
+
+@media all and (max-width : 760px) {
+	div#wrapper {
+		width: 760px;
+	}
+	aside {
+		left: 30px;
+		width: 178px; /* total 200px */
+		padding: 40px 10px;
+	}
+	article#list {
+		left: 240px;
+		width: 478px; /* total 500px */
+		padding: 40px 10px;
+	}
+	article#list ul li {
+		width: 48%;
+	}
+}
+
+@media all and (min-width : 761px) and (max-width : 1000px) {
+	div#wrapper {
+		min-width: 760px;
+	}
+	aside {
+		left: 4%;
+		width: 23%; /* total 280px */
+		padding: 40px 20px;
+	}
+	article#list {
+		left: 27%;
+		/* min-width : 478px;  */ /* total 500px */
+		padding: 40px 20px;
+		margin-left: 50px;
+		margin-right: 4%;
+	}
+	article#list ul li {
+		width: 48%;
+	}
+}
+
+@media all and (min-width : 1001px) {
+	div#wrapper {
+		width: 940px;
+		margin : auto;
+		margin-top : 100px;
+	}
+	aside {
+		/* left : 4%; */
+		width: 230px; /* total 280px */
+		padding: 40px 20px;
+	}
+	article#list {
+		width : 600px;
+		left : 272px;
+		padding: 40px 20px;
+		margin-left : 10px;
+	}
+	article#list ul li {
+		width: 32%;
+	}
+}
+
+/* 
+@media all and (min-width : 1001px){
+	div#wrapper {
+		width : 1000px;
+		margin : auto;
+	}
+	aside {
+		left : 3%;
+		width : 238px; total 280px
+		padding : 40px 20px;
+	}
+	
+	article#list {
+		left : 26%;
+		min-width : 478px;  */ /* total 500px
+		padding : 40px 20px;
+		margin-left : 50px;
+		margin-right : 3%;
+	}
+	article#list ul li {
+		width : 48%;
+	}	
+}
+
+ */

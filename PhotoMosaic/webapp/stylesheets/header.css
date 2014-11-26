@@ -17,6 +17,7 @@ header {
 	min-width : 450px;
 	height: 60px;
 	background: RGBA(10, 10, 10, 0.8);
+	border-bottom : RGBA(10, 10, 10, 0.8);
 	/* box-shadow: 0px 2px 5px RGBA(10, 10, 10, 0.3); */
 	text-align : center;
 }
@@ -26,7 +27,6 @@ header a {
 	text-align: center;
 	-webkit-transition: background-color 0.3s;
 	height : 50px;
-	
 }
 
 header a button {
