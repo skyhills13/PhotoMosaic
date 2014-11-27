@@ -11,7 +11,7 @@
  --> 	
  	<!-- remote Database --> 
 	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry> 
-	<entry key="database.url">jdbc:mysql://localhost:3306/photomosaic</entry> 
+	<entry key="database.url">jdbc:mysql://localhost/photomosaic</entry> 
 	<entry key="database.username">root</entry> 
  	<entry key="database.password"></entry> 
 </properties> 

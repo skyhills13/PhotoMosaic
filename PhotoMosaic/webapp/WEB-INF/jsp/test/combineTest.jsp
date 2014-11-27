@@ -34,7 +34,7 @@
  */		
  	
 		 var pppp = document.querySelectorAll("article#list ul li img");
-		 PhotoChecker(pppp);
+		 /* PhotoChecker(pppp); */
 
 		 var t = [ [ "1x1", "1x1", "1x4", "1x4", "1x1", "1x1", "x", "x", "2x1", "x", "x", "x", "2x1", "x", "x", "x" ],
 					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
