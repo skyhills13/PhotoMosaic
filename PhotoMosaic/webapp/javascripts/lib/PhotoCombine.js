@@ -6,7 +6,8 @@ function PhotoCombine() {
 PhotoCombine.prototype = {
 	create : function() {
 		this.makeMosaicBoard();
-		this.linkBoardWithImage();
+		//this.linkBoardWithImageByOptimize();
+		this.linkBoardWithImageByOrder();
 		this.boardToCanvas();
 	},
 
@@ -31,14 +32,10 @@ PhotoCombine.prototype = {
 	drawingTargetImage : function(item) {
 		
 		var i = this.adjustImageSize(item);
-		// this.adjustImagePosition(item);
-		// var i = item;
 		i = this.adjustImagePosition(i);
 		var img = this.photoArray[0];
 		var canvas = this.mainCanvas;
 		var context = canvas.getContext("2d");
-		// context.drawImage(i.imgElement, 0, 0, i._width, i._height, i.posX,
-		// i.posY, i._width, i._height);
 		context.drawImage(i.imgElement, i.widthStart, i.heightStart, i.widthBound, i.heightBound, i.posX, i.posY, i.cWidth, i.cHeight);
 	},
 	
@@ -68,6 +65,7 @@ PhotoCombine.prototype = {
 			// "sy" : ,
 			// "widthBound" : ,
 			// "heightBound" : ,
+//			"orientation" : "",
 			"posX" : item.posX,
 			"posY" : item.posY,
 			"cWidth" : item._width,
@@ -84,24 +82,10 @@ PhotoCombine.prototype = {
 			mat.widthBound = item._width*(item.imgElement.naturalHeight/item._height);
 		}
 		return mat;
-		
-//		var remain = item.imgElement.Height * (item._width / item.imgElement.width) - item._height;
-//		
-//		if (remain > 0) {
-//			var realRemain = item.imgElement.height - item._height * (item.imgElement.width / item._width);
-//			drawMaterial.pHeight = item.imgElement.height - realRemain;
-//			return drawMaterial;
-//		}
-//		
-//		drawMaterial.pHeight = item.imgElement.height;
-//		var reamin2 = item.imgElement.width * (item._height/item.imgElement.height) - item._width;
-//		drawMaterial.pWidth = item.imgElement.width - reamin2*(item.imgElement.height/item._height);
-//
-//		
-//		return drawMaterial;
 	},
-
-	linkBoardWithImage : function() {
+	
+	// 좌측 상단부터 차례대로 사진 넣기
+	linkBoardWithImageByOrder : function() {
 		var boardArray = this.mosaic.board;
 		var imageArray = this.photoArray;
 		boardArray.map(function(item, i) {
@@ -115,16 +99,64 @@ PhotoCombine.prototype = {
 		});
 	},
 	
+	// 최적의 장소에 넣기
+	linkBoardWithImageByOptimize : function(){
+		var boardHash = this.getBoardHashByOrientation();
+		var imageHash = this.getImageHashByOrientation();
+		console.log("this is imagehash");
+		console.log(imageHash);
+		console.log("this is boardhash");
+		console.log(boardHash);
+	},
+	
+	getBoardHashByOrientation : function(){
+		var bArray = this.mosaic.board;
+		var ratioHash = {
+			"portrait" : {},
+			"square" : {},
+			"landscape" : {}
+		}
+		for(var i=0 ; i<bArray.length ; i++){
+			var orientation = bArray[i].orientation;
+			var ratio = bArray[i].ratio;
+			var targetHash = ratioHash[orientation];
+			if(typeof targetHash[ratio] === "undefined") targetHash[ratio] = [];
+			targetHash[ratio].push(bArray[i]);
+		}
+		return ratioHash;
+	},
+	
+	getImageHashByOrientation : function(){
+		var pArray = this.photoArray;
+		var ratioHash = {
+				"portrait" : {},
+				"square" : {},
+				"landscape" : {}
+			};
+		var checkedPhoto = PhotoChecker(pArray).simpleRatioList;
+		for(var i=0 ; i<checkedPhoto.length ; i++){
+			var orientation = checkedPhoto[i].simpleOrientation;
+			var ratio = checkedPhoto[i].simpleRatio;
+			var targetHash = ratioHash[orientation];
+			if(typeof targetHash[ratio] === "undefined") targetHash[ratio] = [];
+			targetHash[ratio].push(checkedPhoto[i]);
+		}
+		return ratioHash;
+	},
+	
 	makeMosaicBoard : function() {
 		var t = this.template;
 		var m = this.mosaic;
 		var convertedTemplate = [];
 		t.array.map(function(item, oneDimIdx) {
+			var ori = this.getOrientationWithRatio(item);
 			var idx = this.oneDimToTwoDim(oneDimIdx);
 			var area = this.stringAreaToObject(item);
 			if (area === null)
 				return;
 			var cvtItem = {
+				"orientation" : ori,
+				"ratio" : item,
 				"posX" : idx.r * m.roomWidth,
 				"posY" : idx.c * m.roomHeight,
 				"_width" : area.w * m.roomWidth,
@@ -133,9 +165,17 @@ PhotoCombine.prototype = {
 			convertedTemplate.push(cvtItem);
 		}.bind(this));
 		m.board = convertedTemplate;
-		// ooo = convertedTemplate;
 	},
-
+	
+	getOrientationWithRatio : function(ratio){
+		var splited = ratio.split("x");
+		var left = splited[0];
+		var right = splited[1];
+		
+		if(left === right) return "square";
+		return left>right?"landscape":"portrait";
+	},
+	
 	oneDimToTwoDim : function(index) {
 		var column = this.template.column;
 		var row = this.template.row;

@@ -24,7 +24,6 @@ function getOrientationComposition(list){
 		composition[orientation]++;
 	});
 	
-	console.log(composition);
 	return composition;
 }
 
@@ -33,9 +32,10 @@ function createSimpleRatioObejctList(plist){
 	for(var i=0 ; i<plist.length ; i++){
 		var info = convertSimpleRatio(plist[i]);
 		var pObject = {
-			"orientation" : info.orientation,
+			"simpleOrientation" : info.simpleOrientation,
 			"simpleRatio" : info.simpleRatio,
 			"originalRatio" : info.originalRatio,
+			"originalOrientation" : info.originalOrientation,
 			"originalElement" : plist[i]
 		}
 		olistArray.push(pObject);
@@ -50,22 +50,31 @@ function convertSimpleRatio(photoElement){
 	var ratio = originHeight / originWidth;
 	var info = {};
 	info.originalRatio = ratio;
-	info.orientation = getPhotoOrientation(ratio)
-	info.simpleRatio = getSimpleRatio(info.orientation, ratio);
+	info.originalOrientation = getPhotoOrientation(ratio);
+	var simpleObject = getSimpleRatio(info.originalOrientation, ratio);
+	info.simpleRatio = simpleObject.simpleRatio;
+	info.simpleOrientation = simpleObject.simpleOrientation;
 	return info;
 }
 
 function getSimpleRatio(orientation , ratio){
-	var section = "";
+	var section = {
+		"simpleRatio" : "",
+		"simpleOrientation" : ""
+	};
 	if(orientation === "square" ){
-		section = "1x1";
+		section.simpleRatio = "1x1";
+		section.simpleOrientation = "square";
 	}
 	if(orientation === "landscape" ){
-		var rat = 1/ratio;
-		section = Math.round(rat) + "x1";
+		var rat = Math.round(1/ratio);
+		section.simpleRatio = rat + "x1";
+		section.simpleOrientation = rat ===1?"square":"landscape";
 	}
 	if(orientation === "portrait"){
-		section = "1x" + Math.round(ratio);
+		var rat = Math.round(ratio);
+		section.simpleRatio = "1x" + rat;
+		section.simpleOrientation = rat===1?"square":"portrait";
 	}
 	return section;
 }

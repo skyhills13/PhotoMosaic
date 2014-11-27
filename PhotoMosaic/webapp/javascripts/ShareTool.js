@@ -1,8 +1,8 @@
 
 
 function ShareTool(){
+	
 }
-
 
 ShareTool.prototype = {
 	URL : function(sButton){
