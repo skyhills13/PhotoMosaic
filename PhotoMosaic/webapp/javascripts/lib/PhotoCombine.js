@@ -103,14 +103,43 @@ PhotoCombine.prototype = {
 	linkBoardWithImageByOptimize : function(){
 		var boardHash = this.getBoardHashByOrientation();
 		var imageHash = this.getImageHashByOrientation();
-		console.log("this is imagehash");
-		console.log(imageHash);
-		console.log("this is boardhash");
-		console.log(boardHash);
+		var matched = this.matchByHash(imageHash, boardHash);
+		return matched;
+	},
+	
+	matchByHash : function(imageHash, boardHash){
+		console.log(imageHash, boardHash);
+		var matched = [];
+		// 가장 적합한 match
+		for(var orientType in imageHash){
+			var imageTargetHash = imageHash[orientType];
+			for(var imageTemplateSize in imageTargetHash){
+				var imageTargetArray = imageTargetHash[imageTemplateSize]; 
+				imageTargetArray.map(function(item){
+					var boardTargetArray = boardHash[orientType][imageTemplateSize];
+					if(typeof boardTargetArray === "undefined") {
+						item.isMatched = "false";
+						return;
+					}
+					var remain = boardTargetArray.length;
+					if(remain === 0){
+						item.isMatched = "false";
+						return;
+					}
+					
+					var matchedObject = boardTargetArray.pop();
+					matchedObject.imgElement = item.originalElement;
+					item.isMatched = "true";
+					matched.push(matchedObject);
+				});
+			}
+		}
+		return matched;
 	},
 	
 	getBoardHashByOrientation : function(){
 		var bArray = this.mosaic.board;
+		console.log(bArray);
 		var ratioHash = {
 			"portrait" : {},
 			"square" : {},

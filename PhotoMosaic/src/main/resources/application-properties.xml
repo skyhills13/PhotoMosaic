@@ -4,14 +4,15 @@
 	<comment>application-properties</comment> 
 
 	<!-- remote Database --> 
-<!-- 	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry> 
+<!-- 	
+	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry> 
 	<entry key="database.url">jdbc:mysql://10.73.45.131:3306/photomosaic</entry> 
 	<entry key="database.username">crong</entry> 
  	<entry key="database.password"></entry> 
  --> 	
  	<!-- remote Database --> 
 	<entry key="database.driverClassName">com.mysql.jdbc.Driver</entry> 
-	<entry key="database.url">jdbc:mysql://localhost/photomosaic</entry> 
+	<entry key="database.url">jdbc:mysql://localhost:3306/photomosaic</entry> 
 	<entry key="database.username">root</entry> 
  	<entry key="database.password"></entry> 
 </properties> 
