@@ -60,11 +60,16 @@ MultiFileHandler.prototype = {
 		if (event.type === "dragover") {
 			event.dataTransfer.dropEffect = "copy";
 
-			this.hoverLine.appendClassName("hoverOut");
 			if (event.target.getAttribute("data-draghover") === "true") {
+				if (this.hoverLine.hasClassName("hoverIn")) {
+					return;
+				}
 				this.hoverLine.appendClassName("hoverIn");
 				this.hoverLine.removeClassName("hoverOut");
 			} else {
+				if (this.hoverLine.hasClassName("hoverOut")) {
+					return;
+				}
 				this.hoverLine.appendClassName("hoverOut");
 				this.hoverLine.removeClassName("hoverIn");
 			}
