@@ -69,7 +69,7 @@
 				thumbArea.appendClassName("thumb");
 				thumbArea.setAttribute("data-draghover", true);
 				
-				thumbArea.innerHTML = "<div class=\"positioner\">" +
+				thumbArea.innerHTML = "<div class=\"positioner\" data-draghover=\"true\">" +
 						"<section data-draghover=\"true\">" +
 								"<img src=\"" + event.target.result + "\"" +
 									"title=\"" + escape(file.name) + "\"" +
@@ -123,8 +123,8 @@
 		
 		var combine = new PhotoCombine();
 		combine.getMaterial({
-			"mWidth" : 1000,
-			"mHeight" : 750,
+			"mWidth" : 2000,
+			"mHeight" : 1500,
 			"templateArray" : tArray,
 			"templateColumn" : 4, // getWidth
 			"templateRow" : 4, // getHeight
