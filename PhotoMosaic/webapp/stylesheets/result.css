@@ -249,23 +249,25 @@ aside section.share input[type='button']:focus {
 		width: 760px;
 	}
 	aside {
-		left: 30px;
+		position : static;
+		/* left: 30px; */
 		width: 178px; /* total 200px */
 		padding: 40px 10px;
 	}
 	article#list {
-		left: 240px;
-		width: 478px; /* total 500px */
+		position : static;
+		/* left: 240px; */
+		width: 428px; /* total 450px (좌우 border 2px padding 20px 너비 428px) */
 		padding: 40px 10px;
 	}
 	article#list ul li {
-		width: 48%;
+		width: 208px; /* total 210 (border : 좌우 1px 씩) */
 	}
 }
 
 @media all and (min-width : 761px) and (max-width : 1000px) {
 	div#wrapper {
-		min-width: 760px;
+		min-width: 761px;
 	}
 	aside {
 		left: 4%;
@@ -281,7 +283,8 @@ aside section.share input[type='button']:focus {
 	}
 	article#list ul li {
 		width: 48%;
-	}
+		
+ 	}
 }
 
 @media all and (min-width : 1001px) {
@@ -302,7 +305,8 @@ aside section.share input[type='button']:focus {
 		margin-left : 10px;
 	}
 	article#list ul li {
-		width: 32%;
+		width: 190px; /* 총 192px border 좌우 1px*/
+		height : 190px;
 	}
 }
 
