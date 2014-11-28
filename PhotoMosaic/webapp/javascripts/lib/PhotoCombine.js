@@ -28,6 +28,10 @@ PhotoCombine.prototype = {
 	getResult : function() {
 		return this.mainCanvas.toDataURL();
 	},
+	
+	getDataUrl : function(){
+		return this.mainCanvas.toDataURL();
+	},
 
 	drawingTargetImage : function(item) {
 		

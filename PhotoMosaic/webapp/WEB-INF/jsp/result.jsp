@@ -94,6 +94,7 @@
 
 	</div>
 	
+	<script src="/javascripts/StackBlurCanvas.js"></script>
 	<script src="/javascripts/RangeBar.js"></script>
 	<script src="/javascripts/PhotoListSlide.js"></script>
 	<script src="/javascripts/ShareTool.js"></script>
