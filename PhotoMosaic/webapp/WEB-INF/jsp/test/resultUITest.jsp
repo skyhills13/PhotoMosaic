@@ -79,25 +79,25 @@
 		</aside>
 		<article id="list">
 			<ul>
-				<li class="container" data-list="0"><img class="original"
+				<li class="container" data-list="0" style="background-image : url(/images/test/A0.jpg)"><img class="original"
 					src="/images/test/A0.jpg"></li>
-				<li class="container" data-list="1"><img class="original"
+				<li class="container" data-list="1" style="background-image : url(/images/test/A1.jpg)"><img class="original"
 					src="/images/test/A1.jpg"></li>
-				<li class="container" data-list="2"><img class="original"
+				<li class="container" data-list="2" style="background-image : url(/images/test/C2.jpg)"><img class="original"
 					src="/images/test/C2.jpg"></li>
-				<li class="container" data-list="3"><img class="original"
+				<li class="container" data-list="3" style="background-image : url(/images/test/A3.jpg)"><img class="original"
 					src="/images/test/A3.jpg"></li>
-				<li class="container" data-list="4"><img class="original"
+				<li class="container" data-list="4" style="background-image : url(/images/test/A2.jpg)"><img class="original"
 					src="/images/test/A2.jpg"></li>
-				<li class="container" data-list="5"><img class="original"
+				<li class="container" data-list="5" style="background-image : url(/images/test/C0.jpg)"><img class="original"
 					src="/images/test/C0.jpg"></li>
-				<li class="container" data-list="6"><img class="original"
+				<li class="container" data-list="6" style="background-image : url(/images/test/C1.jpg)"><img class="original"
 					src="/images/test/C1.jpg"></li>
-				<li class="container" data-list="7"><img class="original"
+				<li class="container" data-list="7" style="background-image : url(/images/test/pngtest1.png)"><img class="original"
 					src="/images/test/pngtest1.png"></li>
-				<li class="container" data-list="8"><img class="original"
+				<li class="container" data-list="8" style="background-image : url(/images/test/pngtest2.png)"><img class="original"
 					src="/images/test/pngtest2.png"></li>
-				<li class="container" data-list="9"><img class="original"
+				<li class="container" data-list="9" style="background-image : url(/images/test/pngtest3.png)"><img class="original"
 					src="/images/test/pngtest3.png"></li>
 			</ul>
 		</article>

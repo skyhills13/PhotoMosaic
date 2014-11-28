@@ -9,6 +9,6 @@ function resultPageDecorator(){
 		var source = photoList[random].src;
 		
 		var bg = document.querySelector("body");
-		bg.style.backgroundImage = "url(" + source + ")";
+//		bg.style.backgroundImage = "url(" + source + ")";
 	})();
 }

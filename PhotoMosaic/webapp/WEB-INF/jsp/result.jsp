@@ -85,7 +85,7 @@
 		<article id="list">
 			<ul>
 				<c:forEach var="photo" items="${mosaic.getPhotos()}" varStatus="status">
-					<li class="container" data-list="${status.index}">
+					<li class="container" data-list="${status.index}"  style="background-image: url(/images/${mosaic.id}/${photo.getUniqueId()});">
 						<img class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" />
 					</li>
 				</c:forEach>

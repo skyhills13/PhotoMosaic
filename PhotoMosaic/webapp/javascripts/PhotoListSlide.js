@@ -43,14 +43,16 @@ PhotoListSlide.prototype = {
 	
 	basicImageShowEvent : function(){
 		var IMG_TAG = "img";
-		var CLASS_NAME = "original";
-
+		var IMG_CLASS_NAME = "original";
+		var CONTAINER_CLASS = "container";
+		
 		this.wrapper.addEventListener("click", function(e) {
 			var target = e.target;
-			var isImageTag = e.target.tagName.toLowerCase() === IMG_TAG;
-			var isOriginalImage = target.classList.contains(CLASS_NAME);
-
-			if (isImageTag && isOriginalImage) {
+//			var isImageTag = e.target.tagName.toLowerCase() === IMG_TAG;
+//			var isOriginalImage = target.classList.contains(IMG_CLASS_NAME);
+			console.log(e);
+			var isContainer = e.target.classList.contains(CONTAINER_CLASS);
+			if (isContainer) {
 				var targetDataNumber = this.getDataNumber(target);
 				this.changeLightBoxVisible();
 				this.showTargetImage(targetDataNumber);
