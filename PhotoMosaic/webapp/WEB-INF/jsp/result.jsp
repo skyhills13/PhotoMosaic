@@ -5,6 +5,7 @@
 <html>
 <head>
 <%-- <%@ page isELIgnored="false" %> --%>
+<link rel="stylesheet" type="text/css" href="/stylesheets/font.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
@@ -20,6 +21,16 @@
 	</div>
 	<div id="wrapper">
 		<aside>
+			<section class="title">
+			<c:choose>
+				<c:when test="${mosaic.title!=null}">
+					<p>${mosaic.title}</p>
+				</c:when>
+				<c:otherwise>
+					<p>cannot find title</p>
+				</c:otherwise>
+			</c:choose>
+			</section>
 			<section class="thumbnail">
 				<c:choose>
 					<c:when test="${mosaic.fileName!=null}">
@@ -33,18 +44,6 @@
 			<section class="info">
 				<ul>
 					<li>
-						<p>title</p>
-						<c:choose>
-							<c:when test="${mosaic.title!=null}">
-								<p>${mosaic.title}</p>
-							</c:when>
-							<c:otherwise>
-								<p>cannot find title</p>
-							</c:otherwise>
-						</c:choose>
-					</li>
-					<li>
-						<p>comment</p>
 						<c:choose>
 							<c:when test="${mosaic.comment!=null}">
 								<p>${mosaic.comment}</p>
@@ -55,7 +54,6 @@
 						</c:choose>
 					</li>
 					<li>
-						<p>producer</p>
 						<c:choose>
 							<c:when test="${requestScope.producer!=null}">
 								<p>${requestScope.producer}</p>
@@ -66,7 +64,6 @@
 						</c:choose>
 					</li>
 					<li>
-						<p>date</p>
 						<c:choose>
 							<c:when test="${mosaic.createdDate!=null}">
 								<p>${mosaic.createdDate}</p>
@@ -78,10 +75,10 @@
 					</li>
 				</ul>
 			</section>
-			<section class="share">
+<!-- 			<section class="share">
 				<input type="button" value="share" />
 			</section>
-		</aside>
+ -->		</aside>
 		<article id="list">
 			<ul>
 				<c:forEach var="photo" items="${mosaic.getPhotos()}" varStatus="status">
@@ -104,7 +101,7 @@
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
-			var comments = document.querySelector("aside section.info ul li:nth-child(1) p:nth-child(2)").innerHTML;
+			var comments = document.querySelector("aside section.title p").innerHTML;
 			var lightbox = document.querySelector("article#lightBox");
 
 			new PhotoLightBox(lightbox, mosaic, [ comments ], function() {
