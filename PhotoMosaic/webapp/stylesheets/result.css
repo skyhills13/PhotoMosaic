@@ -42,8 +42,18 @@ body #bluredBg{
 /*                                */
 /* ============================== */
 div#header header {
-	background : RGBA(54, 117, 199, 1);
+	/* background : RGBA(54, 117, 199, 1); */
+	/* background : RGBA(194, 216, 237, 1); */
+	background : RGBA(255,255,255,1);
+	/* background : RGBA(10, 10, 10, 1); */
 	border-bottom: 1px solid RGBA(10, 10, 10, 0.8);
+	/* box-shadow : 0px 1px 1px 1px RGBA(0, 0, 0, 0.8); */
+	height : 50px;
+	-webkit-transition : height 0.2s;
+}
+
+div#header header:hover {
+	height : 70px;
 }
 
 div#header header a {
@@ -64,9 +74,12 @@ div#header header a button:hover {
 }
 
 div#header header a button span {
-	color: RGBA(255, 255, 255, 0.8);
+	/* color: RGBA(255, 255, 255, 0.8); */
+	color: RGBA(10, 10, 10, 0.7);
 	display: inline-block;
 	width: initial;
+	font-weight : 400;
+	letter-spacing: -1px;
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -82,7 +95,7 @@ div#header header a button span::before {
 	position: absolute;
 	bottom: -6px;
 	left: 50%;
-	background-color: RGBA(255, 255, 255, 0.7);
+	background-color: RGBA(10, 10, 10, 0.7);
 }
 
 div#header header a button:hover span {
@@ -97,7 +110,7 @@ div#header header a button:hover span::before {
 	position: absolute;
 	bottom: -6px;
 	left: 0px;
-	background-color: RGBA(255, 255, 255, 0.7);
+	background-color: RGBA(10, 10, 10, 1);
 	-webkit-transition: width 0.5s, left 0.5s;
 }
 
@@ -107,7 +120,7 @@ div#header header a button:hover span::before {
 /*                        	*/
 /* ========================	*/
 div#wrapper {
-	margin-top: 100px;
+	
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -271,6 +284,7 @@ aside section.share input[type='button']:focus {
 @media all and (max-width : 760px) {
 	div#wrapper {
 		width: 760px;
+		margin-top : 100px;
 	}
 	aside {
 		position : static;
@@ -293,6 +307,7 @@ aside section.share input[type='button']:focus {
 @media all and (min-width : 761px) and (max-width : 1000px) {
 	div#wrapper {
 		min-width: 761px;
+		margin-top : 100px;
 	}
 	aside {
 		left: 4%;
