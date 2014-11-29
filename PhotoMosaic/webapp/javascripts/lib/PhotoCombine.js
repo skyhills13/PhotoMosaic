@@ -1,3 +1,101 @@
+
+/**
+ * 추후에 사진을 준비하는 객체로 합치기
+ * 사진이 모두 로드된 후에 실행하기 
+ * string 을 상수로 만들기
+ */
+
+function PhotoChecker(list){
+	var sl = createSimpleRatioObejctList(list);
+	var checked = {
+		"simpleRatioList" : sl,
+		"orientationComposition" : getOrientationComposition(sl)
+	}
+	return checked;
+}
+
+function getOrientationComposition(list){
+	var composition = {
+		"square" : 0,
+		"landscape" : 0,
+		"portrait" : 0
+	};
+	list.map(function(item){
+		var orientation = item.orientation;
+		composition[orientation]++;
+	});
+	
+	return composition;
+}
+
+function createSimpleRatioObejctList(plist){
+	var olistArray = [];
+	for(var i=0 ; i<plist.length ; i++){
+		var info = convertSimpleRatio(plist[i]);
+		var pObject = {
+			"simpleOrientation" : info.simpleOrientation,
+			"simpleRatio" : info.simpleRatio,
+			"originalRatio" : info.originalRatio,
+			"originalOrientation" : info.originalOrientation,
+			"originalElement" : plist[i]
+		}
+		olistArray.push(pObject);
+	}
+	return olistArray;
+}
+
+function convertSimpleRatio(photoElement){
+	var originWidth = photoElement.naturalWidth;
+	var originHeight = photoElement.naturalHeight;
+	
+	var ratio = originHeight / originWidth;
+	var info = {};
+	info.originalRatio = ratio;
+	info.originalOrientation = getPhotoOrientation(ratio);
+	var simpleObject = getSimpleRatio(info.originalOrientation, ratio);
+	info.simpleRatio = simpleObject.simpleRatio;
+	info.simpleOrientation = simpleObject.simpleOrientation;
+	return info;
+}
+
+function getSimpleRatio(orientation , ratio){
+	var section = {
+		"simpleRatio" : "",
+		"simpleOrientation" : ""
+	};
+	if(orientation === "square" ){
+		section.simpleRatio = "1x1";
+		section.simpleOrientation = "square";
+	}
+	if(orientation === "landscape" ){
+		var rat = Math.round(1/ratio);
+		section.simpleRatio = rat + "x1";
+		section.simpleOrientation = rat ===1?"square":"landscape";
+	}
+	if(orientation === "portrait"){
+		var rat = Math.round(ratio);
+		section.simpleRatio = "1x" + rat;
+		section.simpleOrientation = rat===1?"square":"portrait";
+	}
+	return section;
+}
+
+function getPhotoOrientation(ratio){
+	if(ratio === 1){
+		return "square";
+	}
+	var orientation = ratio>1?"portrait":"landscape";
+	return orientation;
+}
+
+
+
+
+
+
+
+
+
 // var ooo;
 
 function PhotoCombine() {
@@ -34,7 +132,6 @@ PhotoCombine.prototype = {
 	},
 
 	drawingTargetImage : function(item) {
-		
 		var i = this.adjustImageSize(item);
 		i = this.adjustImagePosition(i);
 		var img = this.photoArray[0];
@@ -108,11 +205,11 @@ PhotoCombine.prototype = {
 		var boardHash = this.getBoardHashByOrientation();
 		var imageHash = this.getImageHashByOrientation();
 		var matched = this.matchByHash(imageHash, boardHash);
+		this.mosaic.board = matched;
 		return matched;
 	},
 	
 	matchByHash : function(imageHash, boardHash){
-		console.log(imageHash, boardHash);
 		var matched = [];
 		// 가장 적합한 match
 		for(var orientType in imageHash){
@@ -122,28 +219,120 @@ PhotoCombine.prototype = {
 				imageTargetArray.map(function(item){
 					var boardTargetArray = boardHash[orientType][imageTemplateSize];
 					if(typeof boardTargetArray === "undefined") {
-						item.isMatched = "false";
+						item.isMatched = -1;
 						return;
 					}
 					var remain = boardTargetArray.length;
 					if(remain === 0){
-						item.isMatched = "false";
+						console.log(orientType, imageTemplateSize, boardHash[orientType][imageTemplateSize]);
+						delete boardHash[orientType][imageTemplateSize];
+						console.log(orientType, imageTemplateSize, boardHash[orientType][imageTemplateSize]);
+						item.isMatched = -1;
 						return;
 					}
 					
-					var matchedObject = boardTargetArray.pop();
+					var matchedObject = boardTargetArray.shift();
 					matchedObject.imgElement = item.originalElement;
-					item.isMatched = "true";
+					item.isMatched = 1;
 					matched.push(matchedObject);
 				});
+			}
+		}
+//		console.log("image hash");
+//		console.log(imageHash);
+//		console.log("board hash");
+//		console.log(boardHash);	
+		matched = this.remainMatching(imageHash, boardHash, matched);
+		return matched;
+	},
+	
+	remainMatching : function(imageHash, boardHash, matched){
+		for(orientType in imageHash){
+			var imageTargetHash = imageHash[orientType];
+			for(var imageTemplateSize in imageTargetHash){
+				var imageTargetArray = imageTargetHash[imageTemplateSize];
+				imageTargetArray.map(function(item){
+					if(item.isMatched > 0){return;}
+					var secondKey = this.secondKeySearching(item, boardHash);
+					var matching = this.secondMatching(item, secondKey, boardHash);
+					matched.push(matching);
+				}.bind(this));
 			}
 		}
 		return matched;
 	},
 	
+	secondMatching : function(item, secondKey, boardHash){
+		var matchingHash = boardHash[secondKey];
+		var target = {};
+		for(var i in matchingHash){
+			var targetArray = matchingHash[i];
+			console.log("secondKey : " + secondKey); 
+			console.log(matchingHash, i, targetArray);
+			target = targetArray.shift();
+			target.imgElement = item.originalElement;
+			if(targetArray.length === 0){
+				delete matchingHash[i];
+			}
+			item.isMatched = 1;
+			return target;
+		}
+	},
+	
+	secondKeySearching : function(item, boardHash){
+		var originalOrient = item.originalOrientation;
+		var target = (originalOrient==="square"?"square":"other") + "SecondKeySearching";
+		var key = this[target](originalOrient, boardHash);
+		return key;
+	},
+	
+	squareSecondKeySearching : function(originalOrient, boardHash){
+		
+		console.log("square");
+	},
+	
+	otherSecondKeySearching : function(originalOrient, boardHash){
+		
+		var target = (originalOrient==="landscape")?"landscape":"portrait";
+		var verseTarget = (target==="landscape")?"portrait":"landscape";
+		
+		var isTargetKeyRemain = this.hasKey(boardHash[target]);
+		var isSqureKeyRemain = this.hasKey(boardHash["square"]);
+		var isVerseKeyReamin = this.hasKey(boardHash[verseTarget]);
+		
+//		console.log("============= search key =============");
+//		console.log(boardHash[target]);
+//		console.log(boardHash[verseTarget]);
+//		console.log(boardHash["square"]);
+		var key = "";
+		if(isTargetKeyRemain){
+			key = target;
+//			console.log(key);
+			return key;
+		}
+		if(isSqureKeyRemain) {
+			key = "square";
+//			console.log(key);
+			return key;
+		}
+		if(isVerseKeyReamin){
+			key = verseTarget;
+//			console.log(key);
+			return key;
+		}
+	},
+	
+	hasKey : function(json){
+		var keyList = [];
+		for(var key in json){
+			keyList.push(key);
+		}
+		var result = keyList.length === 0?false:true;
+		return result;
+	},
+	
 	getBoardHashByOrientation : function(){
 		var bArray = this.mosaic.board;
-		console.log(bArray);
 		var ratioHash = {
 			"portrait" : {},
 			"square" : {},
@@ -232,9 +421,10 @@ PhotoCombine.prototype = {
 
 	getMaterial : function(material) {
 		var m = material;
-		this.setTemplateMaterial(m.templateArray, m.templateColumn, m.templateRow, m.photoLengthInTemplate);
+		this.setTemplateMaterial(m.templateArray, m.templateColumn, m.templateRow);
 		this.setMosaicMaterial(m.mWidth, m.mHeight);
-		this.setPhotoArray(m.photoArray);
+		var tArrayLength = this.templateCount(m.templateArray);
+		this.setPhotoArray(m.photoArray, tArrayLength);
 		this.setAppendPlace(m.appendPlace);
 	},
 
@@ -252,15 +442,60 @@ PhotoCombine.prototype = {
 		}
 	},
 
-	setPhotoArray : function(pArray) {
-		this.photoArray = pArray;
+	setPhotoArray : function(pArray, tArrayLength) {
+		if(pArray.length == tArrayLength){
+			this.photoArray = pArray;
+			return ;
+		}
+		this.photoArray = this.selectRandomPhoto(pArray, tArrayLength);
+		return ;
+	},
+	
+	selectRandomPhoto : function(pArray, tArrayLength){
+		var photoElementList = [];
+		if(pArray.length > tArrayLength){
+			var shuffled = this.shuffleArray(pArray);
+			return shuffled.splice(0, tArrayLength);
+		} else { //pArray.length < tArrayLength
+			
+		}
+		return photoElementList;
+	},
+	
+	shuffleArray : function(array){
+		var indexArray = (function(){
+			var temp = [];
+			for(var i=0 ; i<array.length ; i++){
+				temp.push(i);
+			}
+			return temp;
+		})();
+		
+		var shuffled = [];
+		while(indexArray.length > 0){
+			var randIndex = parseInt(Math.random()*indexArray.length);
+			var tempEle = indexArray[0];
+			indexArray[0] = indexArray[randIndex];
+			indexArray[randIndex] = tempEle;
+			
+			var ele = indexArray.shift();
+			shuffled.push(array[ele]);
+		}
+		return shuffled;
 	},
 
 	setTemplateMaterial : function(tArray, column, row) {
 		this.template = {
 			"array" : tArray,
 			"column" : column,
-			"row" : row,
+			"row" : row
 		}
+	},
+	
+	templateCount : function(templateArray){
+		var countArray = templateArray.filter(function(item){
+			return item != "x";
+		});
+		return countArray.length;
 	}
 }
