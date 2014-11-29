@@ -41,5 +41,5 @@ function resultPageDecorator(){
 	var url = backgroundBlur();
 	
 	var bg = document.querySelector("body");
-	bg.style.backgroundImage = "url(" + url + ")";
+//	bg.style.backgroundImage = "url(" + url + ")";
 }

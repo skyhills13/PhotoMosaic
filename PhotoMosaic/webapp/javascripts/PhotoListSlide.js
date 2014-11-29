@@ -1,5 +1,6 @@
 function UTIL() {
 }
+
 UTIL.prototype = {
 	pixelToNumber : function(pixel) {
 		var len = pixel.length;
@@ -16,6 +17,12 @@ UTIL.prototype = {
 
 	computedStyle : function(target, toGetStyle) {
 		return window.getComputedStyle(target)[toGetStyle];
+	},
+	
+	computedNumStyle : function(target, toGetStyle){
+		var rePx = window.getComputedStyle(target)[toGetStyle];
+		var reNum = this.pixelToNumber(rePx);
+		return reNum;
 	}
 }
 
@@ -38,6 +45,7 @@ PhotoListSlide.prototype = {
 	windowResizeWithRangeBarEvent : function(){
 		window.addEventListener("resize", function(e){
 			this.rangeBarSize();
+			this.resizingCurrentDiv();
 		}.bind(this));
 	},
 	
@@ -48,8 +56,6 @@ PhotoListSlide.prototype = {
 		
 		this.wrapper.addEventListener("click", function(e) {
 			var target = e.target;
-//			var isImageTag = e.target.tagName.toLowerCase() === IMG_TAG;
-//			var isOriginalImage = target.classList.contains(IMG_CLASS_NAME);
 			console.log(e);
 			var isContainer = e.target.classList.contains(CONTAINER_CLASS);
 			if (isContainer) {
@@ -72,13 +78,14 @@ PhotoListSlide.prototype = {
 		this.imagePutter(PREV, currentContainer);
 		this.imagePutter(NEXT, currentContainer);
 		this.removeRemainPhoto(targetNumber);
-		this.resizing();
+		this.resizingCurrentDiv();
 	},
 
 	removeRemainPhoto : function(targetNumber) {
 		var PREV = ".previous";
 		var NEXT = ".next";
 		var EMPTY_STRING = "";
+		var DIV = "div";
 
 		var isFirstPhoto = targetNumber == 0;
 		var isLastPhoto = targetNumber == (this.wrapper.childElementCount - 1);
@@ -86,19 +93,18 @@ PhotoListSlide.prototype = {
 			return;
 
 		var selector = isFirstPhoto ? PREV : NEXT;
-		this.lightBox.querySelector(selector).innerHTML = EMPTY_STRING;
+		this.lightBox.querySelector(selector+" "+DIV).innerHTML = EMPTY_STRING;
 	},
 
 	imagePutter : function(classOfArea, currentContainer) {
 		var CUR = "current";
 		var ORIGINAL_IMG_QUERY = "img.original";
 		var siblingQuery = classOfArea + "ElementSibling";
-		var classQuery = "." + classOfArea;
-
-		var toShowArea = this.lightBox.querySelector(classQuery);
+		var putClassQuery = "." + classOfArea + ">div";
+		var toShowArea = this.lightBox.querySelector(putClassQuery);
 		var isCurrentArea = classOfArea === CUR;
 		var container = isCurrentArea ? currentContainer : currentContainer[siblingQuery];
-
+		
 		if (container === null)
 			return;
 		var toShowImage = container.querySelector(ORIGINAL_IMG_QUERY);
@@ -142,18 +148,29 @@ PhotoListSlide.prototype = {
 		return parseInt(data);
 	},
 
-	resizing : function() {
-		var CUR = ".current";
-		var IMG_TAG = "img";
-		var CLASS_NAME = "over";
-		var EMPTY_STRING = "";
-
-		var viewing = this.lightBox.querySelector(CUR);
-		var target = viewing.querySelector(IMG_TAG);
-		var viewingWidth = window.getComputedStyle(viewing).width;
-		var imageWidth = window.getComputedStyle(target).width;
-
-		target.className = imageWidth > viewingWidth ? CLASS_NAME : EMPTY_STRING;
+	resizingCurrentDiv : function() {
+		var CUR_IMG = ".current img";
+		var widthDepend = "widthDepend";
+		var heightDepend = "heightDepend";
+		
+		var target = this.lightBox.querySelector(CUR_IMG);
+		var cw = target.naturalWidth;
+		var ch = target.naturalHeight;
+		var cRatio = cw/ch;
+		
+		var parent = target.parentNode;
+		var pw = this.ut.computedNumStyle(parent, "width");
+		var ph = this.ut.computedNumStyle(parent, "height");
+		var pRatio = pw/ph;
+		
+		var sizeClass = pRatio>=cRatio?heightDepend:widthDepend;
+		target.className = sizeClass;
+		
+		if(sizeClass === widthDepend){
+			var decHeight = (pw/cw)*ch;
+			var remain = (ph - decHeight)/2;
+			target.style.top = this.ut.numberToPixel(remain);
+		}
 	},
 
 	changeLightBoxVisible : function() {
@@ -190,8 +207,8 @@ PhotoListSlide.prototype = {
 		}
 
 		function createPhotoShowElements() {
-			var photoShowElements = "<div class='previous'></div>" + "<div class='current'></div>"
-					+ "<div class='next'></div>";
+			var photoShowElements = "<div class='previous'><div></div></div>" + "<div class='current'><div></div></div>"
+					+ "<div class='next'><div></div></div>";
 			return photoShowElements;
 		}
 
@@ -202,8 +219,6 @@ PhotoListSlide.prototype = {
 		section.innerHTML = photoShowElements;
 		section.insertAdjacentHTML("afterend", rangeBar);
 		this.lightBoxEvent();
-		// var nav = document.querySelector("#lightBox nav");
-		// new RangeBar(3, nav);
 	},
 
 	lightBoxEvent : function() {

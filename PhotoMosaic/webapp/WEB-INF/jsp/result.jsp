@@ -112,7 +112,7 @@
 
 			var sButton = document.querySelector("section.share input[type='button']");
 			var sTool = new ShareTool();
-			sTool.URL(sButton);
+			/* sTool.URL(sButton); */
 		});
 	</script>
 </body>
