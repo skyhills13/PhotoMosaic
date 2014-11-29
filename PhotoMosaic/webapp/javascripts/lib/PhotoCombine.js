@@ -1,6 +1,6 @@
-
 /**
  * 추후에 사진을 준비하는 객체로 합치기
+
  * 사진이 모두 로드된 후에 실행하기 
  * string 을 상수로 만들기
  */
@@ -448,6 +448,7 @@ PhotoCombine.prototype = {
 			return ;
 		}
 		this.photoArray = this.selectRandomPhoto(pArray, tArrayLength);
+		console.log(this.photoArray);
 		return ;
 	},
 	
