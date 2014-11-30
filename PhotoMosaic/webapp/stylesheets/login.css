@@ -13,7 +13,7 @@ font-family: 'Shadows Into Light', cursive;
 @import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
 body {
-	background : url("../images/background/join_bg2.jpg");
+	/* background : url("../images/background/mosaic_background.jpg"); */
 	background-size : cover;
 	width : 100%;
 	height : 100%;
@@ -21,18 +21,20 @@ body {
 	top : 0px;
 	left : 0px;
 	z-index : -10;
+	background : RGBA(54, 117, 199, 1);
 }
 
 body::before{
-/* 	position : absolute;
+	position : absolute;
 	top : 0px;
 	left : 0px;
 	z-index : -1;
 	width : 100%;
 	height : 100%;
 	content : " ";
-	background : RGBA(255,255,255,0.2);
- */}
+	background : RGBA(10,10,10,0.3)
+	/* background : RGBA(54, 117, 199, 1); */
+}
 
 article {
 	margin-top: 140px;
@@ -47,10 +49,12 @@ article section.welcome {
 article section.welcome p{
 	width : 100%;
 	text-align : center;
-	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Open Sans', sans-serif; */
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 	font-weight : 100;
 	font-size : 35px;
-	color : RGBA(10, 10, 10, 0.8);
+	/* color : RGBA(10, 10, 10, 0.8); */
+	color : RGBA(255,255,255,1);
 	margin-bottom : 30px;
 }
 
@@ -66,8 +70,9 @@ article > form > div{
 	position : relative;
 	top : 0px;
 	left : 0px;
-	border : 2px solid RGBA(10, 10, 10, 0.8);
- 	
+	background : RGBA(255,255,255, 1);
+	box-shadow: 3px 3px RGBA(10, 10, 10, 0.3);
+	border: 1px solid RGBA(10, 10, 10, 0.2);
  }
  
 article > form > div::before{
@@ -77,8 +82,9 @@ article > form > div::before{
 	z-index : -1;
 	width : 100%;
 	height : 100%;
-	content : " ";
-	background : RGBA(255,255,255,0.2);
+	/* content : " "; */
+	box-shadow: 3px 3px RGBA(10, 10, 10, 0.6);
+	border: 1px solid RGBA(10, 10, 10, 0.2);
 }
 
 
@@ -175,13 +181,14 @@ article form button {
 	letter-spacing : 5px;
 	color : RGBA(10, 10, 10, 0.8);
 	font-size : 15px;
-	border : 2px solid RGBA(10, 10, 10, 0.8);
-	background : RGBA(255,255,255,0.2);
+	background : RGBA(255,255,255, 1);
+	box-shadow: 3px 3px RGBA(10, 10, 10, 0.3);
+	border: 1px solid RGBA(10, 10, 10, 0.2);
 }
 
 article form button:hover {
 	color : RGBA(255, 255, 255, 0.8);
-	border : 2px solid RGBA(10, 10, 10, 0.8);
+	border : 1px solid RGBA(10, 10, 10, 0.8);
 	background : RGBA(10, 10, 10, 0.8);
 	-webkit-transition : border 0.4s, background 0.4s, color 0.4s;
 }
