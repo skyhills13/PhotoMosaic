@@ -212,8 +212,8 @@ PhotoListSlide.prototype = {
 		}
 
 		function createPhotoShowElements() {
-			var photoShowElements = "<div class='previous'><div></div></div>" + "<div class='current'><div></div></div>"
-					+ "<div class='next'><div></div></div>";
+			var photoShowElements = "<div class='previous preset'><div></div></div>" + "<div class='current'><div></div></div>"
+					+ "<div class='next preset'><div></div></div>";
 			return photoShowElements;
 		}
 
@@ -232,11 +232,26 @@ PhotoListSlide.prototype = {
 			return body.classList.contains("lightBoxShowing");
 		};
 		
+		
+		this.lightBox.addEventListener("click", function(e){
+			var PREV = "previous";
+			var CUR = "current";
+			var PRESET = "preset";
+			var target = e.target;
+			
+			if(!target.classList.contains(PRESET)) return ;
+			var direct = target.classList.contains(PREV)?-1:1;
+			
+			this.moveWithScroll(direct);
+		}.bind(this));
+		
 		this.lightBox.addEventListener("mousewheel", function(e) {
 			if (isBoxShow()) {
 				e.preventDefault();
-				this.moveWithScroll(e);
-
+				// 밑으로 내려가는 것 : 음수
+				// 위로 올라가는 것 : 양수
+				var direct = e.wheelDeltaY<0?1:-1;
+				this.moveWithScroll(direct);
 			}
 		}.bind(this));
 		
@@ -317,31 +332,27 @@ PhotoListSlide.prototype = {
 		this.showTargetImage(targetNumber);
 	},
 	
-	moveWithScroll : function(event){
-		
-		var PREV = -1;
-		var NEXT = 1;
+	moveWithScroll : function(direct){
+//		var PREV = -1;
+//		var NEXT = 1;
 		var currentShowing = parseInt(this.lightBox.querySelector(".current div").getAttribute("data-list"));
-		console.log(this.preventMoveWithScroll(event, currentShowing));
-		if(this.preventMoveWithScroll(event, currentShowing)) return;
-		var y = event.wheelDeltaY;
-		var target = (y>0?PREV:NEXT) + currentShowing;
-		console.log("target : " + target);
+		
+		if(this.preventMoveWithScroll(direct, currentShowing)) return;
+		
+//		var target = (direct>0?PREV:NEXT) + currentShowing;
+		var target = direct + currentShowing;
 		this.showTargetImage(target);
 		this.rangeBarPosition(target);
 	},
 	
-	preventMoveWithScroll : function(event, currentShowing){
+	preventMoveWithScroll : function(direct, currentShowing){
 		var FIRST_PHOTO = 0;
 		var LAST_PHOTO = this.wrapper.querySelectorAll(".container").length - 1;
-		var y = event.wheelDeltaY;
-		console.log(currentShowing, FIRST_PHOTO, LAST_PHOTO, y);
-		// wheelDeltaY가 0 인 경우
-		if(y === 0) return true;
+		var y = direct;
 		// 가장 첫번째이면서 y > 0 인 경우
-		if(currentShowing===FIRST_PHOTO && y > 0) return true;
+		if(currentShowing===FIRST_PHOTO && y < 0) return true;
 		// 가장 마지막인경우
-		if(currentShowing===LAST_PHOTO && y < 0) return true;
+		if(currentShowing===LAST_PHOTO && y > 0) return true;
 		
 		return false;
 	}
