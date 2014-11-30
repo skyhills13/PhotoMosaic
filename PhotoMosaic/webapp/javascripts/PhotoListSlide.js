@@ -53,10 +53,10 @@ PhotoListSlide.prototype = {
 		var IMG_TAG = "img";
 		var IMG_CLASS_NAME = "original";
 		var CONTAINER_CLASS = "container";
+		var EVENT = "click";
 		
-		this.wrapper.addEventListener("click", function(e) {
+		this.wrapper.addEventListener(EVENT, function(e) {
 			var target = e.target;
-			console.log(e);
 			var isContainer = e.target.classList.contains(CONTAINER_CLASS);
 			if (isContainer) {
 				var targetDataNumber = this.getDataNumber(target);
@@ -85,6 +85,7 @@ PhotoListSlide.prototype = {
 		var PREV = ".previous";
 		var NEXT = ".next";
 		var EMPTY_STRING = "";
+		var SPACE_STRING = " ";
 		var DIV = "div";
 
 		var isFirstPhoto = targetNumber == 0;
@@ -93,7 +94,7 @@ PhotoListSlide.prototype = {
 			return;
 
 		var selector = isFirstPhoto ? PREV : NEXT;
-		this.lightBox.querySelector(selector+" "+DIV).innerHTML = EMPTY_STRING;
+		this.lightBox.querySelector(selector+SPACE_STRING+DIV).innerHTML = EMPTY_STRING;
 	},
 
 	imagePutter : function(classOfArea, currentContainer) {
@@ -101,14 +102,19 @@ PhotoListSlide.prototype = {
 		var ORIGINAL_IMG_QUERY = "img.original";
 		var siblingQuery = classOfArea + "ElementSibling";
 		var putClassQuery = "." + classOfArea + ">div";
+		var DATA_LIST = "data-list";
+		var EMPTY = "";
+		
 		var toShowArea = this.lightBox.querySelector(putClassQuery);
 		var isCurrentArea = classOfArea === CUR;
 		var container = isCurrentArea ? currentContainer : currentContainer[siblingQuery];
+		toShowArea.setAttribute(DATA_LIST, EMPTY);
 		
-		if (container === null)
-			return;
+		if (container === null) return;
+		var data = container.getAttribute(DATA_LIST);
 		var toShowImage = container.querySelector(ORIGINAL_IMG_QUERY);
 		toShowArea.innerHTML = toShowImage.outerHTML;
+		toShowArea.setAttribute(DATA_LIST, data);
 	},
 
 	rangeBarPosition : function(targetNumber) {
@@ -123,9 +129,9 @@ PhotoListSlide.prototype = {
 		var WRAPPER_QUERY = "nav section";
 		var rangeBar = this.lightBox.querySelector(RANGE_QUERY);
 		var wrapper = this.lightBox.querySelector(WRAPPER_QUERY);
-		var wrapperHeight= u.pixelToNumber(u.computedStyle(wrapper, "height"));
-		var rangeBarBorderLeftWidth = u.pixelToNumber(u.computedStyle(rangeBar, "borderLeftWidth"));
-		var rangeBarBorderBottomWidth = u.pixelToNumber(u.computedStyle(rangeBar, "borderBottomWidth"));
+		var wrapperHeight= u.computedNumStyle(wrapper, "height");
+		var rangeBarBorderLeftWidth = u.computedNumStyle(rangeBar, "borderLeftWidth");
+		var rangeBarBorderBottomWidth = u.computedNumStyle(rangeBar, "borderBottomWidth");
 		
 		rangeBar.style.width = u.numberToPixel(wrapperHeight);
 		rangeBar.style.top = u.numberToPixel(wrapperHeight/2 - rangeBarBorderLeftWidth);
@@ -141,8 +147,7 @@ PhotoListSlide.prototype = {
 			data = target.getAttribute(KEY);
 			var hasData = data != null;
 			var isContainer = target.classList.contains(CONTAINER_CLASS);
-			if (hasData && isContainer)
-				break;
+			if (hasData && isContainer) break;
 			target = target.parentNode;
 		}
 		return parseInt(data);
@@ -223,15 +228,18 @@ PhotoListSlide.prototype = {
 
 	lightBoxEvent : function() {
 		var isBoxShow = function() {
-			return this.lightBox.classList.contains("show");
-		}
-
-		document.addEventListener("scroll", function(e) {
-			if (isBoxShow) {
+			var body = document.querySelector("body");
+			return body.classList.contains("lightBoxShowing");
+		};
+		
+		this.lightBox.addEventListener("mousewheel", function(e) {
+			if (isBoxShow()) {
 				e.preventDefault();
-			}
-		});
+				this.moveWithScroll(e);
 
+			}
+		}.bind(this));
+		
 		var closeButton = this.lightBox.querySelector("input[type='button']");
 		closeButton.addEventListener("click", function() {
 			if (isBoxShow) {
@@ -241,7 +249,6 @@ PhotoListSlide.prototype = {
 
 		var slideBar = this.lightBox.querySelector("nav input[type='range']");
 		slideBar.addEventListener("change", function(e) {
-
 			this.pictureMoveAlongSlideBar(e);
 		}.bind(this));
 
@@ -308,5 +315,35 @@ PhotoListSlide.prototype = {
 	pictureMoveAlongSlideBar : function(event) {
 		var targetNumber = event.target.valueAsNumber;
 		this.showTargetImage(targetNumber);
+	},
+	
+	moveWithScroll : function(event){
+		
+		var PREV = -1;
+		var NEXT = 1;
+		var currentShowing = parseInt(this.lightBox.querySelector(".current div").getAttribute("data-list"));
+		console.log(this.preventMoveWithScroll(event, currentShowing));
+		if(this.preventMoveWithScroll(event, currentShowing)) return;
+		var y = event.wheelDeltaY;
+		var target = (y>0?PREV:NEXT) + currentShowing;
+		console.log("target : " + target);
+		this.showTargetImage(target);
+		this.rangeBarPosition(target);
+	},
+	
+	preventMoveWithScroll : function(event, currentShowing){
+		var FIRST_PHOTO = 0;
+		var LAST_PHOTO = this.wrapper.querySelectorAll(".container").length - 1;
+		var y = event.wheelDeltaY;
+		console.log(currentShowing, FIRST_PHOTO, LAST_PHOTO, y);
+		// wheelDeltaY가 0 인 경우
+		if(y === 0) return true;
+		// 가장 첫번째이면서 y > 0 인 경우
+		if(currentShowing===FIRST_PHOTO && y > 0) return true;
+		// 가장 마지막인경우
+		if(currentShowing===LAST_PHOTO && y < 0) return true;
+		
+		return false;
 	}
+	
 }
