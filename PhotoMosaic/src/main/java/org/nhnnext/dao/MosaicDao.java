@@ -35,8 +35,8 @@ public class MosaicDao extends JdbcDaoSupport {
 						rs.getInt("id"),
 						rs.getString("file_name"),
 						rs.getString("title"),
-						rs.getString("comment"),
 						rs.getString("url"),
+						rs.getString("comment"),
 						rs.getTimestamp("created_date"));
 			}
 		};
