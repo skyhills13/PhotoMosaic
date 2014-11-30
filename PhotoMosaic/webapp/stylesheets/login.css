@@ -47,7 +47,7 @@ article section.welcome {
 article section.welcome p{
 	width : 100%;
 	text-align : center;
-	font-family: 'Shadows Into Light', cursive;
+	font-family: 'Open Sans', sans-serif;
 	font-weight : 100;
 	font-size : 35px;
 	color : RGBA(10, 10, 10, 0.8);
