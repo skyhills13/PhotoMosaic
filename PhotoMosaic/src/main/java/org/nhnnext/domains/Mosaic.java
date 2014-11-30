@@ -39,7 +39,7 @@ public class Mosaic {
 		this.createdDate = createdDate.toString();
 	}
 	public Mosaic(int id, String fileName, String title,  String url,
-			String comment, Timestamp timestamp, int userId) {
+			String comment, Timestamp createdDate, int userId) {
 		this.id = id;
 		this.fileName = fileName;
 		this.title = title;

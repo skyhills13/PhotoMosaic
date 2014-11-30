@@ -48,7 +48,7 @@ public class MosaicDao extends JdbcDaoSupport {
 		RowMapper<Mosaic> rowMapper = new RowMapper<Mosaic>() {
 			public Mosaic mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new Mosaic(rs.getInt("id"),
-							rs.getString("fileName"),
+							rs.getString("file_name"),
 							rs.getString("title"),
 							rs.getString("url"),
 							rs.getString("comment"),

@@ -71,12 +71,19 @@ public class UserController {
 			model.addAttribute("errorMessage", Constants.WRONG_PASSWORD);
 			return "loginform";
 		}
-		session.setAttribute("email", user.getEmail());
+		
+		String currentUserEmail = user.getEmail();
+		session.setAttribute("email", currentUserEmail);
+		int currentUserId = userDao.findByEmail(currentUserEmail).getId(); 
+		user.setId(currentUserId);
+		session.setAttribute("userId", user.getId());
 		return "redirect:/";
 	}
+	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session){
 		session.removeAttribute("email");
+		session.removeAttribute("userId");
 		return "redirect:/";
 	}
 }

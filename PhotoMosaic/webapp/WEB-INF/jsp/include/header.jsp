@@ -13,7 +13,7 @@
 				<button><span>SIGN UP</span></button></a>
 		</c:when>
 		<c:otherwise>
-			<a href="/album/${sessionScope.email}">
+			<a href="/album/${sessionScope.userId}">
 				<button><span>${sessionScope.email}</span></button></a>
 			<a href="/logout">
 				<button><span>SIGN OUT</span></button></a>
