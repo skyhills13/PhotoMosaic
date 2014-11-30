@@ -159,6 +159,7 @@ PhotoListSlide.prototype = {
 		var heightDepend = "heightDepend";
 		
 		var target = this.lightBox.querySelector(CUR_IMG);
+		if(target == null) return;
 		var cw = target.naturalWidth;
 		var ch = target.naturalHeight;
 		var cRatio = cw/ch;
