@@ -8,6 +8,7 @@ public class Constants {
 	public static final String NOT_IMAGE = "Not a known image file: ";
 	public static final String MOVE_FAIL_MESSAGE ="fail to move attachedFile";
 	public static final String NOT_EXISTING_MEMBER ="존재하지 않는 사용자입니다.";
+	public static final String ALREADY_EXISTING_MEMBER = "이미 존재하는 사용자입니다";
 	public static final String WRONG_PASSWORD = "비밀번호가 틀립니다.";
 	
 //	public static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";

@@ -40,7 +40,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String createUser(@Valid User user, BindingResult bindingResult) {
+	public String createUser(@Valid User user, BindingResult bindingResult, Model model) {
+		
+		if(userDao.findByEmail(user.getEmail()) != null){
+			model.addAttribute("errorMessage", Constants.ALREADY_EXISTING_MEMBER);
+			return "redirect:/form";
+		};
+		
 		if ( bindingResult.hasErrors()) {
 			logger.debug("binding Result has error!");
 			List<ObjectError> errors = bindingResult.getAllErrors();

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE HTML>
 
@@ -27,6 +28,9 @@
 					<span>EMAIL</span>
 					<form:input path="email" />
 					<form:errors path="email" cssClass="error email" />
+					<c:if test="${errorMessage != null}">
+						<p>${errorMessage}</p>
+					</c:if>
 				</p>
 				<p>
 					<span>PASSWORD</span>
