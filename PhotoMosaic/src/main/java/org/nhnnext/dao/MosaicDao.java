@@ -83,6 +83,11 @@ public class MosaicDao extends JdbcDaoSupport {
 		getJdbcTemplate().update(sql, mosaic.getFileName(), mosaic.getTitle(), mosaic.getComment(), mosaic.getUrl());
 	}
 	
+	public void updateUserId(Mosaic mosaic){
+		String sql = "UPDATE mosaics SET users_id = ? where id = ?";
+		getJdbcTemplate().update(sql, mosaic.getUserId(), mosaic.getId());
+	}
+	
 	public void updateCreatedTime(Mosaic mosaic) {
 		String sql ="UPDATE mosaics SET created_date = NOW() where id = ?";
 		getJdbcTemplate().update(sql, mosaic.getId());

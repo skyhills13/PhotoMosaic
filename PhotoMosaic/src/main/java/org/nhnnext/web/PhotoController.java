@@ -5,10 +5,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.domains.User;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
@@ -37,22 +41,40 @@ public class PhotoController {
 	@Autowired
 	private MosaicDao mosaicDao;
 
+	@Autowired
+	private UserDao userDao;
+	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
 		
+		String userEmail = "";
+		User currentUser = null;
+		if (session.getAttribute("email") != null) {
+			userEmail = session.getAttribute("email").toString();
+			currentUser = userDao.findByEmail(userEmail);
+		}
+		logger.debug("session :" + userEmail);
+		logger.debug("session :" + userEmail.isEmpty());
 		/*
 		 * TODO exception handling for the case submit w/o photo
 		* right now, mosaic table is updated without photo table update.
 		* do it to check the situation before handling
 		*/
-
 		/*insert mosaic information into the database*/
 		String mosaicUrl = StringHandler.makeUrl();
 		Mosaic mosaic = new Mosaic(mosaicUrl+".png", title, mosaicUrl, comment);
 		mosaicDao.upload(mosaic);
 		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
 		mosaic.setId(mosaicId);
+		if(currentUser != null) {
+			logger.debug("into the if sentence");
+			int currentUserId = currentUser.getId();
+			mosaic.setUserId(currentUserId);
+			mosaicDao.updateUserId(mosaic);
+			logger.debug("mosaic id : " + mosaic.getId());
+			logger.debug("mosaic user id : " + mosaic.getUserId());
+		}
 		mosaic.setPhotos(uploadFiles(files, mosaic));
 		
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
@@ -70,6 +92,7 @@ public class PhotoController {
 	
 	public Photo[] uploadFiles(MultipartFile[] files, Mosaic mosaic) throws IOException{
 		Photo[] photos = new Photo[files.length];
+		logger.debug("*****************one mosaic start************************");
 		for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             
@@ -99,6 +122,7 @@ public class PhotoController {
             photoDao.upload(photos[i]);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
         }
+		logger.debug("*****************one mosaic end************************");
 		return photos;
 	}
 	

@@ -15,7 +15,6 @@ public class Mosaic {
 	public Mosaic() {
 	}
 	
-	
 	public Mosaic(String fileName, String title, String url, String comment) {
 		this.fileName = fileName;
 		this.title = title;
