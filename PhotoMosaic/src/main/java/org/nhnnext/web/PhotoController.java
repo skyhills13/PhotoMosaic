@@ -54,8 +54,6 @@ public class PhotoController {
 			userEmail = session.getAttribute("email").toString();
 			currentUser = userDao.findByEmail(userEmail);
 		}
-		logger.debug("session :" + userEmail);
-		logger.debug("session :" + userEmail.isEmpty());
 		/*
 		 * TODO exception handling for the case submit w/o photo
 		* right now, mosaic table is updated without photo table update.
@@ -68,12 +66,9 @@ public class PhotoController {
 		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
 		mosaic.setId(mosaicId);
 		if(currentUser != null) {
-			logger.debug("into the if sentence");
 			int currentUserId = currentUser.getId();
 			mosaic.setUserId(currentUserId);
 			mosaicDao.updateUserId(mosaic);
-			logger.debug("mosaic id : " + mosaic.getId());
-			logger.debug("mosaic user id : " + mosaic.getUserId());
 		}
 		mosaic.setPhotos(uploadFiles(files, mosaic));
 		

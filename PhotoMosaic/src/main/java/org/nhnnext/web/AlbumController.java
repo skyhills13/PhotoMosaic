@@ -28,9 +28,7 @@ public class AlbumController {
 	public String albumPage(@PathVariable int userId, Model model){
 		logger.debug("into albumpage");
 		User user = userDao.findById(userId);
-		logger.debug("userid:" + user.getId());
 		List<Mosaic> mosaics = mosaicDao.findMosaicsOfUser(user.getId());
-		//List<Mosaic> mosaics = mosaicDao.findAllMosaics();
 		model.addAttribute("mosaics", mosaics);
 		return "album";
 	}

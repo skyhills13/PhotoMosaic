@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 public class UserDao extends JdbcDaoSupport{
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserDao.class);
 	
 	public User findByEmail(String email) {
 		String sql = "SELECT * FROM users WHERE email = ?";
@@ -28,7 +26,6 @@ public class UserDao extends JdbcDaoSupport{
 		try {
 			return getJdbcTemplate().queryForObject(sql, rowMapper, email);
 		}catch(EmptyResultDataAccessException e){
-			logger.debug("no user matches the email ");
 			return null;
 		}
 	}
