@@ -42,9 +42,7 @@
 				</div>
 			</div>
 			<article class="pictures" data-draghover="true">
-				<div class="positioner" data-draghover="true">
-					<div class="clean"></div>
-				</div>
+				<div class="positioner" data-draghover="true"></div>
 			</article>
 		</article>
 		<section class="controll">

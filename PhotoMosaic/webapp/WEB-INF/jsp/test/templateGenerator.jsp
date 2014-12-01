@@ -25,11 +25,7 @@
 	
 	var templateGenerator = new TemplateGenerator(width, height);
 
-	div.innerHTML += "</ br><p>num of possibleTemplates : " + templateGenerator.possibleTemplates.length + "</p>";
-	
-	templateGenerator.saveTargetTemplates(targetNum);
-
-	div.innerHTML += "<p>num of targetTemplates(" + targetNum + "): " + templateGenerator.targetTemplates.length + "</p>";
+	div.innerHTML += "</ br><p>num of templates : " + templateGenerator.templates.length + "</p>";
 </script>
 </body>
 
