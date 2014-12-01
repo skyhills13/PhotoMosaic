@@ -31,15 +31,13 @@ var Template = (function() {
 	 * PUBLIC AREA
 	 */
 	
-	var constructor = function(width, height) {
+	var constructor = function Template(width, height) {
 		_width = (typeof width !== "undefined") ? width : 4;
 		_height = (typeof height !== "undefined") ? height : 4;
 		
 		this.data;
 		this.counter = {};
 	};
-	
-	constructor.contructor = constructor;
 	
 	// getWidth는 _width를 반환한다.
 	constructor.prototype.getWidth = function() {
@@ -98,6 +96,18 @@ var Template = (function() {
 	return constructor;
 })();
 
+var Section = (function() {
+	var constructor = function Section(x, y) {
+		this.x = x;
+		this.y = y;
+	};
+	
+	constructor.prototype.toString = function() {
+		return this.x + "x" + this.y;
+	}
+	
+	return constructor;
+})();
 
 var TemplateGenerator = (function(){
 	/*
@@ -123,30 +133,20 @@ var TemplateGenerator = (function(){
 			_unitData[idx] = 0;
 		}
 
-		var sections = ["1x1", "1x1", "1x1", "2x1", "2x1", "2x1", "1x2", "1x2"];
+		//var sections = ["1x1", "1x1", "1x1", "2x1", "2x1", "2x1", "1x2", "1x2"];
 		this.createAllTemplates(_unitData, 0, 0, 0);
 		//this.createSuitableTemplates(_unitData, 0, 0, sections, 0, 1);
 	};
 	
 	// _canInsert는 template의 특정 좌표에 section을 넣을 수 있는지 검사하는 함수이다.
 	var _canInsert = function(template, section, startX, startY) {
-		if (typeof section !== "string") {
-			console.error("_isPossible: Type of input section is wrong");
-			return false;
-		}
-		
-		var sectionSize = section.split("x");
-
-		var sectionWidth = sectionSize[0];
-		var sectionHeight = sectionSize[1];
-
-		if (_width - sectionWidth < startX
-				|| _height - sectionHeight < startY) {
+		if (_width - section.x < startX
+				|| _height - section.y < startY) {
 			return false;
 		}
 
-		for (var row = 0; row < sectionHeight; row++) {
-			for (var col = 0; col < sectionWidth; col++) {
+		for (var row = 0; row < section.y; row++) {
+			for (var col = 0; col < section.x; col++) {
 				if (template[(startY + row) * _width + startX + col] !== 0) {
 					return false;
 				}
@@ -159,21 +159,11 @@ var TemplateGenerator = (function(){
 	// _insert는 template의 특정 좌표에 section을 저장하는 함수이다.
 	// template을 복사해서 작업하고 반환한다.
 	var _insert = function(template, section, startX, startY) {
-		if (typeof section !== "string") {
-			console.error("_insert: Type of input section is wrong");
-			return false;
-		}
-
 		// copy by value
 		var result = template.concat();
 
-		var sectionSize = section.split("x");
-
-		var sectionWidth = sectionSize[0];
-		var sectionHeight = sectionSize[1];
-
-		for (var row = 0; row < sectionHeight; row++) {
-			for (var col = 0; col < sectionWidth; col++) {
+		for (var row = 0; row < section.y; row++) {
+			for (var col = 0; col < section.x; col++) {
 				if (row === 0 && col === 0) {
 					result[startY * _width + startX] = section;
 					continue;
@@ -200,12 +190,7 @@ var TemplateGenerator = (function(){
 	};
 
 	var _zoomSection = function(section, zoomRatio) {
-		var sectionSize = section.split("x");
-
-		var sectionWidth = sectionSize[0];
-		var sectionHeight = sectionSize[1];
-
-		return sectionWidth * zoomRatio + "x" + sectionHeight * zoomRatio;
+		return new Section(section.x * zoomRatio, section.y * zoomRatio);
 	}
 	
 	
@@ -214,16 +199,18 @@ var TemplateGenerator = (function(){
 	 */
 	
 	// constructor는 constructor다.
-	var constructor = function(width, height, targetNum) {
+	var constructor = function TemplateGenerator(width, height, targetNum) {
 		_width = (typeof width !== "undefined") ? width : 4;
 		_height = (typeof height !== "undefined") ? height : 4;
 		_targetNum = (typeof targetNum !== "undefined") ? targetNum : 8;
 		
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
-				_sections.push( (col + 1) + "x" + (row + 1) );
+				_sections.push(new Section(col + 1, row + 1));
 			}
 		}
+		
+		console.log(_sections);
 		
 		_tempTemplate = [];
 		this.templates = [];
@@ -283,15 +270,10 @@ var TemplateGenerator = (function(){
 					// 1-3. 넣는다.
 					var tempTemplate = _insert(template, section, startX, startY);
 
-					// 1-4. 현재 좌표가 column의 마지막 좌표이면
-					var sectionSize = section.split("x");
-					var sectionWidth = sectionSize[0];
-					if (startX === _width - 1) {
-						// 1-4-1. row를 하나 증가, column은 0으로 실행.
-						this.createAllTemplates(tempTemplate, 0, startY, count + 1);
+					if (startX + section.x < 4) {
+						this.createAllTemplates(tempTemplate, startX + section.x, startY, count + 1);
 					} else {
-						// 1-4-2. 아니면 column을 하나 증가해서 실행.
-						this.createAllTemplates(tempTemplate, startX + 1, startY, count + 1);
+						this.createAllTemplates(tempTemplate, 0, startY + 1, count + 1);
 					}
 				}
 			}
