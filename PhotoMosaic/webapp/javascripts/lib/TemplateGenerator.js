@@ -227,6 +227,7 @@ var TemplateGenerator = (function(){
 		
 		_tempTemplate = [];
 		this.templates = [];
+		this.count = 0;
 		
 		_init.call(this, _tempTemplate);
 	};
@@ -250,10 +251,9 @@ var TemplateGenerator = (function(){
 		// End condition
 		if (startY === _height) {
 			// 모든 section을 모든 좌표에 넣어본 상황.
-			// 1. template이 빈 칸 없이 완성되었다면,
-			if (_isComplete(template) && count === _targetNum) {
+			// 1. 현재 갯수가 _targetNum이면
+			if (count === _targetNum) {
 				// 2. possibleTemplate에 현재 template을 저장한다.
-				// this.possibleTemplates.push(template.concat());
 				var newTemplate = new Template(_width, _height);
 				newTemplate.setTemplate(template);
 				this.templates.push(newTemplate);
@@ -268,24 +268,27 @@ var TemplateGenerator = (function(){
 				// 1. 생성 가능한 모든 section에 대해
 				var section = _sections[row * _width + col];
 
-				// 1-2. 지금 template에 넣을 수 있는지 검사하고
+				// 1-2. 지금 template에 넣을 수 있는지 검사
 				if (_canInsert(template, section, startX, startY)) {
-					// boundary over
+					// boundary over: 들어갈 수 있어도 목표한 갯수가 넘어가버린 경우
 					if (count + 1 > _targetNum) {
 						return;
 					}
 
+					// boundary over: 들어갈 수 있어도 목표한 갯수를 채울 수 없는 경우
 					if (_width * _height + _targetNum < (count + 1) + (startY * 4 + startX) + 1) {
 						return;
 					}
 
-					// 1-3. 가능하면 넣는다.
+					// 1-3. 넣는다.
 					var tempTemplate = _insert(template, section, startX, startY);
 
 					// 1-4. 현재 좌표가 column의 마지막 좌표이면
+					var sectionSize = section.split("x");
+					var sectionWidth = sectionSize[0];
 					if (startX === _width - 1) {
 						// 1-4-1. row를 하나 증가, column은 0으로 실행.
-						this.createAllTemplates(tempTemplate, 0, startY + 1, count + 1);
+						this.createAllTemplates(tempTemplate, 0, startY, count + 1);
 					} else {
 						// 1-4-2. 아니면 column을 하나 증가해서 실행.
 						this.createAllTemplates(tempTemplate, startX + 1, startY, count + 1);
@@ -293,17 +296,17 @@ var TemplateGenerator = (function(){
 				}
 			}
 		}
-		// 여기까지는 section크기를 계속 증가시키면서 "넣을 수 있으면 넣고, 아님 말고" 하는 식으로 채워넣은 것.
-		// 즉 큰 section에 대해 연산하고 있었으면 빈 칸이 생길 수 있다.
 		
-		// 2. 다음 칸에 대해 1을 반복해서 수행한다.
+		// 2. 해당 칸에 정보가 들어가있다면 다음 칸으로 넘어간다.
 		if (template[startY * _width + startX] !== 0) {
 			if (startX === _width - 1) {
-				this.createAllTemplates(template, 0, ++startY, count);
+				this.createAllTemplates(template, 0, startY + 1, count);
 			} else {
-				this.createAllTemplates(template, ++startX, startY, count);
+				this.createAllTemplates(template, startX + 1, startY, count);
 			}
 		}
+		// 정보가 없는 경우에는 종료
+		// -> 현재 template, startX, startY로 다시 한 번 1을 수행한다.
 	};
 
 	// TODO
