@@ -210,8 +210,6 @@ var TemplateGenerator = (function(){
 			}
 		}
 		
-		console.log(_sections);
-		
 		_tempTemplate = [];
 		this.templates = [];
 		this.count = 0;
@@ -270,7 +268,7 @@ var TemplateGenerator = (function(){
 					// 1-3. 넣는다.
 					var tempTemplate = _insert(template, section, startX, startY);
 
-					if (startX + section.x < 4) {
+					if (startX + section.x < _width) {
 						this.createAllTemplates(tempTemplate, startX + section.x, startY, count + 1);
 					} else {
 						this.createAllTemplates(tempTemplate, 0, startY + 1, count + 1);
