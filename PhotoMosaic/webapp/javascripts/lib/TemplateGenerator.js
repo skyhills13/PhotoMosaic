@@ -12,14 +12,17 @@ var Template = (function() {
 	
 	var _countSections = function(data) {
 		var idx = 0;
+		
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
-				idx = row * _width + col
+				idx = row * _width + col;
+				
 				if (data[idx] !== "x") {
-					if (typeof this.counter[data[idx]] === "undefined") {
-						this.counter[data[idx]] = 1;
+					var ratio = this.counter[data[idx]];
+					if (typeof this.counter[data[idx].getRatio()] === "undefined") {
+						this.counter[data[idx].getRatio()] = 1;
 					} else {
-						this.counter[data[idx]]++;
+						this.counter[data[idx].getRatio()]++;
 					}
 				}
 			}
@@ -54,6 +57,42 @@ var Template = (function() {
 		_countSections.call(this, this.data);
 	};
 	
+	constructor.prototype.isSimilarWith = function(counter) {
+		var property;
+		for (property in this.counter) {
+			if (!typeof counter[property]) {
+				return false;
+			}
+			
+			if (this.counter[property] !== counter[property]) {
+				return false;
+			}
+		}
+		
+		for (property in counter) {
+			if (!typeof this.counter[property]) {
+				return false;
+			}
+		}
+		
+		return true;
+	};
+	
+	constructor.prototype.getStringData = function() {
+		var result = [];
+		
+		for (var idx in this.data) {
+			if (this.data[idx] !== "x") {
+				result.push(this.data[idx].toString());
+				continue;
+			}
+			
+			result.push("x");
+		}
+		
+		return result;
+	}
+	
 	// print는 data을 예쁘게 반환해준다. 디버깅 / 개발용
 	// 원래 한 줄 짜리 array라 찍으면 안 예쁘게 나온다.
 	constructor.prototype.print = function() {
@@ -75,18 +114,10 @@ var Template = (function() {
 
 		return result;
 	};
-
-	constructor.prototype.sumCounter = function() {
-		var num = 0;
-		for (var section in this.counter) {
-			num += this.counter[section];
-		}
-		
-		return num;
-	};
 	
 	return constructor;
 })();
+
 
 var Section = (function() {
 	var constructor = function Section(x, y) {
@@ -98,8 +129,13 @@ var Section = (function() {
 		return this.x + "x" + this.y;
 	}
 	
+	constructor.prototype.getRatio = function(divisionRatio) {
+		return this.x / this.y;
+	}
+	
 	return constructor;
 })();
+
 
 var TemplateGenerator = (function(){
 	/*
@@ -125,9 +161,7 @@ var TemplateGenerator = (function(){
 			_unitData[idx] = 0;
 		}
 
-		//var sections = ["1x1", "1x1", "1x1", "2x1", "2x1", "2x1", "1x2", "1x2"];
 		this.createAllTemplates(_unitData, 0, 0, 0);
-		//this.createSuitableTemplates(_unitData, 0, 0, sections, 0, 1);
 	};
 	
 	// _canInsert는 data의 특정 좌표에 section을 넣을 수 있는지 검사하는 함수이다.
@@ -191,10 +225,10 @@ var TemplateGenerator = (function(){
 	 */
 	
 	// constructor는 constructor다.
-	var constructor = function TemplateGenerator(width, height, targetNum) {
-		_width = (typeof width !== "undefined") ? width : 4;
-		_height = (typeof height !== "undefined") ? height : 4;
-		_targetNum = (typeof targetNum !== "undefined") ? targetNum : 8;
+	var constructor = function TemplateGenerator(options) {
+		_width = (typeof options["width"] !== "undefined") ? options["width"] : 4;
+		_height = (typeof options["height"] !== "undefined") ? options["height"] : 4;
+		_targetNum = (typeof options["targetNum"] !== "undefined") ? options["targetNum"] : 8;
 		
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
@@ -202,11 +236,10 @@ var TemplateGenerator = (function(){
 			}
 		}
 		
-		_tempTemplate = [];
+		_unitData = [];
 		this.templates = [];
-		this.count = 0;
 		
-		_init.call(this, _tempTemplate);
+		_init.call(this, _unitData);
 	};
 	
 	// getWidth는 _width를 반환한다.
@@ -281,7 +314,20 @@ var TemplateGenerator = (function(){
 		// 정보가 없는 경우에는 종료
 		// -> 현재 data, startX, startY로 다시 한 번 1을 수행한다.
 	};
+	
+	constructor.prototype.getSuitableTemplate = function(objRatio) {
+		var result = [];
+		for (var idx in this.templates) {
+			if (this.templates[idx].isSimilarWith(objRatio)) {
+				result.push(this.templates[idx]);
+			}
+		}
+		
+		return result;
+	};
 
+	
+/*
 	// TODO
 	constructor.prototype.createSuitableTemplates = function(data, startX, startY, sections, sIdx, zoomRatio) {
 		// End condition
@@ -324,6 +370,7 @@ var TemplateGenerator = (function(){
 
 		console.log(data + ", " + section + ", " + startX + ", " + startY);
 	};
+*/
 
 	return constructor;
 })();

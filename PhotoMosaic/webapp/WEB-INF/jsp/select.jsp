@@ -51,7 +51,7 @@
 				<input type="file" multiple accept="image/*" />
 			</div>
 			<button class="button">Upload</button>
-			<button class="serverButton" style="margin-left:130px">Server</button>
+			<button class="serverButton" style="margin-left: 70px; width: 110px;">Server</button>
 		</section >
 	</div>
 	</section>
@@ -60,6 +60,7 @@
 	<script src="/javascripts/lib/MyHTMLElement.js?20141112"></script>
 	<script src="/javascripts/lib/MultiFileHandler.js?20141112"></script>
 	<script src="/javascripts/lib/PhotoCombine.js"></script>
+	<script src="/javascripts/lib/TemplateGenerator.js"></script>
 	<script src="/javascripts/select.js?20141112"></script>
 
 </body>

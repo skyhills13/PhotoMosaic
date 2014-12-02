@@ -23,9 +23,15 @@
 	div.innerHTML += "<p>width : " + width + "</p>";
 	div.innerHTML += "<p>height: " + height + "</p>";
 	
-	var templateGenerator = new TemplateGenerator(width, height);
+	var options = {
+		width: 4,
+		height: 4,
+		targetNum: 8
+	};
+	
+	var templateGenerator = new TemplateGenerator(options);
 
-	div.innerHTML += "</ br><p>num of templates : " + templateGenerator.templates.length + "</p>";
+	div.innerHTML += "</ br><p>length of allTemplates : " + templateGenerator.templates.length + "</p>";
 </script>
 </body>
 
