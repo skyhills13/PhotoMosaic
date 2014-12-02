@@ -1,5 +1,7 @@
 package org.nhnnext.domains;
 
+import org.nhnnext.support.Orientation;
+
 public class Photo {
 	
 	private int id;
@@ -10,6 +12,7 @@ public class Photo {
 	private int scaledWidth;
 	private int scaledHeight;
 	private int mosaicId;
+	private Orientation orientation;
 	
 	public Photo(){
 		
@@ -114,5 +117,13 @@ public class Photo {
 	
 	public void setMosaicId(int mosaicId) {
 		this.mosaicId = mosaicId;
+	}
+
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
 	}
 }

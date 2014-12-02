@@ -18,6 +18,8 @@ public class MosaicHandler {
 	
 	private static final int CHUNK_WIDTH = 1000;
 	private static final int CHUNK_HEIGHT = 750;
+	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 1000;
+	private static final int LANDSCAPE_INDIVIDUAL_HEIGHT = 500;
 	
 	public static void mergePhotos(Mosaic mosaic) throws IOException {
 
@@ -68,7 +70,19 @@ public class MosaicHandler {
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
-
+	public static Orientation judgeMosaicOrientation(Mosaic mosaic){
+		int landscapeCount = 0;
+		Orientation mosaicOrientation = null;
+		for( Photo photo : mosaic.getPhotos()) {
+			if(photo.getOrientation() == Orientation.LANDSCAPE){
+				landscapeCount++;
+			}else if(photo.getOrientation() == Orientation.PORTRAIT) {
+				landscapeCount--;
+			}
+		}
+		mosaicOrientation = (landscapeCount > 0) ? Orientation.LANDSCAPE : (landscapeCount < 0 ) ? Orientation.PORTRAIT: Orientation.SQUARE;
+		return mosaicOrientation;
+	}
 	
 	/*
 	 * temporal template 

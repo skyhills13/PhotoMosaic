@@ -19,11 +19,9 @@ import org.slf4j.LoggerFactory;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
-
-
-	private static final int CHUNK_WIDTH = 1000;
-	private static final int CHUNK_HEIGHT = 750;
 	
+	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 1000;
+	private static final int LANDSCAPE_INDIVIDUAL_HEIGHT = 500;
 	
 	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
 		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + photo.getUniqueId());
@@ -65,7 +63,7 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
-	public static Orientation judgeOrientation(Photo photo) {
+	public static Orientation judgePhotoOrientation(Photo photo) {
 		if( photo.getOriginalHeight() > photo.getOriginalWidth()) {
 			return Orientation.PORTRAIT;
 		} else if ( photo.getOriginalWidth() > photo.getOriginalHeight()) {
@@ -76,7 +74,7 @@ public class PhotoHandler {
 	}
 	
 	public static Dimension getScaledDimension(Photo photo) {
-		Dimension boundary = new Dimension(CHUNK_WIDTH, CHUNK_HEIGHT);
+		Dimension boundary = new Dimension(PORTRAIT_INDIVIDUAL_WIDTH, LANDSCAPE_INDIVIDUAL_HEIGHT);
 		int originalWidth = photo.getOriginalWidth();
 		int originalHeight = photo.getOriginalHeight();
 		int boundWidth = boundary.width;
@@ -84,14 +82,17 @@ public class PhotoHandler {
 		int newWidth = originalWidth;
 		int newHeight = originalHeight;
 		
-		if (originalWidth > boundWidth) {
-			newWidth = boundWidth;
-			newHeight = (newWidth * originalHeight) / originalWidth;
+		if( photo.getOrientation() == Orientation.PORTRAIT) {
+			if (originalWidth > boundWidth) {
+				newWidth = boundWidth;
+				newHeight = (newWidth * originalHeight) / originalWidth;
+			}
 		}
-		
-		if(newHeight > boundHeight) {
-			newHeight = boundHeight;
-			newWidth = (newHeight * originalWidth) / originalHeight;
+		if ( photo.getOrientation() == Orientation.LANDSCAPE) {
+			if(newHeight > boundHeight) {
+				newHeight = boundHeight;
+				newWidth = (newHeight * originalWidth) / originalHeight;
+			}
 		}
 		return new Dimension(newWidth, newHeight);
 	}

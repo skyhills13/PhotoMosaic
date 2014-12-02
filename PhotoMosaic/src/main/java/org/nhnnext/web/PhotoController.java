@@ -14,6 +14,8 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.domains.User;
 import org.nhnnext.support.Constants;
+import org.nhnnext.support.MosaicHandler;
+import org.nhnnext.support.Orientation;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.nhnnext.support.UploadHandler;
@@ -55,14 +57,11 @@ public class PhotoController {
 		
 		convertDataUrlToImg(clientMosaic, mosaicPath);
 		
-        /*merge photos*/
-//        MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-        
-//        PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();
     }
+	
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
 	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
 			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
@@ -70,17 +69,23 @@ public class PhotoController {
 
 		Mosaic mosaic = createMosaicObject(title, comment, session);
 		mosaic.setPhotos(uploadFiles(files, mosaic));
-		
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
-		convertDataUrlToImg(clientMosaic, mosaicPath);
+		for( Photo photo : mosaic.getPhotos()){
+			photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
+		}
 		
+		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
+		
+		
+		//horizontalGrid
+		//verticalGrid
         /*merge photos*/
-//        MosaicHandler.mergePhotos(mosaic);
+//      MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         
-//        PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
+//      PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();	
 	}
 	

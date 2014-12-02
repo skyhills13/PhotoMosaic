@@ -49,7 +49,6 @@ public class Mosaic {
 		this.userId = userId;
 	}
 
-
 	public int getId() {
 		return id;
 	}
