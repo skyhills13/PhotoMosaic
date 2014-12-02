@@ -84,6 +84,20 @@ public class PhotoController {
 //        PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();
     }
+	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
+	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+		
+		String userEmail = "";
+		User currentUser = null;
+		if (session.getAttribute("email") != null) {
+			userEmail = session.getAttribute("email").toString();
+			currentUser = userDao.findByEmail(userEmail);
+		}
+		String mosaicUrl = StringHandler.makeUrl();
+		Mosaic mosaic = new Mosaic(mosaicUrl+".png", title, mosaicUrl, comment);
+		return mosaic.getUrl();
+	}
 	
 	public Photo[] uploadFiles(MultipartFile[] files, Mosaic mosaic) throws IOException{
 		Photo[] photos = new Photo[files.length];

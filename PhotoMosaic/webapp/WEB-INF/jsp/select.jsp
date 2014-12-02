@@ -51,6 +51,7 @@
 				<input type="file" multiple accept="image/*" />
 			</div>
 			<button class="button">Upload</button>
+			<button class="serverButton" style="margin-left:130px">Server</button>
 		</section >
 	</div>
 	</section>

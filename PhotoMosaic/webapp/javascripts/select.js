@@ -12,6 +12,7 @@
 	var eleDrag = document.querySelector(".pictures");
 	
 	var eleSubmit = document.querySelector(".controll button");
+	var eleServerSubmit = document.querySelector(".serverButton");
 	
 	var fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
 	var images = [];
@@ -35,6 +36,40 @@
 		
 		var request = new XMLHttpRequest();
 		request.open("POST", "/photo");
+		request.send(formData);
+		
+		request.addEventListener("load", function() {
+			var mosaicUrl = request.responseText;
+			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
+			if (mosaicUrl.search(regExp) > -1) {
+				console.error("UPLOAD: Error! Response is not valid");
+				return;
+			}
+			
+			var origin = window.location.origin;
+			window.location.assign(origin + "/result/" + mosaicUrl);
+		});
+	});
+
+	eleServerSubmit.addEventListener("click", function(event) {
+		event.preventDefault();
+		
+		var inputTexts = document.querySelectorAll(".select input[type=text]");
+		var formData = new FormData();
+	
+		for (var idx = 0; idx < inputTexts.length; idx++) {
+			formData.append(inputTexts[idx].name, inputTexts[idx].value);
+		}
+		
+		for (var idx = 0; idx < images.length; idx++) {
+			formData.append("photos", images[idx]["file"]);
+		}
+		
+		var layout = makeLayout();
+		formData.append("mosaic", layout);
+		
+		var request = new XMLHttpRequest();
+		request.open("POST", "/photoServer");
 		request.send(formData);
 		
 		request.addEventListener("load", function() {
