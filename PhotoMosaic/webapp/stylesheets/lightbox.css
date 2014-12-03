@@ -86,6 +86,9 @@ font-family: 'Shadows Into Light', cursive;
 }
 
 /* slide view */
+#lightBox.slide {
+	background : RGBA(10, 10, 10, 1);
+}
 #lightBox.slide section {
 	position: absolute;
 	width: 80%;

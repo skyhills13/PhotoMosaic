@@ -2,6 +2,7 @@
 
 StackBlur - a fast almost Gaussian Blur For Canvas
 
+
 Version: 	0.5
 Author:		Mario Klingemann
 Contact: 	mario@quasimondo.com

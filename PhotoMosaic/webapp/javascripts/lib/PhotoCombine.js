@@ -108,6 +108,13 @@ PhotoCombine.prototype = {
 		this.linkBoardWithImageByOrder();
 		this.boardToCanvas();
 	},
+	
+	createWithOptimize : function(){
+		this.makeMosaicBoard();
+		this.linkBoardWithImageByOptimize();
+		//this.linkBoardWithImageByOrder();
+		this.boardToCanvas();
+	},
 
 	boardToCanvas : function() {
 		var canvas = document.createElement("canvas");
