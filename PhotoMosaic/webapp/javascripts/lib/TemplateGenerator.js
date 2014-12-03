@@ -315,6 +315,7 @@ var TemplateGenerator = (function(){
 		// -> 현재 data, startX, startY로 다시 한 번 1을 수행한다.
 	};
 	
+	// TODO 비율 일치하는 template이 없을 경우 예외처리 할 것!
 	constructor.prototype.getSuitableTemplate = function(objRatio) {
 		var result = [];
 		for (var idx in this.templates) {

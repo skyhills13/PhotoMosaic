@@ -140,50 +140,51 @@
 	}
 
 	
-	var templateGenerator = new TemplateGenerator({
-		width: 4,
-		height: 4,
-		targetNum: 8
-	});
+//	var templateGenerator = new TemplateGenerator({
+//		width: 4,
+//		height: 4,
+//		targetNum: 8
+//	});
 	function makeLayout() {
-//		var t = [ [ "1x1", "1x1", "1x4", "1x4", "1x1", "1x1", "x", "x", "2x1", "x", "x", "x", "2x1", "x", "x", "x" ],
-//					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
-//					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
-//					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
-//					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
-//					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
-//					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
-//					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
-//					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
-//					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ] ];
-		
+		var t = [ [ "1x1", "1x1", "1x4", "1x4", "1x1", "1x1", "x", "x", "2x1", "x", "x", "x", "2x1", "x", "x", "x" ],
+					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ],
+					[ "1x1", "2x1", "x", "1x1", "1x1", "2x2", "x", "1x2", "1x1", "x", "x", "x", "4x1", "x", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "2x2", "x", "2x2", "x", "x", "x", "x", "x", "1x1", "3x1", "x", "x" ],
+					[ "1x1", "1x1", "1x1", "1x1", "4x2", "x", "x", "x", "x", "x", "x", "x", "1x1", "1x1", "2x1", "x" ],
+					[ "1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1" ] ];
 		
 
 		var pArray = document.querySelectorAll(".select .thumb img");
-		var pChecked = PhotoChecker(pArray);
+//		var pChecked = PhotoChecker(pArray);
+//		
+//		var objRatios = {};
+//		for (var idx in pChecked.simpleRatioList) {
+//			var size = pChecked.simpleRatioList[idx].simpleRatio.split("x");
+//			var ratio = size[0] / size[1];
+//			
+//			if (typeof objRatios[ratio] === "undefined") {
+//				objRatios[ratio] = 1;
+//			} else {
+//				objRatios[ratio]++;
+//			}
+//		}
+//		
+//		var suitableTemplates = templateGenerator.getSuitableTemplate(objRatios);
+//		var tArray = suitableTemplates[parseInt(Math.random() * suitableTemplates.length)];
 		
-		var objRatios = {};
-		for (var idx in pChecked.simpleRatioList) {
-			var size = pChecked.simpleRatioList[idx].simpleRatio.split("x");
-			var ratio = size[0] / size[1];
-			
-			if (typeof objRatios[ratio] === "undefined") {
-				objRatios[ratio] = 1;
-			} else {
-				objRatios[ratio]++;
-			}
-		}
-		
-		var suitableTemplates = templateGenerator.getSuitableTemplate(objRatios);
-		var tArray = suitableTemplates[parseInt(Math.random() * suitableTemplates.length)];
-		
+		var tArray = t[parseInt(Math.random() * t.length)];
 		var appendPlace = document.querySelector("section.hidden");
 		
 		var combine = new PhotoCombine();
 		combine.getMaterial({
 			"mWidth" : 2000,
-			"mHeight" : 1500,
-			"templateArray" : tArray.getStringData(),
+			"mHeight" : 2000,
+//			"templateArray" : tArray.getStringData(),
+			"templateArray" : tArray,
 			"templateColumn" : 4, // getWidth
 			"templateRow" : 4, // getHeight
 			"photoArray" : pArray, // HTMLImgElement
