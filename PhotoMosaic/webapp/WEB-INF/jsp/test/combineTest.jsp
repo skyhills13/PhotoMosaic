@@ -54,21 +54,23 @@
 		 /* console.log(rand); */
 			var tArray = t[rand];
 			/* console.log(tArray); */
-			
+			var testArr = ["1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1"]
  			var pArray = document.querySelectorAll("#list img");
 			var appendPlace = document.querySelector("#canvas");
-		
+
 			var combine = new PhotoCombine();
 			combine.getMaterial({
 				"mWidth" : 500,
 				"mHeight" : 500,
-				"templateArray" : tArray,
+				"templateArray" : testArr,
 				"templateColumn" : 4, // getWidth
 				"templateRow" : 4, // getHeight
 				"photoArray" : pArray, // HTMLImgElement
 				"appendPlace" : appendPlace
 			});
-			combine.create();
+			console.log(testArr);
+			combine.createWithOptimize();
+			
 			var result = combine.getResult();
 			document.querySelector("p a").addEventListener("click", function() {
 				window.location = result;
