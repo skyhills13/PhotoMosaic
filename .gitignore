@@ -18,3 +18,8 @@ bin
 # VIM
 *.swp
 
+PhotoMosaic/webapp/images/*
+!PhotoMosaic/webapp/images/background
+!PhotoMosaic/webapp/images/button
+!PhotoMosaic/webapp/images/test
+
