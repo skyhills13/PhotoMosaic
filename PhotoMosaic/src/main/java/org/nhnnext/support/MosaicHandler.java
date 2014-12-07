@@ -1,9 +1,10 @@
 package org.nhnnext.support;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -84,11 +85,7 @@ public class MosaicHandler {
 		return mosaicOrientation;
 	}
 	
-	/*
-	 * temporal template 
-	 * 2x1   0   1x1   1x2
-	 * 1x3  1x2   0     0
-	 * 0    1x2  2x1    0
-	 * 0     0   2x1    0
-	 */	
+	// 2,3,3 / 3,2,3 / 3,3,2 / 2,2,4 / 2,4,2 / 4,2,2 / 1,3,4/ 1,4,3 / 3,1,4 /3,4,1 /4,1,3/4,3,1
+	// [,,0,,,,0,,,][,,,0,,,0,,,][,,,0,,,,0,,][,,0,,,0,,,,][,,0,,,,,0,,][,0,,,,0,,,,][,0,,,,,0,,,][,,,,0,,,,0,][,,,0,,,,,0,][,,,,0,,0,,,][,,,,0,,,,0,] 
+	// 1,2,3,2 / 1,3,3,1 / 3,3,2 /
 }

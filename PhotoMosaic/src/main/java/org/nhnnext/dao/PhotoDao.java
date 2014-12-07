@@ -85,7 +85,24 @@ public class PhotoDao extends JdbcDaoSupport{
 		return getJdbcTemplate().query(sql, rowMapper, mosaicId);
 	}
 	
+	public Photo getSmallestWidthPhoto(int mosaicId) {
+		String sql ="select * from photos where mosaics_id = ? order by original_width limit 3";
+		RowMapper<Photo> rowMapper = new RowMapper<Photo>() {
+			public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new Photo(rs.getInt("id"), 
+							rs.getString("unique_id"),
+							rs.getString("original_name"),
+							rs.getInt("original_width"),
+							rs.getInt("original_height"),
+							rs.getInt("scaled_width"),
+							rs.getInt("scaled_height"),
+							rs.getInt("mosaics_id"));
+			}
+		};
+		return getJdbcTemplate().queryForObject(sql, rowMapper, mosaicId);
+	}
 	
+	//select * from photos where mosaics_id = 1 order by original_width, original_height limit 4;
 	public int getNumOfPhotos(int mosaicId) {
 		String sql = "select COUNT(*) from photos where mosaics_id = ?";
 		int numOfPhotos = getJdbcTemplate().queryForObject(sql, new Object[]{mosaicId}, Integer.class);

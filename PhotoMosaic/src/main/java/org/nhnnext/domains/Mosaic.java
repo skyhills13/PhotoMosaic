@@ -2,6 +2,8 @@ package org.nhnnext.domains;
 
 import java.sql.Timestamp;
 
+import org.nhnnext.support.Orientation;
+
 public class Mosaic {
 	private int id;
 	private String fileName;
@@ -11,6 +13,7 @@ public class Mosaic {
 	private String createdDate;
 	private int userId;
 	private Photo[] photos;
+	private Orientation orientation;
 	
 	public Mosaic() {
 	}
@@ -102,4 +105,13 @@ public class Mosaic {
 	public void setPhotos(Photo[] photos) {
 		this.photos = photos;
 	}
+
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
+	}
+	
 }

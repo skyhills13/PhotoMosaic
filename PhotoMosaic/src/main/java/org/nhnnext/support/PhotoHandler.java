@@ -2,6 +2,7 @@ package org.nhnnext.support;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
 	
-	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 1000;
+	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 800;
 	private static final int LANDSCAPE_INDIVIDUAL_HEIGHT = 500;
 	
 	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
@@ -34,7 +35,7 @@ public class PhotoHandler {
 		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
 		g.dispose();
 		
-		ImageIO.write(resizedImage, "png", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + "resizecheckcheck.png"));
+		ImageIO.write(resizedImage, "jpg", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + "resizecheckcheck.jpg"));
 	}
 	
 	public static Dimension getImageDimension(Mosaic mosaic, String fileName)
@@ -73,6 +74,13 @@ public class PhotoHandler {
 		}
 	}
 	
+	public static BufferedImage cropPhoto(Photo photo, Rectangle rect) throws IOException{
+		BufferedImage originalPhoto = ImageIO.read(new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId()));
+		BufferedImage croppedImage = originalPhoto.getSubimage(0, 0, rect.width, rect.height);
+		return croppedImage; 
+	}
+	
+	//다른 케이스에도 scale 다운할 수 있도록 parameter로 받기
 	public static Dimension getScaledDimension(Photo photo) {
 		Dimension boundary = new Dimension(PORTRAIT_INDIVIDUAL_WIDTH, LANDSCAPE_INDIVIDUAL_HEIGHT);
 		int originalWidth = photo.getOriginalWidth();
@@ -95,5 +103,11 @@ public class PhotoHandler {
 			}
 		}
 		return new Dimension(newWidth, newHeight);
+	}
+	public static void sizedownPhoto(Photo photo) {
+		int originalWidth = photo.getOriginalWidth();
+		int originalHeight = photo.getOriginalHeight();
+		photo.setScaledWidth(originalWidth/2);
+		photo.setScaledHeight(originalHeight/2);
 	}
 }
