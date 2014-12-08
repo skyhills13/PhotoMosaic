@@ -56,21 +56,15 @@ var Template = (function() {
 		this.data = data;
 		_countSections.call(this, this.data);
 	};
-	
+
 	constructor.prototype.isSimilarWith = function(counter) {
 		var property;
-		for (property in this.counter) {
-			if (!typeof counter[property]) {
+		for (property in counter) {
+			if (!typeof this.counter[property]) {
 				return false;
 			}
 			
 			if (this.counter[property] !== counter[property]) {
-				return false;
-			}
-		}
-		
-		for (property in counter) {
-			if (!typeof this.counter[property]) {
 				return false;
 			}
 		}
@@ -154,6 +148,8 @@ var TemplateGenerator = (function(){
 	//  section은 template를 이루는 기본 단위이다. string 형태로 정보를 저장한다. "1x2", "3x2" 처럼 표시된다
 	var _sections = [];
 	
+	var _suitableTemplates;
+	
 	// _init은 객체를 초기화하는 함수이다.
 	var _init = function(_unitData) {
 		// constructor.tempTemplate
@@ -219,6 +215,40 @@ var TemplateGenerator = (function(){
 		return new Section(section.x * zoomRatio, section.y * zoomRatio);
 	}
 	
+	var _createSuitableTemplates = function(objRatio) {
+		for (var idx in this.templates) {
+			if (this.templates[idx].isSimilarWith(objRatio)) {
+				_suitableTemplates.push(this.templates[idx]);
+			}
+		}
+		
+		// 일치하는 비율이 없으면 다시 돈다.
+		if (_suitableTemplates.length <= 1) {
+			var ratios = [];
+			for (var ratio in objRatio) {
+				ratios.push(ratio);
+			}
+			var min = Math.min.apply(Math, ratios);
+			var max = Math.max.apply(Math, ratios);
+			
+			if (min * max <= 1) {
+				if (objRatio[min] <= 1) {
+					delete objRatio[min];
+				} else {
+					objRatio[min]--;
+				};
+			} else {
+				if (objRatio[max] <= 1) {
+					delete objRatio[max];
+				} else {
+					objRatio[max]--;
+				};
+			}
+			
+			this.getSuitableTemplates(objRatio);
+		}
+	};
+	
 	
 	/*
 	 * PUBLIC AREA
@@ -237,6 +267,7 @@ var TemplateGenerator = (function(){
 		}
 		
 		_unitData = [];
+		_suitableTemplates = [];
 		this.templates = [];
 		
 		_init.call(this, _unitData);
@@ -315,17 +346,10 @@ var TemplateGenerator = (function(){
 		// -> 현재 data, startX, startY로 다시 한 번 1을 수행한다.
 	};
 	
-	// TODO 비율 일치하는 template이 없을 경우 예외처리 할 것!
-	constructor.prototype.getSuitableTemplate = function(objRatio) {
-		var result = [];
-		for (var idx in this.templates) {
-			if (this.templates[idx].isSimilarWith(objRatio)) {
-				result.push(this.templates[idx]);
-			}
-		}
-		
-		return result;
-	};
+	constructor.prototype.getSuitableTemplates = function(objRatio) {
+		_createSuitableTemplates.call(this, objRatio);
+		return _suitableTemplates;
+	}
 
 	
 /*
