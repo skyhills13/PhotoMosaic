@@ -56,6 +56,7 @@ article section.welcome p{
 	/* color : RGBA(10, 10, 10, 0.8); */
 	color : RGBA(255,255,255,1);
 	margin-bottom : 30px;
+	text-shadow : 2px 2px 2px RGBA(10, 10, 10, 1);
 }
 
 article form {

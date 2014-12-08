@@ -13,6 +13,7 @@ import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.domains.User;
+import org.nhnnext.generator.MosaicGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
@@ -76,10 +77,13 @@ public class PhotoController {
 		}
 		
 		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
+		mosaic.setOrientation(mosaicOrientation);
+		/**
+		 * Test
+		 */
+		MosaicGenerator mosaicGenerator = new MosaicGenerator(mosaic.getPhotos(), mosaicOrientation);
+		mosaicGenerator.getMosaic();
 		
-		
-		//horizontalGrid
-		//verticalGrid
         /*merge photos*/
 //      MosaicHandler.mergePhotos(mosaic);
         mosaicDao.updateCreatedTime(mosaic);
@@ -129,20 +133,15 @@ public class PhotoController {
             UploadHandler.upload(mosaic, file);
             
             /*get the information of the photo*/
-            Dimension photoDimension = PhotoHandler.getImageDimension(mosaic, file.getOriginalFilename());
-            logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
+            photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, file);
             
-            /*insert file information into the database*/
-            int extensionIndex = file.getOriginalFilename().indexOf(".");
-            String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
-
-            String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
-            photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
             UploadHandler.renameAsUnique(mosaic, photos[i]);
-
-            Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
-            photos[i].setScaledWidth(scaledDimension.width);
-            photos[i].setScaledHeight(scaledDimension.height);
+            
+            PhotoHandler.sizedownPhoto(photos[i]);
+            
+//            Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
+//            photos[i].setScaledWidth(scaledDimension.width);
+//            photos[i].setScaledHeight(scaledDimension.height);
             //TODO add date to UUID for the case of exception
             photoDao.upload(photos[i]);
             logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());

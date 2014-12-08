@@ -69,6 +69,7 @@
 				"appendPlace" : appendPlace
 			});
 			console.log(testArr);
+			//combine.create();
 			combine.createWithOptimize();
 			
 			var result = combine.getResult();

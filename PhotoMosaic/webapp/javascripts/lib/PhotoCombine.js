@@ -104,8 +104,8 @@ function PhotoCombine() {
 PhotoCombine.prototype = {
 	create : function() {
 		this.makeMosaicBoard();
-		this.linkBoardWithImageByOptimize();
-		//this.linkBoardWithImageByOrder();
+		//this.linkBoardWithImageByOptimize();
+		this.linkBoardWithImageByOrder();
 		this.boardToCanvas();
 	},
 	
