@@ -1,6 +1,7 @@
 package org.nhnnext.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import org.nhnnext.support.Orientation;
@@ -60,7 +61,7 @@ public enum Template {
 	
 	//TODO Array Shuffle
 	public TemplateFrameList getTemplateFrameList(Orientation orientation) {
-		return new TemplateFrameList(){{
+		TemplateFrameList templateFrameList = new TemplateFrameList(){{
 			if (orientation == Orientation.PORTRAIT) {
 				add(col1);
 				add(col2);
@@ -77,6 +78,10 @@ public enum Template {
 				//throw new Exception();
 			}
 		}};
+		
+		Collections.shuffle(templateFrameList);
+		
+		return templateFrameList;
 	}
 	
 	public int getCol1() {

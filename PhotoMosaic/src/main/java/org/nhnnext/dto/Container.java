@@ -10,6 +10,10 @@ public class Container<T> extends ArrayList<T> {
 		this.max = max;
 	}
 	
+	public int getMax() {
+		return max;
+	}
+	
 	public boolean isFull() {
 		return this.size() == max ? true : false;  
 	}

@@ -1,13 +1,14 @@
 package org.nhnnext.generator;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
+import org.nhnnext.dto.PhotoContainer;
 import org.nhnnext.dto.PhotoGroupContainer;
 import org.nhnnext.dto.Template;
 import org.nhnnext.dto.TemplateFrameList;
 import org.nhnnext.support.Orientation;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
 
 public class ContainerGeneratorTest {
@@ -25,5 +26,8 @@ public class ContainerGeneratorTest {
 		assertThat(groupContainer.size(), is(4));
 		
 		System.out.println(groupContainer.toString());
+		for (PhotoContainer photoContainer : groupContainer) {
+			System.out.print(photoContainer.getMax()+", ");
+		}
 	}
 }
