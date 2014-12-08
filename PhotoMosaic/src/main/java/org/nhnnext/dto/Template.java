@@ -61,12 +61,12 @@ public enum Template {
 	//TODO Array Shuffle
 	public TemplateFrameList getTemplateFrameList(Orientation orientation) {
 		return new TemplateFrameList(){{
-			if (orientation == Orientation.LANDSCAPE) {
+			if (orientation == Orientation.PORTRAIT) {
 				add(col1);
 				add(col2);
 				add(col3);
 				
-			} else if (orientation == Orientation.PORTRAIT){
+			} else if (orientation == Orientation.LANDSCAPE){
 				add(row1);
 				add(row2);
 				add(row3);
