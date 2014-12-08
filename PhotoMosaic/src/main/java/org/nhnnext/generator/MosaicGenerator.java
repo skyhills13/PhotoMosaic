@@ -3,6 +3,7 @@ package org.nhnnext.generator;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.dto.Container;
 import org.nhnnext.dto.PhotoContainer;
@@ -70,7 +71,8 @@ public class MosaicGenerator {
 		//		throw new Exception();	
 	}
 
-	public Photo getMosaic() {
+	public Mosaic getMosaic() {
+		//groupContainer.get
 		return null;
 	}
 }
