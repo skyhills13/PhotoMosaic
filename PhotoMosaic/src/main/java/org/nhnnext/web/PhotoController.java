@@ -13,6 +13,7 @@ import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.domains.User;
+import org.nhnnext.generator.MosaicGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
@@ -77,6 +78,11 @@ public class PhotoController {
 		
 		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 		mosaic.setOrientation(mosaicOrientation);
+		/**
+		 * Test
+		 */
+		MosaicGenerator mosaicGenerator = new MosaicGenerator(mosaic.getPhotos(), mosaicOrientation);
+		mosaicGenerator.getMosaic();
 		
         /*merge photos*/
 //      MosaicHandler.mergePhotos(mosaic);

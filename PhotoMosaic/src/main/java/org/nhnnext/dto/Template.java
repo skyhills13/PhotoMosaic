@@ -7,13 +7,13 @@ import org.nhnnext.support.Orientation;
 
 @SuppressWarnings("serial")
 public enum Template {
-	HORIZONTAL_STRATEGY_1 (2, 3, 3),
-	HORIZONTAL_STRATEGY_2 (2, 2, 4),
-	HORIZONTAL_STRATEGY_3 (1, 4, 3),
+	PORTRAIT_STRATEGY_1 (2, 3, 3),
+	PORTRAIT_STRATEGY_2 (2, 2, 4),
+	PORTRAIT_STRATEGY_3 (1, 4, 3),
 	
-	PORTRAIT_STRATEGY_1 (1, 2, 3, 2),
-	PORTRAIT_STRATEGY_2 (1, 3, 3, 1),
-	PORTRAIT_STRATEGY_3 (3, 3, 2, 0);
+	HORIZONTAL_STRATEGY_1 (1, 2, 3, 2),
+	HORIZONTAL_STRATEGY_2 (1, 3, 3, 1),
+	HORIZONTAL_STRATEGY_3 (3, 3, 2, 0);
 	
 	int col1;
 	int col2;

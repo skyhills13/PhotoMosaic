@@ -40,9 +40,12 @@ public class MosaicGenerator {
 		PhotoContainer criteriaPhotoList = new PhotoContainer(this.templateFrameList.size());
 		
 		
+		//Get CriteriaOrientation, 
+		Orientation basePhotoOrientation = Orientation.getBasePhotoOrientation(mosaicOrientation);
+		
 		//Seperate PhotoList (criteria and others)
 		for (Photo photo : originPhotos) {
-			if (photo.getOrientation() == mosaicOrientation) {
+			if (photo.getOrientation() == basePhotoOrientation) {
 				criteriaPhotoList.add(photo);
 				originPhotoList.remove(photo);
 			}
@@ -51,13 +54,16 @@ public class MosaicGenerator {
 		//Placement
 		for (int index = 0; index < this.groupContainer.size(); index++) {
 			PhotoContainer photoContainer = this.groupContainer.get(index);
-			photoContainer.add(criteriaPhotoList.remove(index));
+			
+			if (!criteriaPhotoList.isEmpty())
+				photoContainer.add(criteriaPhotoList.remove(index));
 			
 			while(!photoContainer.isFull()) {
 				photoContainer.add(originPhotoList.remove(index));
 			}
 		}
 		
+		//TODO
 		//Something Wrong
 		//if (originPhotoList.size() !=0 || criteriaPhotoList.size() != 0)
 		//		throw new Exception();	
