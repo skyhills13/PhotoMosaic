@@ -22,9 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
 	
-	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 800;
-	private static final int LANDSCAPE_INDIVIDUAL_HEIGHT = 500;
-	
 	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
 		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + photo.getUniqueId());
 		//TODO change throw exception to try catch 
@@ -82,8 +79,8 @@ public class PhotoHandler {
 	}
 	
 	//다른 케이스에도 scale 다운할 수 있도록 parameter로 받기
-	public static Dimension getScaledDimension(Photo photo) {
-		Dimension boundary = new Dimension(PORTRAIT_INDIVIDUAL_WIDTH, LANDSCAPE_INDIVIDUAL_HEIGHT);
+	public static Dimension getScaledDimension(Photo photo, Photo basePhoto) {
+		Dimension boundary = new Dimension(photo.getOriginalWidth(), photo.getOriginalHeight());
 		int originalWidth = photo.getOriginalWidth();
 		int originalHeight = photo.getOriginalHeight();
 		int boundWidth = boundary.width;

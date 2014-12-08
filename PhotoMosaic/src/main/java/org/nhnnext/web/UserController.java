@@ -44,7 +44,7 @@ public class UserController {
 		
 		if(userDao.findByEmail(user.getEmail()) != null){
 			model.addAttribute("errorMessage", Constants.ALREADY_EXISTING_MEMBER);
-			return "redirect:/form";
+			return "form";
 		};
 		
 		if ( bindingResult.hasErrors()) {

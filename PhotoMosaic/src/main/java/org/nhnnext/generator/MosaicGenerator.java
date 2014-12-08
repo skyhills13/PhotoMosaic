@@ -15,7 +15,7 @@ import org.nhnnext.support.Orientation;
 public class MosaicGenerator {
 
 	private PhotoGroupContainer groupContainer; 
-	private Orientation mosaicOrientation;
+	private Orientation basePhotoOrientation;
 	private TemplateFrameList templateFrameList;
 	
 	public MosaicGenerator(Photo[] originPhotos, Orientation mosaicOrientation) {
@@ -26,9 +26,11 @@ public class MosaicGenerator {
 	}
 
 	protected void init(Orientation mosaicOrientation) {
-		this.mosaicOrientation = mosaicOrientation;
 		Template template = Template.getRandomTemplate(mosaicOrientation);
 		this.templateFrameList = template.getTemplateFrameList(mosaicOrientation);
+		
+		//Get CriteriaOrientation, 
+		this.basePhotoOrientation = Orientation.getBasePhotoOrientation(mosaicOrientation);
 	}
 
 	private void setupContainer() {
@@ -40,10 +42,6 @@ public class MosaicGenerator {
 		
 		ArrayList<Photo> originPhotoList = new ArrayList<Photo>(Arrays.asList(originPhotos));
 		PhotoContainer criteriaPhotoList = new PhotoContainer(this.templateFrameList.size());
-		
-		
-		//Get CriteriaOrientation, 
-		Orientation basePhotoOrientation = Orientation.getBasePhotoOrientation(mosaicOrientation);
 		
 		//Seperate PhotoList (criteria and others)
 		for (Photo photo : originPhotos) {
@@ -72,7 +70,7 @@ public class MosaicGenerator {
 	}
 
 	public Mosaic getMosaic() {
-		//groupContainer.get
+		groupContainer.getCombinedMosaic(basePhotoOrientation);
 		return null;
 	}
 }

@@ -17,11 +17,6 @@ public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
-	private static final int CHUNK_WIDTH = 1000;
-	private static final int CHUNK_HEIGHT = 750;
-	private static final int PORTRAIT_INDIVIDUAL_WIDTH = 1000;
-	private static final int LANDSCAPE_INDIVIDUAL_HEIGHT = 500;
-	
 	public static void mergePhotos(Mosaic mosaic) throws IOException {
 
 		int rows = 2; // we assume the no. of rows and cols are known and each

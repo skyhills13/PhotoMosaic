@@ -1,9 +1,12 @@
 package org.nhnnext.dto;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import org.nhnnext.support.Orientation;
+
 @SuppressWarnings("serial")
-public class Container<T> extends ArrayList<T> {
+public abstract class Container<T> extends ArrayList<T> {
 	private int max;
 	
 	public Container(Integer max) {
@@ -27,4 +30,6 @@ public class Container<T> extends ArrayList<T> {
 		else
 			return false; 
 	}
+	
+	abstract File getCombinedMosaic(Orientation basePhotoOrientation);
 }
