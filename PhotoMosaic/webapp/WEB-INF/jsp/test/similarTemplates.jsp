@@ -70,7 +70,7 @@ window.addEventListener("load", function() {
 		}
 	}
 	
-	var suitableTemplates = templateGenerator.getSuitableTemplate(objRatios);
+	var suitableTemplates = templateGenerator.getSuitableTemplates(objRatios);
 	var tArray = suitableTemplates[parseInt(Math.random() * suitableTemplates.length)];
 	
 	var idx;
