@@ -17,6 +17,7 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
@@ -109,5 +110,17 @@ public class PhotoHandler {
 		int originalHeight = photo.getOriginalHeight();
 		photo.setScaledWidth(originalWidth/2);
 		photo.setScaledHeight(originalHeight/2);
+	}
+
+	public static Photo getNewPhotoInstanceWithData(Mosaic mosaic, MultipartFile file) throws IOException {
+		Dimension photoDimension = getImageDimension(mosaic, file.getOriginalFilename());
+		logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
+		
+		/*insert file information into the database*/
+		int extensionIndex = file.getOriginalFilename().indexOf(".");
+		String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
+
+		String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
+		return new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
 	}
 }

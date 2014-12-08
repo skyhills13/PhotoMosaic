@@ -133,15 +133,8 @@ public class PhotoController {
             UploadHandler.upload(mosaic, file);
             
             /*get the information of the photo*/
-            Dimension photoDimension = PhotoHandler.getImageDimension(mosaic, file.getOriginalFilename());
-            logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
+            photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, file);
             
-            /*insert file information into the database*/
-            int extensionIndex = file.getOriginalFilename().indexOf(".");
-            String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
-
-            String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
-            photos[i] = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
             UploadHandler.renameAsUnique(mosaic, photos[i]);
             
             PhotoHandler.sizedownPhoto(photos[i]);
