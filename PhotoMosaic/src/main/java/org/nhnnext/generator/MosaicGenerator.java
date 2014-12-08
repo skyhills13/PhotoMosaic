@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.nhnnext.domains.Photo;
+import org.nhnnext.dto.Container;
 import org.nhnnext.dto.PhotoContainer;
 import org.nhnnext.dto.PhotoGroupContainer;
 import org.nhnnext.dto.Template;

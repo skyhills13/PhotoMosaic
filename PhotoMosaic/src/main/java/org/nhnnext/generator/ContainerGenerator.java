@@ -14,8 +14,7 @@ public class ContainerGenerator {
 
 	public PhotoGroupContainer getContainer() {
 		
-		//TODO Apply Extends, Extract Abstract functions
-		PhotoGroupContainer groupContainer = new PhotoGroupContainer();
+		PhotoGroupContainer groupContainer = new PhotoGroupContainer(templateFrameList.size());
 		
 		for (int index = 0; index < templateFrameList.size(); index++) {
 			PhotoContainer photoContainer = new PhotoContainer(templateFrameList.get(index));
