@@ -1,6 +1,7 @@
 package org.nhnnext.service;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
@@ -61,7 +62,13 @@ public class MosaicService {
 			 * Test
 			 */
 			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
-			mosaicImageGenerator.makeMosaicImage();
+			
+			try {
+				mosaicImageGenerator.makeMosaicImage();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		} else {
 			uploadService.uploadUrl(clientMosaic, mosaicPath);

@@ -74,8 +74,8 @@ public class MosaicImageGeneratorTest {
 	@Test
 	public void getMosaic() {
 		
-		MosaicImageGenerator mg = new MosaicImageGenerator(mosaic);
-		Mosaic mosaic = mg.makeMosaicImage();
+		//MosaicImageGenerator mg = new MosaicImageGenerator(mosaic);
+		//Mosaic mosaic = mg.makeMosaicImage();
 		
 	}
 	

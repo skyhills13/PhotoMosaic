@@ -1,5 +1,6 @@
 package org.nhnnext.generator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +18,7 @@ public class MosaicImageGenerator {
 	private PhotoGroupContainer groupContainer; 
 	private Orientation basePhotoOrientation;
 	private TemplateFrameList templateFrameList;
+	private Mosaic mosaic;
 	
 	public MosaicImageGenerator(Mosaic mosaic) {
 		
@@ -26,6 +28,7 @@ public class MosaicImageGenerator {
 	}
 
 	protected void init(Mosaic mosaic) {
+		this.mosaic = mosaic;
 		Orientation mosaicOrientation = mosaic.getOrientation();
 		Template template = Template.getRandomTemplate(mosaicOrientation);
 		this.templateFrameList = template.getTemplateFrameList(mosaicOrientation);
@@ -70,8 +73,7 @@ public class MosaicImageGenerator {
 		//		throw new Exception();	
 	}
 
-	public Mosaic makeMosaicImage() {
-		groupContainer.getCombinedMosaic(basePhotoOrientation);
-		return null;
+	public void makeMosaicImage() throws IOException {
+		groupContainer.getCombinedMosaic(mosaic, basePhotoOrientation);
 	}
 }

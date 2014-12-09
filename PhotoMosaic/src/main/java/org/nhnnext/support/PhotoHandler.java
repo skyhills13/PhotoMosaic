@@ -23,6 +23,23 @@ import org.springframework.web.multipart.MultipartFile;
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
 	
+	public static BufferedImage getResizedPhoto(String filePath, Orientation basePhotoOrientation, Dimension resizeDimension) throws IOException {
+		
+		File file = new File(filePath);
+		BufferedImage originalImage = ImageIO.read(file);
+		
+		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+		int resizeWidth = (int)resizeDimension.getWidth();
+		int resizeHeight = (int)resizeDimension.getHeight();
+		
+		BufferedImage resizedImage = new BufferedImage(resizeWidth, resizeHeight, type);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(originalImage, 0, 0, resizeWidth, resizeHeight, null);
+		g.dispose();
+		
+		return resizedImage;
+	}
+	
 	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
 		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + photo.getUniqueId());
 		//TODO change throw exception to try catch 
@@ -79,30 +96,24 @@ public class PhotoHandler {
 		return croppedImage; 
 	}
 	
-	//다른 케이스에도 scale 다운할 수 있도록 parameter로 받기
-	public static Dimension getScaledDimension(Photo photo, Photo basePhoto) {
-		Dimension boundary = new Dimension(photo.getOriginalWidth(), photo.getOriginalHeight());
-		int originalWidth = photo.getOriginalWidth();
-		int originalHeight = photo.getOriginalHeight();
-		int boundWidth = boundary.width;
-		int boundHeight = boundary.height;
-		int newWidth = originalWidth;
-		int newHeight = originalHeight;
+	public static Dimension getScaledDimension(Dimension originDimension, int scaleCriteriaSize, Orientation basePhotoOrientation) {
+		Dimension dimension = new Dimension();
 		
-		if( photo.getOrientation() == Orientation.PORTRAIT) {
-			if (originalWidth > boundWidth) {
-				newWidth = boundWidth;
-				newHeight = (newWidth * originalHeight) / originalWidth;
-			}
+		//  origin width : scaleCriteriaSize = origin Height : x
+		if( basePhotoOrientation == Orientation.LANDSCAPE) {
+			double newHeight = scaleCriteriaSize * originDimension.getHeight() / originDimension.getWidth();
+			dimension.setSize(scaleCriteriaSize, newHeight);
+			
+		} else if( basePhotoOrientation == Orientation.PORTRAIT) {
+			double newWidth= scaleCriteriaSize * originDimension.getWidth() / originDimension.getHeight();
+			dimension.setSize(newWidth, scaleCriteriaSize);
+		} else {
+			//TODO ThrowException
 		}
-		if ( photo.getOrientation() == Orientation.LANDSCAPE) {
-			if(newHeight > boundHeight) {
-				newHeight = boundHeight;
-				newWidth = (newHeight * originalWidth) / originalHeight;
-			}
-		}
-		return new Dimension(newWidth, newHeight);
+		
+		return dimension;
 	}
+	
 	public static void sizedownPhoto(Photo photo) {
 		int originalWidth = photo.getOriginalWidth();
 		int originalHeight = photo.getOriginalHeight();
