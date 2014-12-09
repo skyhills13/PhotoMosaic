@@ -2,7 +2,8 @@ html, body {
 	position: relative;
 	height: 100%;
 
-	font-family: "Apple SD Gothic Neo";
+	font-family: "Lato", "Apple SD Gothic Neo";
+	font-weight: 400;
 	
 	-webkit-user-select: NONE;
 	-moz-user-select: NONE;
@@ -281,8 +282,8 @@ body * {
 	border: none;
 	border-radius: 5px;
 
-	font-size: 14px;
-	line-height: 16px;
+	font-size: 15px;
+	line-height: 15px;
 
 	background-color: #AAA;
 }
