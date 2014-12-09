@@ -52,22 +52,19 @@ public class MosaicService {
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		if( server ) {
-			for( Photo photo : mosaic.getPhotos()){
-				photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
-			}
-			
+//			for( Photo photo : mosaic.getPhotos()){
+//				photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
+//			}
 			Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 			mosaic.setOrientation(mosaicOrientation);
 			/**
 			 * Test
 			 */
 			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
-			
 			try {
 				mosaicImageGenerator.makeMosaicImage();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (IOException e1) {
+				logger.error("exception in createMosaic of server : " + e1.getMessage());
 			}
 		
 		} else {
