@@ -7,6 +7,9 @@
 (function() {
 	var eleBody = document.querySelector("body");
 	
+	var eleHeader = document.querySelector("header");
+	var eleSelect = document.querySelector(".select");
+	
 	var eleInfo = document.querySelector(".hoverLine .info");
 	var eleInput = document.querySelector(".inputFile input[type=file]");
 	var eleDrag = document.querySelector(".pictures");
@@ -14,11 +17,38 @@
 	var eleSubmit = document.querySelector(".controll button");
 	var eleServerSubmit = document.querySelector(".serverButton");
 	
-	var fileHandler = new MultiFileHandler( [eleInput, eleBody], [imgCb] );
+	var fileHandler = new MultiFileHandler( [eleInput, eleSelect], [imgCb] );
 	var images = [];
+	
+	eleHeader.addEventListener("mouseenter", function(event) {
+		var prefix = getBrowserPrefix();
+		var strTransform = "";
+		if (prefix === "moz" || prefix === "") {
+			strTransform = "transform";
+		} else {
+			strTransform = prefix + "Transform";
+		}
+		eleSelect.style[strTransform] = "translate3d(0px, 12px, 0px)";
+	});
+	
+	eleHeader.addEventListener("mouseleave", function(event) {
+		var prefix = getBrowserPrefix();
+		var strTransform = "";
+		if (prefix === "moz" || prefix === "") {
+			strTransform = "transform";
+		} else {
+			strTransform = prefix + "Transform";
+		}
+		eleSelect.style[strTransform] = "";
+	});
 	
 	eleSubmit.addEventListener("click", function(event) {
 		event.preventDefault();
+		
+		if (images.length <= 0) {
+			alert("8장 이상의 사진이 필요해요~!");
+			return;
+		}
 		
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
 		var formData = new FormData();
@@ -54,6 +84,10 @@
 	eleServerSubmit.addEventListener("click", function(event) {
 		event.preventDefault();
 		
+		if (images.length <= 0) {
+			alert("8장 이상의 사진이 필요해요~!");
+			return;
+		}
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
 		var formData = new FormData();
 	
