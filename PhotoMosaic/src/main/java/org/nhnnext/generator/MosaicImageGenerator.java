@@ -1,8 +1,13 @@
 package org.nhnnext.generator;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
 
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
@@ -11,7 +16,9 @@ import org.nhnnext.dto.PhotoContainer;
 import org.nhnnext.dto.PhotoGroupContainer;
 import org.nhnnext.dto.Template;
 import org.nhnnext.dto.TemplateFrameList;
+import org.nhnnext.support.Constants;
 import org.nhnnext.support.Orientation;
+import org.nhnnext.support.UploadHandler;
 
 public class MosaicImageGenerator {
 
@@ -31,8 +38,7 @@ public class MosaicImageGenerator {
 		this.mosaic = mosaic;
 		Orientation mosaicOrientation = mosaic.getOrientation();
 		Template template = Template.getRandomTemplate(mosaicOrientation);
-		this.templateFrameList = template.getTemplateFrameList(mosaicOrientation);
-		
+		this.templateFrameList = template.getTemplateFrameList();
 		//Get CriteriaOrientation, 
 		this.basePhotoOrientation = Orientation.getBasePhotoOrientation(mosaicOrientation);
 	}
@@ -74,6 +80,8 @@ public class MosaicImageGenerator {
 	}
 
 	public void makeMosaicImage() throws IOException {
-		groupContainer.getCombinedMosaic(mosaic, basePhotoOrientation);
+		BufferedImage mosaicImage = groupContainer.getCombinedMosaic(mosaic, basePhotoOrientation);
+		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + mosaic.getFileName());
+		ImageIO.write(mosaicImage, Constants.MOSAIC_FILE_EXTENSION, file);
 	}
 }

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.support.Constants;
@@ -23,7 +25,7 @@ public class PhotoContainer extends Container<Photo> {
 	@Override
 	public BufferedImage getCombinedMosaic(Mosaic mosaic, Orientation basePhotoOrientation) throws IOException {
 		
-		ArrayList<BufferedImage> resizedImageList = resizeEach(mosaic, basePhotoOrientation);
+		ArrayList<BufferedImage> resizedImageList = getResizedImageList(mosaic, basePhotoOrientation);
 		return mergeImages(resizedImageList, basePhotoOrientation);
 	}
 
@@ -51,15 +53,13 @@ public class PhotoContainer extends Container<Photo> {
 		return MosaicHandler.getMergedPhoto(mergeInstanceList, basePhotoOrientation);
 	}
 
-	@Override
-	protected ArrayList<BufferedImage> resizeEach(Mosaic mosaic, Orientation basePhotoOrientation) throws IOException {
+	private ArrayList<BufferedImage> getResizedImageList(Mosaic mosaic, Orientation basePhotoOrientation) throws IOException {
 		Photo smallestSizedPhoto = getSmallestSizedPhoto(basePhotoOrientation);
 		
 		int scaleCriteriaSize = (basePhotoOrientation == Orientation.LANDSCAPE ) ? smallestSizedPhoto.getOriginalWidth() : smallestSizedPhoto.getOriginalHeight();
-		String filePath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + smallestSizedPhoto.getUniqueId();
+		String directoryPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId();
 		
 		ArrayList<BufferedImage> resizedImages = new ArrayList<BufferedImage>(); 
-		
 		
 		Photo photo = null;
 		Dimension resizedDimension = null;
@@ -71,16 +71,17 @@ public class PhotoContainer extends Container<Photo> {
 					scaleCriteriaSize, 
 					basePhotoOrientation
 			);
+			File file = new File(directoryPath + File.separator + photo.getUniqueId());
+			BufferedImage originalImage = ImageIO.read(file);
 			
-			resizedImage = PhotoHandler.getResizedPhoto(filePath, basePhotoOrientation, resizedDimension);
+			resizedImage = PhotoHandler.getResizedPhoto(originalImage, basePhotoOrientation, resizedDimension);
 			resizedImages.add(resizedImage);
 		}
 		
 		return resizedImages;
 	}
 
-	@Override
-	protected Photo getSmallestSizedPhoto(Orientation basePhotoOrientation) {
+	private Photo getSmallestSizedPhoto(Orientation basePhotoOrientation) {
 		Photo basePhoto = get(0);
 		
 		if (basePhotoOrientation == Orientation.LANDSCAPE) {

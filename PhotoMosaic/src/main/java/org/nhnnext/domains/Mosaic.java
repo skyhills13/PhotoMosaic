@@ -1,10 +1,21 @@
 package org.nhnnext.domains;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 import org.nhnnext.support.Orientation;
 
 public class Mosaic {
+	
+	@Override
+	public String toString() {
+		return "Mosaic [id=" + id + ", fileName=" + fileName + ", title="
+				+ title + ", url=" + url + ", comment=" + comment
+				+ ", createdDate=" + createdDate + ", userId=" + userId
+				+ ", photos=" + Arrays.toString(photos) + ", orientation="
+				+ orientation + "]";
+	}
+
 	private int id;
 	private String fileName;
 	private String title;
