@@ -12,20 +12,21 @@ import org.nhnnext.dto.Template;
 import org.nhnnext.dto.TemplateFrameList;
 import org.nhnnext.support.Orientation;
 
-public class MosaicGenerator {
+public class MosaicImageGenerator {
 
 	private PhotoGroupContainer groupContainer; 
 	private Orientation basePhotoOrientation;
 	private TemplateFrameList templateFrameList;
 	
-	public MosaicGenerator(Photo[] originPhotos, Orientation mosaicOrientation) {
+	public MosaicImageGenerator(Mosaic mosaic) {
 		
-		init(mosaicOrientation);
+		init(mosaic);
 		setupContainer();
-		placePhotosToContainer(originPhotos);
+		placePhotosToContainer(mosaic.getPhotos());
 	}
 
-	protected void init(Orientation mosaicOrientation) {
+	protected void init(Mosaic mosaic) {
+		Orientation mosaicOrientation = mosaic.getOrientation();
 		Template template = Template.getRandomTemplate(mosaicOrientation);
 		this.templateFrameList = template.getTemplateFrameList(mosaicOrientation);
 		
@@ -69,7 +70,7 @@ public class MosaicGenerator {
 		//		throw new Exception();	
 	}
 
-	public Mosaic getMosaic() {
+	public Mosaic makeMosaicImage() {
 		groupContainer.getCombinedMosaic(basePhotoOrientation);
 		return null;
 	}

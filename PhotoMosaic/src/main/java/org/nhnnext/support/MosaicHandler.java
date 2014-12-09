@@ -68,7 +68,7 @@ public class MosaicHandler {
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
-	public Orientation judgeMosaicOrientation(Mosaic mosaic){
+	public static Orientation judgeMosaicOrientation(Mosaic mosaic){
 		int landscapeCount = 0;
 		Orientation mosaicOrientation = null;
 		for( Photo photo : mosaic.getPhotos()) {

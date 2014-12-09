@@ -2,17 +2,16 @@ package org.nhnnext.service;
 
 import java.io.File;
 
-import javax.servlet.http.HttpSession;
-
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.nhnnext.domains.User;
-import org.nhnnext.generator.MosaicGenerator;
+import org.nhnnext.generator.MosaicImageGenerator;
 import org.nhnnext.support.Constants;
+import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
+import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,17 +51,18 @@ public class MosaicService {
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		if( server ) {
-//			for( Photo photo : mosaic.getPhotos()){
-//				photo.setOrientation(photoHandler.judgePhotoOrientation(photo));
-//			}
-//			
-//			Orientation mosaicOrientation = mosaicHandler.judgeMosaicOrientation(mosaic);
-//			mosaic.setOrientation(mosaicOrientation);
-//			/**
-//			 * Test
-//			 */
-//			MosaicGenerator mosaicGenerator = new MosaicGenerator(mosaic.getPhotos(), mosaicOrientation);
-//			mosaicGenerator.getMosaic();
+			for( Photo photo : mosaic.getPhotos()){
+				photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
+			}
+			
+			Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
+			mosaic.setOrientation(mosaicOrientation);
+			/**
+			 * Test
+			 */
+			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
+			mosaicImageGenerator.makeMosaicImage();
+		
 		} else {
 			uploadService.uploadUrl(clientMosaic, mosaicPath);
 		}

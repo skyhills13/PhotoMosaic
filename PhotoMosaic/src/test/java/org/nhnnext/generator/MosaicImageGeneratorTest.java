@@ -25,9 +25,8 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
-public class MosaicGeneratorTest {
+public class MosaicImageGeneratorTest {
 
-	private static Photo[] photoArray; 
 	private static Mosaic mosaic;
 	
 	@BeforeClass
@@ -65,11 +64,9 @@ public class MosaicGeneratorTest {
 			photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
 		}
 		
-		photoArray = photoList.toArray(new Photo[photoList.size()]);
-		
-		mosaic.setPhotos(photoArray);
-//		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
-//		mosaic.setOrientation(mosaicOrientation);
+		mosaic.setPhotos(photoList.toArray(new Photo[photoList.size()]));
+		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
+		mosaic.setOrientation(mosaicOrientation);
 //		
 		
 	}
@@ -77,8 +74,8 @@ public class MosaicGeneratorTest {
 	@Test
 	public void getMosaic() {
 		
-		MosaicGenerator mg = new MosaicGenerator(photoArray, mosaic.getOrientation());
-		Mosaic mosaic = mg.getMosaic();
+		MosaicImageGenerator mg = new MosaicImageGenerator(mosaic);
+		Mosaic mosaic = mg.makeMosaicImage();
 		
 	}
 	
