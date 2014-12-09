@@ -80,13 +80,17 @@ MultiFileHandler.prototype = {
 	},
 
 	_fileSelectHandler: function(event) {
+		if (!this.hoverLine.hasClassName("hoverIn")) {
+			this._fileDragHover(event);
+			return;
+		}
 		// cancel event and hover styling
 		this._fileDragHover(event);
 
 		// fetch FileList object
 		var files = event.target.files || event.dataTransfer.files;
 		var thisFiles = this.getFiles();
-
+		
 		// process all File objects
 		for (var idxFile = 0, file; file = files[idxFile]; idxFile++) {
 			thisFiles.push(file);

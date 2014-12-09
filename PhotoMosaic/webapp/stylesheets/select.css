@@ -1,6 +1,7 @@
 html, body {
 	position: relative;
 	height: 100%;
+	min-height: 450px;
 
 	font-family: "Lato", "Apple SD Gothic Neo";
 	font-weight: 400;
@@ -37,12 +38,34 @@ body * {
 	width: 110px;
 	height: 46px;
 	
-	background-color: #AAA;
+	background-color: #DDD;
 	
 	border: none;
-	border-radius: 5px;
+	border-radius: 15px;
+	outline: none;
 	
 	overflow: hidden;
+	box-shadow: 0px 5px rgba(10, 10, 10, 0.4);
+	
+	transition: all 0.1s;
+}
+
+.button, .button * {
+	cursor: pointer;
+}
+
+.button:hover {
+	-webkit-transform: translate3d(0px, 1px, 0px);
+	   -moz-transform: translate3d(0px, 1px, 0px);
+	        transform: translate3d(0px, 1px, 0px);
+	box-shadow: 0px 4px rgba(10, 10, 10, 0.4);
+}
+
+.button:active {
+	-webkit-transform: translate3d(0px, 5px, 0px);
+	   -moz-transform: translate3d(0px, 5px, 0px);
+	        transform: translate3d(0px, 5px, 0px);
+	box-shadow: 0px 0px rgba(10, 10, 10, 0.4);
 }
 
 .button > .value {
@@ -61,31 +84,36 @@ body * {
 
 	left: 0px;
 	right: 0px;
-	top: 45px;
+	top: 50px;
 	bottom: 0px;
+	
+	-webkit-transition: -webkit-transform 0.2s ease-in-out;
+	   -moz-transition: transform 0.2s ease-in-out;
+	        transition: transform 0.2s ease-in-out;
 }
 
 .select .contents {
 	position: absolute;
 
 	width: 80%;
-	top: 40px;
+	top: 30px;
 	bottom: 100px;
 
 	left: 10%;
 
-	border: 1px solid #CCC;
+	border: 1px solid #AAA;
 	box-shadow: 0px 3px 6px rgba(10, 10, 10, 0.3);
 }
 
 .select header:nth-child(1) {
 	display: table;
-	position: initial;
+	position: relative;
 
 	width: 100%;
 	height: 40px;
 	
-	box-shadow: initial;
+	border: none;
+	box-shadow: none;
 }
 
 .select header > * {
@@ -94,7 +122,7 @@ body * {
 
 .select header > *:nth-child(1) {
 	width: 300px;
-	border-right: 1px solid #CCC;
+	border-right: 1px solid #AAA;
 }
 
 .select input[type=text] {
@@ -120,7 +148,7 @@ body * {
 	
 	border: 3px dashed transparent;
 	
-	box-sizing: initial;
+	box-sizing: auto;
 }
 
 .select .hoverLine.hoverIn {
@@ -161,7 +189,7 @@ body * {
 
 .select .hoverLine div p:nth-child(2) {
 	font-size: 24px;
-	font-weight: initial;
+	font-weight: auto;
 }
 
 .select .hoverLine div p:nth-child(3) {
@@ -177,7 +205,7 @@ body * {
 	bottom: 0px;
 
 	padding: 8px;
-	border-top: 1px solid #CCC;
+	border-top: 1px solid #AAA;
 
 	text-align: center;
 
@@ -185,7 +213,7 @@ body * {
 }
 
 .select .pictures > .positioner {
-	height: initial;
+	height: auto;
 	margin: 10px 10px 15px 10px;
 }
 
@@ -196,7 +224,6 @@ body * {
 	height: 150px;
 	
 	margin: 5px;
-	
 }
 
 .select .pictures .positioner .thumb > .positioner {
@@ -206,7 +233,7 @@ body * {
 	width: 100%;
 	height: 100%;
 	
-	border: 1px solid #CCC;
+	border: 1px solid #AAA;
 }
 
 .select .pictures .positioner .thumb section {
@@ -280,13 +307,42 @@ body * {
 	padding: 15px 20px;
 
 	border: none;
-	border-radius: 5px;
+	border-radius: 15px;
+	outline: none;
 
 	font-size: 15px;
 	line-height: 15px;
 
-	background-color: #AAA;
+	background-color: #DDD;
+	box-shadow: 0px 5px rgba(10, 10, 10, 0.4);
+
+	cursor: pointer;
+	
+	transition: all 0.1s;
 }
+
+.select .controll button.serverButton:hover {
+	-webkit-transform: translate3d(0px, 1px, 0px);
+	   -moz-transform: translate3d(0px, 1px, 0px);
+	        transform: translate3d(0px, 1px, 0px);
+	box-shadow: 0px 4px rgba(10, 10, 10, 0.4);
+}
+
+
+.select .controll .button:hover, .select .controll button.serverButton:hover {
+	-webkit-transform: translate3d(0px, 1px, 0px);
+	   -moz-transform: translate3d(0px, 1px, 0px);
+	        transform: translate3d(0px, 1px, 0px);
+	box-shadow: 0px 4px rgba(10, 10, 10, 0.4);
+}
+
+.select .controll .button:active, .select .controll button.serverButton:active {
+	-webkit-transform: translate3d(0px, 5px, 0px);
+	   -moz-transform: translate3d(0px, 5px, 0px);
+	        transform: translate3d(0px, 5px, 0px);
+	box-shadow: 0px 0px rgba(10, 10, 10, 0.4);
+}
+
 
 .inputFile {
 	position: absolute;
