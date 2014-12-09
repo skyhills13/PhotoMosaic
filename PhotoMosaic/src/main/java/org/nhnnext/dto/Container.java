@@ -36,6 +36,4 @@ public abstract class Container<T> extends ArrayList<T> {
 	}
 	
 	abstract <Any> Any getCombinedMosaic(Mosaic mosaic, Orientation basePhotoOrientation) throws IOException;
-	protected abstract ArrayList<BufferedImage> resizeEach(Mosaic mosaic, Orientation basePhotoOrientation) throws IOException;
-	protected abstract Photo getSmallestSizedPhoto(Orientation basePhotoOrientation);
 }

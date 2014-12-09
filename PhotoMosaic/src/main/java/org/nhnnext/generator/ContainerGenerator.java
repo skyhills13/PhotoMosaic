@@ -19,6 +19,7 @@ public class ContainerGenerator {
 		for (int index = 0; index < templateFrameList.size(); index++) {
 			PhotoContainer photoContainer = new PhotoContainer(templateFrameList.get(index));
 			groupContainer.add(photoContainer);
+			
 		}
 		
 		return groupContainer;

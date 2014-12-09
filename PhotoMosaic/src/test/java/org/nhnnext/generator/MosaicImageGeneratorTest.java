@@ -64,6 +64,7 @@ public class MosaicImageGeneratorTest {
 			photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
 		}
 		
+		mosaic.setFileName("testMosaic.png");
 		mosaic.setPhotos(photoList.toArray(new Photo[photoList.size()]));
 		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 		mosaic.setOrientation(mosaicOrientation);
@@ -73,10 +74,13 @@ public class MosaicImageGeneratorTest {
 	
 	@Test
 	public void getMosaic() {
-		
-		//MosaicImageGenerator mg = new MosaicImageGenerator(mosaic);
-		//Mosaic mosaic = mg.makeMosaicImage();
-		
+		System.out.println(mosaic.toString());
+		MosaicImageGenerator mg = new MosaicImageGenerator(mosaic);
+		try {
+			mg.makeMosaicImage();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static File getFile(String fileName) {

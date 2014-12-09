@@ -19,11 +19,12 @@ public class ContainerGeneratorTest {
 		Orientation mosaicOrientation = Orientation.LANDSCAPE;
 		
 		Template template = Template.getRandomTemplate(mosaicOrientation);
-		TemplateFrameList list = template.getTemplateFrameList(mosaicOrientation);
-		
+		TemplateFrameList list = template.getTemplateFrameList();
+		System.out.println("list : "+list);
 		ContainerGenerator cg = new ContainerGenerator(list);
 		PhotoGroupContainer groupContainer = cg.getContainer();
-		assertThat(groupContainer.size(), is(4));
+		
+		assertThat(groupContainer.size(), is(3));
 		
 		System.out.println(groupContainer.toString());
 		for (PhotoContainer photoContainer : groupContainer) {

@@ -23,10 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
 	
-	public static BufferedImage getResizedPhoto(String filePath, Orientation basePhotoOrientation, Dimension resizeDimension) throws IOException {
-		
-		File file = new File(filePath);
-		BufferedImage originalImage = ImageIO.read(file);
+	public static BufferedImage getResizedPhoto(BufferedImage originalImage, Orientation basePhotoOrientation, Dimension resizeDimension) throws IOException {
 		
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		int resizeWidth = (int)resizeDimension.getWidth();
