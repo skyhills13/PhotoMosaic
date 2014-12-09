@@ -68,9 +68,9 @@ public class MosaicGeneratorTest {
 		photoArray = photoList.toArray(new Photo[photoList.size()]);
 		
 		mosaic.setPhotos(photoArray);
-		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
-		mosaic.setOrientation(mosaicOrientation);
-		
+//		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
+//		mosaic.setOrientation(mosaicOrientation);
+//		
 		
 	}
 	

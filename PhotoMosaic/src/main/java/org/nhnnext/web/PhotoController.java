@@ -1,25 +1,10 @@
 package org.nhnnext.web;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
-import org.nhnnext.dao.MosaicDao;
-import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.dao.UserDao;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
-import org.nhnnext.domains.User;
-import org.nhnnext.generator.MosaicGenerator;
-import org.nhnnext.support.Constants;
-import org.nhnnext.support.MosaicHandler;
-import org.nhnnext.support.Orientation;
-import org.nhnnext.support.PhotoHandler;
-import org.nhnnext.support.StringHandler;
-import org.nhnnext.support.UploadHandler;
+import org.nhnnext.service.MosaicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,137 +15,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import sun.misc.BASE64Decoder;
-
 @Controller
 public class PhotoController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(PhotoController.class);
-	
-	@Autowired
-	private PhotoDao photoDao;
-	
-	@Autowired
-	private MosaicDao mosaicDao;
 
 	@Autowired
-	private UserDao userDao;
+	private MosaicService mosaicService;
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
 		
-		Mosaic mosaic = createMosaicObject(title, comment, session);
-		mosaic.setPhotos(uploadFiles(files, mosaic));
+		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic);
 		
-		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
-		
-		convertDataUrlToImg(clientMosaic, mosaicPath);
-		
-        mosaicDao.updateCreatedTime(mosaic);
-        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-        return mosaic.getUrl();
+        return url;
     }
 	
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
 	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
-			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
 
-
-		Mosaic mosaic = createMosaicObject(title, comment, session);
-		mosaic.setPhotos(uploadFiles(files, mosaic));
-		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
+		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic);
 		
-		for( Photo photo : mosaic.getPhotos()){
-			photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
-		}
-		
-		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
-		mosaic.setOrientation(mosaicOrientation);
-		/**
-		 * Test
-		 */
-		MosaicGenerator mosaicGenerator = new MosaicGenerator(mosaic.getPhotos(), mosaicOrientation);
-		mosaicGenerator.getMosaic();
-		
-        /*merge photos*/
-//      MosaicHandler.mergePhotos(mosaic);
-        mosaicDao.updateCreatedTime(mosaic);
-        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-        
-//      PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
-        return mosaic.getUrl();	
+		return url;
 	}
 	
-	public Mosaic createMosaicObject(String title, String comment, HttpSession session){
-		String userEmail = "";
-		User currentUser = null;
-		if (session.getAttribute("email") != null) {
-			userEmail = session.getAttribute("email").toString();
-			currentUser = userDao.findByEmail(userEmail);
-		}
-		/*
-		 * TODO exception handling for the case submit w/o photo
-		* right now, mosaic table is updated without photo table update.
-		* do it to check the situation before handling
-		*/
-		/*insert mosaic information into the database*/
-		String mosaicUrl = StringHandler.makeUrl();
-		Mosaic mosaic = new Mosaic(mosaicUrl+".png", title, mosaicUrl, comment);
-		mosaicDao.upload(mosaic);
-		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
-		mosaic.setId(mosaicId);
-		if(currentUser != null) {
-			int currentUserId = currentUser.getId();
-			mosaic.setUserId(currentUserId);
-			mosaicDao.updateUserId(mosaic);
-		}
-		return mosaic;
-	}
-	
-	public Photo[] uploadFiles(MultipartFile[] files, Mosaic mosaic) throws IOException{
-		Photo[] photos = new Photo[files.length];
-		logger.debug("*****************one mosaic start************************");
-		for (int i = 0; i < files.length; i++) {
-            MultipartFile file = files[i];
-            
-            if (file.isEmpty()) {
-            	logger.debug(Constants.UPLOAD_FAIL_MESSAGE + file.getOriginalFilename());
-            	return null;
-            }
-            /*file upload to the server*/
-            UploadHandler.upload(mosaic, file);
-            
-            /*get the information of the photo*/
-            photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, file);
-            
-            UploadHandler.renameAsUnique(mosaic, photos[i]);
-            
-            PhotoHandler.sizedownPhoto(photos[i]);
-            
-//            Dimension scaledDimension = PhotoHandler.getScaledDimension(photos[i]);
-//            photos[i].setScaledWidth(scaledDimension.width);
-//            photos[i].setScaledHeight(scaledDimension.height);
-            //TODO add date to UUID for the case of exception
-            photoDao.upload(photos[i]);
-            logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE + file.getOriginalFilename());
-        }
-		logger.debug("*****************one mosaic end************************");
-		return photos;
-	}
-	
-	public void convertDataUrlToImg(String dataUrl, String mosaicPath) throws IOException{
-		String imageDataBytes = dataUrl.substring(dataUrl.indexOf(",")+1);
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] bytes = decoder.decodeBuffer(imageDataBytes);
-		
-		File of = new File(mosaicPath);  
-		FileOutputStream osf = new FileOutputStream(of);  
-		osf.write(bytes);  
-		osf.flush();  
-		// TODO Resource leak: 'osf' is never closed 경고 뜸.
-	}
 
 //	//not using now 
 //	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)

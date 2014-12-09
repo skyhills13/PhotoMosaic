@@ -17,6 +17,7 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {

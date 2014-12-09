@@ -17,7 +17,6 @@
 		p:username ="${database.username}"
 		p:password="${database.password}" 
 	/>
-	
 	<bean id="photoDao" class="org.nhnnext.dao.PhotoDao"
 		p:dataSource-ref="dataSource"
 	/>
@@ -29,5 +28,7 @@
 	<bean id="userDao" class="org.nhnnext.dao.UserDao"
 		p:dataSource-ref="dataSource"
 	/>
+	
+	
 	
 </beans>

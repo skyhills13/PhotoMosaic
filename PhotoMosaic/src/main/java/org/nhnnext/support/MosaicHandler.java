@@ -12,12 +12,14 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
-	public static void mergePhotos(Mosaic mosaic) throws IOException {
+	public void mergePhotos(Mosaic mosaic) throws IOException {
 
 		int rows = 2; // we assume the no. of rows and cols are known and each
 						// chunk has equal width and height
@@ -66,7 +68,7 @@ public class MosaicHandler {
 		ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
-	public static Orientation judgeMosaicOrientation(Mosaic mosaic){
+	public Orientation judgeMosaicOrientation(Mosaic mosaic){
 		int landscapeCount = 0;
 		Orientation mosaicOrientation = null;
 		for( Photo photo : mosaic.getPhotos()) {

@@ -6,6 +6,7 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadHandler {
@@ -48,7 +49,7 @@ public class UploadHandler {
 		}
 	}
 	
-	public static boolean delete(Mosaic mosaic, String fileName) {
+	public boolean delete(Mosaic mosaic, String fileName) {
 		File targetFile = getDestinationFile(mosaic, fileName);
 		try {
 			return targetFile.delete();
@@ -57,5 +58,4 @@ public class UploadHandler {
 		}
 		return false;
 	}
-
 }

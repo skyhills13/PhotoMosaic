@@ -18,8 +18,6 @@ public class PhotoContainer extends Container<Photo> {
 		for (int i = 0; i < size(); i++) {
 			//get(i)
 		}
-		
-		
 		return null;
 	}
 
