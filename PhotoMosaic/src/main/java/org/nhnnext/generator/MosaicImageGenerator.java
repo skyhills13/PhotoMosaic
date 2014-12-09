@@ -96,7 +96,7 @@ public class MosaicImageGenerator {
 
 	public void makeMosaicImage() throws IOException {
 		BufferedImage mosaicImage = groupContainer.getCombinedMosaic(mosaic, basePhotoOrientation);
-		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + mosaic.getFileName());
+		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + mosaic.getFileName());
 		ImageIO.write(mosaicImage, Constants.MOSAIC_FILE_EXTENSION, file);
 	}
 }

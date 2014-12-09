@@ -56,6 +56,7 @@ public class MosaicImageGeneratorTest {
 			MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 			
 			Photo photo = PhotoHandler.getNewPhotoInstanceWithData(mosaic, multipartFile);
+			photo.setUniqueId(path);
 			photoList.add(photo);
 		}
 		assertEquals(filePathArray.length, photoList.size());

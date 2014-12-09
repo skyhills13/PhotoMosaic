@@ -76,8 +76,7 @@ public class PhotoContainer extends Container<Photo> {
 					scaleCriteriaSize, 
 					basePhotoOrientation
 			);
-			//File file = new File(directoryPath + File.separator + photo.getUniqueId());
-			File file = new File(directoryPath + File.separator + photo.getOriginalFileName());
+			File file = new File(directoryPath + File.separator + photo.getUniqueId());
 			
 			logger.info("Path : {}, file Exists : {}", file.getAbsolutePath(), file.exists());
 			BufferedImage originalImage = ImageIO.read(file);
