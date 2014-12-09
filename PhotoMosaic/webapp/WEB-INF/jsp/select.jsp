@@ -33,7 +33,7 @@
 			</header>
 			<div class="hoverLine" data-draghover="true">
 				<div class="info">
-					<img src="/images/button/image.png"></img>
+					<img src="/images/button/image.png" />
 					<div>
 						<p>Drag images here</p>
 						<p>or</p>

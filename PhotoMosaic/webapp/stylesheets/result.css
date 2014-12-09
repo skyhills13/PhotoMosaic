@@ -209,7 +209,7 @@ aside {
 	display: inline-block;
 	vertical-align: top;
 	padding: 40px 20px;
-	overflow: scroll;
+	overflow: hidden;
 	text-align: -webkit-right;
 	-webkit-transition: padding-right 0.3s;
 	text-align: -webkit-right;
