@@ -43,6 +43,7 @@ header a button {
 	background : none;
 	font-family: 'Lato', sans-serif;
 	font-weight: 100;
+	cursor: pointer;
 }
 
 header a button:hover {

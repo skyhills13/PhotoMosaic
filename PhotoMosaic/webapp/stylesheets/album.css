@@ -2,7 +2,8 @@ html, body {
 	position: relative;
 	height: 100%;
 	
-	font-family: "Apple SD Gothic Neo";
+	font-family: "Lato", "Apple SD Gothic Neo";
+	font-weight: 400;
 	
 	-webkit-user-select: NONE;
 	-moz-user-select: NONE;
@@ -28,11 +29,15 @@ body * {
 	
 	left: 0px;
 	right: 0px;
-	top: 60px;
+	top: 50px;
 	bottom: 0px;
 	
 	overflow-x: hidden;
 	overflow-y: scroll;
+	
+	-webkit-transition: -webkit-transform 0.2s ease-in-out;
+	   -moz-transition: transform 0.2s ease-in-out;
+	        transition: transform 0.2s ease-in-out;
 }
 
 .albums > .positioner {
@@ -149,20 +154,26 @@ and (max-width: 640px) {
 	bottom: 0px;
 
 	color: white;
-	opacity: 0.95;
+	opacity: 0.85;
 	
 	background-image: url("/images/background/title.png");
 	background-repeat: repeat-x;
-	background-size: 100% 100%;
+	background-size: 100% 180px;
 }
 
 .album .info .title {
 	display: block;
 	position: absolute;
 	
+	width: 100%;
+	
 	bottom: 20px;
 	padding: 0px 20px;
 	
 	text-align: left;
 	font-size: 20px;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
 }

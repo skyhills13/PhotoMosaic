@@ -43,5 +43,9 @@
 			<div class="clear"></div>
 		</div>
 	</section>
+	
+	<script src="/javascripts/lib/util.js"></script>
+	<script src="/javascripts/lib/MyHTMLElement.js"></script>
+	<script src="/javascripts/album.js"></script>
 </body>
 </html>
