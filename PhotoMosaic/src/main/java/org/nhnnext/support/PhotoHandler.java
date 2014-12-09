@@ -127,6 +127,8 @@ public class PhotoHandler {
 		String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
 
 		String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
-		return new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
+		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
+		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(newPhoto));
+		return newPhoto;
 	}
 }

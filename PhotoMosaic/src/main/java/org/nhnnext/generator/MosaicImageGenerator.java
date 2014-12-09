@@ -19,9 +19,13 @@ import org.nhnnext.dto.TemplateFrameList;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.Orientation;
 import org.nhnnext.support.UploadHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MosaicImageGenerator {
 
+	private static final Logger logger = LoggerFactory.getLogger(MosaicImageGenerator.class);
+	
 	private PhotoGroupContainer groupContainer; 
 	private Orientation basePhotoOrientation;
 	private TemplateFrameList templateFrameList;
@@ -46,6 +50,11 @@ public class MosaicImageGenerator {
 	private void setupContainer() {
 		ContainerGenerator containerGenerator = new ContainerGenerator(templateFrameList);
 		this.groupContainer = containerGenerator.getContainer();
+		logger.info("Create Group Container : {}",groupContainer.toString());
+		
+		for (PhotoContainer photoContainer : groupContainer) {
+			logger.info("PhotoContainer : {}, Size : {}, Max : {}",photoContainer.toString(), photoContainer.size(), photoContainer.getMax());
+		}
 	}
 	
 	private void placePhotosToContainer(Photo[] originPhotos) {
@@ -61,15 +70,21 @@ public class MosaicImageGenerator {
 			}
 		}
 		
+		logger.info("originPhotoList.size() : {}",originPhotoList.size());
+		logger.info("criteriaPhotoList.size() : {}",criteriaPhotoList.size());
+		
 		//Placement
-		for (int index = 0; index < this.groupContainer.size(); index++) {
+		for (int index = 0; index < this.groupContainer.getMax(); index++) {
 			PhotoContainer photoContainer = this.groupContainer.get(index);
 			
-			if (!criteriaPhotoList.isEmpty())
-				photoContainer.add(criteriaPhotoList.remove(index));
+			if (!criteriaPhotoList.isEmpty()) {
+				photoContainer.add(criteriaPhotoList.remove(0));
+				logger.info("index : {}. photoContainer.isFull() : {}", index, photoContainer.isFull());				
+			}
 			
 			while(!photoContainer.isFull()) {
-				photoContainer.add(originPhotoList.remove(index));
+				photoContainer.add(originPhotoList.remove(0));
+				logger.info("index : {}. photoContainer.isFull() : {}", index, photoContainer.isFull());
 			}
 		}
 		

@@ -20,7 +20,37 @@ public class MosaicHandler {
 		
 		int type = mergeInstanceList.get(0).getBufferedImage().getType();
 		
-		BufferedImage groupImg = null;
+		int baseDirectionLength = 0;
+		int notBaseDirectionLength = 0;
+		int canvasWidth = 0;
+		int canvasHeight = 0;
+		
+		if (basePhotoOrientation == Orientation.LANDSCAPE) {
+			
+			for (MergeInstance mergeInstance : mergeInstanceList) {
+				notBaseDirectionLength += mergeInstance.getBufferedImage().getHeight();
+			}
+			
+			baseDirectionLength = mergeInstanceList.get(0).getBufferedImage().getWidth();
+			canvasWidth = baseDirectionLength;
+			canvasHeight = notBaseDirectionLength;
+			
+		} else if (basePhotoOrientation == Orientation.PORTRAIT) {
+			
+			for (MergeInstance mergeInstance : mergeInstanceList) {
+				notBaseDirectionLength += mergeInstance.getBufferedImage().getWidth();
+			}
+			
+			baseDirectionLength = mergeInstanceList.get(0).getBufferedImage().getHeight();
+			canvasWidth = notBaseDirectionLength;
+			canvasHeight = baseDirectionLength;
+		}
+		
+		BufferedImage groupImg = new BufferedImage(
+			canvasWidth,
+			canvasHeight,
+			type
+		);
 		
 		for (int i = 0; i < mergeInstanceList.size(); i++) {
 				groupImg.createGraphics().drawImage(mergeInstanceList.get(i).getBufferedImage(), mergeInstanceList.get(i).getX(), mergeInstanceList.get(i).getY(), null);

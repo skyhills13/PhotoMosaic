@@ -4,6 +4,12 @@ import java.awt.image.BufferedImage;
 
 public class MergeInstance {
 	
+	@Override
+	public String toString() {
+		return "MergeInstance [bufferedImage=" + bufferedImage + ", x=" + x
+				+ ", y=" + y + "]";
+	}
+
 	private BufferedImage bufferedImage;
 	private int x;
 	private int y;

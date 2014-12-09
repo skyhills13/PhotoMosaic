@@ -14,9 +14,14 @@ import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
 import org.nhnnext.support.PhotoHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("serial")
 public class PhotoContainer extends Container<Photo> {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PhotoContainer.class);
+	
 	public PhotoContainer(Integer max) {
 		super(max);
 	}
@@ -71,7 +76,10 @@ public class PhotoContainer extends Container<Photo> {
 					scaleCriteriaSize, 
 					basePhotoOrientation
 			);
-			File file = new File(directoryPath + File.separator + photo.getUniqueId());
+			//File file = new File(directoryPath + File.separator + photo.getUniqueId());
+			File file = new File(directoryPath + File.separator + photo.getOriginalFileName());
+			
+			logger.info("Path : {}, file Exists : {}", file.getAbsolutePath(), file.exists());
 			BufferedImage originalImage = ImageIO.read(file);
 			
 			resizedImage = PhotoHandler.getResizedPhoto(originalImage, basePhotoOrientation, resizedDimension);

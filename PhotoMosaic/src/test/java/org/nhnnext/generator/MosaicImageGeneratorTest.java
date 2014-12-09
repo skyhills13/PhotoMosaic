@@ -41,7 +41,7 @@ public class MosaicImageGeneratorTest {
 			"A2.jpg",
 			"A3.jpg",
 			
-			"C0.jpg",
+			"B0.jpg",
 			"C1.jpg",
 			"C2.jpg",
 			"C3.jpg"
