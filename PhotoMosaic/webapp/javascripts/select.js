@@ -143,7 +143,7 @@
 								"<img src=\"" + event.target.result + "\"" +
 									"title=\"" + escape(file.name) + "\"" +
 									"draggable=\"false\"" +
-									"data-draghover=\"true\">" +
+									"data-draghover=\"true\" />" +
 						"</section>" +
 						"</div>";
 				
