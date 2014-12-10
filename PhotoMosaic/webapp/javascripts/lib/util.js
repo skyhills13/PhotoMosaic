@@ -59,3 +59,73 @@ function isString(target) {
 	
 	return true;
 }
+
+
+function UTIL(){
+	return {
+		hasOneOverKey : function(hash){
+			for(var i in hash){
+				if(this.isUndefined(i)) return false;
+				return true;
+			}
+		},
+			
+		getFirstKeyInHash : function(hash){
+			for(var i in hash){
+				return i;
+			}
+		},
+			
+		getIndexPositionInMatrix : function(index, matrix){
+			var column = matrix.column;
+			var row = matrix.row;
+			return {
+				"c" : parseInt(index/column),
+				"r" : index%row
+			};
+		},
+		
+		isUndefined : function(object){
+			if(typeof object==="undefined") return true;
+			return false;
+		},
+		
+		shuffleArray : function(array){
+			var indexArray = (function(){
+				var temp = [];
+				for(var i=0 ; i<array.length ; i++){
+					temp.push(i);
+				}
+				return temp;
+			})();
+					
+			var shuffled = [];
+			while(indexArray.length > 0){
+				var randIndex = parseInt(Math.random()*indexArray.length);
+				var tempEle = indexArray[0];
+				indexArray[0] = indexArray[randIndex];
+				indexArray[randIndex] = tempEle;
+							
+				var ele = indexArray.shift();
+				shuffled.push(array[ele]);
+			}
+			return shuffled;
+		},
+		
+		adjustArrayWithSpecificLength : function(array, toGetLen){
+			var curLen = array.length;
+			console.log(curLen, toGetLen);
+			if(curLen > toGetLen){
+				var removeLen = curLen - toGetLen;
+				return array.slice(removeLen);
+			} else if (curLen < toGetLen){
+				while(array.length!=toGetLen){
+					var targetIndex = array.length%curLen;
+					array.push(array[targetIndex]);
+				}
+				return array;
+			}
+			return array;
+		}
+	};
+};

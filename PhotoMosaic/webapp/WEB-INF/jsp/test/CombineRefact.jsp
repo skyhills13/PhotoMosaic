@@ -23,10 +23,9 @@
 			<li data-list="8"><img src="/images/test/C2.jpg" /></li>
 			<li data-list="9"><img src="/images/test/C3.jpg" /></li>
 			<li data-list="10"><img src="/images/test/pngtest3.png" /></li>
-		</ul>
+ 	</ul>
 	</article>
 	<script src="/javascripts/lib/util.js"></script>
-	<script src="/javascripts/test/CombineRefact.js"></script>
 	<script src="/javascripts/lib/PhotoCombine.js"></script>
 	<script>
 		window.addEventListener("load",
@@ -67,23 +66,25 @@
 					var opt = new PhotoCombine(true);
 					
 					var canvas1 = opt.create(pArray, {
-						"width" : 800,
-						"height" : 800,
+						"width" : 500,
+						"height" : 500,
+						"template" : testArr, // 필수항목
+						"column" : 4, // 필수항목
+						"row" : 4 // 필수항목
+					}, "canvas1");
+					appendPlace.appendChild(canvas1);
+					
+					var ord = new PhotoCombine(false);
+					var canvas2 = ord.create(pArray, {
+						"width" : 500,
+						"height" : 500,
 						"template" : testArr, // 필수항목
 						"column" : 4, // 필수항목
 						"row" : 4 // 필수항목
 					}, "canvas1");
 					
-					appendPlace.appendChild(canvas1);
-					
-					// return <canvas></canvas>
-					var canvas2 = opt.create(pArray, { // 필수항목
-						"template" : testArr, // 필수항목
-						"column" : 4, // 필수항목
-						"row" : 4 // 필수항목
-					});
-					
 					appendPlace.appendChild(canvas2);
+					// return <canvas></canvas>
 					
 /* 					var combine = new PhotoCombine();
 					combine.getMaterial({
