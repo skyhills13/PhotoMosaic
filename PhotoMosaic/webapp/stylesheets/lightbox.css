@@ -139,10 +139,17 @@ font-family: 'Shadows Into Light', cursive;
 	height: 60%;
 }
 
+
+/* 
 #lightBox.slide section div.current::after {
 	content : "";
 }
-	
+ */
+ 
+#lightBox.slide section div.current img{
+	box-shadow : 1px 1px RGBA(255,255,255,1);
+}
+ 	
 #lightBox.slide section div.current img.heightDepend {
 	height: 100%;
 }

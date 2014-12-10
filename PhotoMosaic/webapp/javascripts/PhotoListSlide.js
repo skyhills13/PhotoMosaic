@@ -1,5 +1,4 @@
-function UTIL() {
-}
+function UTIL() {} 
 
 UTIL.prototype = {
 	pixelToNumber : function(pixel) {
@@ -28,8 +27,9 @@ UTIL.prototype = {
 
 function PhotoListSlide(wrapper, lightBox) {
 	this.ut = new UTIL();
+	
 	this.lightBox = lightBox;
-	this.container = wrapper.firstElementChild;
+	this.container = wrapper.querySelector("container");
 	this.wrapper = wrapper;
 	this.chageLightBoxClassName();
 	this.createNavigation();

@@ -18,8 +18,6 @@ function resultPageDecorator(){
 		var image = new Image();
 		image.src = imageSrc;
 		image.addEventListener("load", function(){
-			console.log("load");
-			console.log(image);
 			var originalHeight = image.naturalHeight;
 			var originalWidth = image.naturalWidth; 
 			
@@ -42,12 +40,9 @@ function resultPageDecorator(){
 //			return target.toDataURL();
 			var url = target.toDataURL();
 			var bg = document.querySelector("body");
-			bg.style.backgroundImage = "url(" + url + ")";
+			//bg.style.backgroundImage = "url(" + url + ")";
 		});
 	}
 	
 	backgroundBlur();
-	
-//	var bg = document.querySelector("body");
-//	bg.style.backgroundImage = "url(" + url + ")";
 }

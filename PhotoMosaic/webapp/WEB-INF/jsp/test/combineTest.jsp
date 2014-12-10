@@ -55,7 +55,10 @@
 			var tArray = t[rand];
 			/* console.log(tArray); */
 			var testArr = ["1x1", "1x1", "1x2", "1x1", "2x1", "x", "x", "1x2", "3x2", "x", "x", "x", "x", "x", "x", "1x1"]
- 			var pArray = document.querySelectorAll("#list img");
+ 			
+			
+			
+			var pArray = document.querySelectorAll("#list img");
 			var appendPlace = document.querySelector("#canvas");
 
 			var combine = new PhotoCombine();
@@ -68,7 +71,6 @@
 				"photoArray" : pArray, // HTMLImgElement
 				"appendPlace" : appendPlace
 			});
-			console.log(testArr);
 			//combine.create();
 			combine.createWithOptimize();
 			
