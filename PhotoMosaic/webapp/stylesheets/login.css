@@ -117,36 +117,6 @@ article form p input:focus{
 	-webkit-transition : background 0.2s, color 0.2s;
 }
 
-article form span.error{
-	display : inline-block;
-	position : relative;
-	text-align : left;
-	height : initial;
-	left : 390px;
-	width : 220px;
-	padding : 5px;
- 	background : RGBA(179, 5, 24, 1);
- 	color : RGBA(255,255,255,1);
-	border-radius : 3px;
-}
-
-article form span.error::before{
-	content : "url("../images/background/join_bg2.jpg")";
-}
-
-article form span.email{
-	top : -40px;
-}
-
-article form span.password{
-	top : -40px;
-}
-
-article form span.nouser{
-	top : -75px;
-}
-
-
 article form button {
 	width : 500px;
 	margin : auto;
@@ -168,6 +138,32 @@ article form button:hover {
 	background : RGBA(10, 10, 10, 0.8);
 	-webkit-transition : border 0.4s, background 0.4s, color 0.4s;
 }
+
+
+
+/* error message */
+article form div p.errorMessage {
+	margin : auto;
+	width : 60%;
+	margin-bottom : 0px;
+	height : initial;
+	display : table;
+}
+
+article form div p.errorMessage span.showError{
+    display: table-cell;
+    vertical-align: middle;
+   	margin : auto;
+	width : 100%;
+	font-size : 13px;
+	text-align : center;
+	color : RGBA(179, 5, 24, 1);
+	border : 1px solid RGBA(179, 5, 24, 0.1);
+	border-radius : 100px;
+	padding : 10px;
+	margin-top : 20px;
+}
+
 
 /*Denim RGBA(54, 117, 199, 1)*/
 /*Beau Blue RGBA(194, 216, 237, 1)*/

@@ -27,15 +27,17 @@
 				<p>
 					<span>EMAIL</span>
 					<form:input path="email" />
-					<form:errors path="email" cssClass="error email" />
-					<c:if test="${errorMessage != null}">
-						<p>${errorMessage}</p>
-					</c:if>
 				</p>
 				<p>
 					<span>PASSWORD</span>
 					<form:password path="password" />
-					<form:errors path="password" cssClass="error password" />
+				</p>
+				<p class="errorMessage">
+					<form:errors path="email" cssClass="email showError" />
+					<c:if test="${errorMessage != null}">
+						<span class="showError">${errorMessage}</span>
+					</c:if>
+					<form:errors path="password" cssClass="password showError" />
 				</p>
 			</div>
 			<button type="submit">SIGN UP</button>
