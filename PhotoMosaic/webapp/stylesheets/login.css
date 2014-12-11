@@ -144,24 +144,26 @@ article form button:hover {
 /* error message */
 article form div p.errorMessage {
 	margin : auto;
-	width : 60%;
+	width : 70%;
 	margin-bottom : 0px;
 	height : initial;
 	display : table;
 }
 
 article form div p.errorMessage span.showError{
-    display: table-cell;
-    vertical-align: middle;
+    display: block;
    	margin : auto;
 	width : 100%;
 	font-size : 13px;
 	text-align : center;
 	color : RGBA(179, 5, 24, 1);
-	border : 1px solid RGBA(179, 5, 24, 0.1);
-	border-radius : 100px;
-	padding : 10px;
-	margin-top : 20px;
+	/* border : 1px solid RGBA(179, 5, 24, 0.1); */
+	/* border-radius : 100px; */
+	padding-top : 0px;
+}
+
+article form div p.errorMessage span:nth-child(1){
+	padding-top : 20px;
 }
 
 
