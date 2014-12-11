@@ -2,7 +2,6 @@ package org.nhnnext.support;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +16,12 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 public class PhotoHandler {
 	private static final Logger logger = LoggerFactory.getLogger(PhotoHandler.class);
-	
-	public static BufferedImage getResizedPhoto(BufferedImage originalImage, Orientation basePhotoOrientation, Dimension resizeDimension) throws IOException {
+		
+	public static BufferedImage getResizedPhoto(BufferedImage originalImage, Dimension resizeDimension) throws IOException {
 		
 		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 		int resizeWidth = (int)resizeDimension.getWidth();
@@ -37,23 +35,9 @@ public class PhotoHandler {
 		return resizedImage;
 	}
 	
-	public static void resizePhoto(Mosaic mosaic, Photo photo) throws IOException {
-		File file = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + photo.getUniqueId());
-		//TODO change throw exception to try catch 
-		BufferedImage originalImage = ImageIO.read(file);
-		int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-		
-		BufferedImage resizedImage = new BufferedImage(photo.getScaledWidth(), photo.getScaledHeight(), type);
-		Graphics2D g = resizedImage.createGraphics();
-		g.drawImage(originalImage, 0, 0, photo.getScaledWidth(), photo.getScaledHeight(), null);
-		g.dispose();
-		
-		ImageIO.write(resizedImage, "jpg", new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + "resizecheckcheck.jpg"));
-	}
-	
-	public static Dimension getImageDimension(Mosaic mosaic, String fileName)
+	public static Dimension getImageDimension(int mosaicId, String fileName)
 			throws IOException {
-		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + fileName);
+		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaicId + File.separator + fileName);
 		int pos = imgFile.getName().lastIndexOf(".");
 		if (pos == -1) {
 			throw new IOException(Constants.WRONG_FILE + imgFile.getAbsolutePath());
@@ -77,21 +61,21 @@ public class PhotoHandler {
 		throw new IOException(Constants.NOT_IMAGE + imgFile.getAbsolutePath());
 	}
 	
-	public static Orientation judgePhotoOrientation(Photo photo) {
-		if( photo.getOriginalHeight() > photo.getOriginalWidth()) {
+	public static Orientation judgePhotoOrientation(Dimension originalDimension) {
+		if( originalDimension.height> originalDimension.width) {
 			return Orientation.PORTRAIT;
-		} else if ( photo.getOriginalWidth() > photo.getOriginalHeight()) {
+		} else if ( originalDimension.width > originalDimension.height) {
 			return Orientation.LANDSCAPE;
 		} else {
 			return Orientation.SQUARE;
 		}
 	}
 	
-	public static BufferedImage cropPhoto(Photo photo, Rectangle rect) throws IOException{
-		BufferedImage originalPhoto = ImageIO.read(new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId()));
-		BufferedImage croppedImage = originalPhoto.getSubimage(0, 0, rect.width, rect.height);
-		return croppedImage; 
-	}
+//	public static BufferedImage cropPhoto(Photo photo, Rectangle rect) throws IOException{
+//		BufferedImage originalPhoto = ImageIO.read(new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + photo.getUniqueId()));
+//		BufferedImage croppedImage = originalPhoto.getSubimage(0, 0, rect.width, rect.height);
+//		return croppedImage; 
+//	}
 	
 	public static Dimension getScaledDimension(Dimension originDimension, int scaleCriteriaSize, Orientation basePhotoOrientation) {
 		Dimension dimension = new Dimension();
@@ -107,28 +91,18 @@ public class PhotoHandler {
 		} else {
 			//TODO ThrowException
 		}
-		
 		return dimension;
 	}
-	
-	public static void sizedownPhoto(Photo photo) {
-		int originalWidth = photo.getOriginalWidth();
-		int originalHeight = photo.getOriginalHeight();
-		photo.setScaledWidth(originalWidth/2);
-		photo.setScaledHeight(originalHeight/2);
-	}
 
-	public static Photo getNewPhotoInstanceWithData(Mosaic mosaic, MultipartFile file) throws IOException {
-		Dimension photoDimension = getImageDimension(mosaic, file.getOriginalFilename());
-		logger.debug("dimension : " + photoDimension.getWidth() + " & " + photoDimension.getHeight());
+	public static Photo getNewPhotoInstanceWithData(int mosaicId, String mosaicUrl, MultipartFile file) throws IOException {
+		Dimension photoDimension = getImageDimension(mosaicId, file.getOriginalFilename());
 		
 		/*insert file information into the database*/
-		int extensionIndex = file.getOriginalFilename().indexOf(".");
-		String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
-
-		String newUniqueId = mosaic.getUrl() + "-" + StringHandler.makeRandomId() +"."+originalExtention;
-		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), (int)photoDimension.getWidth(), (int)photoDimension.getHeight(), mosaic.getId());
-		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(newPhoto));
+		String newUniqueId = StringHandler.getNewUniqueId(mosaicUrl, UploadHandler.getFileExtension(file));
+		
+		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), photoDimension, mosaicId);
+		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(photoDimension));
+		
 		return newPhoto;
 	}
 }

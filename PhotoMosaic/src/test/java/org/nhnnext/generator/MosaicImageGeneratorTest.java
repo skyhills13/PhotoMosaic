@@ -1,5 +1,6 @@
 package org.nhnnext.generator;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext.xml")
 public class MosaicImageGeneratorTest {
-
 	private static Mosaic mosaic;
 	
 	@BeforeClass
@@ -55,22 +55,20 @@ public class MosaicImageGeneratorTest {
 			fileItem.getOutputStream();
 			MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 			
-			Photo photo = PhotoHandler.getNewPhotoInstanceWithData(mosaic, multipartFile);
+			Photo photo = PhotoHandler.getNewPhotoInstanceWithData(mosaic.getId(), mosaic.getUrl(), multipartFile);
 			photo.setUniqueId(path);
 			photoList.add(photo);
 		}
 		assertEquals(filePathArray.length, photoList.size());
 		
 		for( Photo photo : photoList){
-			photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
+			photo.setOrientation(PhotoHandler.judgePhotoOrientation(new Dimension(photo.getOriginalWidth(), photo.getOriginalHeight())));
 		}
 		
 		mosaic.setFileName("testMosaic.png");
 		mosaic.setPhotos(photoList.toArray(new Photo[photoList.size()]));
 		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 		mosaic.setOrientation(mosaicOrientation);
-//		
-		
 	}
 	
 	@Test

@@ -81,7 +81,7 @@ public class PhotoContainer extends Container<Photo> {
 			logger.info("Path : {}, file Exists : {}", file.getAbsolutePath(), file.exists());
 			BufferedImage originalImage = ImageIO.read(file);
 			
-			resizedImage = PhotoHandler.getResizedPhoto(originalImage, basePhotoOrientation, resizedDimension);
+			resizedImage = PhotoHandler.getResizedPhoto(originalImage, resizedDimension);
 			resizedImages.add(resizedImage);
 		}
 		

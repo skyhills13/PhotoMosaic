@@ -85,7 +85,7 @@ public class PhotoGroupContainer extends Container<PhotoContainer>{
 					basePhotoOrientation
 			);
 			
-			resizedImage = PhotoHandler.getResizedPhoto(currentImage, basePhotoOrientation, resizedDimension);
+			resizedImage = PhotoHandler.getResizedPhoto(currentImage, resizedDimension);
 			resizedImages.add(resizedImage);
 		}
 		

@@ -44,14 +44,14 @@ public class UploadService {
 			
 			/* get the information of the photo */
 			try {
-				photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, file);
+				photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic.getId(), mosaic.getUrl(), file);
 			} catch (IOException e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
 
 			UploadHandler.renameAsUnique(mosaic, photos[i]);
 
-			PhotoHandler.sizedownPhoto(photos[i]);
+			//PhotoHandler.sizedownPhoto(photos[i]);
 
 			// Dimension scaledDimension =
 			// PhotoHandler.getScaledDimension(photos[i]);
