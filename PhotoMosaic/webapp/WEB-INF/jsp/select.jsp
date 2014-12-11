@@ -56,6 +56,7 @@
 	</div>
 	</section>
 	
+	<script src="/javascripts/lib/PhotoChecker.js"></script>
 	<script src="/javascripts/lib/util.js?20141112"></script>
 	<script src="/javascripts/lib/MyHTMLElement.js?20141112"></script>
 	<script src="/javascripts/lib/MultiFileHandler.js?20141112"></script>

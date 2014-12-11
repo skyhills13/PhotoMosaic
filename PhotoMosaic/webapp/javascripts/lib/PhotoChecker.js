@@ -1,35 +1,36 @@
 /**
  * 추후에 사진을 준비하는 객체로 합치기
- * 사진이 모두 로드된 후에 실행하기 
- * string 을 상수로 만들기
+ * 
+ * 사진이 모두 로드된 후에 실행하기 string 을 상수로 만들기
  */
 
-function PhotoChecker(list){
+function PhotoChecker(list) {
 	var sl = createSimpleRatioObejctList(list);
 	var checked = {
 		"simpleRatioList" : sl,
 		"orientationComposition" : getOrientationComposition(sl)
 	}
+	console.log("checked photo : " + checked);
 	return checked;
 }
 
-function getOrientationComposition(list){
+function getOrientationComposition(list) {
 	var composition = {
 		"square" : 0,
 		"landscape" : 0,
 		"portrait" : 0
 	};
-	list.map(function(item){
+	list.map(function(item) {
 		var orientation = item.orientation;
 		composition[orientation]++;
 	});
-	
+
 	return composition;
 }
 
-function createSimpleRatioObejctList(plist){
+function createSimpleRatioObejctList(plist) {
 	var olistArray = [];
-	for(var i=0 ; i<plist.length ; i++){
+	for (var i = 0; i < plist.length; i++) {
 		var info = convertSimpleRatio(plist[i]);
 		var pObject = {
 			"simpleOrientation" : info.simpleOrientation,
@@ -43,10 +44,10 @@ function createSimpleRatioObejctList(plist){
 	return olistArray;
 }
 
-function convertSimpleRatio(photoElement){
+function convertSimpleRatio(photoElement) {
 	var originWidth = photoElement.naturalWidth;
 	var originHeight = photoElement.naturalHeight;
-	
+
 	var ratio = originHeight / originWidth;
 	var info = {};
 	info.originalRatio = ratio;
@@ -57,33 +58,32 @@ function convertSimpleRatio(photoElement){
 	return info;
 }
 
-function getSimpleRatio(orientation , ratio){
+function getSimpleRatio(orientation, ratio) {
 	var section = {
 		"simpleRatio" : "",
 		"simpleOrientation" : ""
 	};
-	if(orientation === "square" ){
+	if (orientation === "square") {
 		section.simpleRatio = "1x1";
 		section.simpleOrientation = "square";
 	}
-	if(orientation === "landscape" ){
-		var rat = Math.round(1/ratio);
+	if (orientation === "landscape") {
+		var rat = Math.round(1 / ratio);
 		section.simpleRatio = rat + "x1";
-		section.simpleOrientation = rat ===1?"square":"landscape";
+		section.simpleOrientation = rat === 1 ? "square" : "landscape";
 	}
-	if(orientation === "portrait"){
+	if (orientation === "portrait") {
 		var rat = Math.round(ratio);
 		section.simpleRatio = "1x" + rat;
-		section.simpleOrientation = rat===1?"square":"portrait";
+		section.simpleOrientation = rat === 1 ? "square" : "portrait";
 	}
 	return section;
 }
 
-function getPhotoOrientation(ratio){
-	if(ratio === 1){
+function getPhotoOrientation(ratio) {
+	if (ratio === 1) {
 		return "square";
 	}
-	var orientation = ratio>1?"portrait":"landscape";
+	var orientation = ratio > 1 ? "portrait" : "landscape";
 	return orientation;
 }
-

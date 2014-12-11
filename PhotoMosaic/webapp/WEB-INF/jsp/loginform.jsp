@@ -28,14 +28,16 @@
 				<p>
 					<span>EMAIL</span>
 					<form:input path="email" />
-					<span><form:errors path="email" cssClass="error email" /></span>
 				</p>
 				<p>
 					<span>PASSWORD</span>
 					<form:password path="password" />
-					<form:errors path="password" cssClass="error password" />
+				</p>
+				<p class="errorMessage">
+					<form:errors path="email" cssClass="email showError" />
+					<form:errors path="password" cssClass="password showError" />
 					<c:if test="${not empty errorMessage}">
-						<span class="error email nouser">${errorMessage}</span>
+						<span class="showError">${errorMessage}</span>
 					</c:if>
 				</p>
 			</div>
