@@ -5,12 +5,26 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 public class MosaicDao extends JdbcDaoSupport {
+	
+	@PostConstruct
+	public void initialize(){
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("photomosaic.sql"));
+		DatabasePopulatorUtils.execute(populator, getDataSource());
+		logger.debug("database initialize success!");
+	}
+	
 	public Mosaic findById(int id) {
 		String sql = "select * from mosaics where id= ?";
 		RowMapper<Mosaic> rowMapper = new RowMapper<Mosaic>() {
