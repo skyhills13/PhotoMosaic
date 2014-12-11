@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Variety Template Combine Test</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 </head>
 <body>
-	<p><a>사진보기</a></p>
+	<h1>다양한 템플릿에 사진 합치기</h1>
 	<article id="canvas">
 	</article>
 	<article id="list">
@@ -33,34 +34,38 @@
 		window.addEventListener("load", function() {
 			var photoArray = document.querySelectorAll("#list img");
 			var appendPlace = document.querySelector("#canvas");
+			
 	
 			var combine = new PhotoCombine(true);
-			var canvasT8 = combine.create(photoArray, {
-				"width" : 500,
-				"height" : 500,
-				"template" : template8, // 필수항목
+			var t8c4r4Canvas = combine.create(photoArray, {
+				"width" : 200,
+				"height" : 200,
+				"template" : t8c4r4, // 필수항목
 				"column" : 4, // 필수항목
 				"row" : 4 // 필수항목
-			}, "t8");
-			appendPlace.appendChild(canvasT8);
+			}, "t8c4r4");
+			appendPlace.appendChild(t8c4r4Canvas);
+			appendPlace.insertAdjacentHTML("beforeend", "<p>photo 8 / column 4 / row 4</p><br><br>");
 		
-			var canvasT7 = combine.create(photoArray, {
-				"width" : 500,
-				"height" : 500,
-				"template" : template7, // 필수항목
+			var t7c4r4Canvas = combine.create(photoArray, {
+				"width" : 200,
+				"height" : 200,
+				"template" : t7c4r4, // 필수항목
 				"column" : 4, // 필수항목
 				"row" : 4 // 필수항목
-			}, "t8");
-			appendPlace.appendChild(canvasT7);
-
-		
-		
-		
+			}, "t7c4r4");
+			appendPlace.appendChild(t7c4r4Canvas);
+			appendPlace.insertAdjacentHTML("beforeend", "<p>photo 7 / column 4 / row 4 </p><br><br>");
 			
-			var result = combine.getResult();
-			document.querySelector("p a").addEventListener("click", function() {
-				window.location = result;
-			});
+			var t5c3r3Canvas = combine.create(photoArray, {
+				"width" : 200,
+				"height" : 200,
+				"template" : t5c3r3, // 필수항목
+				"column" : 3, // 필수항목
+				"row" : 3 // 필수항목
+			}, "t5c3r3");
+			appendPlace.appendChild(t5c3r3Canvas);
+			appendPlace.insertAdjacentHTML("beforeend", "<p>photo 5 / column 3 / row 3 </p><br><br>");
 		});
 	</script>
 </body>
