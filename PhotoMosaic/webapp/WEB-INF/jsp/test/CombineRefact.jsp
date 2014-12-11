@@ -62,13 +62,13 @@
 					var testArr = tArray;
 					var pArray = document.querySelectorAll("#list img");
 					var appendPlace = document.querySelector("#canvas");
-
+					var sevenPhotoTemplate = ["1x1", "2x2", "x", "1x2", "1x2", "x", "x", "x", "x", "3x1", "x", "x", "2x1", "x", "2x1","x"];
 					var opt = new PhotoCombine(true);
 					
 					var canvas1 = opt.create(pArray, {
 						"width" : 500,
 						"height" : 500,
-						"template" : testArr, // 필수항목
+						"template" : sevenPhotoTemplate, // 필수항목
 						"column" : 4, // 필수항목
 						"row" : 4 // 필수항목
 					}, "canvas1");
