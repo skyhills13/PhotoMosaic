@@ -36,7 +36,7 @@ function resultPageDecorator(){
 			var context = target.getContext("2d");
 			context.drawImage(image, 0, 0, originalWidth, originalHeight, 0, 0, w, h);
 			stackBlurCanvasRGBA("bluredBg", 0, 0, w, h, 10);
-			console.log(target);
+//			console.log(target);
 //			return target.toDataURL();
 			var url = target.toDataURL();
 			var bg = document.querySelector("body");
