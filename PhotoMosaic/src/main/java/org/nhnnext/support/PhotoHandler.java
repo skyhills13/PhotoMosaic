@@ -37,6 +37,13 @@ public class PhotoHandler {
 	
 	public static Dimension getImageDimension(int mosaicId, String fileName)
 			throws IOException {
+		//db에 넣어라 경로를. 
+		//1.mosaic id와  fileName을 가진 새로운 객체를 만들어서 전달하던지 
+		//객체 지향 기본 원칙은 같이 돌아다니는 애들은 묶어버리는거야. 그러면 새로운 행동을 넣을 수 있으니까.  
+		//2.아니면 file을 넘기던지.
+		//context 종속성. 
+		//추상클래스를 만들던, 코드 단에서 앞, 뒤로 분리를 하던. 
+		
 		File imgFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaicId + File.separator + fileName);
 		int pos = imgFile.getName().lastIndexOf(".");
 		if (pos == -1) {

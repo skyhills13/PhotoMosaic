@@ -78,7 +78,10 @@ public class MosaicService {
 //      PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();	
 	}
-	
+	//tx를 걸면, rollback할 시, autoincrement는 rollback이 안될수도 있어. 그래서 조심해야되. 1357만 남을수 있으니까. 
+	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
+	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 
+	//왜냐면, pk는 몇가지 규칙이 있어. 그중 하나는 변하면 안되는게 있는데, 자연키는 비지니스 의미가 있기 때문에, 변할 수가 있어. 그래서 대리키가 pk로 더 좋아. 
 	private Mosaic createMosaicObject(String title, String comment) {
 		User currentUser = userService.getCurrentUser();
 		/*

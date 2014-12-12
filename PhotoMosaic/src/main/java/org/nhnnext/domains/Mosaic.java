@@ -15,7 +15,8 @@ public class Mosaic {
 				+ ", photos=" + Arrays.toString(photos) + ", orientation="
 				+ orientation + "]";
 	}
-
+	//getter를 쓰게되면, 객체가 아니라 데이터가 되는거야. 그래서 원칙적으로는 getter를 안주는게 맞아. 그리고 필요한 것만 있는지 맞아. 
+	// getter가 적은 코드가 좋은거야. 
 	private int id;
 	private String fileName;
 	private String title;
