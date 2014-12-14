@@ -23,16 +23,30 @@ public class MosaicController {
 	
 	@RequestMapping("/result/{uniqueUrl}")
 	public String showResult(@PathVariable String uniqueUrl, Model model){
-		Mosaic theMosaic = mosaicDao.findByUrl(uniqueUrl);
 		
-		List<Photo> photos = photoDao.findPhotosOfMosaic(theMosaic.getId());
+		Mosaic theMosaic = getSpecificMosaic(uniqueUrl);
+		Photo[] mosaicPhotos = getPhotosOfAMosaic(theMosaic);
+		setPhotosOnMosaic(theMosaic, mosaicPhotos);
+		
+		model.addAttribute("mosaic", theMosaic);
+		return "result";
+	}
+	
+	public Mosaic getSpecificMosaic(String uniqueUrl){
+		Mosaic theMosaic = mosaicDao.findByUrl(uniqueUrl);
+		return theMosaic;
+	}
+	
+	public Photo[] getPhotosOfAMosaic(Mosaic mosaic){
+		List<Photo> photos = photoDao.findPhotosOfMosaic(mosaic.getId());
 		Photo[] mosaicPhotos = new Photo[photos.size()];
 		for(int i = 0; i < photos.size(); ++i){
 			mosaicPhotos[i] = photos.get(i);
 		}
-		theMosaic.setPhotos(mosaicPhotos);
-		
-		model.addAttribute("mosaic", theMosaic);
-		return "result";
+		return mosaicPhotos;
+	}
+
+	public void setPhotosOnMosaic(Mosaic mosaic, Photo[] photos){
+		mosaic.setPhotos(photos);
 	}
 }
