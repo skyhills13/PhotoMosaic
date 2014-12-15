@@ -37,4 +37,10 @@ public class StringHandler {
 		logger.debug("newUrl :" + newUrl);
 		return newUrl;
 	}
+
+	public static String getNewUniqueId(String url, String extention) {
+		
+		return url + "-" + StringHandler.makeRandomId() + "." + extention;
+		
+	}
 }

@@ -29,19 +29,15 @@ public class PhotoController {
     		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
 		
 		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic);
-		
         return url;
     }
-	
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
 	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
 			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
 
 		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic);
-		
 		return url;
 	}
-	
 
 //	//not using now 
 //	@RequestMapping(value = "/photo", method = RequestMethod.DELETE)

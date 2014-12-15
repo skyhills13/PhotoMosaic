@@ -2,6 +2,7 @@ package org.nhnnext.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
@@ -12,7 +13,6 @@ import org.nhnnext.generator.MosaicImageGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
-import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,21 +45,16 @@ public class MosaicService {
 	}
 	
 	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server) {
-		Mosaic mosaic = createMosaicObject(title, comment);
+		Mosaic mosaic = createMosaicInstance(title, comment);
 		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
 		mosaic.setPhotos(photoArr);
 		
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		if( server ) {
-//			for( Photo photo : mosaic.getPhotos()){
-//				photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
-//			}
 			Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 			mosaic.setOrientation(mosaicOrientation);
-			/**
-			 * Test
-			 */
+			
 			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
 			try {
 				mosaicImageGenerator.makeMosaicImage();
@@ -70,34 +65,77 @@ public class MosaicService {
 		} else {
 			uploadService.uploadUrl(clientMosaic, mosaicPath);
 		}
-        /*merge photos*/
-//      MosaicHandler.mergePhotos(mosaic);
-        mosaicDao.updateCreatedTime(mosaic);
+		mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-        
-//      PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();	
 	}
 	
-	private Mosaic createMosaicObject(String title, String comment) {
+	//tx를 걸면, rollback할 시, autoincrement는 rollback이 안될수도 있어. 그래서 조심해야되. 1357만 남을수 있으니까. 
+	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
+	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 
+	//왜냐면, pk는 몇가지 규칙이 있어. 그중 하나는 변하면 안되는게 있는데, 자연키는 비지니스 의미가 있기 때문에, 변할 수가 있어. 그래서 대리키가 pk로 더 좋아. 
+	private Mosaic createMosaicInstance(String title, String comment) {
 		User currentUser = userService.getCurrentUser();
-		/*
-		 * TODO exception handling for the case submit w/o photo right now,
-		 * mosaic table is updated without photo table update. do it to check
-		 * the situation before handling
-		 */
-		/* insert mosaic information into the database */
+		
+		Mosaic mosaic = createAndUploadMosaic(title, comment);
+		updateUserInfoOnMosaic(currentUser, mosaic);
+		
+		return mosaic;
+	}
+	
+	private Mosaic createAndUploadMosaic(String title, String comment){
 		String mosaicUrl = StringHandler.makeUrl();
-		Mosaic mosaic = new Mosaic(mosaicUrl + ".png", title, mosaicUrl,
-				comment);
+		Mosaic mosaic = createMosaicObject(mosaicUrl, title, comment);
+		uploadMosaicObject(mosaic);
+		setIdOnMosaic(mosaicUrl, mosaic);
+		return mosaic;
+	}
+	
+	private Mosaic createMosaicObject(String mosaicUrl, String title, String comment){
+		return new Mosaic(mosaicUrl + "."+ Constants.MOSAIC_FILE_EXTENSION, title, mosaicUrl,comment);
+	}
+	
+	private void uploadMosaicObject(Mosaic mosaic){
 		mosaicDao.upload(mosaic);
+	}
+	
+	private void setIdOnMosaic(String mosaicUrl, Mosaic mosaic){
 		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
 		mosaic.setId(mosaicId);
+	}
+	
+	private void updateUserInfoOnMosaic(User currentUser, Mosaic mosaic){
 		if (currentUser != null) {
 			int currentUserId = currentUser.getId();
 			mosaic.setUserId(currentUserId);
 			mosaicDao.updateUserId(mosaic);
 		}
-		return mosaic;
+	}
+	
+	public Mosaic showResultOfAMosaic(String uniqueUrl){
+		
+		Mosaic theMosaic = getSpecificMosaic(uniqueUrl);
+		Photo[] mosaicPhotos = getPhotosOfAMosaic(theMosaic);
+		setPhotosOnMosaic(theMosaic, mosaicPhotos);
+		
+		return theMosaic;
+	}
+	
+	private Mosaic getSpecificMosaic(String uniqueUrl){
+		Mosaic theMosaic = mosaicDao.findByUrl(uniqueUrl);
+		return theMosaic;
+	}
+	
+	private Photo[] getPhotosOfAMosaic(Mosaic mosaic){
+		List<Photo> photos = photoDao.findPhotosOfMosaic(mosaic.getId());
+		Photo[] mosaicPhotos = new Photo[photos.size()];
+		for(int i = 0; i < photos.size(); ++i){
+			mosaicPhotos[i] = photos.get(i);
+		}
+		return mosaicPhotos;
+	}
+
+	private void setPhotosOnMosaic(Mosaic mosaic, Photo[] photos){
+		mosaic.setPhotos(photos);
 	}
 }

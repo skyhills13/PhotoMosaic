@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nhnnext.dao.UserDao;
+import org.nhnnext.dao.DaoTemplate;
 import org.nhnnext.domains.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class UserDaoTest {
 			.getLogger(UserDaoTest.class);
 	
 	@Autowired
-	private UserDao userDao;
+	private DaoTemplate userDao;
 
 
 //	@Test

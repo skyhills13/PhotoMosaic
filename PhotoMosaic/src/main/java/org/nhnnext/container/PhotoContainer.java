@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.instance.MergeInstance;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
@@ -69,8 +70,8 @@ public class PhotoContainer extends Container<Photo> {
 		Photo photo = null;
 		Dimension resizedDimension = null;
 		BufferedImage resizedImage = null;
-		for (int i = 0; i < size(); i++) {
-			photo = get(i);
+		for (int i = 0; i < arrayList.size(); i++) {
+			photo = arrayList.get(i);
 			resizedDimension = PhotoHandler.getScaledDimension(
 					new Dimension(photo.getOriginalWidth(), photo.getOriginalHeight()), 
 					scaleCriteriaSize, 
@@ -81,7 +82,7 @@ public class PhotoContainer extends Container<Photo> {
 			logger.info("Path : {}, file Exists : {}", file.getAbsolutePath(), file.exists());
 			BufferedImage originalImage = ImageIO.read(file);
 			
-			resizedImage = PhotoHandler.getResizedPhoto(originalImage, basePhotoOrientation, resizedDimension);
+			resizedImage = PhotoHandler.getResizedPhoto(originalImage, resizedDimension);
 			resizedImages.add(resizedImage);
 		}
 		
@@ -89,26 +90,26 @@ public class PhotoContainer extends Container<Photo> {
 	}
 
 	private Photo getSmallestSizedPhoto(Orientation basePhotoOrientation) {
-		Photo basePhoto = get(0);
+		Photo basePhoto = arrayList.get(0);
 		
 		if (basePhotoOrientation == Orientation.LANDSCAPE) {
-			for (int index = 1; index < size(); index++) {
-				Photo comparingPhoto = get(index);
+			for (int index = 1; index < arrayList.size(); index++) {
+				Photo comparingPhoto = arrayList.get(index);
 				if (basePhoto.getOriginalWidth() > comparingPhoto.getOriginalWidth()) {
 					basePhoto = comparingPhoto;
 				}
 			}
 			
 		} else if (basePhotoOrientation == Orientation.PORTRAIT) {
-			for (int index = 1; index < size(); index++) {
-				Photo comparingPhoto = get(index);
+			for (int index = 1; index < arrayList.size(); index++) {
+				Photo comparingPhoto = arrayList.get(index);
 				if (basePhoto.getOriginalHeight() > comparingPhoto.getOriginalHeight()) {
 					basePhoto = comparingPhoto;
 				}
 			}
 			
 		}
-		
 		return basePhoto;
 	}
+
 }

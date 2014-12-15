@@ -2,23 +2,21 @@ package org.nhnnext.generator;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
+import org.nhnnext.container.PhotoContainer;
+import org.nhnnext.container.PhotoGroupContainer;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
-import org.nhnnext.dto.Container;
-import org.nhnnext.dto.PhotoContainer;
-import org.nhnnext.dto.PhotoGroupContainer;
-import org.nhnnext.dto.Template;
-import org.nhnnext.dto.TemplateFrameList;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.Orientation;
-import org.nhnnext.support.UploadHandler;
+import org.nhnnext.template.Template;
+import org.nhnnext.template.TemplateFrameList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +50,9 @@ public class MosaicImageGenerator {
 		this.groupContainer = containerGenerator.getContainer();
 		logger.info("Create Group Container : {}",groupContainer.toString());
 		
-		for (PhotoContainer photoContainer : groupContainer) {
+		Iterator<PhotoContainer> ir =  groupContainer.iterator();
+		while(ir.hasNext()){
+			PhotoContainer photoContainer = ir.next();//현재야 현재. 
 			logger.info("PhotoContainer : {}, Size : {}, Max : {}",photoContainer.toString(), photoContainer.size(), photoContainer.getMax());
 		}
 	}

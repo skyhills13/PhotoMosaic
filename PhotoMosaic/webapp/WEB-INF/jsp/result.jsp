@@ -96,7 +96,8 @@
 	<script src="/javascripts/PhotoListSlide.js"></script>
 	<script src="/javascripts/ShareTool.js"></script>
 	<script src="/javascripts/PhotoLightBox.js"></script>
-	<script src="/javascripts/result.js"></script>
+	<script src="/javascripts/LightBox.js"></script>
+	<!-- <script src="/javascripts/result.js"></script> -->
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

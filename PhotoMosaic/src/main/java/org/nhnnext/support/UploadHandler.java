@@ -6,7 +6,6 @@ import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 public class UploadHandler {
@@ -57,5 +56,13 @@ public class UploadHandler {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	
+	public static String getFileExtension(MultipartFile file) {
+		int extensionIndex = file.getOriginalFilename().indexOf(".");
+		String originalExtention = file.getOriginalFilename().substring(extensionIndex+1);
+		
+		return originalExtention;
 	}
 }

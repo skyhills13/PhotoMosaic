@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
-import org.nhnnext.dto.MergeInstance;
+import org.nhnnext.instance.MergeInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

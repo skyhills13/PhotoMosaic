@@ -1,5 +1,7 @@
 package org.nhnnext.domains;
 
+import java.awt.Dimension;
+
 import org.nhnnext.support.Orientation;
 
 public class Photo {
@@ -15,7 +17,6 @@ public class Photo {
 	private Orientation orientation;
 	
 	public Photo(){
-		
 	}
 
 	public Photo(String originalFileName){
@@ -36,7 +37,6 @@ public class Photo {
 	}
 	
 	public Photo(String uniqueId, String originalFileName, int originalWidth, int originalHeight, int mosaicId) {
-		super();
 		this.uniqueId = uniqueId;
 		this.originalFileName = originalFileName;
 		this.originalWidth = originalWidth;
@@ -55,6 +55,10 @@ public class Photo {
 		this.scaledWidth = scaledWidth;
 		this.scaledHeight = scaledHeight;
 		this.mosaicId = mosaicId;
+	}
+
+	public Photo(String uniqueId, String originalFileName, Dimension dimension, int mosaicId) {
+		this(uniqueId, originalFileName, (int)dimension.getWidth(), (int)dimension.getHeight(), mosaicId);
 	}
 
 	public int getId() {

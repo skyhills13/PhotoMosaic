@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.instance.MergeInstance;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
@@ -29,7 +30,7 @@ public class PhotoGroupContainer extends Container<PhotoContainer>{
 		
 		ArrayList<BufferedImage> combinedImages = new ArrayList<BufferedImage>(); 
 		for (int index = 0; index < getMax() ; index++) {
-			BufferedImage image = get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
+			BufferedImage image = arrayList.get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
 			combinedImages.add(image);
 		}
 		
@@ -85,7 +86,7 @@ public class PhotoGroupContainer extends Container<PhotoContainer>{
 					basePhotoOrientation
 			);
 			
-			resizedImage = PhotoHandler.getResizedPhoto(currentImage, basePhotoOrientation, resizedDimension);
+			resizedImage = PhotoHandler.getResizedPhoto(currentImage, resizedDimension);
 			resizedImages.add(resizedImage);
 		}
 		

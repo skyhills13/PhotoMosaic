@@ -3,6 +3,7 @@ package org.nhnnext.dto;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.nhnnext.container.PhotoContainer;
 import org.nhnnext.domains.Photo;
 
 public class PhotoContainerTest {

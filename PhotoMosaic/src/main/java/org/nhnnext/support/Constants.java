@@ -11,10 +11,13 @@ public class Constants {
 	public static final String ALREADY_EXISTING_MEMBER = "이미 존재하는 사용자입니다";
 	public static final String WRONG_PASSWORD = "비밀번호가 틀립니다.";
 	
+	//코드에 넣지 않아. 설정파일에 넣어. spring value injection도 가능하니까. 
+	//설정파일에 있는 값을 객체의 속성에 넣어벌수도 있어. property파일에 넣어.
+	//어쨌든 코드에 넣는 것은 좋지 않아. 
 	public static final String ATTACHMENT_ROOT_DIR = "/Users/soeunpark/Documents/workspace/sts/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR = "/home/next/tomcat/webapps/images";
 //	public static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
-	public static final String MOSAIC_FILE_EXTENSION = "png";
-	
+	public static final String MOSAIC_FILE_EXTENSION = "jpg";
+
 }

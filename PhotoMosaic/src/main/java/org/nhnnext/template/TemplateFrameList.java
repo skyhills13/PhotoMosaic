@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.template;
 
 import java.util.ArrayList;
 

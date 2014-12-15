@@ -8,9 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-public class UserDao extends JdbcDaoSupport{
+public class UserDao extends DaoTemplate{
 	
 	public User findByEmail(String email) {
 		String sql = "SELECT * FROM users WHERE email = ?";
