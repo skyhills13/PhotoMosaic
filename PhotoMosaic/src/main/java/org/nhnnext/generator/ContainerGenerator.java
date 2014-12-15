@@ -1,8 +1,8 @@
 package org.nhnnext.generator;
 
-import org.nhnnext.dto.PhotoContainer;
-import org.nhnnext.dto.PhotoGroupContainer;
-import org.nhnnext.dto.TemplateFrameList;
+import org.nhnnext.container.PhotoContainer;
+import org.nhnnext.container.PhotoGroupContainer;
+import org.nhnnext.template.TemplateFrameList;
 
 public class ContainerGenerator {
 	

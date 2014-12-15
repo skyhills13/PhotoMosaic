@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.instance.MergeInstance;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;

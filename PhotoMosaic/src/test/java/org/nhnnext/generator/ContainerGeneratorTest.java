@@ -4,11 +4,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.nhnnext.dto.PhotoContainer;
-import org.nhnnext.dto.PhotoGroupContainer;
-import org.nhnnext.dto.Template;
-import org.nhnnext.dto.TemplateFrameList;
+import org.nhnnext.container.PhotoContainer;
+import org.nhnnext.container.PhotoGroupContainer;
 import org.nhnnext.support.Orientation;
+import org.nhnnext.template.Template;
+import org.nhnnext.template.TemplateFrameList;
 
 
 public class ContainerGeneratorTest {

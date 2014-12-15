@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.container;
 
 import java.io.IOException;
 import java.util.ArrayList;

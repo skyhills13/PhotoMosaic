@@ -9,16 +9,16 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
+import org.nhnnext.container.Container;
+import org.nhnnext.container.PhotoContainer;
+import org.nhnnext.container.PhotoGroupContainer;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
-import org.nhnnext.dto.Container;
-import org.nhnnext.dto.PhotoContainer;
-import org.nhnnext.dto.PhotoGroupContainer;
-import org.nhnnext.dto.Template;
-import org.nhnnext.dto.TemplateFrameList;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.Orientation;
 import org.nhnnext.support.UploadHandler;
+import org.nhnnext.template.Template;
+import org.nhnnext.template.TemplateFrameList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

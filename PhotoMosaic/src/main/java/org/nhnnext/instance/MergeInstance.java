@@ -1,4 +1,4 @@
-package org.nhnnext.dto;
+package org.nhnnext.instance;
 
 import java.awt.image.BufferedImage;
 

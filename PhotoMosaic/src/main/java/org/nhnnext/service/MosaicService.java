@@ -45,7 +45,7 @@ public class MosaicService {
 	}
 	
 	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server) {
-		Mosaic mosaic = createMosaicObject(title, comment);
+		Mosaic mosaic = createMosaicInstance(title, comment);
 		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
 		mosaic.setPhotos(photoArr);
 		
@@ -74,26 +74,42 @@ public class MosaicService {
 	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
 	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 
 	//왜냐면, pk는 몇가지 규칙이 있어. 그중 하나는 변하면 안되는게 있는데, 자연키는 비지니스 의미가 있기 때문에, 변할 수가 있어. 그래서 대리키가 pk로 더 좋아. 
-	private Mosaic createMosaicObject(String title, String comment) {
+	private Mosaic createMosaicInstance(String title, String comment) {
 		User currentUser = userService.getCurrentUser();
-		/*
-		 * TODO exception handling for the case submit w/o photo right now,
-		 * mosaic table is updated without photo table update. do it to check
-		 * the situation before handling
-		 */
-		/* insert mosaic information into the database */
+		
+		Mosaic mosaic = createAndUploadMosaic(title, comment);
+		updateUserInfoOnMosaic(currentUser, mosaic);
+		
+		return mosaic;
+	}
+	
+	private Mosaic createAndUploadMosaic(String title, String comment){
 		String mosaicUrl = StringHandler.makeUrl();
-		Mosaic mosaic = new Mosaic(mosaicUrl + ".png", title, mosaicUrl,
-				comment);
+		Mosaic mosaic = createMosaicObject(mosaicUrl, title, comment);
+		uploadMosaicObject(mosaic);
+		setIdOnMosaic(mosaicUrl, mosaic);
+		return mosaic;
+	}
+	
+	private Mosaic createMosaicObject(String mosaicUrl, String title, String comment){
+		return new Mosaic(mosaicUrl + "."+ Constants.MOSAIC_FILE_EXTENSION, title, mosaicUrl,comment);
+	}
+	
+	private void uploadMosaicObject(Mosaic mosaic){
 		mosaicDao.upload(mosaic);
+	}
+	
+	private void setIdOnMosaic(String mosaicUrl, Mosaic mosaic){
 		int mosaicId = mosaicDao.findByUrl(mosaicUrl).getId();
 		mosaic.setId(mosaicId);
+	}
+	
+	private void updateUserInfoOnMosaic(User currentUser, Mosaic mosaic){
 		if (currentUser != null) {
 			int currentUserId = currentUser.getId();
 			mosaic.setUserId(currentUserId);
 			mosaicDao.updateUserId(mosaic);
 		}
-		return mosaic;
 	}
 	
 	public Mosaic showResultOfAMosaic(String uniqueUrl){
@@ -105,12 +121,12 @@ public class MosaicService {
 		return theMosaic;
 	}
 	
-	public Mosaic getSpecificMosaic(String uniqueUrl){
+	private Mosaic getSpecificMosaic(String uniqueUrl){
 		Mosaic theMosaic = mosaicDao.findByUrl(uniqueUrl);
 		return theMosaic;
 	}
 	
-	public Photo[] getPhotosOfAMosaic(Mosaic mosaic){
+	private Photo[] getPhotosOfAMosaic(Mosaic mosaic){
 		List<Photo> photos = photoDao.findPhotosOfMosaic(mosaic.getId());
 		Photo[] mosaicPhotos = new Photo[photos.size()];
 		for(int i = 0; i < photos.size(); ++i){
@@ -119,8 +135,7 @@ public class MosaicService {
 		return mosaicPhotos;
 	}
 
-	public void setPhotosOnMosaic(Mosaic mosaic, Photo[] photos){
+	private void setPhotosOnMosaic(Mosaic mosaic, Photo[] photos){
 		mosaic.setPhotos(photos);
 	}
-	
 }
