@@ -61,6 +61,7 @@
 		<section class="make">
 			<div class="contents">
 				<img class="preview"></img>
+				<button class="button">Change</button>
 				<button class="button">Upload</button>
 			</div>
 		</section>

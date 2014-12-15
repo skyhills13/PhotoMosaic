@@ -19,6 +19,7 @@
 	
 	var eleLightbox = document.querySelector(".lightbox");
 	var eleLightboxBackground = document.querySelector(".lightbox .background");
+	var eleChangeButton = document.querySelector(".make button:nth-of-type(1)");
 	
 	var fileHandler = new MultiFileHandler( [eleInput, eleSelect], [imgCb] );
 	var images = [];
@@ -51,8 +52,6 @@
 	});
 	
 	eleMakeButton.addEventListener("click", function(event) {
-		event.preventDefault();
-
 		if (images.length < 3) {
 			alert("3장 이상의 사진을 넣어주세요~!");
 			return;
@@ -61,8 +60,10 @@
 		eleSelect.appendClassName("background");
 		eleLightbox.removeClassName("hidden");
 		
-		var previewURL = makeLayout().toDataURL("image/jpeg", 0.9);
-		eleLightbox.querySelector(".preview").src = previewURL;
+		var previewURL = makeLayout().toDataURL("image/jpeg", 1);
+		var preview = eleLightbox.querySelector(".preview");
+		
+		preview.src = previewURL;
 	});
 	
 	eleServerSubmit.addEventListener("click", function(event) {
@@ -102,6 +103,10 @@
 			var origin = window.location.origin;
 			window.location.assign(origin + "/result/" + mosaicUrl);
 		});
+	});
+	
+	eleChangeButton.addEventListener("click", function() {
+		
 	});
 	
 	function sendData() {
@@ -233,9 +238,9 @@
 				console.error("사진 갯수가 이상하다! 확인해 달라!");
 				return;
 			}
+			
+			suitableTemplates = suffleArray(templateGenerator.getSuitableTemplates(objRatios));
 		}
-		
-		suitableTemplates = suffleArray(templateGenerator.getSuitableTemplates(objRatios));
 
 		return createMosaic();
 	}
@@ -245,8 +250,8 @@
 		++tIdx;
 		
 		var canvas = combiner.create(pArray, {
-			"width" : 2000,
-			"height" : 2000,
+			"width" : 1200,
+			"height" : 1200,
 			"template" : tArray.getStringData(),
 			"column" : tArray.getWidth(), // getWidth
 			"row" : tArray.getHeight(), // getHeight

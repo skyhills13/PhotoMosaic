@@ -80,6 +80,7 @@ MultiFileHandler.prototype = {
 	},
 
 	_fileSelectHandler: function(event) {
+		// 바깥 영역에 떨군 경우
 		if (!this.hoverLine.hasClassName("hoverIn") && event.type !== "change") {
 			this._fileDragHover(event);
 			return;
