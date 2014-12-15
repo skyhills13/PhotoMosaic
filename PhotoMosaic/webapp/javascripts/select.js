@@ -19,7 +19,9 @@
 	
 	var eleLightbox = document.querySelector(".lightbox");
 	var eleLightboxBackground = document.querySelector(".lightbox .background");
+	var elePreview = eleLightbox.querySelector(".preview");
 	var eleChangeButton = document.querySelector(".make button:nth-of-type(1)");
+	var eleUploadButton = document.querySelector(".make button:nth-of-type(2)");
 	
 	var fileHandler = new MultiFileHandler( [eleInput, eleSelect], [imgCb] );
 	var images = [];
@@ -60,10 +62,9 @@
 		eleSelect.appendClassName("background");
 		eleLightbox.removeClassName("hidden");
 		
-		var previewURL = makeLayout().toDataURL("image/jpeg", 1);
-		var preview = eleLightbox.querySelector(".preview");
+		currentMosaic = makeLayout();
 		
-		preview.src = previewURL;
+		elePreview.src = currentMosaic.toDataURL("image/jpeg", 1);
 	});
 	
 	eleServerSubmit.addEventListener("click", function(event) {
@@ -106,9 +107,15 @@
 	});
 	
 	eleChangeButton.addEventListener("click", function() {
-		
+		currentMosaic = createMosaic();
+		elePreview.src = currentMosaic.toDataURL("image/jpeg", 1);
 	});
 	
+	eleUploadButton.addEventListener("click", function() {
+		sendData();
+	});
+	
+	var currentMosaic;
 	function sendData() {
 		var formData = new FormData();
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
@@ -121,8 +128,7 @@
 			formData.append("photos", images[idx]["file"]);
 		}
 		
-		var layout = makeLayout();
-		formData.append("mosaic", layout);
+		formData.append("mosaic", currentMosaic.toDataURL("image/jpeg", 1));
 		
 		var request = new XMLHttpRequest();
 		request.open("POST", "/photo");
