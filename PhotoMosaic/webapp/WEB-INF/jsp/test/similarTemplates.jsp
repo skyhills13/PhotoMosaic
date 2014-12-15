@@ -40,7 +40,7 @@ window.addEventListener("load", function() {
 
 	var width = 4;
 	var height = 4;
-	var targetNum = 8;
+	var targetNum = 5;
 	
 	div.innerHTML += "<p>width : " + width + "</p>";
 	div.innerHTML += "<p>height: " + height + "</p>";
@@ -48,7 +48,7 @@ window.addEventListener("load", function() {
 	var options = {
 		width: 4,
 		height: 4,
-		targetNum: 8
+		'targetNum': targetNum
 	};
 	
 	var templateGenerator = new TemplateGenerator(options);

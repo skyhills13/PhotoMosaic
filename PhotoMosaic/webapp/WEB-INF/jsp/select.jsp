@@ -50,11 +50,21 @@
 				<div class="value">Add Photo</div>
 				<input type="file" multiple accept="image/*" />
 			</div>
-			<button class="button">Upload</button>
+			<button class="button">Make</button>
 			<button class="serverButton" style="margin-left: 70px; width: 110px;">Server</button>
 		</section >
 	</div>
 	</section>
+	
+	<div class="lightbox hidden">
+		<div class="background darker"></div>
+		<section class="make">
+			<div class="contents">
+				<img class="preview"></img>
+				<button class="button">Upload</button>
+			</div>
+		</section>
+	</div>
 	
 	<script src="/javascripts/lib/util.js?20141112"></script>
 	<script src="/javascripts/lib/MyHTMLElement.js?20141112"></script>

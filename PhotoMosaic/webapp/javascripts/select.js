@@ -3,7 +3,7 @@
  */
 
 // 익명함수를 이용해서 전역공간을 깔끔하게...
-// select.jsp 페이지만을 위한 코드니까 재사용을 위한 설계를 하지 않았다.
+// select.jsp 페이지만을 위한 코드. 재사용을 위한 설계를 하지 않았다.
 (function() {
 	var eleBody = document.querySelector("body");
 	
@@ -14,8 +14,11 @@
 	var eleInput = document.querySelector(".inputFile input[type=file]");
 	var eleDrag = document.querySelector(".pictures");
 	
-	var eleSubmit = document.querySelector(".controll button");
+	var eleMakeButton = document.querySelector(".controll button");
 	var eleServerSubmit = document.querySelector(".serverButton");
+	
+	var eleLightbox = document.querySelector(".lightbox");
+	var eleLightboxBackground = document.querySelector(".lightbox .background");
 	
 	var fileHandler = new MultiFileHandler( [eleInput, eleSelect], [imgCb] );
 	var images = [];
@@ -42,52 +45,34 @@
 		eleSelect.style[strTransform] = "";
 	});
 	
-	eleSubmit.addEventListener("click", function(event) {
+	eleLightboxBackground.addEventListener("click", function(event) {
+		eleSelect.removeClassName("background");
+		eleLightbox.appendClassName("hidden");
+	});
+	
+	eleMakeButton.addEventListener("click", function(event) {
 		event.preventDefault();
-		
-		if (images.length <= 0) {
-			alert("8장 이상의 사진이 필요해요~!");
+
+		if (images.length < 3) {
+			alert("3장 이상의 사진을 넣어주세요~!");
 			return;
 		}
 		
-		var inputTexts = document.querySelectorAll(".select input[type=text]");
-		var formData = new FormData();
-	
-		for (var idx = 0; idx < inputTexts.length; idx++) {
-			formData.append(inputTexts[idx].name, inputTexts[idx].value);
-		}
+		eleSelect.appendClassName("background");
+		eleLightbox.removeClassName("hidden");
 		
-		for (var idx = 0; idx < images.length; idx++) {
-			formData.append("photos", images[idx]["file"]);
-		}
-		
-		var layout = makeLayout();
-		formData.append("mosaic", layout);
-		
-		var request = new XMLHttpRequest();
-		request.open("POST", "/photo");
-		request.send(formData);
-		
-		request.addEventListener("load", function() {
-			var mosaicUrl = request.responseText;
-			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
-			if (mosaicUrl.search(regExp) > -1) {
-				console.error("UPLOAD: Error! Response is not valid");
-				return;
-			}
-			
-			var origin = window.location.origin;
-			window.location.assign(origin + "/result/" + mosaicUrl);
-		});
+		var previewURL = makeLayout().toDataURL("image/jpeg", 0.9);
+		eleLightbox.querySelector(".preview").src = previewURL;
 	});
-
+	
 	eleServerSubmit.addEventListener("click", function(event) {
 		event.preventDefault();
 		
-		if (images.length <= 0) {
+		if (images.length < 8) {
 			alert("8장 이상의 사진이 필요해요~!");
 			return;
 		}
+		
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
 		var formData = new FormData();
 	
@@ -118,6 +103,38 @@
 			window.location.assign(origin + "/result/" + mosaicUrl);
 		});
 	});
+	
+	function sendData() {
+		var formData = new FormData();
+		var inputTexts = document.querySelectorAll(".select input[type=text]");
+		
+		for (var idx = 0; idx < inputTexts.length; idx++) {
+			formData.append(inputTexts[idx].name, inputTexts[idx].value);
+		}
+		
+		for (var idx = 0; idx < images.length; idx++) {
+			formData.append("photos", images[idx]["file"]);
+		}
+		
+		var layout = makeLayout();
+		formData.append("mosaic", layout);
+		
+		var request = new XMLHttpRequest();
+		request.open("POST", "/photo");
+		request.send(formData);
+		
+		request.addEventListener("load", function() {
+			var mosaicUrl = request.responseText;
+			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
+			if (mosaicUrl.search(regExp) > -1) {
+				console.error("UPLOAD: Error! Response is not valid");
+				return;
+			}
+			
+			var origin = window.location.origin;
+			window.location.assign(origin + "/result/" + mosaicUrl);
+		});
+	}
 	
 	function imgCb(file) {
 		// Only process image files.
@@ -173,14 +190,18 @@
 		reader.readAsDataURL(file);
 	}
 
-	
-	var templateGenerator = new TemplateGenerator({
-		width: 4,
-		height: 4,
-		targetNum: 8
-	});
+	var pArray;
+	var templateGenerator;
+	var suitableTemplates;
+	var tIdx = 0;
+	var combiner = new PhotoCombine(true);
 	function makeLayout() {
-		var pArray = document.querySelectorAll(".select .thumb img");
+		var tempPArray = document.querySelectorAll(".select .thumb img");
+		var boolRenewTG;
+		if (!pArray || pArray.length !== tempPArray.length) {
+			pArray = tempPArray;
+			boolRenewTG = true;
+		}
 		var pChecked = PhotoChecker(pArray);
 		
 		var objRatios = {};
@@ -195,19 +216,43 @@
 			}
 		}
 		
-		var suitableTemplates = templateGenerator.getSuitableTemplates(objRatios);
-		var tArray = suitableTemplates[parseInt(Math.random() * suitableTemplates.length)];
+		if (!templateGenerator || boolRenewTG === true) {
+			if (2 < pArray.length && pArray.length < 8) {
+				templateGenerator = new TemplateGenerator({
+					width: 4,
+					height: 4,
+					targetNum: pArray.length
+				});
+			} else if (8 <= pArray.length) {
+				templateGenerator = new TemplateGenerator({
+					width: 4,
+					height: 4,
+					targetNum: 8
+				});
+			} else {
+				console.error("사진 갯수가 이상하다! 확인해 달라!");
+				return;
+			}
+		}
 		
-		var combine = new PhotoCombine(true);
-		var canvas = combine.create(pArray, {
+		suitableTemplates = suffleArray(templateGenerator.getSuitableTemplates(objRatios));
+
+		return createMosaic();
+	}
+	
+	function createMosaic() {
+		var tArray = suitableTemplates[tIdx % suitableTemplates.length];
+		++tIdx;
+		
+		var canvas = combiner.create(pArray, {
 			"width" : 2000,
-			"height" : 1500,
+			"height" : 2000,
 			"template" : tArray.getStringData(),
 			"column" : tArray.getWidth(), // getWidth
 			"row" : tArray.getHeight(), // getHeight
 		});
-
-		return canvas.toDataURL();
+		
+		return canvas;
 	}
 	
 })();
