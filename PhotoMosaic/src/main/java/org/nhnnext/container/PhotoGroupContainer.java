@@ -30,7 +30,7 @@ public class PhotoGroupContainer extends Container<PhotoContainer>{
 		
 		ArrayList<BufferedImage> combinedImages = new ArrayList<BufferedImage>(); 
 		for (int index = 0; index < getMax() ; index++) {
-			BufferedImage image = get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
+			BufferedImage image = arrayList.get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
 			combinedImages.add(image);
 		}
 		

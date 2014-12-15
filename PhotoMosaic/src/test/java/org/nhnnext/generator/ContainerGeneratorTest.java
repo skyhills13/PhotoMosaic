@@ -3,6 +3,8 @@ package org.nhnnext.generator;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Iterator;
+
 import org.junit.Test;
 import org.nhnnext.container.PhotoContainer;
 import org.nhnnext.container.PhotoGroupContainer;
@@ -27,8 +29,12 @@ public class ContainerGeneratorTest {
 		assertThat(groupContainer.size(), is(3));
 		
 		System.out.println(groupContainer.toString());
-		for (PhotoContainer photoContainer : groupContainer) {
+		
+		Iterator<PhotoContainer> ir = groupContainer.iterator();
+		while (ir.hasNext()) {
+			PhotoContainer photoContainer = ir.next();
 			System.out.print(photoContainer.getMax()+", ");
 		}
+
 	}
 }

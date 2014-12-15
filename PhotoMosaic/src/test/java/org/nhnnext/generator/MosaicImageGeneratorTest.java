@@ -33,7 +33,7 @@ public class MosaicImageGeneratorTest {
 	public static void init() throws IOException {
 		//Create Mosaic
 		mosaic = new Mosaic();
-		mosaic.setId(1);
+		mosaic.setId(99);
 		
 		String[] filePathArray = new String[]{
 			"A0.jpg",
