@@ -20,6 +20,7 @@ public class HomeController {
 	// TODO 배포 전에 반드시 제거할 것.
 	@RequestMapping("/test/{testPage}")
 	public String UITest(@PathVariable String testPage) {
+		logger.debug("at test page");
 		return "/test/" + testPage;
 	}
 

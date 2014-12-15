@@ -2,6 +2,7 @@ package org.nhnnext.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
@@ -12,7 +13,6 @@ import org.nhnnext.generator.MosaicImageGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
-import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.StringHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,4 +103,32 @@ public class MosaicService {
 		}
 		return mosaic;
 	}
+	
+	public Mosaic showResultOfAMosaic(String uniqueUrl){
+		
+		Mosaic theMosaic = getSpecificMosaic(uniqueUrl);
+		Photo[] mosaicPhotos = getPhotosOfAMosaic(theMosaic);
+		setPhotosOnMosaic(theMosaic, mosaicPhotos);
+		
+		return theMosaic;
+	}
+	
+	public Mosaic getSpecificMosaic(String uniqueUrl){
+		Mosaic theMosaic = mosaicDao.findByUrl(uniqueUrl);
+		return theMosaic;
+	}
+	
+	public Photo[] getPhotosOfAMosaic(Mosaic mosaic){
+		List<Photo> photos = photoDao.findPhotosOfMosaic(mosaic.getId());
+		Photo[] mosaicPhotos = new Photo[photos.size()];
+		for(int i = 0; i < photos.size(); ++i){
+			mosaicPhotos[i] = photos.get(i);
+		}
+		return mosaicPhotos;
+	}
+
+	public void setPhotosOnMosaic(Mosaic mosaic, Photo[] photos){
+		mosaic.setPhotos(photos);
+	}
+	
 }

@@ -6,6 +6,7 @@ import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.User;
+import org.nhnnext.service.AlbumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,14 @@ public class AlbumController {
 	private static final Logger logger = LoggerFactory.getLogger(AlbumController.class);
 	
 	@Autowired
-	private UserDao userDao;
-	
-	@Autowired
-	private MosaicDao mosaicDao;
+	private AlbumService albumService;
 	
 	@RequestMapping("/album/{userId}")
-	public String albumPage(@PathVariable int userId, Model model){
+	public String showAlbum(@PathVariable int userId, Model model){
 		logger.debug("into albumpage");
-		User user = userDao.findById(userId);
-		List<Mosaic> mosaics = mosaicDao.findMosaicsOfUser(user.getId());
+		
+		List<Mosaic> mosaics = albumService.showAlbumOfSpecificUser(userId);
+		
 		model.addAttribute("mosaics", mosaics);
 		return "album";
 	}
