@@ -52,14 +52,9 @@ public class MosaicService {
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		if( server ) {
-//			for( Photo photo : mosaic.getPhotos()){
-//				photo.setOrientation(PhotoHandler.judgePhotoOrientation(photo));
-//			}
 			Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
 			mosaic.setOrientation(mosaicOrientation);
-			/**
-			 * Test
-			 */
+			
 			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
 			try {
 				mosaicImageGenerator.makeMosaicImage();
@@ -70,14 +65,11 @@ public class MosaicService {
 		} else {
 			uploadService.uploadUrl(clientMosaic, mosaicPath);
 		}
-        /*merge photos*/
-//      MosaicHandler.mergePhotos(mosaic);
-        mosaicDao.updateCreatedTime(mosaic);
+		mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-        
-//      PhotoHandler.resizePhoto(mosaic.getPhotos()[0]);
         return mosaic.getUrl();	
 	}
+	
 	//tx를 걸면, rollback할 시, autoincrement는 rollback이 안될수도 있어. 그래서 조심해야되. 1357만 남을수 있으니까. 
 	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
 	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 

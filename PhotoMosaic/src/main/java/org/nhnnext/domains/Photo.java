@@ -17,7 +17,6 @@ public class Photo {
 	private Orientation orientation;
 	
 	public Photo(){
-		
 	}
 
 	public Photo(String originalFileName){

@@ -51,13 +51,6 @@ public class UploadService {
 
 			UploadHandler.renameAsUnique(mosaic, photos[i]);
 
-			//PhotoHandler.sizedownPhoto(photos[i]);
-
-			// Dimension scaledDimension =
-			// PhotoHandler.getScaledDimension(photos[i]);
-			// photos[i].setScaledWidth(scaledDimension.width);
-			// photos[i].setScaledHeight(scaledDimension.height);
-			// TODO add date to UUID for the case of exception
 			photoDao.upload(photos[i]);
 			logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE
 					+ file.getOriginalFilename());

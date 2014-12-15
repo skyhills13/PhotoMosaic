@@ -80,7 +80,7 @@ MultiFileHandler.prototype = {
 	},
 
 	_fileSelectHandler: function(event) {
-		if (!this.hoverLine.hasClassName("hoverIn")) {
+		if (!this.hoverLine.hasClassName("hoverIn") && event.type !== "change") {
 			this._fileDragHover(event);
 			return;
 		}
