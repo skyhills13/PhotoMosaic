@@ -3,27 +3,13 @@ package org.nhnnext.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.annotation.PostConstruct;
-
 import org.nhnnext.domains.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-public class UserDao extends JdbcDaoSupport{
-	
-	@PostConstruct
-	public void initialize(){
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("photomosaic.sql"));
-		DatabasePopulatorUtils.execute(populator, getDataSource());
-		logger.debug("database initialize success!");
-	}
+public class UserDao extends DaoTemplate{
 	
 	public User findByEmail(String email) {
 		String sql = "SELECT * FROM users WHERE email = ?";

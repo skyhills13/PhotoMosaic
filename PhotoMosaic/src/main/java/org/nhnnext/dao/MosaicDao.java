@@ -15,15 +15,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-public class MosaicDao extends JdbcDaoSupport {
-	
-	@PostConstruct
-	public void initialize(){
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-		populator.addScript(new ClassPathResource("photomosaic.sql"));
-		DatabasePopulatorUtils.execute(populator, getDataSource());
-		logger.debug("database initialize success!");
-	}
+public class MosaicDao extends DaoTemplate {
 	
 	public Mosaic findById(int id) {
 		String sql = "select * from mosaics where id= ?";
