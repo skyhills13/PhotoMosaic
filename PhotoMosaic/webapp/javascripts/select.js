@@ -262,7 +262,7 @@
 						}
 					})(thumbArea));
 					
-					images.push({"eleThumbArea": thumbArea, "file": url});
+					images.push({"eleThumbArea": thumbArea, "file": file});
 				});
 			}
 			
