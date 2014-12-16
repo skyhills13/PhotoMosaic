@@ -146,60 +146,6 @@
 			window.location.assign(origin + "/result/" + mosaicUrl);
 		});
 	}
-	
-	function imgCb(file) {
-		// Only process image files.
-		if (!file.type.match('image.*')) {
-			return ;
-		}
-	
-		var reader = new FileReader();
-	
-		// Closure to capture the file information.
-		reader.onload = (function(file) {
-			return function(event) {
-				eleInfo.appendClassName("hidden");
-				// Render thumbnail.
-				var thumbArea = document.createElement("div");
-				
-				eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
-				thumbArea.appendClassName("thumb");
-				thumbArea.setAttribute("data-draghover", true);
-				
-				thumbArea.innerHTML = "<div class=\"positioner\" data-draghover=\"true\">" +
-						"<section data-draghover=\"true\">" +
-								"<img src=\"" + event.target.result + "\"" +
-									"title=\"" + escape(file.name) + "\"" +
-									"draggable=\"false\"" +
-									"data-draghover=\"true\" />" +
-						"</section>" +
-						"</div>";
-				
-				var removeButton = document.createElement("div");
-				thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
-				removeButton.appendClassName("removeButton");
-				removeButton.setAttribute("data-draghover", true);
-				
-				removeButton.addEventListener("click", (function(eleThumbArea) {
-					return function() {
-						var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
-						
-						images.splice(images.indexOf(itsFile), 1);
-						thumbArea.parentNode.removeChild(thumbArea);
-						
-						if (images.length <= 0) {
-							eleInfo.removeClassName("hidden");
-						}
-					}
-				})(thumbArea));
-				
-				images.push({"eleThumbArea": thumbArea, "file": file});
-			};
-		})(file);
-	
-		// Read in the image file as a data URL.
-		reader.readAsDataURL(file);
-	}
 
 	var pArray;
 	var templateGenerator;
@@ -266,4 +212,102 @@
 		return canvas;
 	}
 	
+	function imgCb(file) {
+		// Only process image files.
+		if (!file.type.match('image.*')) {
+			return ;
+		}
+	
+		var reader = new FileReader();
+	
+		// Closure to capture the file information.
+		reader.onload = function(event) {
+			var originalImage = new Image();
+			
+			originalImage.onload = function(event) {
+				var targetSize = getTargetSize(1200, 1200, this.width, this.height);
+				resizeImage(this.src, targetSize.width, targetSize.height, function(url) {
+					eleInfo.appendClassName("hidden");
+					// Render thumbnail.
+					var thumbArea = document.createElement("div");
+					
+					eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
+					thumbArea.appendClassName("thumb");
+					thumbArea.setAttribute("data-draghover", true);
+					
+					thumbArea.innerHTML = "<div class=\"positioner\" data-draghover=\"true\">" +
+							"<section data-draghover=\"true\">" +
+									"<img src=\"" + url + "\"" +
+										"title=\"" + escape(file.name) + "\"" +
+										"draggable=\"false\"" +
+										"data-draghover=\"true\" />" +
+							"</section>" +
+							"</div>";
+					
+					var removeButton = document.createElement("div");
+					thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
+					removeButton.appendClassName("removeButton");
+					removeButton.setAttribute("data-draghover", true);
+					
+					removeButton.addEventListener("click", (function(eleThumbArea) {
+						return function() {
+							var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
+							
+							images.splice(images.indexOf(itsFile), 1);
+							thumbArea.parentNode.removeChild(thumbArea);
+							
+							if (images.length <= 0) {
+								eleInfo.removeClassName("hidden");
+							}
+						}
+					})(thumbArea));
+					
+					images.push({"eleThumbArea": thumbArea, "file": url});
+				});
+			}
+			
+			originalImage.src = event.target.result;
+		};
+	
+		// Read in the image file as a data URL.
+		reader.readAsDataURL(file);
+	}
+	
+	function getTargetSize(maxWidth, maxHeight, imgWidth, imgHeight) {
+		var result = {
+				width: imgWidth,
+				height: imgHeight
+		};
+		var ratio = imgHeight / imgWidth;
+		
+		if (imgWidth >= maxWidth && ratio <= 1) {
+			result.width = maxWidth;
+			result.height = maxWidth * ratio;
+		} else if (imgHeight >= maxHeight) {
+			result.width = maxHeight / ratio;
+			result.height = maxHeight;
+		}
+		
+		return result;
+	}
+
+	function resizeImage(url, width, height, imgCb) {
+		var sourceImage = new Image();
+
+		sourceImage.onload = function() {
+			// Create a canvas with the desired dimensions
+			var canvas = document.createElement("canvas");
+			canvas.width = width;
+			canvas.height = height;
+
+			// Scale and draw the source image to the canvas
+			canvas.getContext("2d").drawImage(sourceImage, 0, 0, width, height);
+
+			// Convert the canvas to a data URL in PNG format
+			imgCb(canvas.toDataURL("image/jpeg", 0.8));
+		}
+
+		sourceImage.src = url;
+	}
+
 })();
