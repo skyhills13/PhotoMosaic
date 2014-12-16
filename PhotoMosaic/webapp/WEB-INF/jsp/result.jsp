@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <%@ page isELIgnored="false" %> --%>
 <link rel="stylesheet" type="text/css" href="/stylesheets/font.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
@@ -96,7 +95,7 @@
 	<script src="/javascripts/PhotoListSlide.js"></script>
 	<script src="/javascripts/ShareTool.js"></script>
 	<script src="/javascripts/PhotoLightBox.js"></script>
-	<script src="/javascripts/LightBox.js"></script>
+	<!-- <script src="/javascripts/LightBox.js"></script> -->
 	<!-- <script src="/javascripts/result.js"></script> -->
 
 	<script>

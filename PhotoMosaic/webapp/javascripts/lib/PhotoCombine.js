@@ -361,7 +361,25 @@
 	if (typeof module !== 'undefined' && module.exports) {
 		module.exports = PhotoCombine;
 	} else {
-		window.PhotoCombine = PhotoCombine;
+		/*
+			window를 이용한 방법이기 때문에 명시적이지는 않다.
+			전체 코드에 네임스페이스가 있어야 한다.
+		 	window는 남의 전역변수에 추가한것
+		 	변수에서 받고 return 해서 하나의 모듈로 하라 (모듈화)
+			window 객체에 잘 추가를 안함 - window의 원래 객체와 충돌을 하기 때문에 안됨
+			눈에 확 안들어옴 (window 공간을 건들여서 추가가된것이기 때문에 네이티브 브라우저가 지원한건지 내가 한건지 잘 모름) 
+			의존성 관리가 필요함
+			브라우저 호환성 같은 경우에는 readme.md 에서 쓰면 됨
+			익명함수는 안에서만 하고 끝낼때 쓰는 것 밖에서 접근을 못하는 것 이렇게 쓰면 충돌이 안남
+			안에서 쓴 내용이 밖에서 충돌이 안됨
+			그것만 하고 끝이면 익명함수를 씀
+			!!!!!!모듈 페턴 공부하기 // 핵심!!!!
+			- 모듈 패턴을 라이브러리화 한 것이 require.js 모듈의 의존성 체계를 세우는 것
+			amd, common.js -> 노드js에 나온 것 의존성 모듈을 처리하기 위해서
+			모든 파일을 모듈로 만들고 export를 함
+			스크립트 파일을 동적으로 html 에 추가
+		 */
+		window.PhotoCombine = PhotoCombine;  
 		window.CombineHelper = CombineHelper;
 	}
 }(this));
