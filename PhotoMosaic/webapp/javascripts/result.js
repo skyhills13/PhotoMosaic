@@ -40,7 +40,7 @@ function resultPageDecorator(){
 //			return target.toDataURL();
 			var url = target.toDataURL();
 			var bg = document.querySelector("body");
-			//bg.style.backgroundImage = "url(" + url + ")";
+			bg.style.backgroundImage = "url(" + url + ")";
 		});
 	}
 	
