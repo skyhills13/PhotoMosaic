@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -33,13 +35,27 @@ public class MosaicImageGenerator {
 		
 		init(mosaic);
 		setupContainer();
-		placePhotosToContainer(mosaic.getPhotos());
+		List<Photo>selectPhotos = makeAppropriatePhotoArray(mosaic.getPhotos());
+		logger.info("selectPhotosSize : {}", selectPhotos.size());
+		placePhotosToContainer(selectPhotos);
+	}
+	
+	private List<Photo> makeAppropriatePhotoArray(Photo[] photos) {
+		
+		List<Photo> shuffledList = Arrays.asList(photos); 
+		Collections.shuffle(shuffledList);
+		
+		if(photos.length > Constants.MAX_COUNT_OF_PHOTOS_CONSISTING_MOSAIC) {
+			return shuffledList.subList(0, Constants.MAX_COUNT_OF_PHOTOS_CONSISTING_MOSAIC);
+		}else{
+			return shuffledList;
+		}
 	}
 
 	protected void init(Mosaic mosaic) {
 		this.mosaic = mosaic;
 		Orientation mosaicOrientation = mosaic.getOrientation();
-		Template template = Template.getRandomTemplate(mosaicOrientation);
+		Template template = Template.getRandomTemplate(mosaic.getPhotos().length, mosaicOrientation);
 		this.templateFrameList = template.getTemplateFrameList();
 		//Get CriteriaOrientation, 
 		this.basePhotoOrientation = Orientation.getBasePhotoOrientation(mosaicOrientation);
@@ -57,9 +73,11 @@ public class MosaicImageGenerator {
 		}
 	}
 	
-	private void placePhotosToContainer(Photo[] originPhotos) {
+	private void placePhotosToContainer(List<Photo> originPhotos) {
 		
-		ArrayList<Photo> originPhotoList = new ArrayList<Photo>(Arrays.asList(originPhotos));
+		List<Photo> originPhotoList = new ArrayList<Photo>(); 
+		originPhotoList.addAll(originPhotos);
+		
 		PhotoContainer criteriaPhotoList = new PhotoContainer(this.templateFrameList.size());
 		
 		//Seperate PhotoList (criteria and others)

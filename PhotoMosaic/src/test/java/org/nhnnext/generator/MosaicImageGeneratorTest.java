@@ -40,11 +40,12 @@ public class MosaicImageGeneratorTest {
 			"A1.jpg",
 			"A2.jpg",
 			"A3.jpg",
-			
-			"B0.jpg",
-			"C1.jpg",
-			"C2.jpg",
-			"C3.jpg"
+			"A4.jpg",
+			"A5.jpg",
+			"A6.jpg",
+//			"C1.jpg",
+//			"C2.jpg",
+//			"C3.jpg"
 		};
 		
 		ArrayList<Photo> photoList = new ArrayList<Photo>();

@@ -2,27 +2,21 @@ package org.nhnnext.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
 import org.nhnnext.instance.MergeInstance;
-import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;
 import org.nhnnext.support.PhotoHandler;
 
-
-@SuppressWarnings("serial")
 public class PhotoGroupContainer extends Container<PhotoContainer>{
 
 	public PhotoGroupContainer(Integer max) {
 		super(max);
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -30,7 +24,7 @@ public class PhotoGroupContainer extends Container<PhotoContainer>{
 		
 		ArrayList<BufferedImage> combinedImages = new ArrayList<BufferedImage>(); 
 		for (int index = 0; index < getMax() ; index++) {
-			BufferedImage image = arrayList.get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
+			BufferedImage image = super.get(index).getCombinedMosaic(mosaic, basePhotoOrientation);
 			combinedImages.add(image);
 		}
 		

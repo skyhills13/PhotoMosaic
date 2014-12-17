@@ -18,7 +18,6 @@ import org.nhnnext.support.PhotoHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SuppressWarnings("serial")
 public class PhotoContainer extends Container<Photo> {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PhotoContainer.class);
@@ -70,8 +69,8 @@ public class PhotoContainer extends Container<Photo> {
 		Photo photo = null;
 		Dimension resizedDimension = null;
 		BufferedImage resizedImage = null;
-		for (int i = 0; i < arrayList.size(); i++) {
-			photo = arrayList.get(i);
+		for (int i = 0; i < super.size(); i++) {
+			photo = super.get(i);
 			resizedDimension = PhotoHandler.getScaledDimension(
 					new Dimension(photo.getOriginalWidth(), photo.getOriginalHeight()), 
 					scaleCriteriaSize, 
@@ -90,19 +89,19 @@ public class PhotoContainer extends Container<Photo> {
 	}
 
 	private Photo getSmallestSizedPhoto(Orientation basePhotoOrientation) {
-		Photo basePhoto = arrayList.get(0);
+		Photo basePhoto = super.get(0);
 		
 		if (basePhotoOrientation == Orientation.LANDSCAPE) {
-			for (int index = 1; index < arrayList.size(); index++) {
-				Photo comparingPhoto = arrayList.get(index);
+			for (int index = 1; index < super.size(); index++) {
+				Photo comparingPhoto = super.get(index);
 				if (basePhoto.getOriginalWidth() > comparingPhoto.getOriginalWidth()) {
 					basePhoto = comparingPhoto;
 				}
 			}
 			
 		} else if (basePhotoOrientation == Orientation.PORTRAIT) {
-			for (int index = 1; index < arrayList.size(); index++) {
-				Photo comparingPhoto = arrayList.get(index);
+			for (int index = 1; index < super.size(); index++) {
+				Photo comparingPhoto = super.get(index);
 				if (basePhoto.getOriginalHeight() > comparingPhoto.getOriginalHeight()) {
 					basePhoto = comparingPhoto;
 				}

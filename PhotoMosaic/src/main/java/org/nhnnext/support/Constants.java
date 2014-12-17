@@ -19,5 +19,6 @@ public class Constants {
 //	public static final String ATTACHMENT_ROOT_DIR = "/Users/kimjoohwee/git/PhotoMosaic/PhotoMosaic/webapp/images";
 //	public static final String ATTACHMENT_ROOT_DIR =  "/Users/min/dev/FinalProject/Git Repository/PhotoMosaic/webapp/images";
 	public static final String MOSAIC_FILE_EXTENSION = "jpg";
+	public static final int MAX_COUNT_OF_PHOTOS_CONSISTING_MOSAIC = 8;
 
 }
