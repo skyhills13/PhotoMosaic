@@ -80,7 +80,7 @@ public class MosaicImageGenerator {
 		
 		PhotoContainer criteriaPhotoList = new PhotoContainer(this.templateFrameList.size());
 		
-		//Seperate PhotoList (criteria and others)
+		//Separate PhotoList (criteria and others)
 		for (Photo photo : originPhotos) {
 			if (photo.getOrientation() == basePhotoOrientation) {
 				criteriaPhotoList.add(photo);

@@ -1,5 +1,7 @@
 package org.nhnnext.generator;
 
+import static org.junit.Assert.assertEquals;
+
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

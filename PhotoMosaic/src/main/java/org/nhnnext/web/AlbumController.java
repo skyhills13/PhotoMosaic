@@ -2,10 +2,7 @@ package org.nhnnext.web;
 
 import java.util.List;
 
-import org.nhnnext.dao.MosaicDao;
-import org.nhnnext.dao.UserDao;
 import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.User;
 import org.nhnnext.service.AlbumService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

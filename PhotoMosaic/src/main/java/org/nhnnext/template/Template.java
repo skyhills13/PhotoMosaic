@@ -1,18 +1,12 @@
 package org.nhnnext.template;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.nhnnext.support.Orientation;
 
-import com.sun.org.apache.xml.internal.security.keys.storage.StorageResolver;
-
-@SuppressWarnings("serial")
 public enum Template {
 
 	/*
