@@ -67,8 +67,8 @@ body * {
 .albums .empty .album {
 	position: relative;
 	float: left;
-	width: 400px;
-	height: 300px;
+	max-width: 400px;
+	max-height: 400px;
 	margin: 5px;
 }
 
@@ -83,8 +83,8 @@ and (min-width: 1261px) {
 	.album {
 		position: relative;
 		float: left;
-		width: 400px;
-		height: 300px;
+		max-width: 400px;
+		max-height: 400px;
 		margin: 5px;
 	}
 }
@@ -100,8 +100,8 @@ and (min-width: 951px) and (max-width: 1260px) {
 	.album {
 		position: relative;
 		float: left;
-		width: 300px;
-		height: 225px;
+		max-width: 300px;
+		max-height: 300px;
 		margin: 5px;
 	}
 }
@@ -117,8 +117,8 @@ and (min-width: 641px) and (max-width: 950px) {
 	.album {
 		position: relative;
 		float: left;
-		width: 300px;
-		height: 225px;
+		max-width: 300px;
+		max-height: 300px;
 		margin: 5px;
 	}
 }
