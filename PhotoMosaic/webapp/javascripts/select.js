@@ -70,11 +70,6 @@
 	eleServerSubmit.addEventListener("click", function(event) {
 		event.preventDefault();
 		
-		if (images.length < 8) {
-			alert("8장 이상의 사진이 필요해요~!");
-			return;
-		}
-		
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
 		var formData = new FormData();
 	
