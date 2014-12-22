@@ -35,6 +35,7 @@
 			strTransform = prefix + "Transform";
 		}
 		eleSelect.style[strTransform] = "translate3d(0px, 12px, 0px)";
+		eleBody.style.overflow = "hidden";
 	});
 	
 	eleHeader.addEventListener("mouseleave", function(event) {
@@ -45,7 +46,12 @@
 		} else {
 			strTransform = prefix + "Transform";
 		}
+		
 		eleSelect.style[strTransform] = "";
+	});
+	
+	eleHeader.addEventListener("animationend", function() {
+		eleBody.style.overflow = "";
 	});
 	
 	eleLightboxBackground.addEventListener("click", function(event) {
@@ -257,7 +263,8 @@
 						}
 					})(thumbArea));
 					
-					images.push({"eleThumbArea": thumbArea, "file": file});
+					//images.push({"eleThumbArea": thumbArea, "file": file});
+					images.push({"eleThumbArea": thumbArea, "file": url});
 				});
 			}
 			
