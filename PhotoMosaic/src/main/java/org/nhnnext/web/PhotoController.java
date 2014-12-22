@@ -26,16 +26,16 @@ public class PhotoController {
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
-		
-		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic);
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+		logger.debug("client upload method");
+		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session);
         return url;
     }
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
 	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
-			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
-
-		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic);
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+		logger.debug("server upload method");
+		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session);
 		return url;
 	}
 
