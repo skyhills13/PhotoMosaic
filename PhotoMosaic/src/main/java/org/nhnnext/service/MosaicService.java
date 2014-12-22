@@ -36,13 +36,29 @@ public class MosaicService {
 	@Autowired
 	UserService userService;
 	
+	
+	
 	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic) {
+//	public String createMosaicInClient(String[] files, String title, String comment, String clientMosaic) {
+//		Mosaic mosaic = createMosaicInstance(title, comment);
+//		
+//		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
+//		mosaic.setPhotos(photoArr);
+//		
+//		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
+//		
+//		uploadService.uploadMosaicUrl(clientMosaic, mosaicPath);
+//		mosaicDao.updateCreatedTime(mosaic);
+//        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
+//        return mosaic.getUrl();	
 		return createMosaic(files, title, comment, clientMosaic, false);
 	}
 	
 	public String createMosaicInServer(MultipartFile[] files, String title, String comment, String clientMosaic) {
 		return createMosaic(files, title, comment, clientMosaic, true);
 	}
+	
+	
 	
 	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server) {
 		Mosaic mosaic = createMosaicInstance(title, comment);
@@ -63,7 +79,7 @@ public class MosaicService {
 			}
 		
 		} else {
-			uploadService.uploadUrl(clientMosaic, mosaicPath);
+			uploadService.uploadMosaicUrl(clientMosaic, mosaicPath);
 		}
 		mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));

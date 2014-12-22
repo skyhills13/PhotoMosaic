@@ -25,8 +25,7 @@ public class UploadService {
 	@Autowired
 	PhotoDao photoDao;
 	
-	private static final Logger logger = LoggerFactory
-			.getLogger(UploadService.class);
+	private static final Logger logger = LoggerFactory.getLogger(UploadService.class);
 	
 	public Photo[] uploadMultipartFiles(MultipartFile[] files, Mosaic mosaic){
 		Photo[] photos = new Photo[files.length];
@@ -48,7 +47,6 @@ public class UploadService {
 			} catch (IOException e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
-
 			UploadHandler.renameAsUnique(mosaic, photos[i]);
 
 			photoDao.upload(photos[i]);
@@ -59,9 +57,15 @@ public class UploadService {
 		return photos;
 	}
 	
+//	public void uploadPhotosUrl(String[] files, Mosaic mosaic){
+//		UploadHandler.createDir(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId());
+//		for(int i = 0; i < files.length; ++i ){
+//			uploadImageFile(convertDataUrlToImg(files[i]), Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + );
+//		}
+//	}
 	
-	public void uploadUrl(String clientMosaic, String mosaicPath) {
-		uploadMosaicFile(convertDataUrlToImg(clientMosaic), mosaicPath);
+	public void uploadMosaicUrl(String clientMosaic, String mosaicPath) {
+		uploadImageFile(convertDataUrlToImg(clientMosaic), mosaicPath);
 	}
 	
 
@@ -79,8 +83,8 @@ public class UploadService {
 		// TODO Resource leak: 'osf' is never closed 경고 뜸.
 	}
 	
-	private void uploadMosaicFile(byte[] bytes, String mosaicPath) {
-		File of = new File(mosaicPath);
+	private void uploadImageFile(byte[] bytes, String destinationPath) {
+		File of = new File(destinationPath);
 		FileOutputStream osf = null;
 		try {
 			osf = new FileOutputStream(of);
@@ -100,7 +104,4 @@ public class UploadService {
 			logger.debug("error" + e.getMessage());
 		}
 	}
-
-	
-
 }

@@ -16,6 +16,8 @@ public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
 	
+	
+	
 	public static BufferedImage getMergedPhoto(ArrayList<MergeInstance> mergeInstanceList, Orientation basePhotoOrientation) throws IOException {
 		
 		int type = mergeInstanceList.get(0).getBufferedImage().getType();
@@ -26,7 +28,6 @@ public class MosaicHandler {
 		int canvasHeight = 0;
 		
 		if (basePhotoOrientation == Orientation.LANDSCAPE) {
-			
 			for (MergeInstance mergeInstance : mergeInstanceList) {
 				notBaseDirectionLength += mergeInstance.getBufferedImage().getHeight();
 			}
@@ -57,11 +58,9 @@ public class MosaicHandler {
 		}
 		logger.debug("concatenated photo group");
 		return groupImg;
-		//String mergedPhotoName = Constants.ATTACHMENT_ROOT_DIR+ File.separator + mosaic.getFileName();
-		//File mergedImg = new File(mergedPhotoName);
-		//ImageIO.write(finalImg, "png", mergedImg);
 	}
 	
+
 	public static Orientation judgeMosaicOrientation(Mosaic mosaic){
 		int landscapeCount = 0;
 		Orientation mosaicOrientation = null;
