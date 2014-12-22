@@ -26,8 +26,18 @@ public class PhotoController {
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs) throws IOException {
 		
+		/* 2014.12.21 Poppy
+		 * resizedDataURLs는 JSON의 List 입니다.
+		 * (parameter 받는 곳에서는 JSON 타입에 대해 잘 몰라서 String[] 으로 받았습니다)
+		 * POST에 붙여 보낼 이름은 적당히 고쳐쓰시면 될 것 같아요.
+		 * (select.js 의 130 라인과 함께 바꾸면 됩니다)
+		 */
+		for (String json : resizedDataURLs) {
+			logger.debug(json.substring(0, 80) + "...");
+			// TODO json을 파싱해서 dataURL의 value를 Base64Decode.
+		}
 		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic);
         return url;
     }

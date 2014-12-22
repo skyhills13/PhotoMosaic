@@ -126,7 +126,11 @@
 		}
 		
 		for (var idx = 0; idx < images.length; idx++) {
-			formData.append("photos", images[idx]["file"]);
+			formData.append("photos", images[idx].originalFile);
+			formData.append("resizedDataURLs", JSON.stringify({
+				"fileName": images[idx].fileName,
+				"dataURL": images[idx].resizedDataURL
+			}));
 		}
 		
 		formData.append("mosaic", currentMosaic.toDataURL("image/jpeg", 1));
@@ -264,7 +268,7 @@
 					})(thumbArea));
 					
 					//images.push({"eleThumbArea": thumbArea, "file": file});
-					images.push({"eleThumbArea": thumbArea, "file": url});
+					images.push({"originalFile": file, "fileName": file.name, "resizedDataURL": url});
 				});
 			}
 			
@@ -311,5 +315,16 @@
 
 		sourceImage.src = url;
 	}
+	
+	function decodeDataURL(s) {
+	    var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
+	    var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	    for(i=0;i<64;i++){e[A.charAt(i)]=i;}
+	    for(x=0;x<L;x++){
+	        c=e[s.charAt(x)];b=(b<<6)+c;l+=6;
+	        while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a));}
+	    }
+	    return r;
+	};
 
 })();
