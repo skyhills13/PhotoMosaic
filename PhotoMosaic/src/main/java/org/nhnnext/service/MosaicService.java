@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
@@ -38,7 +40,7 @@ public class MosaicService {
 	
 	
 	
-	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic) {
+	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session) {
 //	public String createMosaicInClient(String[] files, String title, String comment, String clientMosaic) {
 //		Mosaic mosaic = createMosaicInstance(title, comment);
 //		
@@ -51,17 +53,17 @@ public class MosaicService {
 //		mosaicDao.updateCreatedTime(mosaic);
 //        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
 //        return mosaic.getUrl();	
-		return createMosaic(files, title, comment, clientMosaic, false);
+		return createMosaic(files, title, comment, clientMosaic, false, session);
 	}
 	
-	public String createMosaicInServer(MultipartFile[] files, String title, String comment, String clientMosaic) {
-		return createMosaic(files, title, comment, clientMosaic, true);
+	public String createMosaicInServer(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session) {
+		return createMosaic(files, title, comment, clientMosaic, true, session);
 	}
 	
 	
 	
-	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server) {
-		Mosaic mosaic = createMosaicInstance(title, comment);
+	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server, HttpSession session) {
+		Mosaic mosaic = createMosaicInstance(title, comment, session);
 		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
 		mosaic.setPhotos(photoArr);
 		
@@ -90,8 +92,8 @@ public class MosaicService {
 	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
 	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 
 	//왜냐면, pk는 몇가지 규칙이 있어. 그중 하나는 변하면 안되는게 있는데, 자연키는 비지니스 의미가 있기 때문에, 변할 수가 있어. 그래서 대리키가 pk로 더 좋아. 
-	private Mosaic createMosaicInstance(String title, String comment) {
-		User currentUser = userService.getCurrentUser();
+	private Mosaic createMosaicInstance(String title, String comment, HttpSession session) {
+		User currentUser = userService.getCurrentUser(session);
 		
 		Mosaic mosaic = createAndUploadMosaic(title, comment);
 		updateUserInfoOnMosaic(currentUser, mosaic);

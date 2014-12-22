@@ -26,7 +26,7 @@ public class PhotoController {
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
     public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
-    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs) throws IOException {
+    		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs, HttpSession session) throws IOException {
 		
 		/* 2014.12.21 Poppy
 		 * resizedDataURLs는 JSON의 List 입니다.
@@ -36,16 +36,16 @@ public class PhotoController {
 		 */
 		for (String json : resizedDataURLs) {
 			logger.debug(json.substring(0, 80) + "...");
-			// TODO json을 파싱해서 dataURL의 value를 Base64Decode.
+			// TODO json을 파싱해서 dataURL의 value를 MultipartFile로 변경하는 로직 수행 하면 되지 않을까?
 		}
-		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic);
+		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session);
         return url;
     }
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
 	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
-			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic) throws IOException {
-
-		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic);
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+		logger.debug("server upload method");
+		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session);
 		return url;
 	}
 
