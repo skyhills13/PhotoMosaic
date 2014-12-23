@@ -1,16 +1,20 @@
-(function(window) {
+//전반적으로 리팩토링을 계획하고 있다면 꼭 해보길 바람. 
+
+(function(window) { //window 왜 이렇게 쓰는지 알아? 안써도 별 차이점이 없지 않을까? 
 	
 	var document = window.document;
 	var console = window.console;
 	
 	var CombineHelper = {};
 
+	//PhotoCombine과 private한 속성의 CombineHelper생성자의 역할이 명확히 구분된 거 맞아? 
+	// 그 기준이 무엇이지? PUBLIC과 private? 아니면 기능을 그냥 나눈거? 
 	function PhotoCombine(isOptimizing) {
-		if (typeof isOptimizing === "undefined")
+		if (typeof isOptimizing === "undefined")  //null이거나 "" 일리는 없는거지? 
 			isOptimizing = true;
 		this.isOptimizing = isOptimizing;
 		this.defaultWidth = 500;
-		this.defaultHeight = 500;
+		this.defaultHeight = 500;  //이런 데이터는 항상 외부로 빼거나 의미를 코드에 담아두기.
 	}
 	
 	PhotoCombine.prototype = {
@@ -32,6 +36,7 @@
 			return adjustPhotoArray;
 		},
 
+		//이름이 setCanvas는 인데.. 실제로는 object 를 반환하네.. 
 		setCanvas : function(id, templateSpec) {
 			var width = typeof templateSpec.width === "undefined" ? this.defaultWidth : templateSpec.width;
 			var height = typeof templateSpec.width === "undefined" ? this.defaultHeight : templateSpec.height;
