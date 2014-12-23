@@ -5,6 +5,9 @@
 // 익명함수를 이용해서 전역공간을 깔끔하게...
 // select.jsp 페이지만을 위한 코드. 재사용을 위한 설계를 하지 않았다.
 (function() {
+	//익명함수로 감싸긴 했지만, 익명함수의 크기가 커서 변수가 많으면 헷갈릴 거 같음.
+	//익면 함수 안에서 아래와 같이 너무 많은 변수(마치 전역변수같이)를 쉽게 쓰고 있음. 
+	// 전역변수는 아니지만 아래와 같은 전역변수형태를 좀더 줄여서 쓰려고 하면 좋겠음. 
 	var eleBody = document.querySelector("body");
 	
 	var eleHeader = document.querySelector("header");
@@ -25,7 +28,7 @@
 	
 	var fileHandler = new MultiFileHandler( [eleInput, eleSelect], [imgCb] );
 	var images = [];
-	
+	//아래 이벤트 핸들러는 하나로 하고 ,  event type으로 구분해서 처리할 수도 있어보임.
 	eleHeader.addEventListener("mouseenter", function(event) {
 		var prefix = getBrowserPrefix();
 		var strTransform = "";
@@ -61,7 +64,7 @@
 	
 	eleMakeButton.addEventListener("click", function(event) {
 		if (images.length < 3) {
-			alert("3장 이상의 사진을 넣어주세요~!");
+			alert("3장 이상의 사진을 넣어주세요~!");  //이런 메시지는 별도로 분리해서 관리하기.
 			return;
 		}
 		
@@ -95,7 +98,7 @@
 		request.send(formData);
 		
 		request.addEventListener("load", function() {
-			var mosaicUrl = request.responseText;
+			var mosaicUrl = request.responseText;  //대체로 모든 변수명에서 type을 파악하기가 너무 어려움..
 			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
 			if (mosaicUrl.search(regExp) > -1) {
 				console.error("UPLOAD: Error! Response is not valid");
@@ -116,7 +119,7 @@
 		sendData();
 	});
 	
-	var currentMosaic;
+	var currentMosaic;  //이렇게 밖에서 선언해야 하는거 맞나..?
 	function sendData() {
 		var formData = new FormData();
 		var inputTexts = document.querySelectorAll(".select input[type=text]");
@@ -135,6 +138,7 @@
 		
 		formData.append("mosaic", currentMosaic.toDataURL("image/jpeg", 1));
 		
+		//ajax 코드가 여기저기 자주 사용되니까, 추상화해서 쉽게 재사용할 수 있게 해도 좋겠음. 
 		var request = new XMLHttpRequest();
 		request.open("POST", "/photo");
 		request.send(formData);
@@ -143,7 +147,7 @@
 			var mosaicUrl = request.responseText;
 			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
 			if (mosaicUrl.search(regExp) > -1) {
-				console.error("UPLOAD: Error! Response is not valid");
+				console.error("UPLOAD: Error! Response is not valid");  //이런 에러메시지도 로직에서 분리해서 관리.
 				return;
 			}
 			
@@ -151,7 +155,8 @@
 			window.location.assign(origin + "/result/" + mosaicUrl);
 		});
 	}
-
+	
+	//함수외부에 선언된 변수들... 익명함수라고 해도 자제해주길 바래.
 	var pArray;
 	var templateGenerator;
 	var suitableTemplates;
@@ -177,9 +182,9 @@
 				objRatios[ratio]++;
 			}
 		}
-		
-		if (!templateGenerator || boolRenewTG === true) {
-			if (2 < pArray.length && pArray.length < 8) {
+		//아래 조건문은 반대조건인 경우를 구현하고 return시키는 게 더 좋겠음.
+		if (!templateGenerator || boolRenewTG === true) {  //boolRenewTg=== true 가 아니고 그냥 boolRenewTG하면 될 듯.
+			if (2 < pArray.length && pArray.length < 8) {  //숫자 2,8이 의미가 뭔지 모르겠음..
 				templateGenerator = new TemplateGenerator({
 					width: 4,
 					height: 4,
@@ -192,7 +197,7 @@
 					targetNum: 8
 				});
 			} else {
-				console.error("사진 갯수가 이상하다! 확인해 달라!");
+				console.error("사진 갯수가 이상하다! 확인해 달라!"); //메시지분리.
 				return;
 			}
 			
@@ -217,6 +222,8 @@
 		return canvas;
 	}
 	
+	//이 함수는 리팩토링대상인듯. 
+	// 너무크고, 로직에 html string이 포함되서 집중도 안되고.(그 부분은 분리)
 	function imgCb(file) {
 		// Only process image files.
 		if (!file.type.match('image.*')) {
@@ -234,6 +241,7 @@
 				resizeImage(this.src, targetSize.width, targetSize.height, function(url) {
 					eleInfo.appendClassName("hidden");
 					// Render thumbnail.
+					//DOM을 조작하는 아래 부분들은 묶어서 별도로 분리할 부분으로 보임. 
 					var thumbArea = document.createElement("div");
 					
 					eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
@@ -253,7 +261,7 @@
 					thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
 					removeButton.appendClassName("removeButton");
 					removeButton.setAttribute("data-draghover", true);
-					
+					//이건 뭐지.. handler가 메서드를 반환하는 코드인데..맞나? 
 					removeButton.addEventListener("click", (function(eleThumbArea) {
 						return function() {
 							var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
