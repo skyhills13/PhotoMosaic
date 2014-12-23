@@ -1,6 +1,19 @@
 /****
  *   Get browser prefix
  */
+ 
+ //util.js 아주 쓸만한 게 많네. 잘 모아두고 정리했다. (짠거 맞지..? ㅎㅎ)
+ // 전체적으로 hashtable 구주로 key-value형태로 왜 구현안했는지 약간 아쉽네. 
+ /*
+ var util = {
+ 	getBrowserPrefix : function() {
+ 		  
+ 	},
+ 	//이렇게 계속..
+ }
+ 
+ */
+ 
 function getBrowserPrefix() {
 	if (typeof document.body.style.webkitTransition !== "undefined") {
 		return "webkit";
@@ -52,7 +65,7 @@ function objectFindByKey(array, key, value) {
  *   Type check for String
  */
 function isString(target) {
-	if (typeof strClassName === "undefined"
+	if (typeof strClassName === "undefined"  //이코드보니까 생각나는데 아예 javascript type을 체크하는 메서드를 만드는 것도 꽤 쓸만한 거야.
 		|| strClassName === null) {
 		return false;
 	}
