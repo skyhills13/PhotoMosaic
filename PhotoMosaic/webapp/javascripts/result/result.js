@@ -4,12 +4,10 @@
 
 	function resultPageDecorator(){
 		var photoList = document.querySelectorAll("#list ul li img.original");
+		
 		function backgroundChange(){
 			var random = parseInt(Math.random()*(photoList.length-1));
 			var source = photoList[random].src;
-			
-			//var bg = document.querySelector("body");
-			//bg.style.backgroundImage = "url(" + source + ")";
 			return source;
 		};
 		
@@ -36,11 +34,12 @@
 				var context = target.getContext("2d");
 				context.drawImage(image, 0, 0, originalWidth, originalHeight, 0, 0, w, h);
 				stackBlurCanvasRGBA("bluredBg", 0, 0, w, h, 10);
-//				console.log(target);
-//				return target.toDataURL();
 				var url = target.toDataURL();
 				var bg = document.querySelector("body");
-//				bg.style.backgroundImage = "url(" + url + ")";
+				var img = "<div id='bg'><img class='bluredBg' src='" + url + "'/ ></div>"
+				var body = document.querySelector("body");
+				console.log(img);
+				put.insertAdjacentHTML("beforeend", img);
 			});
 		}
 		
@@ -50,7 +49,6 @@
 
 	document.addEventListener("DOMContentLoaded", function(){
 		resultPageDecorator();
-		var list = document.querySelectorAll(".container img");
 	});
 
 })(this);

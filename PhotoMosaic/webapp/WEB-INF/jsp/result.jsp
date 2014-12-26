@@ -142,24 +142,5 @@
 	<script src="/javascripts/result/LightBox.js"></script>
 	<script src="/javascripts/result/RepresentPhoto.js"></script>
 	<script src="/javascripts/result/PhotoSlide.js"></script>
-	<!-- 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var mosaic = document.querySelector("img#mosaic");
-			var comments = document.querySelector("aside section.title p").innerHTML;
-			var lightbox = document.querySelector("article#lightBox");
-
-			new PhotoLightBox(lightbox, mosaic, [ comments ], function() {
-				//for ul li img.original
-				var listWrapper = document.querySelector("article#list ul");
-				new PhotoListSlide(listWrapper, lightBox);
-			});
-
-			var sButton = document.querySelector("section.share input[type='button']");
-			var sTool = new ShareTool();
-			/* sTool.URL(sButton); */
-		});
-	</script>
-	 -->
 </body>
 </html>

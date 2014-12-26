@@ -6,6 +6,26 @@
 /*Magnesium RGBA(180, 180, 180, 1)*/
 
 
+body div#bg{
+	position : fixed;
+	z-index : -99999999;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+}
+
+body div#bg img.bluredBg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	min-width: 50%;
+	min-height: 50%;
+}
+
 body.lightBoxShowing {
 	overflow: hidden;
 }
