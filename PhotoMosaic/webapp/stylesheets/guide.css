@@ -1,0 +1,77 @@
+#example {
+	width : 100%;
+	position : fixed;
+	bottom : 0px;
+	left : 0px;
+	z-index : 10;
+	background : RGBA(40,40,40,1);
+	height : 100px;
+}
+
+#example::after {
+	content : "";
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	width : 100%;
+	height : 100%;
+	background : RGBA(40,40,40,0.8);
+}
+
+#example ul{
+	position : relative;
+	height : 80px;
+	margin-top : 8px;
+	text-align : center;
+}
+
+#example li {
+	height : 100%;
+	width : 80px;
+	display : inline-block;
+	padding : 3px;
+	margin-bottom : 5px;
+	position : relative;
+}
+
+#example li img{
+	height : 100%;
+	border-radius : 3px;
+}
+
+#example:hover::after{
+	display : none;
+}
+
+#example:hover ul li:hover{
+	position : relative;
+	height : 75px;
+	margin-bottom : -5px;
+	top : -5px;
+	left : 0px;
+	z-index : 20;
+	background : RGBA(255,255,255,0.1);
+	border-radius : 3px;
+}
+
+#example:hover ul li:hover img{
+	position : absolute;
+	bottom : 150px;
+	width : 300px;
+	height : 300px;
+	left : -90px;
+	box-shadow : 0px 0px 20px 1px RGBA(10, 10, 10, 0.5);
+}
+
+
+article.join {
+	position : absolute;
+	top : 0px;
+	width : 100%;
+}
+
+article.join section.welcome p:nth-child(1){
+	margin-bottom : 0px;
+}
+
+

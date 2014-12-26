@@ -47,11 +47,11 @@ article section.welcome p{
 	text-shadow : 2px 2px 2px RGBA(10, 10, 10, 1);
 }
 
-article form {
+article div form {
 	text-align : center;
 }
 
-article > form > div{
+article div form div{
 	width : 500px;
 	margin : auto;
 	text-align : center;
@@ -64,7 +64,7 @@ article > form > div{
 	border: 1px solid RGBA(10, 10, 10, 0.2);
  }
  
-article > form > div::before{
+article div form div::before{
 	position : absolute;
 	top : 0px;
 	left : 0px;
@@ -76,7 +76,7 @@ article > form > div::before{
 	border: 1px solid RGBA(10, 10, 10, 0.2);
 }
 
-article form p {
+article div form p {
 	text-align : left;
 	width : 80%;
 	margin-bottom : 15px;
@@ -84,7 +84,7 @@ article form p {
 	height : 30px;
 }
 
-article form p span{
+article div form p span{
 	display : inline-block;
 	text-align : right;
 	width : 100px;
@@ -96,7 +96,7 @@ article form p span{
 	color : RGBA(10, 10, 10, 0.8);
 }
 
-article form p input{
+article div form p input{
 	width : 250px;
 	height : 30px;	
 	border : none;
@@ -110,14 +110,14 @@ article form p input{
 	 content: "email";
 }
 
-article form p input:focus{
+article div form p input:focus{
 	outline : none;
 	background : RGBA(10, 10, 10, 0.8);
 	color : RGBA(255,255,255, 1);
 	-webkit-transition : background 0.2s, color 0.2s;
 }
 
-article form button {
+article div form button {
 	width : 500px;
 	margin : auto;
 	margin-top : 15px;
@@ -132,7 +132,7 @@ article form button {
 	border: 1px solid RGBA(10, 10, 10, 0.2);
 }
 
-article form button:hover {
+article div form button:hover {
 	color : RGBA(255, 255, 255, 0.8);
 	border : 1px solid RGBA(10, 10, 10, 0.8);
 	background : RGBA(10, 10, 10, 0.8);
@@ -142,7 +142,7 @@ article form button:hover {
 
 
 /* error message */
-article form div p.errorMessage {
+article div form div p.errorMessage {
 	margin : auto;
 	width : 70%;
 	margin-bottom : 0px;
@@ -150,7 +150,7 @@ article form div p.errorMessage {
 	display : table;
 }
 
-article form div p.errorMessage span.showError{
+article div form div p.errorMessage span.showError{
     display: block;
    	margin : auto;
 	width : 100%;
@@ -162,7 +162,7 @@ article form div p.errorMessage span.showError{
 	padding-top : 0px;
 }
 
-article form div p.errorMessage span:nth-child(1){
+article div form div p.errorMessage span:nth-child(1){
 	padding-top : 20px;
 }
 
