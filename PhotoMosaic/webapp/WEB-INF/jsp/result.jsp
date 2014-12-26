@@ -13,12 +13,59 @@
 <title>show mosaic</title>
 </head>
 <body>
-	<article id="lightBox" class="thumbnail">
-		<input type="button" value="X"></input>
-	</article>
+	<!-- light box 구간 -->
+	<div id="lightBoxWrapper" class="show">
+		<article class="lightBox represent show">
+			<input type="button" value="X" class="showingHandler">
+			<section class="info">
+				<h1>
+					<c:choose>
+						<c:when test="${mosaic.title!=null}">
+							${mosaic.title}
+						</c:when>
+						<c:otherwise>
+							cannot find title
+						</c:otherwise>
+					</c:choose>
+				</h1>
+				<c:choose>
+					<c:when test="${mosaic.fileName!=null}">
+						<img class="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
+					</c:when>
+					<c:otherwise>
+						<img class="mosaic" src="/images/button/no_image_thumb.gif" />
+					</c:otherwise>
+				</c:choose>
+			</section>
+		</article>
+		
+		<article class="lightBox slide hide">
+			<input type="button" value="X" class="showingHandler">
+			<div class="photos">
+				<section class="previous preset">
+					<div><img class="original" src=""/></div>
+				</section>
+				<section class="current">
+					<div><img class="original" src=""/></div>
+				</section>
+				<section class="next preset">
+					<div><img class="original" src=""/></div>
+				</section>
+			</div>
+			<nav>
+				<div></div>
+				<section>
+					<input type="range" min="0" max="${fn:length(mosaic.getPhotos())-1}">
+				</section>
+			</nav>
+		</article>
+	
+	</div>
+	
 	<div id="header">
 	<jsp:include page="./include/header.jsp" flush="false" />
 	</div>
+	
 	<div id="wrapper">
 		<aside>
 			<section class="title">
@@ -75,15 +122,14 @@
 					</li>
 				</ul>
 			</section>
-<!-- 			<section class="share">
-				<input type="button" value="share" />
-			</section>
- -->		</aside>
+ 		</aside>
 		<article id="list">
 			<ul>
 				<c:forEach items="${mosaic.getPhotos()}" var="photo" varStatus="status">
-					<li class="container" data-list="${status.index}"  style="background-image: url(/images/${mosaic.id}/${photo.getUniqueId()});">
-						<img class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" />
+					<li class="container" data-list="${status.index}">
+						<div class="background slideButton" style="background-image: url('/images/${mosaic.id}/${photo.getUniqueId()}');">
+							<img class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" />
+						</div>
 					</li>
 				</c:forEach>
 			</ul>
@@ -91,14 +137,12 @@
 
 	</div>
 	
-	<script src="/javascripts/StackBlurCanvas.js"></script>
-	<script src="/javascripts/RangeBar.js"></script>
-	<script src="/javascripts/PhotoListSlide.js"></script>
-	<script src="/javascripts/ShareTool.js"></script>
-	<script src="/javascripts/PhotoLightBox.js"></script>
-	<!-- <script src="/javascripts/LightBox.js"></script> -->
-	<script src="/javascripts/result.js"></script>
-
+	<script src="/javascripts/result/StackBlurCanvas.js"></script>
+	<script src="/javascripts/result/result.js"></script>
+	<script src="/javascripts/result/LightBox.js"></script>
+	<script src="/javascripts/result/RepresentPhoto.js"></script>
+	<script src="/javascripts/result/PhotoSlide.js"></script>
+	<!-- 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var mosaic = document.querySelector("img#mosaic");
@@ -116,5 +160,6 @@
 			/* sTool.URL(sButton); */
 		});
 	</script>
+	 -->
 </body>
 </html>

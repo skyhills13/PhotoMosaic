@@ -149,17 +149,22 @@ article#list ul {
 }
 
 article#list ul li {
-	/* width : 48%; */
 	display: inline-block;
 	position: relative;
 	vertical-align: top;
 	margin-left: 3px;
 	margin-bottom : 6px;
+	-webkit-transition: width 1s, height 1s;
+}
+
+article#list ul li div.background {
+	width : 100%;
+	height : 100%;
+	display : block;
 	background-image : url("/images/button/no_image_thumb.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	-webkit-transition: width 1s, height 1s;
 }
 
 article#list ul li img {
@@ -189,16 +194,6 @@ article#list ul li:hover::after {
 	margin: -16px;
 }
 
-/* @media all and (min-width : 800px) and (max-width: 1280px){
-	article#list {
-		border : 1px solid red;
-	}
-	
-	article#list ul li {
-		width : 48%;
-	}
-}
- */
 
 /* 사이드바 */
 aside {
@@ -367,8 +362,19 @@ aside section.share input[type='button']:focus {
  	}
  	
 	article#list ul li::before {
-		content : "";
-		display : block;
+		content : " ";
+		position : absolute;
+		top : 0px;
+		left : 0px;
+		width : 100%;
+		height : 100%;
+	}
+	
+	article#list ul li div{
+		position : absolute;
+		top : 0px;
+		left : 0px;
+
 		width : 100%;
 		height : 100%;
 	}
@@ -377,7 +383,7 @@ aside section.share input[type='button']:focus {
 		width  : 100%;
 		position : absolute;
 		top : 0px;
-		left : 0px;		
+		left : 0px;
 	}
 }
 
@@ -403,29 +409,3 @@ aside section.share input[type='button']:focus {
 		height : 190px;
 	}
 }
-
-/* 
-@media all and (min-width : 1001px){
-	div#wrapper {
-		width : 1000px;
-		margin : auto;
-	}
-	aside {
-		left : 3%;
-		width : 238px; total 280px
-		padding : 40px 20px;
-	}
-	
-	article#list {
-		left : 26%;
-		min-width : 478px;  */ /* total 500px
-		padding : 40px 20px;
-		margin-left : 50px;
-		margin-right : 3%;
-	}
-	article#list ul li {
-		width : 48%;
-	}	
-}
-
- */

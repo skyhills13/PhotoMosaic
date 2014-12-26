@@ -1,18 +1,16 @@
-var LightBox = (function(window) {
+var LightBoxHandler = (function(window) {
 
 	var console = window.console;
 	var document = window.document;
 
-	function LightBox(putSpec, specific) {
-		this.createLightBox(specific.id, putSpec);
+	function LightBoxHandler(specific) {
 		specific.init(this);
-		this.initialShowingSetting(specific);
+		this.element = specific.element;
 		this.closeEventHandling();
 	}
 
-	LightBox.prototype = {
+	LightBoxHandler.prototype = {
 		wrapper : document.querySelector("#lightBoxWrapper"),
-		defaultClass : "lightBox",
 		showControlButton : "showingHandler",
 		open : "show",
 		close : "hide",
@@ -35,28 +33,11 @@ var LightBox = (function(window) {
 				target.classList.remove(removal);
 		},
 		
-		initialShowingSetting : function(specific){
-			this.onShowingElement(specific.initialShowing);
-		},
-
-		getTemplate : function(id) {
-			var t = "<article id='" + id + "' class='" + this.defaultClass + "'>"
-			+ "<input type='button' value='X' class='showingHandler' />"
-			+ "</article>";
-			return t;
-		},
-
-		createLightBox : function(id, putSpec) {
-			var template = this.getTemplate(id);
-			putSpec.target.insertAdjacentHTML(putSpec.place, template);
-			this.element = document.querySelector("#" + id);
-		},
-		
 		closeEventHandling : function() {
 			var box = this.element;
 			var button = box.querySelector("." + this.showControlButton);
-			var wrapper = this.element.parentElement;
-			
+			var wrapper = this.wrapper;
+
 			button.addEventListener("click", function(){
 				this.onShowingElement(false);
 				this.onShowingWrapper(false);
@@ -79,5 +60,5 @@ var LightBox = (function(window) {
 		}
 	}
 	
-	return LightBox;
+	return LightBoxHandler;
 }(this));
