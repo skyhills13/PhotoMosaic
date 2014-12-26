@@ -8,20 +8,22 @@
 	
 	var Slider = {
 			id : "test2",
-			info : "info",
 			initialShowing : false,
 			
 			init : function(common){
 				this.lightBox = common;
 				this.showingHandler();
+				this.innerDOMCreate();
+			},
+			
+			innerDOMCreate : function(){
+				console.log(this);
 			},
 			
 			showingHandler : function(){
 				var list = document.querySelector("#list ul li.container");
-				console.log(list);
 				list.addEventListener("click", function(){
 					this.lightBox.onShowingElement(true);
-					console.log("Fasdfasd");
 				}.bind(this));
 			}
 		}
@@ -30,10 +32,6 @@
 			"place" : "afterbegin"
 		}
 	
+
 	var lb = new LightBox(put, Slider);
-	
-	
-	document.addEventListener("click", function(e){
-		console.log(e.target);
-	});
 }(this));

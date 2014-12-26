@@ -40,7 +40,8 @@
 		},
 		
 		getContents : function(){
-			var img = document.querySelector("#mosaic").outerHTML;
+			var imgSrc = document.querySelector("#mosaic").src;
+			var img = "<img src='" + imgSrc + "' />";
 			var title = document.querySelector("aside section.title p").outerHTML;
 			return title + img;
 		},

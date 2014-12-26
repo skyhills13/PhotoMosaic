@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,7 @@
  -->		</aside>
 		<article id="list">
 			<ul>
-				<c:forEach var="photo" items="${mosaic.getPhotos()}" varStatus="status">
+				<c:forEach items="${mosaic.getPhotos()}" var="photo" varStatus="status">
 					<li class="container" data-list="${status.index}"  style="background-image: url(/images/${mosaic.id}/${photo.getUniqueId()});">
 						<img class="original" src="/images/${mosaic.id}/${photo.getUniqueId()}" />
 					</li>
