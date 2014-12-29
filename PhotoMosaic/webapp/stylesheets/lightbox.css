@@ -17,8 +17,8 @@ font-family: 'Shadows Into Light', cursive;
 	display: none;
 }
 
-#lightBoxWrapper{
-	background-image : url("/images/button/full_page_vignette.png");
+#lightBoxWrapper {
+	background-image: url("/images/button/full_page_vignette.png");
 }
 
 .lightBox {
@@ -32,15 +32,15 @@ font-family: 'Shadows Into Light', cursive;
 	background-color: rgba(23, 22, 22, 0.98);
 }
 
-.lightBox::after{
-	content : "PHOTO MOSAIC in NHN NEXT";
-	position : absolute;
-	bottom : 3px;
-	right : 3px;
+.lightBox::after {
+	content: "PHOTO MOSAIC in NHN NEXT";
+	position: absolute;
+	bottom: 3px;
+	right: 3px;
 	font-family: 'Lato', sans-serif;
-	font-weight : 100;
-	color : RGBA(255,255,255,0.15);
-	font-size : 13px;
+	font-weight: 100;
+	color: RGBA(255, 255, 255, 0.15);
+	font-size: 13px;
 }
 
 .lightBox.show {
@@ -53,33 +53,23 @@ font-family: 'Shadows Into Light', cursive;
 
 .lightBox input[type='button'] {
 	position: fixed;
-	right: 0px;
-	top: 0px;
-	width: 75px;
-	height: 75px;
-	background: none;
-	border: none;
-	color: RGBA(255, 255, 255, 0.8);
-	font-size: 35px;
-	font-family: 'Lato', sans-serif;
-	-webkit-transform: rotate(0deg);
-	background: none;
-	height: 75px;
-	background: none;
-	border: none;
-	color: RGBA(255, 255, 255, 0.8);
-	font-size: 35px;
-	font-family: 'Lato', sans-serif;
-	-webkit-transform: rotate(0deg);
-	-webkit-transition: font-size 0.5s, transform 0.5s, color 0.5s;
+	right: 10px;
+	top: 10px;
+	width: 35px;
+	height: 35px;
+	background: RGBA(255,255,255,0.1);
+	border: 1px solid RGBA(255,255,255,1);
+	color: RGBA(255, 255, 255, 1);
+	font-size: 25px;
+	border-radius : 50%;
+	-webkit-transform : rotate(0deg);
+	-webkit-transition : transform 0.4s, background 0.4s, color 0.4s;
 }
 
 .lightBox input[type='button']:hover {
-	-webkit-transform: rotate(360deg);
-	color: RGBA(255, 255, 255, 1.0);
-	font-size: 60px;
-	width: 75px;
-	height: 75px;
+	-webkit-transform : rotate(180deg);
+	background: RGBA(255,255,255,0.8);
+	color: RGBA(0,0,0, 1);
 }
 
 .lightBox input[type='button']:focus {
@@ -105,24 +95,25 @@ font-family: 'Shadows Into Light', cursive;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 800;
 	font-size: 70px;
-	text-shadow : 2px 2px 0px RGBA(300,300,300,0.2);
-	margin-bottom : 5px;
+	text-shadow: 2px 2px 0px RGBA(300, 300, 300, 0.2);
+	margin-bottom: 5px;
 }
 
-.lightBox.represent section div{
+.lightBox.represent section div {
 	height: 95%;
-	min-height : 300px;
+	min-height: 300px;
 	/* padding : 20px; */
-	border-radius : 15px;
-/* 	display : inline-block;
+	border-radius: 15px;
+	/* 	display : inline-block;
 	border : 1px solid RGBA(255,255,255,0.3);
 	background-color : RGBA(255,255,255,0.2);
- */}
+ */
+}
 
 .lightBox.represent section div img {
-	height : 100%;
-	border-radius : 15px;
-	box-shadow : 0px 0px 30px RGBA(0,0,0,1);
+	height: 100%;
+	border-radius: 15px;
+	box-shadow: 0px 0px 30px RGBA(0, 0, 0, 1);
 }
 
 /* slide view */
@@ -132,9 +123,10 @@ font-family: 'Shadows Into Light', cursive;
 	min-width: 600px;
 }
 
-.lightBox.slide div section div img{
-	box-shadow : 0px 0px 30px RGBA(0,0,0,1);
-	border-radius : 10px;
+.lightBox.slide div section div img {
+	box-shadow: 0px 0px 30px RGBA(0, 0, 0, 1);
+	border-radius: 10px;
+	border : 1px solid RGBA(200,200,200,0.35);
 }
 
 .lightBox.slide div.photos {
@@ -204,43 +196,48 @@ section.previous div img {
 	bottom: 0px;
 }
 
-/* 
-.lightBox.slide section div.previous img {
-	width: 70%;
-	position: absolute;
-	left: 15%;
-	bottom: 50%;
-}
 
-.lightBox.slide section div.current img{
-	box-shadow : 1px 1px RGBA(255,255,255,1);
+.lightBox.slide div section.preset div:hover::after{
+	content : "";
 	width : 100%;
 	height : 100%;
-}
- 	
-.lightBox.slide section div.current img.heightDepend {
-	height: 100%;
-}
-
-.lightBox.slide section div.current img.widthDepend {
-	width: 100%;
 	position : absolute;
 	top : 0px;
 	left : 0px;
+	background-color : RGBA(255,255,255,0.04);
+	border-radius : 10px;
 }
 
-.lightBox.slide section div.next {
-	height: 25%;
-	position: relative;
-}
-
-.lightBox.slide section div.next img {
-	width: 70%;
+.lightBox.slide div section.previous div:hover::before {
+	content: "PREVIOUS";
 	position: absolute;
-	left: 15%;
-	top: 50%;
+	z-index: 999999;
+	width: 100%;
+	bottom: 5px;
+	left: 0px;
 }
- */
+
+.lightBox.slide div section.preset div:hover::before{
+	color : RGBA(255,255,255,1);
+	font-size : 3em;
+	font-weight : 800;
+	font-family: 'Lato', sans-serif;
+	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+}
+
+.lightBox.slide div section.preset div:hover img {
+	-webkit-filter: grayscale(100%);
+}
+
+.lightBox.slide div section.next div:hover::before {
+	content: "NEXT";
+	position: absolute;
+	z-index: 999999;
+	width: 100%;
+	top : 5px;
+	left: 0px;
+}
+
 .lightBox.slide nav {
 	position: absolute;
 	width: 20%;
@@ -265,18 +262,14 @@ section.previous div img {
 	content: "";
 	width: 10px;
 	height: 100%;
-	border: 1px solid RGBA(54, 117, 199, 0.8);
-	background: RGBA(54, 117, 199, 0.5);
+	border: 1px solid RGBA(255,255,255,0.9);
+	background: RGBA(255,255,255,0.5);
 	position: absolute;
-	top: 5px;
+	top: 6px;
 	left: -5px;
+	border-radius : 3px;
 }
-/*Denim RGBA(54, 117, 199, 1)*/
-/*Beau Blue RGBA(194, 216, 237, 1)*/
-/*Light Gray RGBA(209, 209, 209, 1)*/
-/*White RGBA(255, 255, 255, 1)*/
-/*Kelly Green RGBA(45, 180, 3, 1)*/
-/*Magnesium RGBA(180, 180, 180, 1)*/
+
 .lightBox.slide nav input[type="range"] {
 	-webkit-appearance: none;
 	position: absolute;
@@ -293,7 +286,7 @@ section.previous div img {
 
 .lightBox.slide nav input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none !important;
-	background: RGBA(194, 216, 237, 1);
+	background: RGBA(255,255,255,1);
 	height: 20px;
 	width: 20px;
 	box-shadow: 0px 0px 1px 1px RGBA(80, 80, 80, 0.9);

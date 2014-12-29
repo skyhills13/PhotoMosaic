@@ -167,13 +167,13 @@ article#list ul li {
 article#list ul li div.background {
 	width: 100%;
 	height: 100%;
-	border-radius : 0px;
+	border-radius: 0px;
 	display: block;
 	background-image: url("/images/button/no_image_thumb.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	-webkit-transition : border-radius 0.4s;
+	-webkit-transition: border-radius 0.4s;
 }
 
 article#list ul li img {
@@ -189,15 +189,15 @@ article#list ul li:hover::after {
 	margin: -16px;
 }
 
-article#list ul li:hover div.background{
-	border-radius : 15px;
+article#list ul li:hover div.background {
+	border-radius: 15px;
 }
 
-article#list ul li div::before{
+article#list ul li div::before {
 	content: "";
-	-webkit-transition : background-color 0.4s, border-radius 0.4s;
+	-webkit-transition: background-color 0.4s, border-radius 0.4s;
 	background-color: RGBA(0, 0, 0, 0.0);
-	border-radius : 0px;
+	border-radius: 0px;
 }
 
 article#list ul li:hover div::before {
@@ -208,7 +208,7 @@ article#list ul li:hover div::before {
 	left: 0px;
 	right: 0px;
 	background-color: RGBA(0, 0, 0, 0.7);
-	border-radius : 15px;
+	border-radius: 15px;
 }
 
 /* 사이드바 */
@@ -240,10 +240,28 @@ aside section.title p {
 	font-size: 30px;
 }
 
+aside section.thumbnail{
+	position : relative;
+}
+
+aside section.thumbnail:hover::after {
+	content: url(/images/button/magnifier_white.png);
+	position: absolute;
+	z-index: 20;
+	bottom : 20px;
+	right : 4px;
+}
+
+aside section.thumbnail:hover img{
+	box-shadow : 0px 0px 10px RGBA(0,0,0,1);
+}
+
 aside section.thumbnail img {
 	border-radius: 5px;
 	width: 100%;
 	margin-bottom: 15px;
+	box-shadow : 0px 0px 10px RGBA(0,0,0,0);
+	-webkit-transition : box-shadow 0.5s;
 }
 
 aside section.info ul li {
