@@ -2,6 +2,7 @@ package org.nhnnext.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -53,9 +54,19 @@ public class MosaicService {
 	
 	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session, String[] resizedDataURLs, boolean server) {
 		Mosaic mosaic = createMosaicInstance(title, comment, session);
-		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
+		//Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
+		
 		String photoBasePath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId();
-		//photoService.savePhotos(resizedDataURLs, photoBasePath);
+		List<DataURL> dataUrlList = new ArrayList<DataURL>();
+		
+		for (String dataURL : resizedDataURLs) {
+			dataUrlList.add(DataURL.create(dataURL));
+		}
+		
+		Photo[] photoArr = uploadService.uploadDataUrlList(dataUrlList, mosaic);
+		
+		//TODO move to uploadDataUrlList
+		photoService.savePhotos(dataUrlList, photoBasePath);
 		
 		mosaic.setPhotos(photoArr);
 		

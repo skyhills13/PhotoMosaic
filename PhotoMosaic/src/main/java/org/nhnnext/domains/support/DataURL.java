@@ -1,9 +1,15 @@
 package org.nhnnext.domains.support;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.nhnnext.support.file.FileTransferer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 
 import sun.misc.BASE64Decoder;
 
@@ -14,6 +20,11 @@ public class DataURL {
 	private String fileName;
 	private String dataURL;
 
+	public static DataURL create(String dataURL) {
+		Gson gson = new Gson();
+		return gson.fromJson(dataURL, DataURL.class);
+	}
+	
 	public DataURL(String dataURL) {
 		this.dataURL = dataURL;
 	}
@@ -42,5 +53,15 @@ public class DataURL {
 		}
 		return bytes;
 		// TODO Resource leak: ‘osf’ is never closed 경고 뜸.
+	}
+
+	public void saveFile(String photoBasePath) {
+		FileTransferer.uploadImageFile(toByteArray(), photoBasePath + File.separator + getFileName());
+	}
+
+	public String getFileExtension() {
+		int extensionIndex = fileName.indexOf(".");
+		String originalExtention = fileName.substring(extensionIndex+1);
+		return originalExtention;
 	}
 }

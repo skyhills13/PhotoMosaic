@@ -55,7 +55,7 @@ public class MosaicImageGeneratorTest {
 			fileItem.getOutputStream();
 			MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 			
-			Photo photo = PhotoHandler.getNewPhotoInstanceWithData(mosaic.getId(), mosaic.getUrl(), multipartFile);
+			Photo photo = PhotoHandler.getNewPhotoInstanceWithData(mosaic, multipartFile);
 			photo.setUniqueId(path);
 			photoList.add(photo);
 		}

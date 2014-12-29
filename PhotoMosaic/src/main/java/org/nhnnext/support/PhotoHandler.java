@@ -12,6 +12,8 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
+import org.nhnnext.domains.support.DataURL;
+import org.nhnnext.domains.table.Mosaic;
 import org.nhnnext.domains.table.Photo;
 import org.nhnnext.support.file.FileDataHandler;
 import org.slf4j.Logger;
@@ -101,13 +103,25 @@ public class PhotoHandler {
 		return dimension;
 	}
 
-	public static Photo getNewPhotoInstanceWithData(int mosaicId, String mosaicUrl, MultipartFile file) throws IOException {
-		Dimension photoDimension = getImageDimension(mosaicId, file.getOriginalFilename());
+	public static Photo getNewPhotoInstanceWithData(Mosaic mosaic, DataURL dataUrl) throws IOException {
+		Dimension photoDimension = getImageDimension(mosaic.getId(), dataUrl.getFileName());
 		
 		/*insert file information into the database*/
-		String newUniqueId = StringHandler.getNewUniqueId(mosaicUrl, FileDataHandler.getFileExtension(file));
+		String newUniqueId = StringHandler.getNewUniqueId(mosaic.getUrl(), dataUrl.getFileExtension());
 		
-		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), photoDimension, mosaicId);
+		Photo newPhoto = new Photo(newUniqueId, dataUrl.getFileName(), photoDimension, mosaic.getId());
+		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(photoDimension));
+		
+		return newPhoto;
+	}
+	
+	public static Photo getNewPhotoInstanceWithData(Mosaic mosaic, MultipartFile file) throws IOException {
+		Dimension photoDimension = getImageDimension(mosaic.getId(), file.getOriginalFilename());
+		
+		/*insert file information into the database*/
+		String newUniqueId = StringHandler.getNewUniqueId(mosaic.getUrl(), FileDataHandler.getFileExtension(file));
+		
+		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), photoDimension, mosaic.getId());
 		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(photoDimension));
 		
 		return newPhoto;
