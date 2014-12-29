@@ -28,6 +28,7 @@
 						</c:otherwise>
 					</c:choose>
 				</h1>
+				<div>
 				<c:choose>
 					<c:when test="${mosaic.fileName!=null}">
 						<img class="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
@@ -36,6 +37,7 @@
 						<img class="mosaic" src="/images/button/no_image_thumb.gif" />
 					</c:otherwise>
 				</c:choose>
+				</div>
 			</section>
 		</article>
 		

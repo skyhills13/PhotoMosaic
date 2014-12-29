@@ -9,32 +9,31 @@
 font-family: 'Lato', sans-serif;
 font-family: 'Shadows Into Light', cursive;
 */
-
 #lightBoxWrapper.show {
-	display : block;
+	display: block;
 }
 
 #lightBoxWrapper.hide {
-	display : none;
+	display: none;
 }
 
-.lightBox{
-	overflow : hidden;
-	width : 100%;
-	height : 100%;
-	position : fixed;
-	top : 0px;
-	left : 0px;
-	z-index : 99999;
-	background : RGBA(10,10,10,0.9);
+.lightBox {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 99999;
+	background-color : rgba(10,10,10,0.95);
 }
 
 .lightBox.show {
-	display : block;
+	display: block;
 }
 
 .lightBox.hide {
-	display : none;
+	display: none;
 }
 
 .lightBox input[type='button'] {
@@ -72,8 +71,6 @@ font-family: 'Shadows Into Light', cursive;
 	outline: none;
 }
 
-
-
 /* thumbnail view */
 .lightBox.represent {
 	overflow-y: hidden;
@@ -87,23 +84,33 @@ font-family: 'Shadows Into Light', cursive;
 }
 
 .lightBox.represent section h1 {
-	color: RGBA(255, 255, 255, 0.8);
+	color: RGBA(255, 255, 255, 1);
 	width: 100%;
-	height: 80px;
-	font-size : 70px;
+	height: 60px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 800;
+	font-size: 55px;
+	text-shadow : 0px 0px 15px RGBA(0,0,0,1);
 }
 
-.lightBox.represent section img {
-	height: 80%;
+.lightBox.represent section div{
+	display : inline-block;
+	height : 80%;
+	padding : 5px;
+	border : 1px solid RGBA(255,255,255,1);
 }
 
-
+.lightBox.represent section div img {
+	height: 100%;
+	border-radius : 3px;
+	box-shadow : 3px 3px 0px RGBA(0,0,0,1);
+}
 
 /* slide view */
 .lightBox.slide {
-	background : RGBA(10, 10, 10, 1);
-	width : 100%;
-	min-width : 600px;
+	background: RGBA(10, 10, 10, 1);
+	width: 100%;
+	min-width: 600px;
 }
 
 .lightBox.slide div.photos {
@@ -115,9 +122,9 @@ font-family: 'Shadows Into Light', cursive;
 	text-align: center;
 }
 
-.lightBox.slide div.photos section{
-	width : 100%;
-	position : relative;
+.lightBox.slide div.photos section {
+	width: 100%;
+	position: relative;
 }
 
 .lightBox.slide div section.previous {
@@ -125,68 +132,53 @@ font-family: 'Shadows Into Light', cursive;
 }
 
 .lightBox.slide div section.current {
-	height : 70%;
+	height: 70%;
 }
 
-.lightBox.slide div section.next{
-	height : 15%;
+.lightBox.slide div section.next {
+	height: 15%;
 }
 
-
-
-
-section.preset div{
-	position : relative;
-	margin : auto;
-	width : 80%;
-	height : 80%;
+section.preset div {
+	position: relative;
+	margin: auto;
+	width: 80%;
+	height: 80%;
 }
 
-section.preset div img{
-	width : 100%;
+section.preset div img {
+	width: 100%;
 }
 
-section.current div{
-	margin : auto;
-	width : 80%;
-	height : 100%;
-	position : relative;
-	
+section.current div {
+	margin: auto;
+	width: 80%;
+	height: 100%;
+	position: relative;
 }
 
-section.current div img{
-	position : relative;
-	left : 0px;
+section.current div img {
+	position: relative;
+	left: 0px;
 }
 
-section.current div img.heightDepend{
-	height : 100%;
+section.current div img.heightDepend {
+	height: 100%;
 }
 
-section.current div img.widthDepend{
-	width : 100%;
+section.current div img.widthDepend {
+	width: 100%;
 }
 
-section.next div{
-	top : 20%;
+section.next div {
+	top: 20%;
 }
 
-section.previous div img{
-	position : absolute;
-	left : 0px;
-	bottom : 0px;
+section.previous div img {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* 
 .lightBox.slide section div.previous img {
@@ -225,8 +217,7 @@ section.previous div img{
 	top: 50%;
 }
  */
- 
-.lightBox.slide nav{
+.lightBox.slide nav {
 	position: absolute;
 	width: 20%;
 	left: 80%;
@@ -243,18 +234,18 @@ section.previous div img{
 	height: 80%;
 	left: 0px;
 	right: 0px;
-	margin-left : 80px;
+	margin-left: 80px;
 }
 
 .lightBox.slide nav section::before {
-	content : "";
-	width : 10px;
-	height : 100%;
-	border : 1px solid RGBA(54, 117, 199, 0.8);
- 	background : RGBA(54, 117, 199, 0.5);
-	position : absolute;
-	top : 5px;
-	left : -5px;
+	content: "";
+	width: 10px;
+	height: 100%;
+	border: 1px solid RGBA(54, 117, 199, 0.8);
+	background: RGBA(54, 117, 199, 0.5);
+	position: absolute;
+	top: 5px;
+	left: -5px;
 }
 /*Denim RGBA(54, 117, 199, 1)*/
 /*Beau Blue RGBA(194, 216, 237, 1)*/
@@ -262,16 +253,13 @@ section.previous div img{
 /*White RGBA(255, 255, 255, 1)*/
 /*Kelly Green RGBA(45, 180, 3, 1)*/
 /*Magnesium RGBA(180, 180, 180, 1)*/
-
-
-
 .lightBox.slide nav input[type="range"] {
 	-webkit-appearance: none;
 	position: absolute;
 	width: 480px;
 	height: 10px;
-	background : none;
-	border : 40px solid RGBA(0,0,0,0);
+	background: none;
+	border: 40px solid RGBA(0, 0, 0, 0);
 	-webkit-transform: rotate(90deg);
 }
 
@@ -296,6 +284,6 @@ section.previous div img{
 	height: 50px;
 }
 
-.lightBox.slide nav div img{
-	width : 100%;
+.lightBox.slide nav div img {
+	width: 100%;
 }
