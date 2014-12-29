@@ -208,14 +208,33 @@ section.previous div img {
 	border-radius : 10px;
 }
 
+.lightBox.slide div section.previous div::before {
+	content: "PREVIOUS";
+	position: absolute;
+	z-index: 999999;
+	width: 100%;
+	bottom: 100%;
+	left: 0px;
+	-webkit-transition : bottom 0.4s;
+}
+
 .lightBox.slide div section.previous div:hover::before {
 	content: "PREVIOUS";
 	position: absolute;
 	z-index: 999999;
 	width: 100%;
-	bottom: 5px;
+	bottom: 20%;
 	left: 0px;
 }
+
+.lightBox.slide div section.preset div::before{
+	color : RGBA(255,255,255,1);
+	font-size : 3em;
+	font-weight : 800;
+	font-family: 'Lato', sans-serif;
+	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+}
+
 
 .lightBox.slide div section.preset div:hover::before{
 	color : RGBA(255,255,255,1);
@@ -234,9 +253,20 @@ section.previous div img {
 	position: absolute;
 	z-index: 999999;
 	width: 100%;
-	top : 5px;
+	top : 20%;
 	left: 0px;
 }
+
+.lightBox.slide div section.next div::before {
+	content: "NEXT";
+	position: absolute;
+	z-index: 999999;
+	width: 100%;
+	top : 100%;
+	left: 0px;
+	-webkit-transition : top 0.4s;
+}
+
 
 .lightBox.slide nav {
 	position: absolute;

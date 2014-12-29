@@ -24,6 +24,14 @@ body div#bg img.bluredBg {
 	min-height: 50%;
 }
 
+body div#bg::after {
+	content : "";
+	width : 100%;
+	height : 100%;
+	position : absolute;
+	background : RGBA(0,0,0,0.3);
+}
+
 body.lightBoxShowing {
 	overflow: hidden;
 }
