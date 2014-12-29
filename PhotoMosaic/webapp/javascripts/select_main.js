@@ -222,63 +222,94 @@
 		if (!file.type.match('image.*')) {
 			return ;
 		}
-	
-		var reader = new FileReader();
-	
-		// Closure to capture the file information.
-		reader.onload = function(event) {
+		
+		var worker = new Worker("/javascripts/select_worker.js");
+		worker.postMessage({
+			"toDataURL": file
+		});
+		
+		worker.addEventListener("message", function(event) {
+			var url = event.data.toDataURL;
+			resizeImage(url, 1200, 1200);
+		});
+		
+		/**
+		 * @param url
+		 */
+		function resizeImage(url, maxWidth, maxHeight) {
+			var maxWidth = (typeof maxWidth !== "undefined") ? maxWidth : 1200;
+			var maxHeight = (typeof maxHeight !== "undefined") ? maxHeight : 1200;
 			var originalImage = new Image();
 			
-			originalImage.onload = function(event) {
-				var targetSize = getTargetSize(1200, 1200, this.width, this.height);
-				resizeImage(this.src, targetSize.width, targetSize.height, function(url) {
-					eleInfo.appendClassName("hidden");
-					// Render thumbnail.
-					var thumbArea = document.createElement("div");
+			originalImage.addEventListener("load", function(event) {
+				var sourceImage = new Image();
+				
+				sourceImage.addEventListener("load", function() {
+					// Create a canvas with the desired dimensions
+					var targetSize = getTargetSize(maxWidth, maxHeight, this.width, this.height);
+					var canvas = document.createElement("canvas");
+					canvas.width = targetSize.width;
+					canvas.height = targetSize.height;
 					
-					eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
-					thumbArea.appendClassName("thumb");
-					thumbArea.setAttribute("data-draghover", true);
+					// Scale and draw the source image to the canvas
+					canvas.getContext("2d").drawImage(sourceImage, 0, 0, targetSize.width, targetSize.height);
 					
-					thumbArea.innerHTML = "<div class=\"positioner\" data-draghover=\"true\">" +
-							"<section data-draghover=\"true\">" +
-									"<img src=\"" + url + "\"" +
-										"title=\"" + escape(file.name) + "\"" +
-										"draggable=\"false\"" +
-										"data-draghover=\"true\" />" +
-							"</section>" +
-							"</div>";
+					var url = canvas.toDataURL("image/jpeg", 0.7);
+					appendThumbnail(url);
 					
-					var removeButton = document.createElement("div");
-					thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
-					removeButton.appendClassName("removeButton");
-					removeButton.setAttribute("data-draghover", true);
-					
-					removeButton.addEventListener("click", (function(eleThumbArea) {
-						return function() {
-							var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
-							
-							images.splice(images.indexOf(itsFile), 1);
-							thumbArea.parentNode.removeChild(thumbArea);
-							
-							if (images.length <= 0) {
-								eleInfo.removeClassName("hidden");
-							}
-						}
-					})(thumbArea));
-					
-					//images.push({"eleThumbArea": thumbArea, "file": file});
 					images.push({"originalFile": file, "fileName": file.name, "resizedDataURL": url});
 				});
-			}
+				
+				sourceImage.src = url;
+			});
 			
-			originalImage.src = event.target.result;
-		};
-	
-		// Read in the image file as a data URL.
-		reader.readAsDataURL(file);
+			originalImage.src = url;
+		}
 	}
 	
+	function appendThumbnail(url) {
+		eleInfo.appendClassName("hidden");
+		// Render thumbnail.
+		var thumbArea = document.createElement("div");
+		
+		eleDrag.querySelector(".positioner").insertBefore(thumbArea, null);
+		thumbArea.appendClassName("thumb");
+		thumbArea.setAttribute("data-draghover", true);
+		
+		thumbArea.innerHTML = "<div class=\"positioner\" data-draghover=\"true\">" +
+				"<section data-draghover=\"true\">" +
+						"<img src=\"" + url + "\"" +
+							"draggable=\"false\"" +
+							"data-draghover=\"true\" />" +
+				"</section>" +
+				"</div>";
+		
+		var removeButton = document.createElement("div");
+		thumbArea.querySelector(".positioner").insertBefore(removeButton, null);
+		removeButton.appendClassName("removeButton");
+		removeButton.setAttribute("data-draghover", true);
+		
+		removeButton.addEventListener("click", (function(eleThumbArea) {
+			return function() {
+				var itsFile = objectFindByKey(images, "eleThumbArea", thumbArea);
+				
+				images.splice(images.indexOf(itsFile), 1);
+				thumbArea.parentNode.removeChild(thumbArea);
+				
+				if (images.length <= 0) {
+					eleInfo.removeClassName("hidden");
+				}
+			}
+		})(thumbArea));
+	}
+
+	/**
+	 * @param maxWidth
+	 * @param maxHeight
+	 * @param imgWidth
+	 * @param imgHeight
+	 * @returns maxWidth 또는 maxHeight 크기에 맞춰진 픽셀값
+	 */
 	function getTargetSize(maxWidth, maxHeight, imgWidth, imgHeight) {
 		var result = {
 				width: imgWidth,
@@ -295,25 +326,6 @@
 		}
 		
 		return result;
-	}
-
-	function resizeImage(url, width, height, imgCb) {
-		var sourceImage = new Image();
-
-		sourceImage.onload = function() {
-			// Create a canvas with the desired dimensions
-			var canvas = document.createElement("canvas");
-			canvas.width = width;
-			canvas.height = height;
-
-			// Scale and draw the source image to the canvas
-			canvas.getContext("2d").drawImage(sourceImage, 0, 0, width, height);
-
-			// Convert the canvas to a data URL in PNG format
-			imgCb(canvas.toDataURL("image/jpeg", 0.8));
-		}
-
-		sourceImage.src = url;
 	}
 
 })();

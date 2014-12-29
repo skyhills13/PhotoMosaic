@@ -1,10 +1,10 @@
 
 self.addEventListener("message", function(event) {
-	if (typeof event.data !== "undefined") {
-		var obj = event.data;
-		postMessage(testTreatObj(obj));
-	}
+	var param = event.data;
+	postMessage([testGlobalVariable(), param]);
 });
+
+var idx = 0;
 
 function testTreatObj(obj) {
 	for (var key in obj) {
@@ -14,3 +14,6 @@ function testTreatObj(obj) {
 	return obj;
 }
 
+function testGlobalVariable() {
+	return idx++;
+}

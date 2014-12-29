@@ -11,15 +11,24 @@ self.addEventListener("message", function(event) {
 	}
 	
 	for (var targetFunction in event.data) {
-		var parameters = event.data[targetFunction];
-		result[targetFunction] = self.functions[targetFunction](parameters);
-		postMessage(result);
+		var parameter = event.data[targetFunction];
+		result[targetFunction] = self.methods[targetFunction](parameter);
+		self.postMessage(result);
 	}
 });
 
-self.functions = {};
+self.methods = {};
 
-self.functions.toString = function toString(target) {
+// FOR TEST
+self.methods.toString = function toString(target) {
 	return target.toString();
-}
+};
+
+/**
+ * This is main method
+ */
+self.methods.toDataURL = function toDataURL(file) {
+	var reader = new FileReaderSync();
+	return reader.readAsDataURL(file);
+};
 
