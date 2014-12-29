@@ -17,6 +17,10 @@ font-family: 'Shadows Into Light', cursive;
 	display: none;
 }
 
+#lightBoxWrapper{
+	background-image : url("/images/button/full_page_vignette.png");
+}
+
 .lightBox {
 	overflow: hidden;
 	width: 100%;
@@ -25,7 +29,18 @@ font-family: 'Shadows Into Light', cursive;
 	top: 0px;
 	left: 0px;
 	z-index: 99999;
-	background-color : rgba(10,10,10,0.95);
+	background-color: rgba(23, 22, 22, 0.98);
+}
+
+.lightBox::after{
+	content : "PHOTO MOSAIC in NHN NEXT";
+	position : absolute;
+	bottom : 3px;
+	right : 3px;
+	font-family: 'Lato', sans-serif;
+	font-weight : 100;
+	color : RGBA(255,255,255,0.15);
+	font-size : 13px;
 }
 
 .lightBox.show {
@@ -80,37 +95,46 @@ font-family: 'Shadows Into Light', cursive;
 .lightBox.represent section {
 	height: 70%;
 	text-align: center;
-	margin-top: 10%;
+	margin-top: 5%;
 }
 
 .lightBox.represent section h1 {
 	color: RGBA(255, 255, 255, 1);
 	width: 100%;
-	height: 60px;
+	height: 80px;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 800;
-	font-size: 55px;
-	text-shadow : 0px 0px 15px RGBA(0,0,0,1);
+	font-size: 70px;
+	text-shadow : 2px 2px 0px RGBA(300,300,300,0.2);
+	margin-bottom : 5px;
 }
 
 .lightBox.represent section div{
-	display : inline-block;
-	height : 80%;
-	padding : 5px;
-	border : 1px solid RGBA(255,255,255,1);
-}
+	height: 95%;
+	min-height : 300px;
+	/* padding : 20px; */
+	border-radius : 15px;
+/* 	display : inline-block;
+	border : 1px solid RGBA(255,255,255,0.3);
+	background-color : RGBA(255,255,255,0.2);
+ */}
 
 .lightBox.represent section div img {
-	height: 100%;
-	border-radius : 3px;
-	box-shadow : 3px 3px 0px RGBA(0,0,0,1);
+	height : 100%;
+	border-radius : 15px;
+	box-shadow : 0px 0px 30px RGBA(0,0,0,1);
 }
 
 /* slide view */
 .lightBox.slide {
-	background: RGBA(10, 10, 10, 1);
+	/* background: RGBA(10, 10, 10, 1); */
 	width: 100%;
 	min-width: 600px;
+}
+
+.lightBox.slide div section div img{
+	box-shadow : 0px 0px 30px RGBA(0,0,0,1);
+	border-radius : 10px;
 }
 
 .lightBox.slide div.photos {

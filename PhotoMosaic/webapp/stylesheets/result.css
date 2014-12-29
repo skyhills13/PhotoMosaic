@@ -4,18 +4,16 @@
 /*White RGBA(255, 255, 255, 1)*/
 /*Kelly Green RGBA(45, 180, 3, 1)*/
 /*Magnesium RGBA(180, 180, 180, 1)*/
-
-
-body div#bg{
-	position : fixed;
-	z-index : -99999999;
+body div#bg {
+	position: fixed;
+	z-index: -99999999;
 	top: -50%;
 	left: -50%;
 	width: 200%;
 	height: 200%;
 }
 
-body div#bg img.bluredBg{
+body div#bg img.bluredBg {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -32,10 +30,9 @@ body.lightBoxShowing {
 
 body {
 	background-size: cover;
-	background-color : RGBA(54, 117, 199, 1);
-	background-attachment : fixed;
+	background-color: RGBA(54, 117, 199, 1);
+	background-attachment: fixed;
 }
-
 
 body::before {
 	/* content : url("../images/background/texture_line.png"); */
@@ -47,11 +44,10 @@ body::before {
 	height: 100%;
 	background-color: RGBA(10, 10, 10, 0.7);
 	/* background-color: RGBA(255,255,255,0.8); */
-	
 }
 
-body #bluredBg{
-	display : none;
+body #bluredBg {
+	display: none;
 }
 
 /* ============================== */
@@ -60,18 +56,14 @@ body #bluredBg{
 /*                                */
 /* ============================== */
 div#header header {
-	/* background : RGBA(54, 117, 199, 1); */
-	/* background : RGBA(194, 216, 237, 1); */
-	background : RGBA(255,255,255,1);
-	/* background : RGBA(10, 10, 10, 1); */
+	background: RGBA(255, 255, 255, 1);
 	border-bottom: 1px solid RGBA(10, 10, 10, 0.8);
-	/* box-shadow : 0px 1px 1px 1px RGBA(0, 0, 0, 0.8); */
-	height : 50px;
-	-webkit-transition : height 0.2s;
+	height: 50px;
+	-webkit-transition: height 0.2s;
 }
 
 div#header header:hover {
-	height : 70px;
+	height: 70px;
 }
 
 div#header header a {
@@ -92,11 +84,10 @@ div#header header a button:hover {
 }
 
 div#header header a button span {
-	/* color: RGBA(255, 255, 255, 0.8); */
 	color: RGBA(10, 10, 10, 0.7);
 	display: inline-block;
 	width: initial;
-	font-weight : 400;
+	font-weight: 400;
 	letter-spacing: -1px;
 	position: relative;
 	top: 0px;
@@ -138,7 +129,6 @@ div#header header a button:hover span::before {
 /*                        	*/
 /* ========================	*/
 div#wrapper {
-	
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -152,16 +142,13 @@ article#list {
 	left: 280px;
 	top: 0px;
 	display: inline-block;
-	margin-bottom : 100px;
+	margin-bottom: 100px;
 	overflow-x: hidden;
 	padding: 40px 20px;
 	-webkit-transition: border 0.3s, padding-left 0.3s;
-	
-	/* background: RGBA(10, 10, 10, 1); */
-	background-color: RGBA(255,255,255,1);
+	background-color: RGBA(255, 255, 255, 1);
 	border-radius: 5px;
-	box-shadow : 2px 2px 0px 0px RGBA(0, 0, 0, 0.8);
-	/* box-shadow : 2px 2px 0px 0px RGBA(255,255,255,0.8); */
+	box-shadow: 2px 2px 0px 0px RGBA(0, 0, 0, 0.8);
 }
 
 article#list ul {
@@ -173,40 +160,28 @@ article#list ul li {
 	position: relative;
 	vertical-align: top;
 	margin-left: 3px;
-	margin-bottom : 6px;
+	margin-bottom: 6px;
 	-webkit-transition: width 1s, height 1s;
 }
 
 article#list ul li div.background {
-	width : 100%;
-	height : 100%;
-	display : block;
-	background-image : url("/images/button/no_image_thumb.gif");
+	width: 100%;
+	height: 100%;
+	border-radius : 0px;
+	display: block;
+	background-image: url("/images/button/no_image_thumb.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
+	-webkit-transition : border-radius 0.4s;
 }
 
 article#list ul li img {
-	display : none;
-	width: 100%;
-	border-radius: 2px;
-	padding: 0px;
-	opacity: 1;
-	-webkit-transition: border-radius 0.2s;
-	border: 1px solid RGBA(180, 180, 180, 0);
-}
-
-article#list ul li img:hover {
-	border-radius: 20px;
-	-webkit-filter: grayscale(1);
-	background: white;
-	filter: grayscale(1);
-	border: 1px solid RGBA(180, 180, 180, 1);
+	display: none;
 }
 
 article#list ul li:hover::after {
-	content: url(/images/button/magnifier.png);
+	content: url(/images/button/magnifier_white.png);
 	position: absolute;
 	z-index: 20;
 	top: 50%;
@@ -214,13 +189,33 @@ article#list ul li:hover::after {
 	margin: -16px;
 }
 
+article#list ul li:hover div.background{
+	border-radius : 15px;
+}
+
+article#list ul li div::before{
+	content: "";
+	-webkit-transition : background-color 0.4s, border-radius 0.4s;
+	background-color: RGBA(0, 0, 0, 0.0);
+	border-radius : 0px;
+}
+
+article#list ul li:hover div::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	background-color: RGBA(0, 0, 0, 0.7);
+	border-radius : 15px;
+}
 
 /* 사이드바 */
 aside {
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	/* width: 240px; */
 	display: inline-block;
 	vertical-align: top;
 	padding: 40px 20px;
@@ -228,23 +223,21 @@ aside {
 	text-align: -webkit-right;
 	-webkit-transition: padding-right 0.3s;
 	text-align: -webkit-right;
-
-	/* background: RGBA(10, 10, 10, 1); */
-	background-color: RGBA(255,255,255,1);
+	background-color: RGBA(255, 255, 255, 1);
 	border-radius: 5px;
-	box-shadow : 2px 2px 0px 0px RGBA(0, 0, 0, 0.8);
-	/* box-shadow : 2px 2px 0px 0px RGBA(255,255,255,0.8); */
+	box-shadow: 2px 2px 0px 0px RGBA(0, 0, 0, 0.8);
 }
+
 aside section.title {
 	margin-bottom: 20px;
 }
 
-aside section.title p{
-	text-align : center;
+aside section.title p {
+	text-align: center;
 	font-family: 'Open Sans', sans-serif;
-	font-weight : 800;
-	font-style : italic;
-	font-size : 30px;
+	font-weight: 800;
+	font-style: italic;
+	font-size: 30px;
 }
 
 aside section.thumbnail img {
@@ -253,51 +246,49 @@ aside section.thumbnail img {
 	margin-bottom: 15px;
 }
 
-
 aside section.info ul li {
 	font-family: 'Lato', sans-serif;
 	font-weight: 100;
 	margin-bottom: 13px;
-	text-align : left;
+	text-align: left;
 }
 
 aside section.info ul li p {
 	font-family: 'Open Sans', sans-serif;
-	font-weight : 600;
-	font-size : 13px;
+	font-weight: 600;
+	font-size: 13px;
 }
 
-aside section.info ul li p{
-	color : RGBA(80, 80, 80, 1);
+aside section.info ul li p {
+	color: RGBA(80, 80, 80, 1);
 }
 
 aside section.info ul li:nth-child(1) p {
-	border-top : 1px solid RGBA(220, 220, 220, 1);
-	border-bottom : 1px solid RGBA(220, 220, 220, 1);
-	padding : 20px 10px;
-	font-size : 15px;
-	color : RGBA(10, 10, 10, 1);
+	border-top: 1px solid RGBA(220, 220, 220, 1);
+	border-bottom: 1px solid RGBA(220, 220, 220, 1);
+	padding: 20px 10px;
+	font-size: 15px;
+	color: RGBA(10, 10, 10, 1);
 }
 
-
 aside section.info ul li:nth-child(2) p::before {
-	content : "by_";
+	content: "by_";
 	font-family: 'Open Sans', sans-serif;
-	font-weight : 600;
-	font-size : 10px;
-	color : RGBA(180, 180, 180, 1);
-	width : 40px;
-	display : inline-block;
+	font-weight: 600;
+	font-size: 10px;
+	color: RGBA(180, 180, 180, 1);
+	width: 40px;
+	display: inline-block;
 }
 
 aside section.info ul li:nth-child(3) p::before {
-	display : inline-block;
-	width : 40px;
-	content : "when_";
+	display: inline-block;
+	width: 40px;
+	content: "when_";
 	font-family: 'Open Sans', sans-serif;
-	font-weight : 600;
-	font-size : 10px;
-	color : RGBA(180, 180, 180, 1);
+	font-weight: 600;
+	font-size: 10px;
+	color: RGBA(180, 180, 180, 1);
 }
 
 aside section.share {
@@ -339,30 +330,30 @@ aside section.share input[type='button']:focus {
 @media all and (max-width : 760px) {
 	div#wrapper {
 		width: 760px;
-		margin-top : 100px;
+		margin-top: 100px;
 	}
 	aside {
-		position : static;
+		position: static;
 		/* left: 30px; */
 		width: 178px; /* total 200px */
 		padding: 40px 10px;
 	}
 	article#list {
-		position : static;
+		position: static;
 		/* left: 240px; */
 		width: 428px; /* total 450px (좌우 border 2px padding 20px 너비 428px) */
 		padding: 40px 10px;
 	}
 	article#list ul li {
 		width: 208px; /* total 210 (border : 좌우 1px 씩) */
-		height : 208px;
+		height: 208px;
 	}
 }
 
 @media all and (min-width : 761px) and (max-width : 1000px) {
 	div#wrapper {
 		min-width: 761px;
-		margin-top : 100px;
+		margin-top: 100px;
 	}
 	aside {
 		left: 4%;
@@ -377,55 +368,50 @@ aside section.share input[type='button']:focus {
 	}
 	article#list ul li {
 		width: 48%;
-		min-width : 210px;
-		padding-top : 48%;
- 	}
- 	
+		min-width: 210px;
+		padding-top: 48%;
+	}
 	article#list ul li::before {
-		content : " ";
-		position : absolute;
-		top : 0px;
-		left : 0px;
-		width : 100%;
-		height : 100%;
+		content: " ";
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
 	}
-	
-	article#list ul li div{
-		position : absolute;
-		top : 0px;
-		left : 0px;
-
-		width : 100%;
-		height : 100%;
+	article#list ul li div {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
 	}
-	
-	article#list ul li img{	
-		width  : 100%;
-		position : absolute;
-		top : 0px;
-		left : 0px;
+	article#list ul li img {
+		width: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
 	}
 }
 
 @media all and (min-width : 1001px) {
 	div#wrapper {
 		width: 940px;
-		margin : auto;
-		margin-top : 100px;
+		margin: auto;
+		margin-top: 100px;
 	}
 	aside {
-		/* left : 4%; */
 		width: 230px; /* total 280px */
 		padding: 40px 20px;
 	}
 	article#list {
-		width : 600px;
-		left : 272px;
+		width: 600px;
+		left: 272px;
 		padding: 40px 20px;
-		margin-left : 10px;
+		margin-left: 10px;
 	}
 	article#list ul li {
 		width: 190px; /* 총 192px border 좌우 1px*/
-		height : 190px;
+		height: 190px;
 	}
 }
