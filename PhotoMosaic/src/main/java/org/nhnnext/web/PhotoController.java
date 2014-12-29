@@ -1,12 +1,9 @@
 package org.nhnnext.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.nhnnext.domains.support.DataURL;
 import org.nhnnext.service.MosaicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-
 @Controller
 public class PhotoController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(PhotoController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PhotoController.class);
 
 	@Autowired
 	private MosaicService mosaicService;
@@ -41,13 +35,6 @@ public class PhotoController {
 		 * {"fileName":"asdfasdf", "dataURL":"adasdf"}
 		 */
 		
-		Gson gson = new Gson();
-		List<DataURL> dataURLs = new ArrayList<DataURL>();
-		for (String resizedDataUrl : resizedDataURLs) {
-			logger.debug(resizedDataUrl.substring(0, 80) + "...");
-			dataURLs.add(gson.fromJson(resizedDataUrl, DataURL.class));
-		}
-
 		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session, resizedDataURLs);
         return url;
     }

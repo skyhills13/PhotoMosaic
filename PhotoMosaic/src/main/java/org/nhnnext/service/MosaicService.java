@@ -38,6 +38,8 @@ public class MosaicService {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	PhotoService photoService;
 	
 	
 	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic,  HttpSession session, String[] resizedDataURLs) {
@@ -51,6 +53,8 @@ public class MosaicService {
 	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session, String[] resizedDataURLs, boolean server) {
 		Mosaic mosaic = createMosaicInstance(title, comment, session);
 		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
+		String photoBasePath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId();
+		//photoService.savePhotos(resizedDataURLs, photoBasePath);
 		
 		mosaic.setPhotos(photoArr);
 		
@@ -74,7 +78,7 @@ public class MosaicService {
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
         return mosaic.getUrl();	
 	}
-	
+
 	//tx를 걸면, rollback할 시, autoincrement는 rollback이 안될수도 있어. 그래서 조심해야되. 1357만 남을수 있으니까. 
 	//그러니까 아이디가 10이라고 갯수가 10개가 아닐 수도 있어. 
 	//pk는 하나인게 좋아. 자연키(비지니스적 의미가 있기 때문에 변할 수 있어), 대리키. 중에 대리키를 pk로 하는 것이 더 편해. 
