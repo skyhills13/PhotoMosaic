@@ -2,8 +2,8 @@ package org.nhnnext.support;
 
 import java.io.File;
 
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;

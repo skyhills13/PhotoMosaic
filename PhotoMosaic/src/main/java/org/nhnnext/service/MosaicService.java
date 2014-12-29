@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
-import org.nhnnext.domains.User;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domains.table.User;
 import org.nhnnext.generator.MosaicImageGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;

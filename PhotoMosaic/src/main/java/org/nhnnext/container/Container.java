@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.nhnnext.domains.Mosaic;
+import org.nhnnext.domains.table.Mosaic;
 import org.nhnnext.support.Orientation;
 
 public abstract class Container<T>{

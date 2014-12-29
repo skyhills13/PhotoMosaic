@@ -3,8 +3,8 @@ package org.nhnnext.service;
 import java.io.IOException;
 
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.Photo;
 import org.nhnnext.library.DataConverter;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.UserDao;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.User;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.nhnnext.domains.Mosaic;
+import org.nhnnext.domains.table.Mosaic;
 import org.springframework.jdbc.core.RowMapper;
 
 public class MosaicDao extends DaoTemplate {
