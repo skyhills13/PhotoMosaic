@@ -3,7 +3,7 @@ package org.nhnnext.service;
 import javax.servlet.http.HttpSession;
 
 import org.nhnnext.dao.UserDao;
-import org.nhnnext.domains.User;
+import org.nhnnext.domains.table.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

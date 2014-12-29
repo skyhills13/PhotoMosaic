@@ -1,9 +1,12 @@
 package org.nhnnext.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.nhnnext.domains.support.DataURL;
 import org.nhnnext.service.MosaicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 @Controller
 public class PhotoController {
 
@@ -25,27 +30,32 @@ public class PhotoController {
 	private MosaicService mosaicService;
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
+    public @ResponseBody String uploadPhotosAndMosaicInClient(@RequestParam("photos") MultipartFile[] files, 
     		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs, HttpSession session) throws IOException {
-		
+
 		/* 2014.12.21 Poppy
 		 * resizedDataURLs는 JSON의 List 입니다.
 		 * (parameter 받는 곳에서는 JSON 타입에 대해 잘 몰라서 String[] 으로 받았습니다)
 		 * POST에 붙여 보낼 이름은 적당히 고쳐쓰시면 될 것 같아요.
 		 * (select.js 의 130 라인과 함께 바꾸면 됩니다)
+		 * {"fileName":"asdfasdf", "dataURL":"adasdf"}
 		 */
-		for (String json : resizedDataURLs) {
-			logger.debug(json.substring(0, 80) + "...");
-			// TODO json을 파싱해서 dataURL의 value를 MultipartFile로 변경하는 로직 수행 하면 되지 않을까?
+		
+		Gson gson = new Gson();
+		List<DataURL> dataURLs = new ArrayList<DataURL>();
+		for (String resizedDataUrl : resizedDataURLs) {
+			logger.debug(resizedDataUrl.substring(0, 80) + "...");
+			dataURLs.add(gson.fromJson(resizedDataUrl, DataURL.class));
 		}
-		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session);
+
+		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session, resizedDataURLs);
         return url;
     }
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
-	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
-			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+	public @ResponseBody String uploadPhotosAndMosaicInServer(@RequestParam("photos") MultipartFile[] files, 
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs, HttpSession session) throws IOException {
 		logger.debug("server upload method");
-		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session);
+		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session, resizedDataURLs);
 		return url;
 	}
 

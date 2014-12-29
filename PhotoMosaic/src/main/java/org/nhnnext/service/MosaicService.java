@@ -8,9 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
-import org.nhnnext.domains.User;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domains.table.User;
 import org.nhnnext.generator.MosaicImageGenerator;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;
@@ -40,31 +40,18 @@ public class MosaicService {
 	
 	
 	
-	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session) {
-//	public String createMosaicInClient(String[] files, String title, String comment, String clientMosaic) {
-//		Mosaic mosaic = createMosaicInstance(title, comment);
-//		
-//		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
-//		mosaic.setPhotos(photoArr);
-//		
-//		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
-//		
-//		uploadService.uploadMosaicUrl(clientMosaic, mosaicPath);
-//		mosaicDao.updateCreatedTime(mosaic);
-//        mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));
-//        return mosaic.getUrl();	
-		return createMosaic(files, title, comment, clientMosaic, false, session);
+	public String createMosaicInClient(MultipartFile[] files, String title, String comment, String clientMosaic,  HttpSession session, String[] resizedDataURLs) {
+		return createMosaic(files, title, comment, clientMosaic, session, resizedDataURLs, false);
 	}
 	
-	public String createMosaicInServer(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session) {
-		return createMosaic(files, title, comment, clientMosaic, true, session);
+	public String createMosaicInServer(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session, String[] resizedDataURLs) {
+		return createMosaic(files, title, comment, clientMosaic, session, resizedDataURLs, true);
 	}
 	
-	
-	
-	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, boolean server, HttpSession session) {
+	private String createMosaic(MultipartFile[] files, String title, String comment, String clientMosaic, HttpSession session, String[] resizedDataURLs, boolean server) {
 		Mosaic mosaic = createMosaicInstance(title, comment, session);
 		Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
+		
 		mosaic.setPhotos(photoArr);
 		
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();

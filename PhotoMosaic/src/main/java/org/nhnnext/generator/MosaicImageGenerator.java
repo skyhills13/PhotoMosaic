@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 
 import org.nhnnext.container.PhotoContainer;
 import org.nhnnext.container.PhotoGroupContainer;
-import org.nhnnext.domains.Mosaic;
-import org.nhnnext.domains.Photo;
+import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domains.table.Photo;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.Orientation;
 import org.nhnnext.template.Template;
