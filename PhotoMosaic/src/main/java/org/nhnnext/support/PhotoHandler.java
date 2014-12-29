@@ -105,7 +105,6 @@ public class PhotoHandler {
 
 	public static Photo getNewPhotoInstanceWithData(Mosaic mosaic, DataURL dataUrl) throws IOException {
 		Dimension photoDimension = getImageDimension(mosaic.getId(), dataUrl.getFileName());
-		
 		/*insert file information into the database*/
 		String newUniqueId = StringHandler.getNewUniqueId(mosaic.getUrl(), dataUrl.getFileExtension());
 		

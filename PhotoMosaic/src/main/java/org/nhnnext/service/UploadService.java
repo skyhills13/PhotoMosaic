@@ -1,5 +1,6 @@
 package org.nhnnext.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,18 +24,25 @@ public class UploadService {
 	@Autowired
 	PhotoDao photoDao;
 	
+	@Autowired
+	PhotoService photoService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(UploadService.class);
 	
 	public Photo[] uploadDataUrlList(List<DataURL> dataUrlList, Mosaic mosaic){
 		Photo[] photos = new Photo[dataUrlList.size()];
+		
+		String photoBasePath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId();
+		photoService.savePhotos(dataUrlList, photoBasePath);
+		
 		logger.debug("*****************one mosaic start************************");
 		for (int i = 0; i < dataUrlList.size(); i++) {
 			DataURL dataURL = dataUrlList.get(i);
+			logger.debug("dataURL in uploadDataUrlList : {}", dataURL.toString());
 			
-			/* get the information of the photo */
 			try {
 				photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, dataURL);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
 			FileDataHandler.renameAsUnique(mosaic, photos[i]);
@@ -77,13 +85,6 @@ public class UploadService {
 		logger.debug("*****************one mosaic end************************");
 		return photos;
 	}
-	
-//	public void uploadPhotosUrl(String[] files, Mosaic mosaic){
-//		UploadHandler.createDir(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId());
-//		for(int i = 0; i < files.length; ++i ){
-//			uploadImageFile(convertDataUrlToImg(files[i]), Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() + File.separator + );
-//		}
-//	}
 	
 	public void uploadMosaicUrl(DataURL dataURL, String mosaicPath) {
 		FileTransferer.uploadImageFile(dataURL.toByteArray(), mosaicPath);

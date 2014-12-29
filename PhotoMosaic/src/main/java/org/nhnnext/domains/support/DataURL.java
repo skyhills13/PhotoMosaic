@@ -2,16 +2,14 @@ package org.nhnnext.domains.support;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.nhnnext.support.file.FileTransferer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
-
 import sun.misc.BASE64Decoder;
+
+import com.google.gson.Gson;
 
 public class DataURL {
 	
@@ -56,6 +54,8 @@ public class DataURL {
 	}
 
 	public void saveFile(String photoBasePath) {
+		//TODO 첫번째 라인은 두번째 라인에 포함될수있도록 리팩
+		FileTransferer.createDir(photoBasePath);
 		FileTransferer.uploadImageFile(toByteArray(), photoBasePath + File.separator + getFileName());
 	}
 

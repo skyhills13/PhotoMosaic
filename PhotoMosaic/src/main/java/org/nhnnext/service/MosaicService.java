@@ -56,7 +56,7 @@ public class MosaicService {
 		Mosaic mosaic = createMosaicInstance(title, comment, session);
 		//Photo[] photoArr = uploadService.uploadMultipartFiles(files, mosaic);
 		
-		String photoBasePath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId();
+		/*서버에서 사이즈 줄일경우 이 부분 삭제 */
 		List<DataURL> dataUrlList = new ArrayList<DataURL>();
 		
 		for (String dataURL : resizedDataURLs) {
@@ -64,9 +64,7 @@ public class MosaicService {
 		}
 		
 		Photo[] photoArr = uploadService.uploadDataUrlList(dataUrlList, mosaic);
-		
-		//TODO move to uploadDataUrlList
-		photoService.savePhotos(dataUrlList, photoBasePath);
+		/* 삭제 끝 */
 		
 		mosaic.setPhotos(photoArr);
 		
