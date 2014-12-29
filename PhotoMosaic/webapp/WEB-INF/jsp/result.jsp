@@ -10,7 +10,11 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/result.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/Range2Range.css">
-<title>show mosaic</title>
+<link rel="image_src" href="/images/${mosaic.id}/${mosaic.fileName}" />
+<meta name="title" content="PHOTO MOSAIC in NHN NEXT" />
+<meta name="description" content="make mosaic and share photo" />
+
+<title>${mosaic.title} :: PHOTO MOSAIC</title>
 </head>
 <body>
 	<!-- light box 구간 -->
@@ -138,7 +142,6 @@
 		</article>
 
 	</div>
-	
 	<script src="/javascripts/result/StackBlurCanvas.js"></script>
 	<script src="/javascripts/result/result.js"></script>
 	<script src="/javascripts/result/LightBox.js"></script>
