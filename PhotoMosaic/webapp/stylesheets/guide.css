@@ -1,11 +1,17 @@
 #example {
 	width : 100%;
 	position : fixed;
-	bottom : 0px;
+	bottom : -50px;
 	left : 0px;
 	z-index : 10;
 	background : RGBA(40,40,40,1);
 	height : 100px;
+	-webkit-transition : bottom 0.4s;
+}
+
+#example:hover {
+	bottom : 0px;
+	-webkit-transition : bottom 0.4s;		
 }
 
 #example::after {
@@ -34,10 +40,6 @@
 	position : relative;
 }
 
-#example li img{
-	height : 100%;
-	border-radius : 3px;
-}
 
 #example:hover::after{
 	display : none;
@@ -51,14 +53,18 @@
 	left : 0px;
 	z-index : 20;
 	background : RGBA(255,255,255,0.1);
+	border-radius : 5px;
+}
+
+#example li img{
+	height : 100%;
 	border-radius : 3px;
 }
 
 #example:hover ul li:hover img{
 	position : absolute;
 	bottom : 150px;
-	width : 300px;
-	height : 300px;
+	height : 300%;
 	left : -90px;
 	box-shadow : 0px 0px 20px 1px RGBA(10, 10, 10, 0.5);
 }

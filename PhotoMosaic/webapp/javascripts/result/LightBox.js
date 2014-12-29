@@ -28,6 +28,7 @@ var LightBoxHandler = (function(window) {
 		onShowingWrapper : function(isShowing){
 			var target = this.wrapper;
 			this.onShowing(target, isShowing);
+			this.isBackScrolling(!isShowing);
 		},
 		
 		onShowingElement : function(isShowing){
@@ -51,22 +52,16 @@ var LightBoxHandler = (function(window) {
 			button.addEventListener("click", function(){
 				this.onShowingElement(false);
 				this.onShowingWrapper(false);
+				this.isBackScrolling(true);
 			}.bind(this));
 		},
 		
-		backArticleScrollState : function(){
-			var HIDE_CLASS = "hide";
-			var SHOW_CLASS = "show";
-			var THUMBNAIL_CLASS = "thumbnail";
-
-			this.lightBox.addEventListener("click", function() {
-				if(!lightBox.classList.contains(THUMBNAIL_CLASS)) return;
-				lightBox.classList.add(HIDE_CLASS);
-				lightBox.classList.remove(THUMBNAIL_CLASS);
-				lightBox.classList.remove(SHOW_CLASS);
-				this.backgroundScrollState();
-				afterBoxCloseCallback();
-			}.bind(this), false);
+		isBackScrolling : function(isScrolling){
+			var toPutClass = "lightBoxShowing";
+			var body = document.querySelector("body");
+			var action = isScrolling?"remove":"add";
+			body.classList[action](toPutClass);
+			console.log(body);
 		}
 	}
 	

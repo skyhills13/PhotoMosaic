@@ -227,23 +227,6 @@ section.previous div img {
 	left: 0px;
 }
 
-.lightBox.slide div section.preset div::before{
-	color : RGBA(255,255,255,0.7);
-	font-size : 2em;
-	font-weight : 800;
-	font-family: 'Lato', sans-serif;
-	text-shadow : 4px 4px 0px RGBA(0,0,0,0.2);
-	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
-}
-
-.lightBox.slide div section.preset div:hover::before{
-	color : RGBA(255,255,255,1);
-	font-size : 3em;
-	font-weight : 800;
-	font-family: 'Lato', sans-serif;
-	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
-	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
-}
 
 .lightBox.slide div section.preset div:hover img {
 	-webkit-filter: grayscale(100%);
@@ -268,6 +251,23 @@ section.previous div img {
 	-webkit-transition : top 0.4s;
 }
 
+.lightBox.slide div section.preset div::before{
+	color : RGBA(255,255,255,0.7);
+	font-size : 1.5em;
+	font-weight : 800;
+	font-family: 'Lato', sans-serif;
+	text-shadow : 4px 4px 0px RGBA(0,0,0,0.2);
+	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
+}
+
+.lightBox.slide div section.preset div:hover::before{
+	color : RGBA(255,255,255,1);
+	font-size : 3em;
+	font-weight : 800;
+	font-family: 'Lato', sans-serif;
+	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
+}
 
 .lightBox.slide nav {
 	position: absolute;

@@ -43,7 +43,6 @@ body {
 }
 
 body::before {
-	/* content : url("../images/background/texture_line.png"); */
 	content: "";
 	position: fixed;
 	top: 0px;
@@ -51,7 +50,6 @@ body::before {
 	width: 100%;
 	height: 100%;
 	background-color: RGBA(10, 10, 10, 0.7);
-	/* background-color: RGBA(255,255,255,0.8); */
 }
 
 body #bluredBg {
