@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.nhnnext.dao.MosaicDao;
 import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.domains.support.DataURL;
 import org.nhnnext.domains.table.Mosaic;
 import org.nhnnext.domains.table.Photo;
 import org.nhnnext.domains.table.User;
@@ -72,7 +73,7 @@ public class MosaicService {
 			}
 		
 		} else {
-			uploadService.uploadMosaicUrl(clientMosaic, mosaicPath);
+			uploadService.uploadMosaicUrl(new DataURL(clientMosaic), mosaicPath);
 		}
 		mosaicDao.updateCreatedTime(mosaic);
         mosaic.setCreatedDate(mosaicDao.getCreatedTime(mosaic.getId()));

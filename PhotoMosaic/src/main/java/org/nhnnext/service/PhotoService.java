@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.nhnnext.domains.support.DataURL;
-import org.nhnnext.utility.dataurl.DataURLConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,12 @@ public class PhotoService {
 	
 	public void savePhotos(String[] resizedDataURLs, String photoBasePath) {
 		List<DataURL> dataURLs = getDataURLList(resizedDataURLs);
-		List<byte[]> listOfByteArray = DataURLConverter.toListOfByteArray(dataURLs);
+		List<byte[]> listOfByteArray = new ArrayList<byte[]>();
+		
+		for (DataURL dataURL : dataURLs) {
+			listOfByteArray.add(dataURL.toByteArray());
+		}
+		
 		for (byte[] singleImage : listOfByteArray) {
 	//		FileTransferer.uploadImageFile(singleImage, photoBasePath + File.separator + dataURL.getFileName());
 		}

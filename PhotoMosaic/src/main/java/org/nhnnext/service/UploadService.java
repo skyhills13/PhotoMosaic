@@ -3,20 +3,18 @@ package org.nhnnext.service;
 import java.io.IOException;
 
 import org.nhnnext.dao.PhotoDao;
+import org.nhnnext.domains.support.DataURL;
 import org.nhnnext.domains.table.Mosaic;
 import org.nhnnext.domains.table.Photo;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.file.FileDataHandler;
 import org.nhnnext.support.file.FileTransferer;
-import org.nhnnext.utility.dataurl.DataURLConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import sun.misc.BASE64Decoder;
 
 @Service
 public class UploadService {
@@ -63,7 +61,7 @@ public class UploadService {
 //		}
 //	}
 	
-	public void uploadMosaicUrl(String clientMosaic, String mosaicPath) {
-		FileTransferer.uploadImageFile(DataURLConverter.toByteArray(clientMosaic), mosaicPath);
+	public void uploadMosaicUrl(DataURL dataURL, String mosaicPath) {
+		FileTransferer.uploadImageFile(dataURL.toByteArray(), mosaicPath);
 	}
 }
