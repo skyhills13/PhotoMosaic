@@ -126,7 +126,11 @@
 		}
 		
 		for (var idx = 0; idx < images.length; idx++) {
-			formData.append("photos", images[idx]["file"]);
+			formData.append("photos", images[idx].originalFile);
+			formData.append("resizedDataURLs", JSON.stringify({
+				"fileName": images[idx].fileName,
+				"dataURL": images[idx].resizedDataURL
+			}));
 		}
 		
 		formData.append("mosaic", currentMosaic.toDataURL("image/jpeg", 1));
@@ -263,8 +267,8 @@
 						}
 					})(thumbArea));
 					
-					images.push({"eleThumbArea": thumbArea, "file": file});
-					//images.push({"eleThumbArea": thumbArea, "file": url});
+					//images.push({"eleThumbArea": thumbArea, "file": file});
+					images.push({"originalFile": file, "fileName": file.name, "resizedDataURL": url});
 				});
 			}
 			
