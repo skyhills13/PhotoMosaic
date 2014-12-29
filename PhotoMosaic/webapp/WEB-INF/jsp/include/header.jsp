@@ -5,7 +5,7 @@
 <link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 <header>
 	<div id="headerWrapper">
-		<a><button>
+		<a href="/"><button>
 				<span class="logo">PHOTO MOSAIC</span>
 			</button></a> <a href="/"><button>
 				<span>MAKE</span>

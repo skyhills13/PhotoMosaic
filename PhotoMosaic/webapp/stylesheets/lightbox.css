@@ -213,7 +213,7 @@ section.previous div img {
 	position: absolute;
 	z-index: 999999;
 	width: 100%;
-	bottom: 100%;
+	bottom: 20%;
 	left: 0px;
 	-webkit-transition : bottom 0.4s;
 }
@@ -228,13 +228,13 @@ section.previous div img {
 }
 
 .lightBox.slide div section.preset div::before{
-	color : RGBA(255,255,255,1);
-	font-size : 3em;
+	color : RGBA(255,255,255,0.7);
+	font-size : 2em;
 	font-weight : 800;
 	font-family: 'Lato', sans-serif;
-	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+	text-shadow : 4px 4px 0px RGBA(0,0,0,0.2);
+	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
 }
-
 
 .lightBox.slide div section.preset div:hover::before{
 	color : RGBA(255,255,255,1);
@@ -242,6 +242,7 @@ section.previous div img {
 	font-weight : 800;
 	font-family: 'Lato', sans-serif;
 	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
 }
 
 .lightBox.slide div section.preset div:hover img {
@@ -262,7 +263,7 @@ section.previous div img {
 	position: absolute;
 	z-index: 999999;
 	width: 100%;
-	top : 100%;
+	top : 20%;
 	left: 0px;
 	-webkit-transition : top 0.4s;
 }
