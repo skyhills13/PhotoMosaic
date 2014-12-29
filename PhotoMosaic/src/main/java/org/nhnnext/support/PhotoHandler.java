@@ -13,6 +13,7 @@ import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
 import org.nhnnext.domains.table.Photo;
+import org.nhnnext.support.file.FileDataHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -104,7 +105,7 @@ public class PhotoHandler {
 		Dimension photoDimension = getImageDimension(mosaicId, file.getOriginalFilename());
 		
 		/*insert file information into the database*/
-		String newUniqueId = StringHandler.getNewUniqueId(mosaicUrl, UploadHandler.getFileExtension(file));
+		String newUniqueId = StringHandler.getNewUniqueId(mosaicUrl, FileDataHandler.getFileExtension(file));
 		
 		Photo newPhoto = new Photo(newUniqueId, file.getOriginalFilename(), photoDimension, mosaicId);
 		newPhoto.setOrientation(PhotoHandler.judgePhotoOrientation(photoDimension));

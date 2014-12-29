@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import sun.misc.BASE64Decoder;
 
-public class DataConverter {
-	private static final Logger logger = LoggerFactory.getLogger(DataConverter.class);
+public class DataURLConverter {
+	private static final Logger logger = LoggerFactory.getLogger(DataURLConverter.class);
 
 	public static byte[] convertDataUrlToImg(String dataUrl) {
 		String imageDataBytes = dataUrl.substring(dataUrl.indexOf(",") + 1);

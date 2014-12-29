@@ -84,7 +84,11 @@
 		}
 		
 		for (var idx = 0; idx < images.length; idx++) {
-			formData.append("photos", images[idx]["file"]);
+			formData.append("photos", images[idx].originalFile);
+			formData.append("resizedDataURLs", JSON.stringify({
+				"fileName": images[idx].fileName,
+				"dataURL": images[idx].resizedDataURL
+			}));
 		}
 		
 		var layout = makeLayout();
@@ -96,6 +100,7 @@
 		
 		request.addEventListener("load", function() {
 			var mosaicUrl = request.responseText;
+			console.log("mosaicURL: " + mosaicUrl);
 			var regExp = new RegExp("\\b" + "DOCTYPE" + "\\b");
 			if (mosaicUrl.search(regExp) > -1) {
 				console.error("UPLOAD: Error! Response is not valid");

@@ -30,7 +30,7 @@ public class PhotoController {
 	private MosaicService mosaicService;
 	
 	@RequestMapping(value = "/photo", method = RequestMethod.POST)
-    public @ResponseBody String uploadMosaic(@RequestParam("photos") MultipartFile[] files, 
+    public @ResponseBody String uploadPhotosAndMosaicInClient(@RequestParam("photos") MultipartFile[] files, 
     		@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs, HttpSession session) throws IOException {
 
 		/* 2014.12.21 Poppy
@@ -45,18 +45,17 @@ public class PhotoController {
 		List<DataURL> dataURLs = new ArrayList<DataURL>();
 		for (String resizedDataUrl : resizedDataURLs) {
 			logger.debug(resizedDataUrl.substring(0, 80) + "...");
-			// TODO json을 파싱해서 dataURL의 value를 MultipartFile로 변경하는 로직 수행 하면 되지 않을까?
 			dataURLs.add(gson.fromJson(resizedDataUrl, DataURL.class));
 		}
 
-		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session);
+		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session, resizedDataURLs);
         return url;
     }
 	@RequestMapping(value = "/photoServer", method = RequestMethod.POST)
-	public @ResponseBody String uploadServerMosaic(@RequestParam("photos") MultipartFile[] files, 
-			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, HttpSession session) throws IOException {
+	public @ResponseBody String uploadPhotosAndMosaicInServer(@RequestParam("photos") MultipartFile[] files, 
+			@RequestParam("title") String title, @RequestParam("comment") String comment, @RequestParam("mosaic") String clientMosaic, @RequestParam("resizedDataURLs") String[] resizedDataURLs, HttpSession session) throws IOException {
 		logger.debug("server upload method");
-		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session);
+		String url = mosaicService.createMosaicInServer(files, title, comment, clientMosaic, session, resizedDataURLs);
 		return url;
 	}
 

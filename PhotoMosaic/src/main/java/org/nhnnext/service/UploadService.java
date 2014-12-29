@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.table.Mosaic;
 import org.nhnnext.domains.table.Photo;
-import org.nhnnext.library.DataConverter;
+import org.nhnnext.library.DataURLConverter;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
-import org.nhnnext.support.UploadHandler;
-import org.nhnnext.utility.FileUploader;
+import org.nhnnext.support.file.FileDataHandler;
+import org.nhnnext.support.file.FileTransferer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class UploadService {
 				return null;
 			}
 			/* file upload to the server */
-			UploadHandler.upload(mosaic, file);
+			FileTransferer.uploadMultipartFile(mosaic, file);
 			
 			/* get the information of the photo */
 			try {
@@ -46,7 +46,7 @@ public class UploadService {
 			} catch (IOException e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
-			UploadHandler.renameAsUnique(mosaic, photos[i]);
+			FileDataHandler.renameAsUnique(mosaic, photos[i]);
 
 			photoDao.upload(photos[i]);
 			logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE
@@ -64,6 +64,6 @@ public class UploadService {
 //	}
 	
 	public void uploadMosaicUrl(String clientMosaic, String mosaicPath) {
-		FileUploader.uploadImageFile(DataConverter.convertDataUrlToImg(clientMosaic), mosaicPath);
+		FileTransferer.uploadImageFile(DataURLConverter.convertDataUrlToImg(clientMosaic), mosaicPath);
 	}
 }
