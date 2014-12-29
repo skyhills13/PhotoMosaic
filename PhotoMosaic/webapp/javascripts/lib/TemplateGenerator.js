@@ -262,9 +262,13 @@ var TemplateGenerator = (function(){
 		
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
-				_sections.push(new Section(col + 1, row + 1));
+				if ((col + 1) * (row + 1) < _width * _height / 2) {
+					_sections.push(new Section(col + 1, row + 1));
+				}
 			}
 		}
+		
+		console.log(_sections);
 		
 		_unitData = [];
 		_suitableTemplates = [];
@@ -306,6 +310,9 @@ var TemplateGenerator = (function(){
 		// main logic
 		for (var row = 0; row < _height; row++) {
 			for (var col = 0; col < _width; col++) {
+				if (row * _width + col >= _sections.length) {
+					break;
+				}
 				// 1. 생성 가능한 모든 section에 대해
 				var section = _sections[row * _width + col];
 

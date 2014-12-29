@@ -73,7 +73,9 @@
 	<script src="/javascripts/lib/MultiFileHandler.js?20141112"></script>
 	<script src="/javascripts/lib/PhotoCombine.js"></script>
 	<script src="/javascripts/lib/TemplateGenerator.js"></script>
-	<script src="/javascripts/select.js?20141112"></script>
+	<script src="/javascripts/select_worker.js"></script>
+	<script src="/javascripts/select_main.js?20141112"></script>
+	
 
 </body>
 

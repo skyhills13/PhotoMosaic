@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,49 @@
 </head>
 <body>
 	<div id="lightBoxWrapper">
+		<article class="lightbox represent show">
+			<input type="button" value="X" class="showingHandler">
+			<section class="info">
+				<h1>
+					<c:choose>
+						<c:when test="${mosaic.title!=null}">
+							${mosaic.title}
+						</c:when>
+						<c:otherwise>
+							cannot find title
+						</c:otherwise>
+					</c:choose>
+				</h1>
+				<c:choose>
+					<c:when test="${mosaic.fileName!=null}">
+						<img class="mosaic" src="/images/${mosaic.id}/${mosaic.fileName}" />
+					</c:when>
+					<c:otherwise>
+						<img class="mosaic" src="/images/button/no_image_thumb.gif" />
+					</c:otherwise>
+				</c:choose>
+			</section>
+		</article>
+		
+		<article class="lightbox slide hide">
+			<input type="button" value="X" class="showingHandler">
+			<section>
+				<div class="previous preset">
+					<div><img class="original" src=""/></div>
+				</div>
+				<div class="currnet">
+					<div><img class="original" src=""/></div>
+				</div>
+				<div class="next preset">
+					<div><img class="original" src=""/></div>
+				</div>
+			</section>
+			<nav>
+				<div></div>
+				<input type="range" min="0" max="${fn:length(mosaic.getPhotos())-1}">
+			</nav>
+		</article>
+	
 	</div>
 	<div id="header">
 	<jsp:include page="../include/header.jsp" flush="false" />
