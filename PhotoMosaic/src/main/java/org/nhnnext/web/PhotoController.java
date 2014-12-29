@@ -37,6 +37,7 @@ public class PhotoController {
 		for (String json : resizedDataURLs) {
 			logger.debug(json.substring(0, 80) + "...");
 			// TODO json을 파싱해서 dataURL의 value를 MultipartFile로 변경하는 로직 수행 하면 되지 않을까?
+			
 		}
 		String url = mosaicService.createMosaicInClient(files, title, comment, clientMosaic, session);
         return url;

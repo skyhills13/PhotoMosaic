@@ -1,16 +1,15 @@
 package org.nhnnext.service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.nhnnext.dao.PhotoDao;
 import org.nhnnext.domains.Mosaic;
 import org.nhnnext.domains.Photo;
+import org.nhnnext.library.DataConverter;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.UploadHandler;
+import org.nhnnext.utility.FileUploader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,43 +64,6 @@ public class UploadService {
 //	}
 	
 	public void uploadMosaicUrl(String clientMosaic, String mosaicPath) {
-		uploadImageFile(convertDataUrlToImg(clientMosaic), mosaicPath);
-	}
-	
-
-	private byte[] convertDataUrlToImg(String dataUrl){
-		String imageDataBytes = dataUrl.substring(dataUrl.indexOf(",") + 1);
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] bytes = null;
-		try {
-			bytes = decoder.decodeBuffer(imageDataBytes);
-		} catch (IOException e) {
-			logger.debug("convertDataUrlToImage error" + e.getMessage());
-		}
-		return bytes;
-		
-		// TODO Resource leak: 'osf' is never closed 경고 뜸.
-	}
-	
-	private void uploadImageFile(byte[] bytes, String destinationPath) {
-		File of = new File(destinationPath);
-		FileOutputStream osf = null;
-		try {
-			osf = new FileOutputStream(of);
-			try {
-				osf.write(bytes);
-				osf.flush();
-			} catch (IOException e) {
-				logger.debug("osf write, flush" + e.getMessage());
-			} finally {
-				try {
-					osf.close();
-				} catch (IOException e) {
-					logger.debug("error" + e.getMessage());
-				}
-			}
-		} catch (FileNotFoundException e) {
-			logger.debug("error" + e.getMessage());
-		}
+		FileUploader.uploadImageFile(DataConverter.convertDataUrlToImg(clientMosaic), mosaicPath);
 	}
 }
