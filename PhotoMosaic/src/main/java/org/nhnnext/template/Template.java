@@ -53,8 +53,8 @@ public enum Template {
 	//7
 	STRATEGY_23 (7, Orientation.LANDSCAPE, new Integer[]{2, 2, 3}),
 	//8
-	STRATEGY_24 (8, Orientation.LANDSCAPE, new Integer[]{1, 2, 3, 2}),
-	STRATEGY_25 (8, Orientation.LANDSCAPE, new Integer[]{1, 3, 3, 1}),
+//	STRATEGY_24 (8, Orientation.LANDSCAPE, new Integer[]{1, 2, 3, 2}),
+//	STRATEGY_25 (8, Orientation.LANDSCAPE, new Integer[]{1, 3, 3, 1}),
 	STRATEGY_26 (8, Orientation.LANDSCAPE, new Integer[]{3, 3, 2});
 	
 	private TemplateFrameList templateFrameList;
@@ -124,6 +124,9 @@ public enum Template {
 	
 	public static Template getRandomTemplate(int photoNumber, Orientation targetOrientation) {
 		ArrayList<Template> tempList = new ArrayList<Template>();
+		if(photoNumber > 8) {
+			photoNumber = 8;
+		}
 		tempList.addAll(strategyStorage.get(photoNumber).get(targetOrientation));
 		Collections.shuffle(tempList);
 		
