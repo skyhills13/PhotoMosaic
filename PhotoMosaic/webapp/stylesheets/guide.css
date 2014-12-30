@@ -6,12 +6,18 @@
 	z-index : 10;
 	background : RGBA(40,40,40,1);
 	height : 100px;
+	transition : bottom 0.4s;
 	-webkit-transition : bottom 0.4s;
+	-moz-transition : bottom 0.4s;
+	-o-transition : bottom 0.4s;
 }
 
 #example:hover {
 	bottom : 0px;
-	-webkit-transition : bottom 0.4s;		
+	transition : bottom 0.4s;
+	-webkit-transition : bottom 0.4s;
+	-moz-transition : bottom 0.4s;
+	-o-transition : bottom 0.4s;
 }
 
 #example::after {

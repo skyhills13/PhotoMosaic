@@ -135,7 +135,6 @@ function UTIL(){
 		
 		adjustArrayWithSpecificLength : function(array, toGetLen){
 			var curLen = array.length;
-			console.log(curLen, toGetLen);
 			if(curLen > toGetLen){
 				var removeLen = curLen - toGetLen;
 				return array.slice(removeLen);

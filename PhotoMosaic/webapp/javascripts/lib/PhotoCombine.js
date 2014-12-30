@@ -15,14 +15,25 @@
 	
 	PhotoCombine.prototype = {
 		create : function(photoArray, templateSpec, id) {
+			console.log("---------------------------------------------");
+			console.log("PhotoGenerator 시작");
+			console.log("1) TemplateGenerator로 부터 템플릿을 받아온다.");
+			console.log(templateSpec.template);
 			var c = CombineHelper;
 			templateSpec.length = c.TEMPLATE.getTemplateLength(templateSpec.template);
-			var sortedPhoto = this.setPhoto(photoArray, templateSpec.length);
 			var canvas = this.setCanvas(id, templateSpec);
 			var board = c.TEMPLATE.makeMosaicBoard(templateSpec, canvas);
+			console.log("2) 실제로 캔버스에 그려질 위치와 크기를 가진 object를 생성한다.");
+			console.log(board);
+			var sortedPhoto = this.setPhoto(photoArray, templateSpec.length);
+			console.log("3) 사진 n장을 랜덤으로 선택한다.");
+			console.log(sortedPhoto);
 			var type = this.isOptimizing ? "Optimize" : "Order";
 			var linker = c.LINK["with" + type](board, sortedPhoto);
-			return c.MERGE.linkerInCanvas(canvas, linker);
+			console.log("4) 사진과 object를 비교하면서 가장 적당한 곳에 캔버스에 합친다.");
+			var mergedCanvas = c.MERGE.linkerInCanvas(canvas, linker); 
+			console.log(mergedCanvas);
+			return mergedCanvas;
 		},
 
 		setPhoto : function(photoArray, length) {

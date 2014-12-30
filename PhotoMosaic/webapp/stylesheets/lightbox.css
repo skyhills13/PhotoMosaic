@@ -62,12 +62,26 @@ font-family: 'Shadows Into Light', cursive;
 	color: RGBA(255, 255, 255, 1);
 	font-size: 25px;
 	border-radius : 50%;
+	
+	transform : rotate(0deg);
+	transition : transform 0.4s, background 0.4s, color 0.4s;
+	
 	-webkit-transform : rotate(0deg);
 	-webkit-transition : transform 0.4s, background 0.4s, color 0.4s;
+	
+	-moz-transform : rotate(0deg);
+	-moz-transition : transform 0.4s, background 0.4s, color 0.4s;
+	
+	-o-transform : rotate(0deg);
+	-o-transition : transform 0.4s, background 0.4s, color 0.4s;
+	
 }
 
 .lightBox input[type='button']:hover {
+	transform : rotate(180deg);
 	-webkit-transform : rotate(180deg);
+	-moz-transform : rotate(180deg);
+	-o-transform : rotate(180deg);
 	background: RGBA(255,255,255,0.8);
 	color: RGBA(0,0,0, 1);
 }
@@ -215,7 +229,10 @@ section.previous div img {
 	width: 100%;
 	bottom: 20%;
 	left: 0px;
+	transition : bottom 0.4s;
 	-webkit-transition : bottom 0.4s;
+	-o-transition : bottom 0.4s;
+	-moz-transition : bottom 0.4s;
 }
 
 .lightBox.slide div section.previous div:hover::before {
@@ -229,7 +246,10 @@ section.previous div img {
 
 
 .lightBox.slide div section.preset div:hover img {
+	filter: grayscale(100%);
 	-webkit-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
 }
 
 .lightBox.slide div section.next div:hover::before {
@@ -248,7 +268,10 @@ section.previous div img {
 	width: 100%;
 	top : 20%;
 	left: 0px;
+	transition : top 0.4s;
 	-webkit-transition : top 0.4s;
+	-moz-transition : top 0.4s;
+	-o-transition : top 0.4s;
 }
 
 .lightBox.slide div section.preset div::before{
@@ -257,7 +280,10 @@ section.previous div img {
 	font-weight : 800;
 	font-family: 'Lato', sans-serif;
 	text-shadow : 4px 4px 0px RGBA(0,0,0,0.2);
+	transition : text-shadow 0.4s, font-size 0.4s;
 	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
+	-o-transition : text-shadow 0.4s, font-size 0.4s;
+	-moz-transition : text-shadow 0.4s, font-size 0.4s;
 }
 
 .lightBox.slide div section.preset div:hover::before{
@@ -266,7 +292,10 @@ section.previous div img {
 	font-weight : 800;
 	font-family: 'Lato', sans-serif;
 	text-shadow : 4px 4px 0px RGBA(0,0,0,1);
+	transition : text-shadow 0.4s, font-size 0.4s;
 	-webkit-transition : text-shadow 0.4s, font-size 0.4s;
+	-o-transition : text-shadow 0.4s, font-size 0.4s;
+	-moz-transition : text-shadow 0.4s, font-size 0.4s;
 }
 
 .lightBox.slide nav {
@@ -303,16 +332,38 @@ section.previous div img {
 
 .lightBox.slide nav input[type="range"] {
 	-webkit-appearance: none;
+	-o-appearance: none;
+	-moz-appearance: none;
 	position: absolute;
 	width: 480px;
 	height: 10px;
 	background: none;
 	border: 40px solid RGBA(0, 0, 0, 0);
+	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
 }
 
 .lightBox.slide nav input[type="range"]:focus {
 	outline: none;
+}
+
+
+.lightBox.slide nav input[type="range"]::-ms-thumb{
+	background: RGBA(255,255,255,1);
+	height: 20px;
+	width: 20px;
+	box-shadow: 0px 0px 1px 1px RGBA(80, 80, 80, 0.9);
+	transition: height 0.5s, width 0.5s;
+}
+
+.lightBox.slide nav input[type="range"]::-moz-range-thumb{
+	background: RGBA(255,255,255,1);
+	height: 20px;
+	width: 20px;
+	box-shadow: 0px 0px 1px 1px RGBA(80, 80, 80, 0.9);
+	-moz-transition: height 0.5s, width 0.5s;
 }
 
 .lightBox.slide nav input[type="range"]::-webkit-slider-thumb {
