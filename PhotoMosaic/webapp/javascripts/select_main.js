@@ -133,7 +133,7 @@
 		for (var idx = 0; idx < images.length; idx++) {
 			formData.append("photos", images[idx].originalFile);
 			formData.append("resizedDataURLs", JSON.stringify({
-				"fileName": images[idx].fileName,
+				"fileName": images[idx].fileName.substr(0, images[idx].fileName.lastIndexOf(".")) + ".jpg",
 				"dataURL": images[idx].resizedDataURL
 			}));
 		}
