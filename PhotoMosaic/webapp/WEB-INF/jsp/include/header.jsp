@@ -6,7 +6,7 @@
 <header>
 	<div id="headerWrapper">
 		<a href="/"><button>
-				<span class="logo">PHOTO MOSAIC</span>
+				<span class="logo">PPOMO</span>
 			</button></a> <a href="/"><button>
 				<span>MAKE</span>
 			</button></a>
