@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sign In</title>
+<title>로그인 하기</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
 
@@ -17,9 +17,10 @@
 <body>
 	<jsp:include page="./include/header.jsp" flush="false" />
 	<article>
+		<div>
 		<section class="welcome">
 			<p>
-				<span> pleased to meet you </span>
+				<span>내가 만든 모자이크를 확인하기 위해서는 로그인 해주세요.</span>
 			</p>
 		</section>
 
@@ -43,6 +44,7 @@
 			</div>
 			<button type="submit">SIGN IN</button>
 		</form:form>
+		</div>
 	</article>
 </body>
 </html>

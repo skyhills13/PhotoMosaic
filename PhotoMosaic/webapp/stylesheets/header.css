@@ -6,165 +6,157 @@
 /*Magnesium RGBA(180, 180, 180, 1)*/
 
 /*font-family: 'Lato', sans-serif;*/
-@import url(http://fonts.googleapis.com/css?family=Lato:100,400);
-
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic,700italic,900italic);
 header {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	z-index: 9999;
+	z-index: 995;
 	width: 100%;
-	min-width : 450px;
-	height: 60px;
-	background: RGBA(10, 10, 10, 0.8);
-	border-bottom : RGBA(10, 10, 10, 0.8);
-	/* box-shadow: 0px 2px 5px RGBA(10, 10, 10, 0.3); */
-	text-align : center;
-}
-
-header a {
-	/* float: right; */
-	text-align: center;
-	-webkit-transition: background-color 0.3s;
-	   -moz-transition: background-color 0.3s;
-	        transition: background-color 0.3s;
-	height : 50px;
-}
-
-header a button {
-	margin-top : 5px;
-	height: 80%;
-	min-width :130px;
-	display: inline-block;
-	font-size: 18px;
-	color: RGBA(255, 255, 255, 0.6);
-	border : none;
-	letter-spacing : 2px;
-	background : none;
-	font-family: 'Lato', sans-serif;
-	font-weight: 100;
-	cursor: pointer;
-}
-
-header a button:hover {
-	background : RGBA(54, 117, 199, 0.8);
-	-webkit-transition : background 0.3s;
-	   -moz-transition : background 0.3s;
-	        transition : background 0.3s;
-}
-
-
-header a button:focus{
-	outline : none;
-}
-header a:focus{
-	outline : none;
-}
-/*make*/
-header a:nth-child(1) {
-	/* float: left; */
-	
-}
-
-header a:nth-child(1) button {
-/* 	border : 1px solid RGBA(54, 117, 199, 0.8);
- */}
-
-/*sign in*/
-header a:nth-child(2) {
-	
-}
-
-/*sign up*/
-header a:nth-child(3) {
-/* 	border-left : 1px solid RGBA(54, 117, 199, 0.8);
-	border-right : 1px solid RGBA(54, 117, 199, 0.8);
- */}
-
-
-
-
-
-
-
-/* result 페이지에 적용된 header */
-
-header {
-	/* background : RGBA(54, 117, 199, 1); */
-	/* background : RGBA(194, 216, 237, 1); */
-	background : RGBA(255,255,255,1);
-	/* background : RGBA(10, 10, 10, 1); */
-	border-bottom: 1px solid RGBA(10, 10, 10, 0.8);
-	/* box-shadow : 0px 1px 1px 1px RGBA(0, 0, 0, 0.8); */
-	height : 50px;
-	-webkit-transition : height 0.2s;
-	   -moz-transition : height 0.2s;
-	        transition : height 0.2s;
+	min-width : 600px;
+	height: 40px;
+	background: RGBA(255,255,255,1);
+	border-bottom : 1px solid RGBA(10,10,10,1);
+	transition : height 0.4s;
+	-webkit-transition : height 0.4s;
+	-moz-transition : height 0.4s;
+	-o-transition : height 0.4s;
 }
 
 header:hover {
-	height : 70px;
+	height : 60px;
+	transition : height 0.4s;
+	-webkit-transition : height 0.4s;
+	-moz-transition : height 0.4s;
+	-o-transition : height 0.4s;
 }
 
-header a {
+header #headerWrapper {
 	position: relative;
-	top: 0px;
-	left: 0px;
+	top : 0px;
+	left : 0px;
+	z-index: 996;
+	width : 100%;
+	height : 100%;
+	min-width : 600px;
+	max-width : 900px;
+	margin : auto;
+	font-family : none;
 }
 
-header a button {
-	color: RGBA(10, 10, 10, 0.8);
-	position: relative;
-	top: 0px;
-	left: 0px;
+#headerWrapper a {
+	height : 100%;
 }
 
-header a button:hover {
-	background: none;
+#headerWrapper button{
+	border : none;
+	background : none;
+	height : 100%;
+	outline : none;
 }
 
-header a button span {
-	/* color: RGBA(255, 255, 255, 0.8); */
-	color: RGBA(10, 10, 10, 0.7);
-	display: inline-block;
-	width: initial;
-	font-weight : 400;
+#headerWrapper div a {
+	height : 100%;
+}
+
+#headerWrapper a button span{
+	font-weight: 300;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+	transition : text-shadow 0.4s;
+	-webkit-transition : text-shadow 0.4s;
+	-moz-transition : text-shadow 0.4s;
+	-o-transition : text-shadow 0.4s;
+	text-shadow: 0px 0px RGBA(0,0,0,0);
+}
+
+#headerWrapper a:hover button span{
+	text-shadow: 2px 2px RGBA(0,0,0,0.15);
+	transition : text-shadow 0.4s;
+	-webkit-transition : text-shadow 0.4s;
+	-moz-transition : text-shadow 0.4s;
+	-o-transition : text-shadow 0.4s;
+}
+
+#headerWrapper span.logo{
+	font-weight: 900;
 	letter-spacing: -1px;
-	position: relative;
-	top: 0px;
-	left: 0px;
-	text-shadow: 0px 0px 1px RGBA(255, 255, 255, 0.2);
-	-webkit-transition: text-shadow 0.5s;
-	   -moz-transition: text-shadow 0.5s;
-	        transition: text-shadow 0.5s;
 }
 
-header a button span::before {
-	margin: auto;
-	content: "";
-	width: 0%;
-	height: 2px;
-	position: absolute;
-	bottom: -6px;
-	left: 50%;
-	background-color: RGBA(10, 10, 10, 0.7);
+#headerWrapper div.existUser{
+	width : 150px;
+	height : 100%;
+	position : absolute;
+	top : 0px;
+	right : 0px;
+	text-align : center;
+	z-index : 990;
+	background-color : RGBA(255,255,255,1);
 }
 
-header a button:hover span {
-	text-shadow: 0px 0px 10px RGBA(255, 255, 255, 1);
+#headerWrapper div.existUser button:nth-child(1){
+	font-size : 15px;
+	font-weight : 100;
+	font-style : italic;
+	width : 100%;
+	background-color : RGBA(255,255,255,1);
 }
 
-header a button:hover span::before {
-	margin: auto;
-	content: "";
-	width: 100%;
-	height: 2px;
-	position: absolute;
-	bottom: -6px;
-	left: 0px;
-	background-color: RGBA(10, 10, 10, 1);
-	-webkit-transition: width 0.5s, left 0.5s;
-	   -moz-transition: width 0.5s, left 0.5s;
-	        transition: width 0.5s, left 0.5s;
+#headerWrapper div.existUser:hover .popUpBox{
+	top : 59px;
+	transition : top 0.4s;
+	-moz-transition : top 0.4s;
+	-o-transition : top 0.4s;
+	-webkit-transition : top 0.4s;
 }
+
+#headerWrapper div.existUser .popUpBox{
+	z-index : -1000;
+	width : 100%;
+	position : absolute;
+	top : -45px;
+	right : 0px;
+	height : 80px;
+	-webkit-transition : top 0.4s;
+	transition : top 0.4s;
+	-moz-transition : top 0.4s;
+	-o-transition : top 0.4s;
+}
+
+#headerWrapper div.existUser .popUpBox a{
+	width : 100%;
+	height : 40px;
+	display : block;
+}
+
+#headerWrapper div.existUser .popUpBox a:nth-child(1) button{
+	background-color : RGBA(245,245,245,1);
+}
+
+#headerWrapper div.existUser .popUpBox a:nth-child(2) button{
+	background-color : RGBA(250,250,250,1);
+}
+
+#headerWrapper div.existUser:hover .popUpBox a:hover button{
+	background-color : RGBA(100,100,100,1);
+}
+#headerWrapper div.existUser:hover .popUpBox a:hover button span{
+	text-shadow: 2px 2px RGBA(0,0,0,0);
+	color : RGBA(255,255,255,1);
+}
+
+
+#headerWrapper div.noneUser {
+	width : 180px;
+	height : 100%;
+	position : absolute;
+	top : 0px;
+	right : 0px;
+	text-align : center;
+	z-index : 990;
+	background-color : RGBA(255,255,255,1);
+}
+
+
+
 

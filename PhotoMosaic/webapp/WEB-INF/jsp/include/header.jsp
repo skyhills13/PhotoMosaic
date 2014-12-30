@@ -4,19 +4,42 @@
 
 <link type="text/css" rel="stylesheet" href="/stylesheets/header.css" />
 <header>
-	<a href="/"><button><span>MAKE</span></button></a>
-	<c:choose>
-		<c:when test="${empty sessionScope.email}">
-			<a href="/loginform">
-				<button><span>SIGN IN</span></button></a>
-			<a href="/form">
-				<button><span>SIGN UP</span></button></a>
-		</c:when>
-		<c:otherwise>
-			<a href="/album/${sessionScope.userId}">
-				<button><span>${sessionScope.email}</span></button></a>
-			<a href="/logout">
-				<button><span>SIGN OUT</span></button></a>
-		</c:otherwise>
-	</c:choose>
+	<div id="headerWrapper">
+		<a href="/"><button>
+				<span class="logo">PHOTO MOSAIC</span>
+			</button></a> <a href="/"><button>
+				<span>MAKE</span>
+			</button></a>
+		<c:choose>
+			<c:when test="${empty sessionScope.email}">
+				<div class="noneUser">
+					<a href="/loginform">
+						<button>
+							<span>SIGN IN</span>
+						</button><!--  --></a>
+					<a href="/form">
+						<button>
+							<span>SIGN UP</span>
+						</button>
+					</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="existUser">
+					<button>${sessionScope.email}</button>
+					<div class="popUpBox">
+						<a href="/album/${sessionScope.userId}">
+							<button>
+								<span>MY ALBUM</span>
+							</button>
+						</a> <a href="/logout">
+							<button>
+								<span>SIGN OUT</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </header>
