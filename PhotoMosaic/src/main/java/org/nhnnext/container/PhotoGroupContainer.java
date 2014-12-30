@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domain.table.Mosaic;
 import org.nhnnext.instance.MergeInstance;
 import org.nhnnext.support.MosaicHandler;
 import org.nhnnext.support.Orientation;

@@ -1,6 +1,6 @@
 package org.nhnnext.web;
 
-import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domain.table.Mosaic;
 import org.nhnnext.service.MosaicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

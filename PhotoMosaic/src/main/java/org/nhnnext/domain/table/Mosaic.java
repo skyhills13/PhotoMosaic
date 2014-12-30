@@ -1,4 +1,4 @@
-package org.nhnnext.domains.table;
+package org.nhnnext.domain.table;
 
 import java.sql.Timestamp;
 import java.util.Arrays;

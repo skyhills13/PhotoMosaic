@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import org.nhnnext.domains.table.Mosaic;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.table.Mosaic;
+import org.nhnnext.domain.table.Photo;
 import org.nhnnext.instance.MergeInstance;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.MosaicHandler;

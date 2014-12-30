@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.List;
 
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.domains.support.DataURL;
-import org.nhnnext.domains.table.Mosaic;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.support.DataURL;
+import org.nhnnext.domain.table.Mosaic;
+import org.nhnnext.domain.table.Photo;
 import org.nhnnext.support.Constants;
 import org.nhnnext.support.PhotoHandler;
 import org.nhnnext.support.file.FileDataHandler;

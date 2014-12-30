@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.table.Photo;
 import org.springframework.jdbc.core.RowMapper;
 
 public class PhotoDao extends DaoTemplate{

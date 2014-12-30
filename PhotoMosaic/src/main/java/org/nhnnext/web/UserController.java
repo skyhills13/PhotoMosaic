@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.nhnnext.dao.UserDao;
-import org.nhnnext.domains.table.User;
+import org.nhnnext.domain.table.User;
 import org.nhnnext.support.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

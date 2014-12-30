@@ -1,4 +1,4 @@
-package org.nhnnext.domains.support;
+package org.nhnnext.domain.support;
 
 import java.io.File;
 import java.io.IOException;

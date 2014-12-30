@@ -12,9 +12,9 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
-import org.nhnnext.domains.support.DataURL;
-import org.nhnnext.domains.table.Mosaic;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.support.DataURL;
+import org.nhnnext.domain.table.Mosaic;
+import org.nhnnext.domain.table.Photo;
 import org.nhnnext.support.file.FileDataHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

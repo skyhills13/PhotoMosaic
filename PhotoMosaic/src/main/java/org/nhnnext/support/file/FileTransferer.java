@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.nhnnext.domains.table.Mosaic;
+import org.nhnnext.domain.table.Mosaic;
 import org.nhnnext.support.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

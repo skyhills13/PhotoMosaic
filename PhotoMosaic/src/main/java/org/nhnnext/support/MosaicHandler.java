@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.nhnnext.domains.table.Mosaic;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.table.Mosaic;
+import org.nhnnext.domain.table.Photo;
 import org.nhnnext.instance.MergeInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

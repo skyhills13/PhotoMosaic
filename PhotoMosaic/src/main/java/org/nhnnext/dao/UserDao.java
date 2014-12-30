@@ -3,7 +3,7 @@ package org.nhnnext.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.nhnnext.domains.table.User;
+import org.nhnnext.domain.table.User;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 

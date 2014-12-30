@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nhnnext.dao.PhotoDao;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.table.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

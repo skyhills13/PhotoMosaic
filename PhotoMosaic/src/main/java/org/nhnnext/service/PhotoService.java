@@ -2,7 +2,7 @@ package org.nhnnext.service;
 
 import java.util.List;
 
-import org.nhnnext.domains.support.DataURL;
+import org.nhnnext.domain.support.DataURL;
 import org.springframework.stereotype.Service;
 
 @Service

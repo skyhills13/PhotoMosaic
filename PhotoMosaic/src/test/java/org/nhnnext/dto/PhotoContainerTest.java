@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.nhnnext.container.PhotoContainer;
-import org.nhnnext.domains.table.Photo;
+import org.nhnnext.domain.table.Photo;
 
 public class PhotoContainerTest {
 

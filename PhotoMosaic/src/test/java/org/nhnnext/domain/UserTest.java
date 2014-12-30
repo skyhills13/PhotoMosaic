@@ -1,4 +1,4 @@
-package org.nhnnext.domains;
+package org.nhnnext.domain;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.nhnnext.domains.table.User;
+import org.nhnnext.domain.table.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

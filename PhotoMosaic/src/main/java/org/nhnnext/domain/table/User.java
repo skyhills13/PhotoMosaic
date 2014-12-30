@@ -1,4 +1,4 @@
-package org.nhnnext.domains.table;
+package org.nhnnext.domain.table;
 
 import javax.validation.constraints.Size;
 
