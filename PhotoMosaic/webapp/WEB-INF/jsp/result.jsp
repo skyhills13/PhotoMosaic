@@ -11,10 +11,10 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/lightbox.css">
 <link rel="stylesheet" type="text/css" href="/stylesheets/Range2Range.css">
 <link rel="image_src" href="/images/${mosaic.id}/${mosaic.fileName}" />
-<meta name="title" content="PHOTO MOSAIC in NHN NEXT" />
+<meta name="title" content="PPOMO in NHN NEXT" />
 <meta name="description" content="make mosaic and share photo" />
 
-<title>${mosaic.title} :: PHOTO MOSAIC</title>
+<title>${mosaic.title} :: PPOMO</title>
 </head>
 <body>
 	<!-- light box 구간 -->
