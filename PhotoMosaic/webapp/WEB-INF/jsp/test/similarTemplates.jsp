@@ -70,6 +70,7 @@ window.addEventListener("load", function() {
 			objRatios[ratio]++;
 		}
 	}
+	console.log(objRatios);
 	
 	var suitableTemplates = templateGenerator.getSuitableTemplates(objRatios);
 	var tArray = suitableTemplates[parseInt(Math.random() * suitableTemplates.length)];
