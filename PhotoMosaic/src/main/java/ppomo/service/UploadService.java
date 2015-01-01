@@ -14,9 +14,9 @@ import ppomo.dao.PhotoDao;
 import ppomo.domain.support.DataURL;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
+import ppomo.exception.PhotoRenameFailureException;
 import ppomo.support.Constants;
 import ppomo.support.PhotoHandler;
-import ppomo.support.file.FileDataHandler;
 import ppomo.support.file.FileTransferer;
 
 @Service
@@ -43,10 +43,10 @@ public class UploadService {
 			
 			try {
 				photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, dataURL);
+				photos[i].renameAsUnique();
 			} catch (Exception e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
-			FileDataHandler.renameAsUnique(mosaic, photos[i]);
 
 			photoDao.upload(photos[i]);
 			logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE
@@ -74,10 +74,10 @@ public class UploadService {
 			/* get the information of the photo */
 			try {
 				photos[i] = PhotoHandler.getNewPhotoInstanceWithData(mosaic, file);
-			} catch (IOException e) {
+				photos[i].renameAsUnique();
+			} catch (IOException | PhotoRenameFailureException e) {
 				logger.debug("exception in uploadFiles of Mosaic Service : " + e.getMessage());
 			}
-			FileDataHandler.renameAsUnique(mosaic, photos[i]);
 
 			photoDao.upload(photos[i]);
 			logger.debug(Constants.UPLOAD_SUCCESS_MESSAGE

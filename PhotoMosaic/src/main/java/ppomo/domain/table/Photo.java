@@ -1,7 +1,12 @@
 package ppomo.domain.table;
 
 import java.awt.Dimension;
+import java.io.File;
 
+import com.sun.xml.internal.ws.api.client.ThrowableInPacketCompletionFeature;
+
+import ppomo.exception.PhotoRenameFailureException;
+import ppomo.support.Constants;
 import ppomo.support.Orientation;
 
 public class Photo {
@@ -129,5 +134,13 @@ public class Photo {
 
 	public void setOrientation(Orientation orientation) {
 		this.orientation = orientation;
+	}
+	
+	public void renameAsUnique() throws PhotoRenameFailureException{
+		File oldFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaicId + File.separator + originalFileName);
+		File newFile = new File(Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaicId + File.separator + uniqueId);
+		if(!oldFile.renameTo(newFile)){
+			throw new PhotoRenameFailureException();
+		}
 	}
 }
