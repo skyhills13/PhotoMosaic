@@ -11,10 +11,10 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.nhnnext.domain.table.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ppomo.domain.table.User;
 import static org.hamcrest.CoreMatchers.*;
 
 public class UserTest {

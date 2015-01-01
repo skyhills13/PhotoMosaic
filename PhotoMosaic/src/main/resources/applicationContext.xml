@@ -17,15 +17,15 @@
 		p:username ="${database.username}"
 		p:password="${database.password}" 
 	/>
-	<bean id="photoDao" class="org.nhnnext.dao.PhotoDao"
+	<bean id="photoDao" class="ppomo.dao.PhotoDao"
 		p:dataSource-ref="dataSource"
 	/>
 	
-	<bean id="mosaicDao" class="org.nhnnext.dao.MosaicDao"
+	<bean id="mosaicDao" class="ppomo.dao.MosaicDao"
 		p:dataSource-ref="dataSource"
 	/>
 	
-	<bean id="userDao" class="org.nhnnext.dao.UserDao"
+	<bean id="userDao" class="ppomo.dao.UserDao"
 		p:dataSource-ref="dataSource"
 	/>
 	

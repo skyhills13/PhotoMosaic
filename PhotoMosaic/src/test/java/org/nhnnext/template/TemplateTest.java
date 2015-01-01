@@ -3,7 +3,9 @@ package org.nhnnext.template;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.nhnnext.support.Orientation;
+
+import ppomo.support.Orientation;
+import ppomo.template.Template;
 
 public class TemplateTest {
 

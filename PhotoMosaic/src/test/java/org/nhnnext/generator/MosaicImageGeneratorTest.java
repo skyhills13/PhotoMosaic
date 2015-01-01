@@ -11,16 +11,18 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nhnnext.domain.table.Mosaic;
-import org.nhnnext.domain.table.Photo;
-import org.nhnnext.support.Constants;
-import org.nhnnext.support.MosaicHandler;
-import org.nhnnext.support.Orientation;
-import org.nhnnext.support.PhotoHandler;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import ppomo.domain.table.Mosaic;
+import ppomo.domain.table.Photo;
+import ppomo.generator.MosaicImageGenerator;
+import ppomo.support.Constants;
+import ppomo.support.MosaicHandler;
+import ppomo.support.Orientation;
+import ppomo.support.PhotoHandler;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
