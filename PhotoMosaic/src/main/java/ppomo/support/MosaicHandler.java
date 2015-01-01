@@ -9,15 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import ppomo.algorithm.instance.MergeInstance;
-import ppomo.domain.table.Mosaic;
-import ppomo.domain.table.Photo;
 
 @Component
 public class MosaicHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MosaicHandler.class);
-	
-	
 	
 	public static BufferedImage getMergedPhoto(ArrayList<MergeInstance> mergeInstanceList, Orientation basePhotoOrientation) throws IOException {
 		
@@ -59,20 +55,5 @@ public class MosaicHandler {
 		}
 		logger.debug("concatenated photo group");
 		return groupImg;
-	}
-	
-
-	public static Orientation judgeMosaicOrientation(Mosaic mosaic){
-		int landscapeCount = 0;
-		Orientation mosaicOrientation = null;
-		for( Photo photo : mosaic.getPhotos()) {
-			if(photo.getOrientation() == Orientation.LANDSCAPE){
-				landscapeCount++;
-			}else if(photo.getOrientation() == Orientation.PORTRAIT) {
-				landscapeCount--;
-			}
-		}
-		mosaicOrientation = (landscapeCount > 0) ? Orientation.LANDSCAPE : Orientation.PORTRAIT;
-		return mosaicOrientation;
 	}
 }

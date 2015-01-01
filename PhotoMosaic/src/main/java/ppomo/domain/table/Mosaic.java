@@ -116,14 +116,22 @@ public class Mosaic {
 	}
 	public void setPhotos(Photo[] photos) {
 		this.photos = photos;
+		setOrientation();
 	}
 
 	public Orientation getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(Orientation orientation) {
-		this.orientation = orientation;
+	private void setOrientation() {
+		int landscapeCount = 0;
+		for( Photo photo : photos) {
+			if(photo.getOrientation() == Orientation.LANDSCAPE){
+				landscapeCount++;
+			}else if(photo.getOrientation() == Orientation.PORTRAIT) {
+				landscapeCount--;
+			}
+		}
+		this.orientation = (landscapeCount > 0) ? Orientation.LANDSCAPE : Orientation.PORTRAIT;
 	}
-	
 }

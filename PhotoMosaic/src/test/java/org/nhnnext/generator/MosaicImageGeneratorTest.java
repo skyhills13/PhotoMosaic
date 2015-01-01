@@ -20,8 +20,6 @@ import ppomo.algorithm.generator.MosaicImageGenerator;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
 import ppomo.support.Constants;
-import ppomo.support.MosaicHandler;
-import ppomo.support.Orientation;
 import ppomo.support.PhotoHandler;
 
 
@@ -69,8 +67,6 @@ public class MosaicImageGeneratorTest {
 		
 		mosaic.setFileName("testMosaic.png");
 		mosaic.setPhotos(photoList.toArray(new Photo[photoList.size()]));
-		Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
-		mosaic.setOrientation(mosaicOrientation);
 	}
 	
 	@Test

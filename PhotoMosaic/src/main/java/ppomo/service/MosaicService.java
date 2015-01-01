@@ -21,8 +21,6 @@ import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
 import ppomo.domain.table.User;
 import ppomo.support.Constants;
-import ppomo.support.MosaicHandler;
-import ppomo.support.Orientation;
 import ppomo.support.StringHandler;
 
 @Service
@@ -72,9 +70,6 @@ public class MosaicService {
 		String mosaicPath = Constants.ATTACHMENT_ROOT_DIR + File.separator + mosaic.getId() +File.separator + mosaic.getFileName();
 		
 		if( server ) {
-			Orientation mosaicOrientation = MosaicHandler.judgeMosaicOrientation(mosaic);
-			mosaic.setOrientation(mosaicOrientation);
-			
 			MosaicImageGenerator mosaicImageGenerator = new MosaicImageGenerator(mosaic);
 			try {
 				mosaicImageGenerator.makeMosaicImage();
