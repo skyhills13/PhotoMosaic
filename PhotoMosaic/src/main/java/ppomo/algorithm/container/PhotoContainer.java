@@ -1,4 +1,4 @@
-package ppomo.container;
+package ppomo.algorithm.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -11,9 +11,9 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ppomo.algorithm.instance.MergeInstance;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
-import ppomo.instance.MergeInstance;
 import ppomo.support.Constants;
 import ppomo.support.MosaicHandler;
 import ppomo.support.Orientation;

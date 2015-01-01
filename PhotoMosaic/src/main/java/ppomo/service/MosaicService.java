@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import ppomo.algorithm.generator.MosaicImageGenerator;
 import ppomo.dao.MosaicDao;
 import ppomo.dao.PhotoDao;
 import ppomo.domain.support.DataURL;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
 import ppomo.domain.table.User;
-import ppomo.generator.MosaicImageGenerator;
 import ppomo.support.Constants;
 import ppomo.support.MosaicHandler;
 import ppomo.support.Orientation;

@@ -1,4 +1,4 @@
-package ppomo.template;
+package ppomo.alogirthm.template;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package ppomo.container;
+package ppomo.algorithm.container;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ppomo.algorithm.instance.MergeInstance;
 import ppomo.domain.table.Mosaic;
-import ppomo.instance.MergeInstance;
 import ppomo.support.MosaicHandler;
 import ppomo.support.Orientation;
 import ppomo.support.PhotoHandler;

@@ -16,9 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import ppomo.algorithm.generator.MosaicImageGenerator;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
-import ppomo.generator.MosaicImageGenerator;
 import ppomo.support.Constants;
 import ppomo.support.MosaicHandler;
 import ppomo.support.Orientation;

@@ -1,8 +1,8 @@
-package ppomo.generator;
+package ppomo.algorithm.generator;
 
-import ppomo.container.PhotoContainer;
-import ppomo.container.PhotoGroupContainer;
-import ppomo.template.TemplateFrameList;
+import ppomo.algorithm.container.PhotoContainer;
+import ppomo.algorithm.container.PhotoGroupContainer;
+import ppomo.alogirthm.template.TemplateFrameList;
 
 public class ContainerGenerator {
 	

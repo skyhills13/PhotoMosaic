@@ -1,4 +1,4 @@
-package ppomo.container;
+package ppomo.algorithm.container;
 
 import java.io.IOException;
 import java.util.ArrayList;

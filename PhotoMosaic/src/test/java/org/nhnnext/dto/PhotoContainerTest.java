@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ppomo.container.PhotoContainer;
+import ppomo.algorithm.container.PhotoContainer;
 import ppomo.domain.table.Photo;
 
 public class PhotoContainerTest {

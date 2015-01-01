@@ -1,4 +1,4 @@
-package ppomo.instance;
+package ppomo.algorithm.instance;
 
 import java.awt.image.BufferedImage;
 

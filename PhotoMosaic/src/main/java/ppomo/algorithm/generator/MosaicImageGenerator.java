@@ -1,4 +1,4 @@
-package ppomo.generator;
+package ppomo.algorithm.generator;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,14 +14,14 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ppomo.container.PhotoContainer;
-import ppomo.container.PhotoGroupContainer;
+import ppomo.algorithm.container.PhotoContainer;
+import ppomo.algorithm.container.PhotoGroupContainer;
+import ppomo.alogirthm.template.Template;
+import ppomo.alogirthm.template.TemplateFrameList;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
 import ppomo.support.Constants;
 import ppomo.support.Orientation;
-import ppomo.template.Template;
-import ppomo.template.TemplateFrameList;
 
 public class MosaicImageGenerator {
 

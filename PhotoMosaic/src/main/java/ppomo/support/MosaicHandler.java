@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ppomo.algorithm.instance.MergeInstance;
 import ppomo.domain.table.Mosaic;
 import ppomo.domain.table.Photo;
-import ppomo.instance.MergeInstance;
 
 @Component
 public class MosaicHandler {
